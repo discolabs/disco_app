@@ -3,8 +3,12 @@ PATH
   specs:
     disco_app (0.0.1)
       dotenv-rails (~> 2.0.1)
+      pg (~> 0.18.2)
+      puma (~> 2.11.3)
       rails (~> 4.2.1)
+      rails_12factor (~> 0.0.3)
       shopify_app (~> 6.1.0)
+      sidekiq (~> 3.3.4)
 
 GEM
   remote: https://rubygems.org/
@@ -50,6 +54,9 @@ GEM
       tzinfo (~> 1.1)
     arel (6.0.0)
     builder (3.2.2)
+    celluloid (0.16.0)
+      timers (~> 4.0.0)
+    connection_pool (2.2.0)
     dotenv (2.0.1)
     dotenv-rails (2.0.1)
       dotenv (= 2.0.1)
@@ -59,6 +66,7 @@ GEM
     globalid (0.3.5)
       activesupport (>= 4.1.0)
     hashie (3.4.1)
+    hitimes (1.2.2)
     i18n (0.7.0)
     json (1.8.2)
     jwt (1.5.0)
@@ -90,6 +98,9 @@ GEM
       omniauth (~> 1.2)
     omniauth-shopify-oauth2 (1.1.8)
       omniauth-oauth2 (~> 1.1.1)
+    pg (0.18.2)
+    puma (2.11.3)
+      rack (>= 1.1, < 2.0)
     rack (1.6.1)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -114,12 +125,20 @@ GEM
       loofah (~> 2.0)
     rails-observers (0.1.2)
       activemodel (~> 4.0)
+    rails_12factor (0.0.3)
+      rails_serve_static_assets
+      rails_stdout_logging
+    rails_serve_static_assets (0.0.4)
+    rails_stdout_logging (0.0.3)
     railties (4.2.1)
       actionpack (= 4.2.1)
       activesupport (= 4.2.1)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
+    redis (3.2.1)
+    redis-namespace (1.5.2)
+      redis (~> 3.0, >= 3.0.4)
     shopify_api (4.0.3)
       activeresource
       rack
@@ -127,6 +146,12 @@ GEM
       omniauth-shopify-oauth2 (~> 1.1.8)
       rails (>= 3.1, < 5.0)
       shopify_api (~> 4.0.2)
+    sidekiq (3.3.4)
+      celluloid (>= 0.16.0)
+      connection_pool (>= 2.1.1)
+      json
+      redis (>= 3.0.6)
+      redis-namespace (>= 1.3.1)
     sprockets (3.1.0)
       rack (~> 1.0)
     sprockets-rails (2.3.1)
@@ -136,6 +161,8 @@ GEM
     sqlite3 (1.3.10)
     thor (0.19.1)
     thread_safe (0.3.5)
+    timers (4.0.1)
+      hitimes
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
 
@@ -144,4 +171,4 @@ PLATFORMS
 
 DEPENDENCIES
   disco_app!
-  sqlite3
+  sqlite3 (~> 1.3.10)
