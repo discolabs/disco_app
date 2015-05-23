@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", "~> 4.2.1"
   s.add_dependency "shopify_app", "~> 6.1.0"
+  s.add_dependency "dotenv-rails", "~> 2.0.1"
 
   s.add_development_dependency "sqlite3"
 end
