@@ -19,11 +19,11 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", "~> 4.2.1"
   s.add_dependency "shopify_app", "~> 6.1.0"
-  s.add_dependency "dotenv-rails", "~> 2.0.1"
   s.add_dependency "puma", "~> 2.11.3"
   s.add_dependency "sidekiq", "~> 3.3.4"
   s.add_dependency "pg", "~> 0.18.2"
   s.add_dependency "rails_12factor", "~> 0.0.3"
 
   s.add_development_dependency "sqlite3", "~> 1.3.10"
+  s.add_development_dependency "dotenv-rails", "~> 2.0.1"
 end

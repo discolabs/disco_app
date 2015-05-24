@@ -2,7 +2,6 @@ PATH
   remote: .
   specs:
     disco_app (0.0.1)
-      dotenv-rails (~> 2.0.1)
       pg (~> 0.18.2)
       puma (~> 2.11.3)
       rails (~> 4.2.1)
@@ -171,4 +170,5 @@ PLATFORMS
 
 DEPENDENCIES
   disco_app!
+  dotenv-rails (~> 2.0.1)
   sqlite3 (~> 1.3.10)
