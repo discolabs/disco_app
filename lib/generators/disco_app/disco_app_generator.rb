@@ -58,4 +58,15 @@ class DiscoAppGenerator < Rails::Generators::Base
     application "# Set the default host for absolute URL routing purposes."
   end
 
+  # Create Rakefiles
+  def create_rakefiles
+    rakefile 'start.rake' do
+      %Q{
+        task start: :environment do
+          system 'bundle exec rails server -b 127.0.0.1 -p 3000'
+        end
+      }
+    end
+  end
+
 end
