@@ -46,4 +46,16 @@ class DiscoAppGenerator < Rails::Generators::Base
     prepend_to_file 'Gemfile', "ruby '2.2.2'\n"
   end
 
+  # Make any required adjustments to the application configuration.
+  def configure_application
+    # The force_ssl flag is commented by default for production.
+    # Uncomment to ensure config.force_ssl = true in production.
+    uncomment_lines 'config/environments/production.rb', /force_ssl/
+
+    # Ensure the application configuration uses the DEFAULT_HOST environment variable to set up support for reverse
+    # routing absolute URLS (needed when generating Webhook URLs for example).
+    application "routes.default_url_options[:host] = ENV['DEFAULT_HOST']"
+    application "# Set the default host for absolute URL routing purposes."
+  end
+
 end
