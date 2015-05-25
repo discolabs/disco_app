@@ -46,7 +46,11 @@ class DiscoAppGenerator < Rails::Generators::Base
     # Ensure the application configuration uses the DEFAULT_HOST environment variable to set up support for reverse
     # routing absolute URLS (needed when generating Webhook URLs for example).
     application "routes.default_url_options[:host] = ENV['DEFAULT_HOST']"
-    application "# Set the default host for absolute URL routing purposes."
+    application "# Set the default host for absolute URL routing purposes"
+
+    # Set Sidekiq as the queue adapter in production.
+    application "config.active_job.queue_adapter = :sidekiq", env: :production
+    application "# Use Sidekiq as the active job backend", env: :production
   end
 
   # Create Rakefiles
