@@ -94,6 +94,11 @@ class DiscoAppGenerator < Rails::Generators::Base
     route "mount DiscoApp::Engine, at: '/'"
   end
 
+  # Copy engine migrations over.
+  def install_migrations
+    rake 'disco_app:install:migrations'
+  end
+
   # Run migrations.
   def migrate
     rake 'db:migrate'
