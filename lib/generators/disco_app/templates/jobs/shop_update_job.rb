@@ -1,4 +1,4 @@
-class ShopUpdatedJob < DiscoApp::ShopJob
+class ShopUpdateJob < DiscoApp::ShopJob
 
   def perform(domain, shop_data = nil)
     # If we weren't provided with shop data (eg from a webhook), fetch it.

@@ -10,7 +10,7 @@ class AppInstalledJob < DiscoApp::ShopJob
     # Install webhooks.
     webhooks_url = DiscoApp::Engine.routes.url_helpers.webhooks_url
     ShopifyAPI::Webhook.create(topic: 'app/uninstalled', address: webhooks_url, format: 'json')
-    ShopifyAPI::Webhook.create(topic: 'shop/updated', address: webhooks_url, format: 'json')
+    ShopifyAPI::Webhook.create(topic: 'shop/update', address: webhooks_url, format: 'json')
 
     # Mark store as installed.
     @shop.installed!
