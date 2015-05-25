@@ -7,9 +7,8 @@ class ShopUpdateJob < DiscoApp::ShopJob
     # Ensure we can access shop data through symbols.
     shop_data = HashWithIndifferentAccess.new(shop_data)
 
-    # Update model attributes from data.
-    # @TODO
-    @shop.update_attributes({})
+    # Update model attributes present in both our model and the data hash.
+    @shop.update_attributes(shop_data.slice(*::Shop.column_names))
   end
 
 end
