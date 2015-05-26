@@ -48,7 +48,6 @@ $ cd example_app
 $ echo "gem 'disco_app', git: 'https://$DISCO_GEM_CREDENTIALS@github.com/discolabs/disco_app.git'" >> Gemfile
 $ bundle install
 $ rails generate disco_app --force
-$ bundle install
 ```
 
 Once this is complete, you'll have a new Rails app created in `/example_app`,
