@@ -222,5 +222,15 @@ There shouldn't be any need to extend or override
 `DiscoApp::WebhooksController` inside an application - all application logic
 should simply be placed inside the relevant `*Job` class.
 
+Webhooks should generally be created inside the `perform` method of the
+`AppInstalledJob` background task. By default, webhooks are set up to listen
+for the `app/uninstalled` and `shop/update` webhook topics.
+
 
 ## Contributing
+While developing Shopify applications using the DiscoApp Engine, you may see
+something that could be improved, or perhaps notice a pattern that's becoming
+common across a number of applications.
+
+In those cases, please consider taking the time to raise an issue or pull
+request against the DiscoApp repository.
