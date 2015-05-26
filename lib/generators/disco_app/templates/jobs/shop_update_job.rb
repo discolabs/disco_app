@@ -8,7 +8,7 @@ class ShopUpdateJob < DiscoApp::ShopJob
     shop_data = HashWithIndifferentAccess.new(shop_data)
 
     # Update model attributes present in both our model and the data hash.
-    @shop.update_attributes(shop_data.slice(*::Shop.column_names))
+    @shop.update_attributes(shop_data.except(:id, :created_at).slice(*::Shop.column_names))
   end
 
 end
