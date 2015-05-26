@@ -84,7 +84,7 @@ class DiscoAppGenerator < Rails::Generators::Base
 
   # Set up default jobs.
   def setup_jobs
-    ['app_installed', 'app_uninstalled', 'shop_updated'].each do |job_name|
+    ['app_installed', 'app_uninstalled', 'shop_update'].each do |job_name|
       copy_file "jobs/#{job_name}_job.rb", "app/jobs/#{job_name}_job.rb"
     end
   end
