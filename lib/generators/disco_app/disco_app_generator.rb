@@ -115,11 +115,4 @@ class DiscoAppGenerator < Rails::Generators::Base
     prepend_to_file 'Gemfile', "ruby '2.2.2'\n"
   end
 
-  # Now that the Ruby version is locked, perform a bundle install.
-  def bundle_install
-    Bundler.with_clean_env do
-      run 'bundle install'
-    end
-  end
-
 end
