@@ -145,12 +145,12 @@ Finally, the following environment changes are made:
 - Update the `.gitignore` with some additional useful defaults;
 - Add a `start` Rake tasks to spin up Puma in development.
 
-[shopify_app]: #
-[puma]: #
-[sidekiq]: #
-[pg]: #
-[dotenv-rails]: #
-[rails_12factor]: #
+[shopify_app]: https://github.com/Shopify/shopify_app
+[puma]: http://puma.io/
+[sidekiq]: http://sidekiq.org/
+[pg]: https://bitbucket.org/ged/ruby-pg
+[dotenv-rails]: https://github.com/bkeepers/dotenv
+[rails_12factor]: https://github.com/heroku/rails_12factor
 
 ### Authentication, Sessions and the Shop Model
 The functionality provided by the ShopifyApp engine includes support for OAuth
