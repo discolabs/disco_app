@@ -9,9 +9,9 @@ Gem::Specification.new do |s|
   s.version     = DiscoApp::VERSION
   s.authors     = ["Gavin Ballard"]
   s.email       = ["gavin@gavinballard.com"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of DiscoApp."
-  s.description = "TODO: Description of DiscoApp."
+  s.homepage    = "https://github.com/discolabs/disco_app/"
+  s.summary     = "Rails engine for Shopify applications."
+  s.description = "Rails engine for Shopify applications."
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
