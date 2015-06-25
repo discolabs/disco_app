@@ -51,6 +51,9 @@ class DiscoAppGenerator < Rails::Generators::Base
     # Set Sidekiq as the queue adapter in production.
     application "config.active_job.queue_adapter = :sidekiq", env: :production
     application "# Use Sidekiq as the active job backend", env: :production
+
+    # Copy over the default puma configuration.
+    copy_file 'config/puma.rb', 'config/puma.rb'
   end
 
   # Create Rakefiles
