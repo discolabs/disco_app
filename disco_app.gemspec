@@ -25,5 +25,5 @@ Gem::Specification.new do |s|
   s.add_dependency "rails_12factor", "~> 0.0.3"
 
   s.add_development_dependency "sqlite3", "~> 1.3.10"
-  s.add_development_dependency "dotenv-rails", "~> 2.0.1"
+  s.add_development_dependency "dotenv-rails", "~> 2.0.2"
 end

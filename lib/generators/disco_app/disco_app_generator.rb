@@ -27,7 +27,7 @@ class DiscoAppGenerator < Rails::Generators::Base
     # Add gems for development and testing only.
     gem_group :development, :test do
       gem 'sqlite3', '~> 1.3.10'
-      gem 'dotenv-rails', '~> 2.0.1'
+      gem 'dotenv-rails', '~> 2.0.2'
     end
 
     # Add gems for production only.
