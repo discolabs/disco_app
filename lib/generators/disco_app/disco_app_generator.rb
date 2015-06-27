@@ -14,6 +14,13 @@ class DiscoAppGenerator < Rails::Generators::Base
     end
   end
 
+  # Remove a number of root files.
+  def remove_root_files
+    %w(README.rdoc).each do |file|
+      remove_file file
+    end
+  end
+
   # Configure the application's Gemfile.
   def configure_gems
     # Remove sqlite from the general Gemfile.
