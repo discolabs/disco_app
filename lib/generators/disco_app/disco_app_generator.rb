@@ -109,7 +109,7 @@ class DiscoAppGenerator < Rails::Generators::Base
   # Set up controllers.
   def setup_controllers
     ['application_controller.rb', 'home_controller.rb'].each do |controller_name|
-      copy_file "controllers/#{controller_name}", "app/controllers#{controller_name}"
+      copy_file "controllers/#{controller_name}", "app/controllers/#{controller_name}"
     end
   end
 
