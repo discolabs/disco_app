@@ -1,5 +1,5 @@
 module DiscoApp
-  class ApplicationController
+  module ApplicationController
     extend ActiveSupport::Concern
     include ShopifyApp::Controller
   end
