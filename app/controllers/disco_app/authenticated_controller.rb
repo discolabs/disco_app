@@ -14,7 +14,7 @@ module DiscoApp
 
       def shopify_shop
         if shop_session
-          @shop = Shop.find_by!(shopify_domain: @shop_session.url)
+          @shop = ::Shop.find_by!(shopify_domain: @shop_session.url)
         else
           redirect_to_login
         end
