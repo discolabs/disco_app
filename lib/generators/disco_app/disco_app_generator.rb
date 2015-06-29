@@ -115,10 +115,10 @@ class DiscoAppGenerator < Rails::Generators::Base
 
   # Set up views.
   def setup_views
-    ['layout/application.html.erb', 'home/index.html.erb'].each do |view_name|
+    ['layouts/application.html.erb', 'home/index.html.erb'].each do |view_name|
       copy_file "views/#{view_name}", "app/views/#{view_name}"
     end
-    ['layout/embedded_app.html.erb', 'home/index.html.erb'].each do |view_name|
+    ['layouts/embedded_app.html.erb'].each do |view_name|
       remove_file "app/views/#{view_name}"
     end
   end
