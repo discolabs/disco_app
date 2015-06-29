@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", "~> 4.2.1"
-  s.add_dependency "shopify_app", "~> 6.1.0"
+  s.add_dependency "shopify_app", "~> 6.1.2"
   s.add_dependency "puma", "~> 2.11.3"
   s.add_dependency "sidekiq", "~> 3.3.4"
   s.add_dependency "pg", "~> 0.18.2"
