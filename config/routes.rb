@@ -4,8 +4,8 @@ DiscoApp::Engine.routes.draw do
     post 'webhooks' => :process_webhook, as: :webhooks
   end
 
-  namespace :disco_app do
-    controller :disco_app do
+  namespace :charges do
+    controller :charges do
       get 'new' => :new, as: :new_charge
       post 'create' => :create, as: :create_charge
       get 'accept' => :accept, as: :accept_charge

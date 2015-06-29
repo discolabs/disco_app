@@ -22,17 +22,17 @@ module DiscoApp
 
       def verify_status
         if @shop.charge_none? or @shop.charge_declined? or @shop.charge_cancelled?
-          redirect_if_not_current_path(new_charge_path)
+          redirect_if_not_current_path(charges_new_charge_path)
         elsif @shop.charge_pending?
-          redirect_if_not_current_path(accept_charge_path)
+          redirect_if_not_current_path(charges_accept_charge_path)
         elsif @shop.charge_accepted?
-          redirect_if_not_current_path(activate_charge_path)
+          redirect_if_not_current_path(charges_activate_charge_path)
         elsif @shop.never_installed? or @shop.uninstalled?
-          redirect_if_not_current_path(install_path)
+          redirect_if_not_current_path(install_install_path)
         elsif @shop.installing?
-          redirect_if_not_current_path(installing_path)
+          redirect_if_not_current_path(install_installing_path)
         elsif @shop.uninstalling?
-          redirect_if_not_current_path(uninstalling_path)
+          redirect_if_not_current_path(install_uninstalling_path)
         end
       end
 
