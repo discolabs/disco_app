@@ -4,6 +4,7 @@ module DiscoApp
 
     included do
       before_action :verify_proxy_signature
+      after_action :add_liquid_header
     end
 
     private
@@ -21,6 +22,10 @@ module DiscoApp
         sorted_params = query_hash.collect{ |k, v| "#{k}=#{Array(v).join(',')}" }.sort.join
         calculated_signature = OpenSSL::HMAC.hexdigest(OpenSSL::Digest::Digest.new('sha256'), ShopifyApp.configuration.secret, sorted_params)
         signature == calculated_signature
+      end
+
+      def add_liquid_header
+        response.headers['Content-Type'] = 'application/liquid'
       end
 
   end
