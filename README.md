@@ -239,6 +239,29 @@ by Shopify before returning the response to the user. If you'd like to return
 plain HTML and avoid Liquid processing, you can add a `skip_after_action`
 directive on your controller targeting the `:add_liquid_header` method.
 
+Here's an example controller using the concern, that will return plain HTML
+from its `index` action and Liquid from its `show` action:
+
+```
+class MarblesController < ApplicationController
+  include DiscoApp::AppProxyController
+  
+  skip_after_action :add_liquid_header, only: [:index]
+  
+  def index
+    @marbles = Marble.all
+  end
+  
+  def show
+    @marble = Marble.find(params[:id])
+  end  
+end  
+```
+
+Note that in this instance it's important that `ApplicationController` doesn't
+perform any login authentication, as no session information is made available
+in proxied requests.
+
 [Application Proxy]: https://docs.shopify.com/api/uiintegrations/application-proxies
 [security section]: https://docs.shopify.com/api/uiintegrations/application-proxies#security
 
@@ -246,7 +269,7 @@ directive on your controller targeting the `:add_liquid_header` method.
 ## Optional Generators
 A number of "optional" generators are provided to add functionality that's
 useful, but not necessary for every application. They should be run after
-you've completed the first "Setting up" step described in the "Getting
+you've completed the "Creating the Rails app" step described in the "Getting
 Started" section above.
 
 A list of available optional generators follows.
