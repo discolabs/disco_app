@@ -219,6 +219,23 @@ Webhooks should generally be created inside the `perform` method of the
 `AppInstalledJob` background task. By default, webhooks are set up to listen
 for the `app/uninstalled` and `shop/update` webhook topics.
 
+### Application Proxies
+The gem provides support for Shopify's [Application Proxy][] functionality
+through a controller concern named `DiscoApp::AppProxyController`. Including
+this concern on any controller will automatically verify each incoming request
+to make sure it's coming from Shopify (see the [security section][]) in the
+Shopify documentation. Note that by default this check is only performed in
+production environments.
+
+The `DiscoApp::AppProxyController` also alters the response headers to return
+an `application/liquid` MIME type by default, to allow the processing of Liquid
+by Shopify before returning the response to the user. If you'd like to return
+plain HTML and avoid Liquid processing, you can add a `skip_after_action`
+directive on your controller targeting the `:add_liquid_header` method.
+
+[Application Proxy]: https://docs.shopify.com/api/uiintegrations/application-proxies
+[security section]: https://docs.shopify.com/api/uiintegrations/application-proxies#security
+
 
 ## Contributing
 While developing Shopify applications using the DiscoApp Engine, you may see
