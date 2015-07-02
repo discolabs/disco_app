@@ -169,10 +169,24 @@ which stores the domain name and API token for a shop that installs the app.
 The DiscoApp gem extends this model with the following:
 
 - A `status` flag indicating the installation status of the app for that Shop;
+- A `charge_status` flag indicating the payment status of the app for that
+  Shop;
 - A number of attributes with general information about the Shop (email
-  address, country, Shopify plan type, et cetera);
-- A check to queue an `AppInstalledJob` background task on installation (see
-  below for more information on background tasks and DiscoApp).
+  address, country, Shopify plan type, et cetera).
+
+### Charge and Installation Checks
+The gem provides a `DiscoApp::AuthenticatedController` concern that should be
+included into any controller that handles actions inside the embedded admin
+panel. The concern performs the following checks:
+
+- Checks the shop has an authenticated session. If not, redirects to the OAuth
+  authentication flow provided by the `ShopifyApp` gem;
+- Checks the current shop has successfully authorised any relevant charge for
+  the use of the application. If not, redirects to a charge creation and
+  authorisation flow (provided by `DiscoApp::ChargesController`);
+- Checks the app has completed installation for the current shop. If not,
+  begins the installation and displays an "Installing..." progress page until
+  installation is complete (provided by `DiscoApp::InstallController`).
 
 ### Background Tasks
 The `DiscoApp::ShopJob` class inherits from `ActiveJob::Base`, and can be used
