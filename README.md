@@ -7,6 +7,7 @@ well as providing common functionality in a single codebase.
 
 - [Getting Started](#getting-started)
 - [Engine Overview](#engine-overview)
+- [Optional Generators](#optional-generators)
 - [Contributing](#contributing)
 
 
