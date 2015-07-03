@@ -61,10 +61,17 @@ class DiscoAppGenerator < Rails::Generators::Base
 
     # Set the "real charges" config variable to false explicitly by default.
     # Only in production do we read from the environment variable and potentially have it become true.
-    application "config.x.shopify_real_charges = false"
+    application "config.x.shopify_charges_real = false"
     application "# Explicitly prevent real charges being created by default"
-    application "config.x.shopify_real_charges = ENV['SHOPIFY_REAL_CHARGES'] == 'true'"
+    application "config.x.shopify_charges_real = ENV['SHOPIFY_CHARGES_REAL'] == 'true'"
     application "# Allow real charges in production with an ENV variable"
+
+    # Set defaults for various charge attributes.
+    application "config.x.shopify_charges_default_trial_days = 14"
+    application "config.x.shopify_charges_default_price = 10.00"
+    application "config.x.shopify_charges_default_name = 'Shopify Application'"
+    application "config.x.shopify_charges_default_type = :recurring"
+    application "# Set defaults for charges created by the application"
 
     # Copy over the default puma configuration.
     copy_file 'config/puma.rb', 'config/puma.rb'
