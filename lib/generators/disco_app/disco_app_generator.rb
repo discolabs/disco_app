@@ -59,6 +59,13 @@ class DiscoAppGenerator < Rails::Generators::Base
     application "config.active_job.queue_adapter = :sidekiq", env: :production
     application "# Use Sidekiq as the active job backend", env: :production
 
+    # Set the "real charges" config variable to false explicitly by default.
+    # Only in production do we read from the environment variable and potentially have it become true.
+    application "config.x.shopify_real_charges = false"
+    application "# Explicitly prevent real charges being created by default"
+    application "config.x.shopify_real_charges = ENV['SHOPIFY_REAL_CHARGES'] == 'true'"
+    application "# Allow real charges in production with an ENV variable"
+
     # Copy over the default puma configuration.
     copy_file 'config/puma.rb', 'config/puma.rb'
   end

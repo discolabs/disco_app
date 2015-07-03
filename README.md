@@ -78,7 +78,8 @@ DiscoApp generator during step 2).
 
 While the `.env` file is open, add in values for `DEFAULT_HOST` (this should be
 the tunnel endpoint) and `SHOPIFY_APP_SCOPE` (view a [list of scopes][]). The
-`SECRET_KEY_BASE` and `REDIS_PROVIDER` values can be left blank in development.
+`SHOPIFY_REAL_CHARGES`, `SECRET_KEY_BASE` and `REDIS_PROVIDER` values can be
+left blank in development.
 
 When you're done, your `.env` file should look something like this:
 
@@ -88,6 +89,7 @@ DEFAULT_HOST=https://example.ngrok.io
 SHOPIFY_APP_API_KEY=ebef81bcfe2174ff2c6e65f5c0a0ba50
 SHOPIFY_APP_SECRET=d5e1347de6352cb778413654e1296dde
 SHOPIFY_APP_SCOPE=read_products,write_script_tags
+SHOPIFY_REAL_CHARGES=
 
 SECRET_KEY_BASE=
 
