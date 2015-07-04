@@ -1,1 +1,10 @@
-new_charge
+<% provide(:title, 'Thanks') %>
+
+<p>
+  Thanks for installing.
+  We're now going to ask you to authorize a charge.
+</p>
+
+<%= form_tag disco_app.create_charge_path, method: 'POST', target: '_parent' do %>
+  <%= submit_tag 'Okay' %>
+<% end %>

@@ -7,7 +7,6 @@ DiscoApp::Engine.routes.draw do
   controller :charges do
     get 'charges/new' => :new, as: :new_charge
     post 'charges/create' => :create, as: :create_charge
-    get 'charges/accept' => :accept, as: :accept_charge
     get 'charges/activate' => :activate, as: :activate_charge
   end
 
