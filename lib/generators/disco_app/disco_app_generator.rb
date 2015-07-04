@@ -50,28 +50,30 @@ class DiscoAppGenerator < Rails::Generators::Base
     # Uncomment to ensure config.force_ssl = true in production.
     uncomment_lines 'config/environments/production.rb', /force_ssl/
 
-    # Ensure the application configuration uses the DEFAULT_HOST environment variable to set up support for reverse
-    # routing absolute URLS (needed when generating Webhook URLs for example).
-    application "routes.default_url_options[:host] = ENV['DEFAULT_HOST']"
-    application "# Set the default host for absolute URL routing purposes"
-
-    # Set Sidekiq as the queue adapter in production.
-    application "config.active_job.queue_adapter = :sidekiq", env: :production
-    application "# Use Sidekiq as the active job backend", env: :production
+    # Set defaults for various charge attributes.
+    application "config.x.shopify_charges_default_trial_days = 14\n"
+    application "config.x.shopify_charges_default_price = 10.00"
+    application "config.x.shopify_charges_default_type = :recurring"
+    application "# Set defaults for charges created by the application"
 
     # Set the "real charges" config variable to false explicitly by default.
     # Only in production do we read from the environment variable and potentially have it become true.
-    application "config.x.shopify_charges_real = false"
+    application "config.x.shopify_charges_real = false\n"
     application "# Explicitly prevent real charges being created by default"
-    application "config.x.shopify_charges_real = ENV['SHOPIFY_CHARGES_REAL'] == 'true'"
-    application "# Allow real charges in production with an ENV variable"
+    application "config.x.shopify_charges_real = ENV['SHOPIFY_CHARGES_REAL'] == 'true'\n", env: :production
+    application "# Allow real charges in production with an ENV variable", env: :production
 
-    # Set defaults for various charge attributes.
-    application "config.x.shopify_charges_default_trial_days = 14"
-    application "config.x.shopify_charges_default_price = 10.00"
-    application "config.x.shopify_charges_default_name = 'Shopify Application'"
-    application "config.x.shopify_charges_default_type = :recurring"
-    application "# Set defaults for charges created by the application"
+    # Set Sidekiq as the queue adapter in production.
+    application "config.active_job.queue_adapter = :sidekiq\n", env: :production
+    application "# Use Sidekiq as the active job backend", env: :production
+
+    # Ensure the application configuration uses the DEFAULT_HOST environment variable to set up support for reverse
+    # routing absolute URLS (needed when generating Webhook URLs for example).
+    application "routes.default_url_options[:host] = ENV['DEFAULT_HOST']\n"
+    application "# Set the default host for absolute URL routing purposes"
+
+    application "config.x.shopify_app_name = ENV['SHOPIFY_APP_NAME']\n"
+    application "# Set the name of the application"
 
     # Copy over the default puma configuration.
     copy_file 'config/puma.rb', 'config/puma.rb'

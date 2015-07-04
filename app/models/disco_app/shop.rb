@@ -23,7 +23,7 @@ module DiscoApp
     def new_charge_attributes
       {
           type: Rails.configuration.x.shopify_charges_default_type,
-          name: Rails.configuration.x.shopify_charges_default_name,
+          name: Rails.configuration.x.shopify_app_name,
           price: Rails.configuration.x.shopify_charges_default_price,
           trial_days: Rails.configuration.x.shopify_charges_default_trial_days,
       }
