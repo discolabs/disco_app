@@ -13,9 +13,7 @@ module DiscoApp
       }
 
       # If the charge was successfully created, update the charge status on the shop.
-      if shopify_charge
-        shop.charge_pending!
-      end
+      shop.update_charge_status(shopify_charge) if shopify_charge
 
       # Return the charge.
       shopify_charge
@@ -31,14 +29,7 @@ module DiscoApp
         }
 
         # If the charge was successfully fetched, update the status for the shop accordingly.
-        if shopify_charge
-          # Update the state of the charge.
-          if shopify_charge.status.to_sym == :accepted
-            shop.charge_accepted!
-          elsif shopify_charge.status.to_sym == :declined
-            shop.charge_declined!
-          end
-        end
+        shop.update_charge_status(shopify_charge) if shopify_charge
 
         shopify_charge
       rescue
@@ -53,7 +44,7 @@ module DiscoApp
         shop.temp {
           shopify_charge.activate
         }
-        shop.charge_activated!
+        shop.charge_active!
         true
       rescue
         false

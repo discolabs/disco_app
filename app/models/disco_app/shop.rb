@@ -10,7 +10,7 @@ module DiscoApp
       enum status: [:never_installed, :installing, :installed, :uninstalling, :uninstalled]
 
       # Define possible charge statuses as an enum.
-      enum charge_status: [:charge_none, :charge_pending, :charge_accepted, :charge_declined, :charge_activated, :charge_cancelled, :charge_waived]
+      enum charge_status: [:charge_none, :charge_pending, :charge_accepted, :charge_declined, :charge_active, :charge_cancelled, :charge_waived]
 
       # Alias 'with_shopify_session' as 'temp', as per our existing conventions.
       alias_method :temp, :with_shopify_session
@@ -27,6 +27,12 @@ module DiscoApp
           price: Rails.configuration.x.shopify_charges_default_price,
           trial_days: Rails.configuration.x.shopify_charges_default_trial_days,
       }
+    end
+
+    # Update this Shop's charge_status attribute based on the given Shopify charge object.
+    def update_charge_status(shopify_charge)
+      status_update_method_name = "charge_#{shopify_charge.status}!"
+      self.public_send(status_update_method_name) if self.respond_to? status_update_method_name
     end
 
   end
