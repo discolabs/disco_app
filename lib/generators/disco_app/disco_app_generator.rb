@@ -86,6 +86,13 @@ class DiscoAppGenerator < Rails::Generators::Base
         end
       }
     end
+    rakefile 'console.rake' do
+      %Q{
+        task console: :environment do
+          system 'bundle exec rails console'
+        end
+      }
+    end
   end
 
   # Run shopify_app:install and shopify_app:shop_model
