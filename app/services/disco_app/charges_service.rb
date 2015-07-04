@@ -7,7 +7,7 @@ module DiscoApp
     # to provide custom charge types for individual shops.
     #
     # Returns the new Shopify charge model on success, nil otherwise.
-    def self.create_new_charge(shop)
+    def self.create(shop)
       shopify_charge = shop.temp {
         self.charge_api_class(shop).create(self.new_charge_attributes(shop))
       }
@@ -21,38 +21,42 @@ module DiscoApp
       shopify_charge
     end
 
-    # Attempt to activate the given charge for the given shop.
-    def self.activate_charge(shop, charge_id)
-      return nil unless charge_id
-
+    # Fetch the specified charge for the given Shop using the Shopify API and check that it has been actioned (either
+    # accepted or declined). Updates the shop object's charge status, then returns the charge if it was accepted or
+    # nil otherwise.
+    def self.get_accepted_charge(shop, charge_id)
       begin
-        # First, check the charge exists and belongs to this shop.
         shopify_charge = shop.temp {
           self.charge_api_class(shop).find(charge_id)
         }
 
-        # Bail if the charge doesn't exist.
-        unless shopify_charge
-          return nil
+        # If the charge was successfully fetched, update the status for the shop accordingly.
+        if shopify_charge
+          # Update the state of the charge.
+          if shopify_charge.status.to_sym == :accepted
+            shop.charge_accepted!
+          elsif shopify_charge.status.to_sym == :declined
+            shop.charge_declined!
+          end
         end
 
-        # Update the state of the charge.
-        if shopify_charge.status.to_sym == :accepted
-          shop.charge_accepted!
-        elsif shopify_charge.status.to_sym == :declined
-          shop.charge_declined!
-        end
-
-        # Attempt to activate the charge if it was accepted.
-        if shop.charge_accepted?
-          shop.temp {
-            shopify_charge.activate
-          }
-          shop.charge_activated!
-          shopify_charge
-        end
+        shopify_charge
       rescue
         nil
+      end
+    end
+
+    # Attempt to activate the given Shopify charge for the given Shop using the Shopify API.
+    # Returns true on successful activation, false otherwise.
+    def self.activate(shop, shopify_charge)
+      begin
+        shop.temp {
+          shopify_charge.activate
+        }
+        shop.charge_activated!
+        true
+      rescue
+        false
       end
     end
 

@@ -10,7 +10,7 @@ module DiscoApp
 
     # Create a new charge for the currently logged in shop, then redirect to the charge's confirmation URL.
     def create
-      if (shopify_charge = DiscoApp::ChargesService.create_new_charge(@shop)).nil?
+      if (shopify_charge = DiscoApp::ChargesService.create(@shop)).nil?
         redirect_to action: :new and return
       end
       redirect_to shopify_charge.confirmation_url
@@ -19,7 +19,10 @@ module DiscoApp
     # Attempt to activate a charge after a user has accepted or declined it. Redirect to the main application's root URL
     # immediately afterwards - if the charge wasn't accepted, the flow will start again.
     def activate
-      DiscoApp::ChargesService.activate_charge(@shop, params[:charge_id])
+      if (shopify_charge = DiscoApp::ChargesService.get_accepted_charge(@shop, params[:charge_id])).nil?
+        redirect_to action: :new and return
+      end
+      DiscoApp::ChargesService.activate(@shop, shopify_charge)
       redirect_to main_app.root_url
     end
 
