@@ -7,12 +7,23 @@ module DiscoApp
 
     queue_as :default
 
-    around_perform do |job, block|
-      @shop = ::Shop.find_by!(shopify_domain: job.arguments.first)
-      @shop.temp {
-        block.call(job.arguments)
-      }
-    end
+    before_perform { |job| find_shop(job) }
+    before_enqueue { |job| find_shop(job) }
+
+    around_enqueue { |job, block| shop_context(job, block) }
+    around_perform { |job, block| shop_context(job, block) }
+
+    private
+
+      def find_shop(job)
+        @shop ||= ::Shop.find_by!(shopify_domain: job.arguments.first)
+      end
+
+      def shop_context(job, block)
+        @shop.temp {
+          block.call(job.arguments)
+        }
+      end
 
   end
 end

@@ -1,11 +1,10 @@
 class AppInstalledJob < DiscoApp::ShopJob
 
-  def perform(domain)
-    # Check that the application isn't already installed or installing for this store.
-    return if @shop.installing? or @shop.installed?
+  before_enqueue { @shop.awaiting_install! }
+  before_perform { @shop.installing! }
+  after_perform { @shop.installed! }
 
-    # Mark as installing.
-    @shop.installing!
+  def perform(domain)
 
     # Install webhooks.
     webhooks_url = DiscoApp::Engine.routes.url_helpers.webhooks_url
@@ -15,8 +14,6 @@ class AppInstalledJob < DiscoApp::ShopJob
     # Perform initial update of shop information.
     ::ShopUpdateJob.perform_now(domain)
 
-    # Mark store as installed.
-    @shop.installed!
   end
 
 end

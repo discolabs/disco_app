@@ -27,9 +27,9 @@ module DiscoApp
           redirect_if_not_current_path(disco_app.activate_charge_path)
         elsif @shop.never_installed? or @shop.uninstalled?
           redirect_if_not_current_path(disco_app.install_path)
-        elsif @shop.installing?
+        elsif @shop.awaiting_install? or @shop.installing?
           redirect_if_not_current_path(disco_app.installing_path)
-        elsif @shop.uninstalling?
+        elsif @shop.awaiting_uninstall? or @shop.uninstalling?
           redirect_if_not_current_path(disco_app.uninstalling_path)
         end
       end

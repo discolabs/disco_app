@@ -7,7 +7,7 @@ module DiscoApp
 
     included do
       # Define possible installation statuses as an enum.
-      enum status: [:never_installed, :installing, :installed, :uninstalling, :uninstalled]
+      enum status: [:never_installed, :awaiting_install, :installing, :installed, :awaiting_uninstall, :uninstalling, :uninstalled]
 
       # Define possible charge statuses as an enum.
       enum charge_status: [:charge_none, :charge_pending, :charge_accepted, :charge_declined, :charge_active, :charge_cancelled, :charge_waived]

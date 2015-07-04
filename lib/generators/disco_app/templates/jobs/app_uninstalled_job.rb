@@ -1,16 +1,16 @@
 class AppUninstalledJob < DiscoApp::ShopJob
 
+  before_enqueue { @shop.awaiting_uninstall! }
+  before_perform { @shop.uninstalling! }
+  after_perform { @shop.uninstalled! }
+
   def perform(domain, shop_data)
-    # Check the application isn't already uninstalled or is uninstalling for this store.
-    return if @shop.uninstalling? or @shop.uninstalled?
 
-    # Mark as beginning uninstallation.
-    @shop.uninstalling!
+    # Mark the shop's charge status as "cancelled" unless charges have been waived.
+    unless @shop.charge_waived?
+      @shop.charge_cancelled!
+    end
 
-    # Add teardown here.
-
-    # Mark as uninstalled.
-    @shop.uninstalled!
   end
 
 end
