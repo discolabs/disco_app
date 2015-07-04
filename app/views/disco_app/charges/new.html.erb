@@ -1,9 +1,32 @@
-<% provide(:title, 'Thanks') %>
+<% provide(:title, 'Thankyou') %>
 
-<p>
-  Thanks for installing.
-  We're now going to ask you to authorize a charge.
-</p>
+<% if @shop.charge_declined? %>
+  <p>
+    Oops! Looks like you declined the charge.
+    Unfortunately, you'll have to accept the charge on the next screen in order to continue installing the application.
+  </p>
+<% elsif @shop.charge_cancelled? %>
+  <p>
+    Your authorized charge for this application has expired.
+    This could have occurred if:
+  </p>
+  <ul>
+    <li>You uninstalled and reinstalled the application; or</li>
+    <li>Your plan level has changed.</li>
+  </ul>
+  <p>
+    In either case, it's no problem!
+    Simply click okay and you'll be asked to authorize a new charge.
+    Don't worry - you *wont'* be billed twice.
+  </p>
+<% else %>
+  <p>
+    Thanks for installing <%= Rails.configuration.x.shopify_app_name %>!
+  </p>
+  <p>
+    Before we start setting things up, we need you to authorize a charge for the application.
+  </p>
+<% end %>
 
 <%= form_tag disco_app.create_charge_path, method: 'POST', target: '_parent' do %>
   <%= submit_tag 'Okay' %>
