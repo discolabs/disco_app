@@ -30,6 +30,7 @@ class DiscoAppGenerator < Rails::Generators::Base
     gem 'shopify_app', '~> 6.1.0'
     gem 'sidekiq', '~> 3.3.4'
     gem 'puma', '~> 2.11.3'
+    gem 'bootstrap-sass', '~> 3.3.5.1'
 
     # Add gems for development and testing only.
     gem_group :development, :test do

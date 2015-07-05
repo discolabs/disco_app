@@ -3,15 +3,18 @@
 <head>
   <title><%= yield(:title) %></title>
 
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'disco_app/application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+
   <%= csrf_meta_tags %>
 
   <%= yield :extra_head %>
 </head>
 <body>
 
-<%= yield %>
+  <%= yield %>
 
+  <%= javascript_include_tag 'disco_app/application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 </body>
 </html>
