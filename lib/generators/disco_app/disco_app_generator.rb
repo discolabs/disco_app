@@ -144,6 +144,17 @@ class DiscoAppGenerator < Rails::Generators::Base
     end
   end
 
+  # Set up assets.
+  def setup_assets
+    # Copy over our default assets.
+    ['javascripts/application.js', 'stylesheets/application.scss'].each do |asset_name|
+      copy_file "assets/#{asset_name}", "app/assets/#{asset_name}"
+    end
+
+    # Make sure application.css is removed.
+    remove_file 'app/assets/stylesheets/application.css'
+  end
+
   # Copy engine migrations over.
   def install_migrations
     rake 'disco_app:install:migrations'
