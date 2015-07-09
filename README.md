@@ -46,11 +46,16 @@ add the DiscoApp Rails Engine to your Gemfile, and set up the Engine:
 $ export DISCO_GEM_CREDENTIALS=disco-gems:f361b0fef05c465c85a3d2d297930719617cb583
 $ rails new example_app
 $ cd example_app
-$ echo "gem 'disco_app', git: 'https://$DISCO_GEM_CREDENTIALS@github.com/discolabs/disco_app.git'" >> Gemfile
+$ echo "gem 'disco_app', git: 'https://$DISCO_GEM_CREDENTIALS@github.com/discolabs/disco_app.git', tag: '0.4.0'" >> Gemfile
 $ bundle install
 $ bundle exec rails generate disco_app --force
 $ bundle install
 ```
+
+Note the `tag` option being added to the Gemfile - this pins the version of
+DiscoApp you'll be using and avoid accidentally pulling incompatible changes
+into your project when you run a `bundle update`. Double check that the tag
+number you're using is the latest version available.
 
 Once this is complete, you'll have a new Rails app created in `/example_app`,
 with the DiscoApp Engine configured and mounted.
