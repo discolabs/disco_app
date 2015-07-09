@@ -1,33 +1,45 @@
 <% provide(:title, 'Thankyou') %>
 
-<% if @shop.charge_declined? %>
-  <p>
-    Oops! Looks like you declined the charge.
-    Unfortunately, you'll have to accept the charge on the next screen in order to continue installing the application.
-  </p>
-<% elsif @shop.charge_cancelled? %>
-  <p>
-    Your authorized charge for this application has expired.
-    This could have occurred if:
-  </p>
-  <ul>
-    <li>You uninstalled and reinstalled the application; or</li>
-    <li>Your plan level has changed.</li>
-  </ul>
-  <p>
-    In either case, it's no problem!
-    Simply click okay and you'll be asked to authorize a new charge.
-    Don't worry - you *wont'* be billed twice.
-  </p>
-<% else %>
-  <p>
-    Thanks for installing <%= Rails.configuration.x.shopify_app_name %>!
-  </p>
-  <p>
-    Before we start setting things up, we need you to authorize a charge for the application.
-  </p>
-<% end %>
+<div class="row">
+  <% if @shop.charge_declined? %>
+    <div class="alert alert-warning">
+      <p>
+        Oops! Looks like you declined the charge.
+        Unfortunately, you'll have to accept the charge on the next screen in order to continue installing the application.
+      </p>
+    </div>
+  <% elsif @shop.charge_cancelled? %>
+    <div class="alert alert-warning">
+      <p>
+        Your authorized charge for this application has expired.
+        This could have occurred if:
+      </p>
+      <ul>
+        <li>You uninstalled and reinstalled the application; or</li>
+        <li>Your plan level has changed.</li>
+      </ul>
+      <p>
+        In either case, it's no problem!
+        Simply click okay and you'll be asked to authorize a new charge.
+        Don't worry - you *wont'* be billed twice.
+      </p>
+    </div>
+  <% else %>
+    <div class="alert alert-success">
+      <p>
+        Thanks for installing <%= Rails.configuration.x.shopify_app_name %>!
+      </p>
+      <p>
+        Before we start setting things up, we need you to authorize a charge for the application.
+      </p>
+    </div>
+  <% end %>
+</div>
 
-<%= form_tag disco_app.create_charge_path, method: 'POST', target: '_parent' do %>
-  <%= submit_tag 'Okay' %>
-<% end %>
+<div class="row">
+  <%= form_tag disco_app.create_charge_path, method: 'POST', target: '_parent' do %>
+    <div class="form-group">
+      <%= submit_tag 'Okay', class: 'form-input' %>
+    </div>
+  <% end %>
+</div>
