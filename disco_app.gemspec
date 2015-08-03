@@ -28,6 +28,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency "sqlite3", "~> 1.3.10"
   s.add_development_dependency "dotenv-rails", "~> 2.0.2"
   s.add_development_dependency "minitest-reporters", "~> 1.0.19"
-  s.add_development_dependency "guard", "~> 2.2.2"
+  s.add_development_dependency "guard", "~> 2.13.0"
   s.add_development_dependency "guard-minitest", "~> 2.4.4"
 end
