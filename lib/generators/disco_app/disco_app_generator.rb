@@ -36,6 +36,9 @@ class DiscoAppGenerator < Rails::Generators::Base
     gem_group :development, :test do
       gem 'sqlite3', '~> 1.3.10'
       gem 'dotenv-rails', '~> 2.0.2'
+      gem 'minitest-reporters', '~> 1.0.19'
+      gem 'guard', '~> 2.2.2'
+      gem 'guard-minitest', '~> 2.4.4'
     end
 
     # Add gems for production only.
