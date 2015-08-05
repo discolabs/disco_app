@@ -5,6 +5,10 @@ module DiscoApp
     included do
       before_action :verify_proxy_signature
       after_action :add_liquid_header
+
+      rescue_from ActiveRecord::RecordNotFound do |exception|
+        render_error 404
+      end
     end
 
     private
@@ -26,6 +30,11 @@ module DiscoApp
 
       def add_liquid_header
         response.headers['Content-Type'] = 'application/liquid'
+      end
+
+      def render_error(status)
+        add_liquid_header
+        render "disco_app/proxy_errors/#{status}", status: status
       end
 
   end
