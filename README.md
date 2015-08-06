@@ -47,6 +47,7 @@ $ export DISCO_GEM_CREDENTIALS=disco-gems:f361b0fef05c465c85a3d2d297930719617cb5
 $ rails new example_app
 $ cd example_app
 $ echo "gem 'disco_app', git: 'https://$DISCO_GEM_CREDENTIALS@github.com/discolabs/disco_app.git', tag: '0.4.2'" >> Gemfile
+$ bundle update
 $ bundle install
 $ bundle exec rails generate disco_app --force
 $ bundle install
