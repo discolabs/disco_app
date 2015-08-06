@@ -8,7 +8,7 @@ PATH
       rails (~> 4.2.3)
       rails_12factor (~> 0.0.3)
       shopify_app (~> 6.1.2)
-      sidekiq (~> 3.4.1)
+      sidekiq (~> 3.4.2)
 
 GEM
   remote: https://rubygems.org/
@@ -186,7 +186,7 @@ GEM
     ruby-progressbar (1.7.5)
     sass (3.4.16)
     shellany (0.0.1)
-    shopify_api (4.0.4)
+    shopify_api (4.0.5)
       activeresource
       rack
     shopify_app (6.1.2)
