@@ -5,7 +5,7 @@ module DiscoApp
     included do
       before_action :verify_carrier_request_signature
     end
-    
+
     private
 
       def verify_carrier_request_signature
@@ -22,10 +22,6 @@ module DiscoApp
         calculated_hmac = Base64.encode64(OpenSSL::HMAC.digest(digest, ShopifyApp.configuration.secret, data)).strip
         request.body.rewind
         calculated_hmac == hmac_header
-      end
-
-      def carrier_request_domain
-        request.headers['HTTP_X_SHOPIFY_SHOP_DOMAIN']
       end
 
   end
