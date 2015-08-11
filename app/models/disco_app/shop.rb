@@ -12,6 +12,11 @@ module DiscoApp
       # Define possible charge statuses as an enum.
       enum charge_status: [:charge_none, :charge_pending, :charge_accepted, :charge_declined, :charge_active, :charge_cancelled, :charge_waived]
 
+      # Define some useful scopes.
+      scope :status, -> (status) { where status: status }
+      scope :installed, -> { where status: ShopifySession.statuses[:installed] }
+      scope :has_active_shopify_plan, -> { where.not(plan_name: [:cancelled, :frozen]) }
+
       # Alias 'with_shopify_session' as 'temp', as per our existing conventions.
       alias_method :temp, :with_shopify_session
     end
