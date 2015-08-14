@@ -4,7 +4,6 @@ class AddMoreMetaToShops < ActiveRecord::Migration
     add_column :shops, :latitude, :decimal
     add_column :shops, :longitude, :decimal
     add_column :shops, :customer_email, :string
-    add_column :shops, :plan_display_name, :string
     add_column :shops, :password_enabled, :boolean
     add_column :shops, :phone, :string
     add_column :shops, :primary_locale, :string
