@@ -73,8 +73,11 @@ generated API credentials to our development app and perform a test install.
 
 To do this, open your Shopify Partner dashboard and create a new application
 from the "Apps" tab. Make sure the "Embedded App" option is selected. When
-prompted for the callback URL, enter the endpoint provided by your tunneling
-software - for example, `https://example.ngrok.io`.
+prompted for the **Application URL**, enter the endpoint provided by your
+tunneling software - for example, `https://example.ngrok.io`. You can ignore the
+fields for **Preferences URL** and **Support URL** for now. The 
+**Redirection URL** should be set to something like
+`https://example.ngrok.io/auth/shopify/callback`.
 
 Once the application has been created on Shopify, copy over the API credentials
 to the `SHOPIFY_APP_API_KEY` and `SHOPIFY_APP_SECRET` values in the `.env` file
