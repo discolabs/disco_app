@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    disco_app (0.5.3)
+    disco_app (0.5.4)
       bootstrap-sass (~> 3.3.5.1)
       pg (~> 0.18.2)
       puma (~> 2.11.3)
