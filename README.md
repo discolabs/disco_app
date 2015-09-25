@@ -85,9 +85,9 @@ located in the root directory of the Rails app (this file was created by the
 DiscoApp generator during step 2).
 
 While the `.env` file is open, add in values for `DEFAULT_HOST` (this should be
-the tunnel endpoint), `SHOPIFY_APP_NAME`, and `SHOPIFY_APP_SCOPE` (view a
-[list of scopes][]). The `SHOPIFY_CHARGES_REAL`, `SECRET_KEY_BASE` and
-`REDIS_PROVIDER` values can be left blank in development.
+the tunnel endpoint), `SHOPIFY_APP_NAME`, `SHOPIFY_APP_REDIRECT_URI`, and
+`SHOPIFY_APP_SCOPE` (view a [list of scopes][]). The `SHOPIFY_CHARGES_REAL`,
+`SECRET_KEY_BASE` and `REDIS_PROVIDER` values can be left blank in development.
 
 When you're done, your `.env` file should look something like this:
 
@@ -97,6 +97,7 @@ DEFAULT_HOST=https://example.ngrok.io
 SHOPIFY_APP_NAME=Example App
 SHOPIFY_APP_API_KEY=ebef81bcfe2174ff2c6e65f5c0a0ba50
 SHOPIFY_APP_SECRET=d5e1347de6352cb778413654e1296dde
+SHOPIFY_APP_REDIRECT_URI=https://example.ngrok.io/auth/shopify/callback
 SHOPIFY_APP_SCOPE=read_products,write_script_tags
 
 SHOPIFY_CHARGES_REAL=
@@ -131,6 +132,11 @@ process of authorising and installing the application to the store.
 
 If you don't have a development store to test with, you can create one from the
 Shopify Partner dashboard in a similar manner to creating a development app.
+
+***Note:*** It's important to access your local development app via SSL (ie,
+`https://example.ngrok.io` rather than `http://example.ngrok.io`. Otherwise,
+the URLs generated during the OAuth flow won't match your application settings
+and you won't be able to install the app.
 
 
 ## Engine Overview
