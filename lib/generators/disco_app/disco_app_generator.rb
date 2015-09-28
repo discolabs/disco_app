@@ -28,7 +28,7 @@ class DiscoAppGenerator < Rails::Generators::Base
 
     # Add gems common to all environments.
     gem 'shopify_app', '~> 6.1.0'
-    gem 'sidekiq', '~> 3.4.2'
+    gem 'sidekiq', '~> 3.5.0'
     gem 'puma', '~> 2.11.3'
     gem 'bootstrap-sass', '~> 3.3.5.1'
 
