@@ -1,0 +1,23 @@
+//
+// Replicate the styles for Shopify Admin cards.
+// --------------------------------------------------
+
+.next-card {
+  background-color: #ffffff;
+  border-radius: 3px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.next-card__header {
+  padding: 20px 20px 0;
+
+  h1, h2, h3 {
+    margin-bottom: 0;
+    font-size: 18px;
+    line-height: 1.2em;
+  }
+}
+
+.next-card__section {
+  padding: 20px;
+}
