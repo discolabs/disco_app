@@ -1,0 +1,23 @@
+//
+// Replicate the styles for Shopify Admin forms.
+// --------------------------------------------------
+
+.form-control {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+
+  font-size: 15px;
+  line-height: 20px;
+
+  &:focus {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+}
+
+.help-block {
+  font-style: italic;
+  font-size: 13px;
+  color: #95a7b7;
+  margin-top: 5px;
+}
