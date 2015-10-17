@@ -1,5 +1,3 @@
-require 'shopify_app'
-
 ShopifyApp.configure do |config|
   config.api_key = ENV['SHOPIFY_APP_API_KEY']
   config.secret = ENV['SHOPIFY_APP_SECRET']
