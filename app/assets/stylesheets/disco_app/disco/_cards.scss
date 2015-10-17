@@ -8,6 +8,10 @@
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
+.next-card ~ .next-card {
+  margin-top: 20px;
+}
+
 .next-card__header {
   padding: 20px 20px 0;
 
@@ -20,4 +24,16 @@
 
 .next-card__section {
   padding: 20px;
+}
+
+.next-card--aside,
+.next-card--disabled {
+  background-color: #f5f6f7;
+}
+
+.next-card--disabled {
+  .next-card__header,
+  .next-card__section {
+    color: #777777;
+  }
 }

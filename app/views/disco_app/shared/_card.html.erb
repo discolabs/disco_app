@@ -1,0 +1,11 @@
+<% disabled ||= false %>
+<div class="next-card <% if disabled %>next-card--disabled<% end %>">
+  <% if content_for?(:card_header) %>
+    <header class="next-card__header">
+      <%= content_for :card_header %>
+    </header>
+  <% end %>
+  <section class="next-card__section">
+    <%= content_for :card_content %>
+  </section>
+</div>

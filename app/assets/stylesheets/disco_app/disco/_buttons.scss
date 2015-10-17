@@ -20,3 +20,12 @@
     background-color: #4293c2;
   }
 }
+
+.btn-disabled {
+  &, &:hover, &:focus, &:active {
+    cursor: default;
+    background: #fafbfc;
+    color: #c3cfd8;
+    border: 1px solid #d3dbe2;
+  }
+}

@@ -10,16 +10,7 @@
     </aside>
 
     <section class="layout-content__main">
-      <div class="next-card">
-        <% if content_for?(:section_header) %>
-        <header class="next-card__header">
-          <%= content_for :section_header %>
-        </header>
-        <% end %>
-        <section class="next-card__section">
-          <%= content_for :section_content %>
-        </section>
-      </div>
+      <%= content_for :section_content %>
     </section>
 
   </div>
