@@ -1,0 +1,26 @@
+<section class="section">
+  <div class="layout-content">
+
+    <aside class="layout-content__sidebar layout-content__first">
+      <% if content_for?(:section_summary) %>
+      <div class="section-summary">
+        <%= content_for :section_summary %>
+      </div>
+      <% end %>
+    </aside>
+
+    <section class="layout-content__main">
+      <div class="next-card">
+        <% if content_for?(:section_header) %>
+        <header class="next-card__header">
+          <%= content_for :section_header %>
+        </header>
+        <% end %>
+        <section class="next-card__section">
+          <%= content_for :section_content %>
+        </section>
+      </div>
+    </section>
+
+  </div>
+</section>
