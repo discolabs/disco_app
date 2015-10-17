@@ -20,16 +20,15 @@
   <%= yield :extra_head %>
 </head>
 <body>
-  <%= yield %>
-
   <script type="text/javascript">
-    (function() {
-      ShopifyApp.Bar.initialize({
-        title: "<%= yield(:title) %>",
-        buttons: <%= content_for?(:buttons) ? content_for(:buttons) : '{}' %>
-      });
-    })();
+    ShopifyApp.Bar.initialize({
+      title: "<%= yield(:title) %>",
+      icon: "<%= image_url("disco_app/icon.svg") %>",
+      buttons: <%= content_for?(:buttons) ? content_for(:buttons) : '{}' %>
+    });
   </script>
+
+  <%= yield %>
 
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 </body>
