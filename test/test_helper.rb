@@ -18,3 +18,18 @@ if ActiveSupport::TestCase.respond_to?(:fixture_path=)
   ActiveSupport::TestCase.fixture_path = File.expand_path("../fixtures", __FILE__)
   ActiveSupport::TestCase.fixtures :all
 end
+
+# Set up the base test class.
+class ActiveSupport::TestCase
+
+  def log_in_as(shop)
+    session[:shopify] = shop.id
+    session[:shopify_domain] = shop.shopify_domain
+  end
+
+  def log_out
+    session[:shopify] = nil
+    session[:shopify_domain] = nil
+  end
+
+end
