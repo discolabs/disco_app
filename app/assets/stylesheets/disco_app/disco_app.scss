@@ -1,7 +1,13 @@
-/*!
- * disco_app/disco_app.scss
- * Base styles for Disco applications.
- */
+//
+// Styles for Disco applications.
+// --------------------------------------------------
+
 @import 'bootstrap-sprockets';
-@import 'bootstrap-variables';
-@import 'bootstrap-custom';
+@import 'bootstrap/variables';
+@import 'bootstrap/custom';
+@import 'disco/mixins/flexbox';
+@import 'disco/type';
+@import 'disco/sections';
+@import 'disco/cards';
+@import 'disco/buttons';
+@import 'disco/forms';
