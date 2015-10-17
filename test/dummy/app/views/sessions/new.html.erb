@@ -1,0 +1,26 @@
+<% provide(:title, 'Install') %>
+
+<%= form_tag shopify_app.login_path do %>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+
+          <% flash.each do |message_type, message| %>
+              <div class="alert alert-<%= message_type %>"><%= message %></div>
+          <% end %>
+
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-addon">http://</div>
+              <input type="text" class="form-control" id="shop" name="shop" placeholder="your-store" autocomplete="off" autofocus="on" />
+              <div class="input-group-addon">.myshopify.com</div>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Install</button>
+        </div>
+      </div>
+    </div>
+<% end %>
