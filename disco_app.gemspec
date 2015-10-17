@@ -17,15 +17,15 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency "rails", "~> 4.2.3"
+  s.add_dependency "rails", "~> 4.2.4"
   s.add_dependency "shopify_app", "~> 6.2.0"
-  s.add_dependency "puma", "~> 2.11.3"
-  s.add_dependency "sidekiq", "~> 3.5.0"
+  s.add_dependency "puma", "~> 2.14.0"
+  s.add_dependency "sidekiq", "~> 3.5.1"
   s.add_dependency "bootstrap-sass", "~> 3.3.5.1"
-  s.add_dependency "pg", "~> 0.18.2"
+  s.add_dependency "pg", "~> 0.18.3"
   s.add_dependency "rails_12factor", "~> 0.0.3"
 
-  s.add_development_dependency "sqlite3", "~> 1.3.10"
+  s.add_development_dependency "sqlite3", "~> 1.3.11"
   s.add_development_dependency "dotenv-rails", "~> 2.0.2"
   s.add_development_dependency "minitest-reporters", "~> 1.0.19"
   s.add_development_dependency "guard", "~> 2.13.0"

@@ -27,14 +27,14 @@ class DiscoAppGenerator < Rails::Generators::Base
     gsub_file 'Gemfile', /^# Use sqlite3 as the database for Active Record\ngem 'sqlite3'/m, ''
 
     # Add gems common to all environments.
-    gem 'shopify_app', '~> 6.1.0'
-    gem 'sidekiq', '~> 3.5.0'
-    gem 'puma', '~> 2.11.3'
+    gem 'shopify_app', '~> 6.2.0'
+    gem 'sidekiq', '~> 3.5.1'
+    gem 'puma', '~> 2.14.0'
     gem 'bootstrap-sass', '~> 3.3.5.1'
 
     # Add gems for development and testing only.
     gem_group :development, :test do
-      gem 'sqlite3', '~> 1.3.10'
+      gem 'sqlite3', '~> 1.3.11'
       gem 'dotenv-rails', '~> 2.0.2'
       gem 'minitest-reporters', '~> 1.0.19'
       gem 'guard', '~> 2.13.0'
@@ -43,7 +43,7 @@ class DiscoAppGenerator < Rails::Generators::Base
 
     # Add gems for production only.
     gem_group :production do
-      gem 'pg', '~> 0.18.2'
+      gem 'pg', '~> 0.18.3'
       gem 'rails_12factor', '~> 0.0.3'
     end
   end
