@@ -305,6 +305,9 @@ useful, but not necessary for every application. They should be run after
 you've completed the "Creating the Rails app" step described in the "Getting
 Started" section above.
 
+These generators are provided as conveniences. You should still carefully check
+the changes they make to your app after running them to tidy up their changes.
+
 A list of available optional generators follows.
 
 ### Reactify
@@ -314,6 +317,15 @@ $ bundle exec rails generate disco_app:reactify
 
 Adds the `react-rails` gem and installs and configures React.js for use with
 the Rails application.
+
+### Mailify
+```
+$ bundle exec rails generate disco_app:mailify
+```
+
+Adds the `mailgun_rails` and `premailer-rails` gems and configures Active Mailer
+to use the Mailgun API in production for sending email. Adds the
+`MAILGUN_API_KEY` and `MAILGUN_API_DOMAIN` environment variables.
 
 
 ## Contributing
