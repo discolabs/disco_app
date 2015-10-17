@@ -1,0 +1,21 @@
+//
+// Replicate the styles for Shopify Admin buttons.
+// --------------------------------------------------
+
+.btn {
+  line-height: 1;
+}
+
+.btn-default {
+  &:hover, &:focus, &:active, &.active {
+    border-color: #d3dbe2;
+    background-color: #f5f6f7;
+  }
+}
+
+.btn-primary {
+  &:hover, &:focus, &:active, &.active {
+    border-color: #4293c2;
+    background-color: #4293c2;
+  }
+}
