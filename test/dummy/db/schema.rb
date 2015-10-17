@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151017185711) do
+ActiveRecord::Schema.define(version: 20151017231302) do
+
+  create_table "disco_app_plans", force: :cascade do |t|
+    t.integer  "status"
+    t.string   "name"
+    t.integer  "charge_type"
+    t.decimal  "default_price"
+    t.integer  "default_trial_days"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
 
   create_table "plans", force: :cascade do |t|
     t.integer  "status",              default: 0
