@@ -1,0 +1,8 @@
+widget_store_dev:
+  shop: widget_store_dev
+  plan: development
+  status: 0
+  name: Development
+  charge_type: 0
+  price: 0.00
+  trial_days: 0
