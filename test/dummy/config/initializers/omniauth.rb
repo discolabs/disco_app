@@ -1,3 +1,5 @@
+require 'omniauth'
+
 Rails.application.config.middleware.use OmniAuth::Builder do
   provider :shopify,
     ShopifyApp.configuration.api_key,
