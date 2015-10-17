@@ -1,25 +1,24 @@
 module DiscoApp
-  module Shop
-    extend ActiveSupport::Concern
-
-    # Include the base ShopifyApp functionality.
+  class Shop < ActiveRecord::Base
     include ShopifyApp::Shop
 
-    included do
-      # Define possible installation statuses as an enum.
-      enum status: [:never_installed, :awaiting_install, :installing, :installed, :awaiting_uninstall, :uninstalling, :uninstalled]
+    # Define relationships to plans and subscriptions.
+    has_many :subscriptions
+    has_many :plans, through: :subscriptions
 
-      # Define possible charge statuses as an enum.
-      enum charge_status: [:charge_none, :charge_pending, :charge_accepted, :charge_declined, :charge_active, :charge_cancelled, :charge_waived]
+    # Define possible installation statuses as an enum.
+    enum status: [:never_installed, :awaiting_install, :installing, :installed, :awaiting_uninstall, :uninstalling, :uninstalled]
 
-      # Define some useful scopes.
-      scope :status, -> (status) { where status: status }
-      scope :installed, -> { where status: ::Shop.statuses[:installed] }
-      scope :has_active_shopify_plan, -> { where.not(plan_name: [:cancelled, :frozen]) }
+    # Define possible charge statuses as an enum.
+    enum charge_status: [:charge_none, :charge_pending, :charge_accepted, :charge_declined, :charge_active, :charge_cancelled, :charge_waived]
 
-      # Alias 'with_shopify_session' as 'temp', as per our existing conventions.
-      alias_method :temp, :with_shopify_session
-    end
+    # Define some useful scopes.
+    scope :status, -> (status) { where status: status }
+    scope :installed, -> { where status: ::Shop.statuses[:installed] }
+    scope :has_active_shopify_plan, -> { where.not(plan_name: [:cancelled, :frozen]) }
+
+    # Alias 'with_shopify_session' as 'temp', as per our existing conventions.
+    alias_method :temp, :with_shopify_session
 
     # Return a hash of attributes that should be used to create a new charge for this shop.
     # This method can be overridden by the inheriting Shop class in order to provide charges
