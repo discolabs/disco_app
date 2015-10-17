@@ -1,12 +1,12 @@
 //
-// Custom styles for Embedded App "sections"
+// Replicate the styles for Shopify Admin sections
+// and flexbox layout.
 // --------------------------------------------------
 
-.section {
-  margin: 0;
-  padding: 0;
-  border-bottom: 1px solid #e6e6e6;
-}
+
+//== Layout
+//
+//## Simple Flexbox layout utilities.
 
 .layout-content {
   display: flex;
@@ -27,6 +27,19 @@
   padding-right: 0;
 }
 
+
+//== Section
+//
+//## Simple Flexbox layout utilities.
+
+//** Main section wrapper.
+.section {
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+//** Section "summary" to the left of the section.
 .section-summary {
   padding: 20px 20px 20px 30px;
 
