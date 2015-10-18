@@ -1,10 +1,3 @@
-module DiscoApp
-  class Plan < ActiveRecord::Base
-
-    has_many :subscriptions
-    has_many :shops, through: :subscriptions
-
-    enum status: [:available, :unavailable, :hidden]
-
-  end
+class DiscoApp::Plan < ActiveRecord::Base
+  include DiscoApp::Concerns::Plan
 end
