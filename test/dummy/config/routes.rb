@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
 
-  root :to => 'home#index'
-
-  mount DiscoApp::Engine, at: '/'
-  mount ShopifyApp::Engine, at: '/'
-
+  mount DiscoApp::Engine => "/disco_app"
 end
