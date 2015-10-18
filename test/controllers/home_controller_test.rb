@@ -3,7 +3,7 @@ require 'test_helper'
 class HomeControllerTest < ActionController::TestCase
 
   def setup
-    @shop = shops(:widget_store)
+    @shop = disco_app_shops(:widget_store)
     log_in_as(@shop)
   end
 
