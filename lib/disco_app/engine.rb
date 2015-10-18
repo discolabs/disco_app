@@ -1,4 +1,7 @@
 require 'shopify_app'
+require 'bootstrap-sass'
+require 'jquery-rails'
+require 'turbolinks'
 
 module DiscoApp
   class Engine < ::Rails::Engine
