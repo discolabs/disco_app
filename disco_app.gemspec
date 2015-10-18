@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'turbolinks', '~> 2.5.3'
   s.add_dependency 'pg', '~> 0.18.3'
   s.add_dependency 'rails_12factor', '~> 0.0.3'
+  s.add_dependency 'active_utils', '~> 3.2.0'
 
   s.add_development_dependency 'sqlite3', '~> 1.3.11'
   s.add_development_dependency 'dotenv-rails', '~> 2.0.2'
