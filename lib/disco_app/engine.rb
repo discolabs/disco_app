@@ -1,3 +1,5 @@
+require 'shopify_app'
+
 module DiscoApp
   class Engine < ::Rails::Engine
 

@@ -12,10 +12,3 @@ gemspec
 
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
-
-group :development, :test do
-  gem 'shopify_app', '~> 6.2.0'
-  gem 'bootstrap-sass', '~> 3.3.5.1'
-  gem 'jquery-rails', '~> 4.0.3'
-  gem 'turbolinks', '~> 2.5.3'
-end

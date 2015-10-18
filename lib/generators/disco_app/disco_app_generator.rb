@@ -106,10 +106,9 @@ class DiscoAppGenerator < Rails::Generators::Base
     route "mount DiscoApp::Engine, at: '/'"
   end
 
-  # Run shopify_app:install and shopify_app:shop_model
+  # Run shopify_app:install
   def shopify_app_install
     generate 'shopify_app:install'
-    generate 'shopify_app:shop_model'
   end
 
   # Copy template files to the appropriate location. In some cases, we'll be
@@ -131,16 +130,9 @@ class DiscoAppGenerator < Rails::Generators::Base
     # Remove application.css
     remove_file 'app/assets/stylesheets/application.css'
 
-    # Remove the Shop and SessionStorage model files created by ShopifyApp.
-    remove_file 'app/models/shop.rb'
-    remove_file 'app/models/session_storage.rb'
-
     # Remove the layout files created by ShopifyApp
     remove_file 'app/views/layout/application.html.erb'
     remove_file 'app/views/layout/embedded_app.html.erb'
-
-    # Remove the 'create shops' migration created by ShopifyApp
-    remove_file 'db/migrate/*_create_shops.rb'
   end
 
   # Run migrations.
