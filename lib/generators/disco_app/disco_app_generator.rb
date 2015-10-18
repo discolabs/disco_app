@@ -113,11 +113,12 @@ class DiscoAppGenerator < Rails::Generators::Base
   end
 
   # Copy template files to the appropriate location. In some cases, we'll be
-  # overwriting existing files or those created by ShopifyApp.
-  def copy_templates
+  # overwriting or removing existing files or those created by ShopifyApp.
+  def copy_and_remove_files
     # Copy initializers
     copy_file 'initializers/shopify_app.rb', 'config/initializers/shopify_app.rb'
     copy_file 'initializers/disco_app.rb', 'config/initializers/disco_app.rb'
+    copy_file 'initializers/shopify_session_repository.rb', 'config/initializers/shopify_session_repository.rb'
 
     # Copy default home controller and view
     copy_file 'controllers/home_controller.rb', 'app/controllers/home_controller.rb'
@@ -127,8 +128,19 @@ class DiscoAppGenerator < Rails::Generators::Base
     copy_file 'assets/javascripts/application.js', 'app/assets/javascripts/application.js'
     copy_file 'assets/stylesheets/application.scss', 'app/assets/stylesheets/application.scss'
 
-    # Make sure application.css is removed.
+    # Remove application.css
     remove_file 'app/assets/stylesheets/application.css'
+
+    # Remove the Shop and SessionStorage model files created by ShopifyApp.
+    remove_file 'app/models/shop.rb'
+    remove_file 'app/models/session_storage.rb'
+
+    # Remove the layout files created by ShopifyApp
+    remove_file 'app/views/layout/application.html.erb'
+    remove_file 'app/views/layout/embedded_app.html.erb'
+
+    # Remove the 'create shops' migration created by ShopifyApp
+    remove_file 'db/migrate/*_create_shops.rb'
   end
 
   # Run migrations.
