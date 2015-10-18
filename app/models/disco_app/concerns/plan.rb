@@ -8,5 +8,7 @@ module DiscoApp::Concerns::Plan
 
     enum status: [:available, :unavailable, :hidden]
 
+    scope :available, -> { where status: statuses[:available] }
+
   end
 end

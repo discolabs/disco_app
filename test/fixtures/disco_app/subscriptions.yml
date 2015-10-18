@@ -1,3 +1,21 @@
+widget_store_old:
+  shop: widget_store
+  plan: cheapo
+  status: 1
+  name: Cheapo
+  charge_type: 0
+  price: 0.99
+  trial_days: 14
+
+widget_store:
+  shop: widget_store
+  plan: basic
+  status: 0
+  name: Basic
+  charge_type: 0
+  price: 9.99
+  trial_days: 14
+
 widget_store_dev:
   shop: widget_store_dev
   plan: development

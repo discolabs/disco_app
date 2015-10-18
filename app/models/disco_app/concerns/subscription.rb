@@ -8,5 +8,7 @@ module DiscoApp::Concerns::Subscription
 
     enum status: [:active, :replaced, :cancelled]
 
+    scope :active, -> { where status: statuses[:active] }
+
   end
 end
