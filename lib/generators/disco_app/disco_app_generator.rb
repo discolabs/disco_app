@@ -131,11 +131,6 @@ class DiscoAppGenerator < Rails::Generators::Base
     remove_file 'app/assets/stylesheets/application.css'
   end
 
-  # Copy engine migrations over.
-  # def install_migrations
-  #   rake 'disco_app:install:migrations'
-  # end
-
   # Run migrations.
   def migrate
     rake 'db:migrate'
