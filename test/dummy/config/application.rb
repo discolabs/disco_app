@@ -19,6 +19,15 @@ module Dummy
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
+    # Set the name of the application
+    config.x.shopify_app_name = ENV['SHOPIFY_APP_NAME']
+
+    # Set the default host for absolute URL routing purposes
+    routes.default_url_options[:host] = ENV['DEFAULT_HOST']
+
+    # Explicitly prevent real charges being created by default
+    config.x.shopify_charges_real = false
+
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
   end
