@@ -41,6 +41,11 @@ module DiscoApp::Concerns::Shop
       self.public_send(status_update_method_name) if self.respond_to? status_update_method_name
     end
 
+    # Convenience method to get the currently active subscription for this Shop.
+    def current_subscription
+      subscriptions.active.first
+    end
+
   end
 
 end
