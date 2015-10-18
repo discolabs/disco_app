@@ -11,6 +11,60 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20151017234409) do
+
+  create_table "disco_app_plans", force: :cascade do |t|
+    t.integer  "status"
+    t.string   "name"
+    t.integer  "charge_type"
+    t.decimal  "default_price"
+    t.integer  "default_trial_days"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  create_table "disco_app_shops", force: :cascade do |t|
+    t.string   "shopify_domain",                         null: false
+    t.string   "shopify_token",                          null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "status",                     default: 0
+    t.string   "email"
+    t.string   "country_name"
+    t.string   "currency"
+    t.string   "money_format"
+    t.string   "money_with_currency_format"
+    t.string   "domain"
+    t.string   "plan_name"
+    t.integer  "charge_status",              default: 6
+    t.string   "plan_display_name"
+    t.decimal  "latitude"
+    t.decimal  "longitude"
+    t.string   "customer_email"
+    t.boolean  "password_enabled"
+    t.string   "phone"
+    t.string   "primary_locale"
+    t.string   "ships_to_countries"
+    t.string   "timezone"
+    t.string   "iana_timezone"
+    t.boolean  "has_storefront"
+  end
+
+  add_index "disco_app_shops", ["shopify_domain"], name: "index_disco_app_shops_on_shopify_domain", unique: true
+
+  create_table "disco_app_subscriptions", force: :cascade do |t|
+    t.integer  "shop_id"
+    t.integer  "plan_id"
+    t.integer  "status"
+    t.string   "name"
+    t.integer  "charge_type"
+    t.decimal  "price"
+    t.integer  "trial_days"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "disco_app_subscriptions", ["plan_id"], name: "index_disco_app_subscriptions_on_plan_id"
+  add_index "disco_app_subscriptions", ["shop_id"], name: "index_disco_app_subscriptions_on_shop_id"
 
 end
