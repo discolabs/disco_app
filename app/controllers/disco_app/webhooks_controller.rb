@@ -8,10 +8,16 @@ module DiscoApp
       topic = request.headers['HTTP_X_SHOPIFY_TOPIC']
       domain = request.headers['HTTP_X_SHOPIFY_SHOP_DOMAIN']
 
+      # Ensure a domain was provided in the headers.
+      unless domain
+        head :bad_request
+      end
+
       # Try to find a matching background job task for the given topic using class name.
-      begin
-        job_class = "#{topic}_job".gsub('/', '_').classify.constantize
-      rescue NameError
+      job_class = DiscoApp::WebhookService.find_job_class(topic)
+
+      # Return bad request if we couldn't match a job class.
+      unless job_class.present?
         head :bad_request
       end
 
@@ -26,11 +32,7 @@ module DiscoApp
 
       # Verify a webhook request.
       def verify_webhook
-        data = request.body.read.to_s
-        hmac_header = request.headers['HTTP_X_SHOPIFY_HMAC_SHA256']
-        digest  = OpenSSL::Digest::Digest.new('sha256')
-        calculated_hmac = Base64.encode64(OpenSSL::HMAC.digest(digest, ShopifyApp.configuration.secret, data)).strip
-        unless calculated_hmac == hmac_header
+        unless DiscoApp::WebhookService.is_valid_hmac?(request.body.read.to_s, ShopifyApp.configuration.secret, request.headers['HTTP_X_SHOPIFY_HMAC_SHA256'])
           head :unauthorized
         end
         request.body.rewind
