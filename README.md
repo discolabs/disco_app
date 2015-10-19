@@ -245,13 +245,13 @@ to the `process_webhook` method on `DiscoApp::WebhooksController`.
 When the controller receives an inbound webhook, it is automatically verified
 using the application's secret key. The controller then attempt to queue a job
 matching the topic name of the incoming webhook (eg `app/uninstalled` will try
-to queue a job named `AppUninstalledJob`). Two arguments will be passed to the
-job's `perform` method: the domain of the shop the webhook was related to, and
-the JSON payload of the webhook as a hash.
+to queue a job named `DiscoApp::AppUninstalledJob`). Two arguments will be
+passed to the job's `perform` method: the domain of the shop the webhook was
+related to, and the JSON payload of the webhook as a hash.
 
-There shouldn't be any need to extend or override
-`DiscoApp::WebhooksController` inside an application - all application logic
-should simply be placed inside the relevant `*Job` class.
+There shouldn't be any need to extend or override `DiscoApp::WebhooksController`
+inside an application - all application logic should simply be placed inside the
+relevant `*Job` class.
 
 Webhooks should generally be created inside the `perform` method of the
 `DiscoApp::AppInstalledJob` background task. By default, webhooks are set up to
