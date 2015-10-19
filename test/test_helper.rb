@@ -1,5 +1,12 @@
 # Configure Rails Environment
-ENV["RAILS_ENV"] = "test"
+ENV['RAILS_ENV'] = 'test'
+ENV['DEFAULT_HOST'] = 'https://test.example.com'
+ENV['SHOPIFY_APP_NAME'] = 'Test Application'
+ENV['SHOPIFY_APP_API_KEY'] = 'f61b26d635309536c3c83c0adc3cb972'
+ENV['SHOPIFY_APP_SECRET'] = 'b607d1f8b992dccb017f9315f07af9c4'
+ENV['SHOPIFY_APP_REDIRECT_URI'] = 'https://test.example.com/shopify/auth/callback'
+ENV['SHOPIFY_APP_SCOPE'] = 'read_products'
+ENV['SHOPIFY_CHARGES_REAL'] = 'false'
 
 require File.expand_path("../../test/dummy/config/environment.rb",  __FILE__)
 ActiveRecord::Migrator.migrations_paths = [File.expand_path("../../test/dummy/db/migrate", __FILE__)]
@@ -18,15 +25,6 @@ if ActiveSupport::TestCase.respond_to?(:fixture_path=)
   ActiveSupport::TestCase.fixture_path = File.expand_path("../fixtures", __FILE__)
   ActiveSupport::TestCase.fixtures :all
 end
-
-# Set test environment variables.
-ENV['DEFAULT_HOST'] = 'https://test.example.com'
-ENV['SHOPIFY_APP_NAME'] = 'Test Application'
-ENV['SHOPIFY_APP_API_KEY'] = 'f61b26d635309536c3c83c0adc3cb972'
-ENV['SHOPIFY_APP_SECRET'] = 'b607d1f8b992dccb017f9315f07af9c4'
-ENV['SHOPIFY_APP_REDIRECT_URI'] = 'https://test.example.com/shopify/auth/callback'
-ENV['SHOPIFY_APP_SCOPE'] = 'read_products'
-ENV['SHOPIFY_CHARGES_REAL'] = 'false'
 
 # Set up the base test class.
 class ActiveSupport::TestCase
