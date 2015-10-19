@@ -11,9 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150814214025) do
+ActiveRecord::Schema.define(version: 20151017234409) do
 
-  create_table "shops", force: :cascade do |t|
+  create_table "disco_app_plans", force: :cascade do |t|
+    t.integer  "status"
+    t.string   "name"
+    t.integer  "charge_type"
+    t.decimal  "default_price"
+    t.integer  "default_trial_days"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  create_table "disco_app_shops", force: :cascade do |t|
     t.string   "shopify_domain",                         null: false
     t.string   "shopify_token",                          null: false
     t.datetime "created_at"
@@ -40,6 +50,21 @@ ActiveRecord::Schema.define(version: 20150814214025) do
     t.boolean  "has_storefront"
   end
 
-  add_index "shops", ["shopify_domain"], name: "index_shops_on_shopify_domain", unique: true
+  add_index "disco_app_shops", ["shopify_domain"], name: "index_disco_app_shops_on_shopify_domain", unique: true
+
+  create_table "disco_app_subscriptions", force: :cascade do |t|
+    t.integer  "shop_id"
+    t.integer  "plan_id"
+    t.integer  "status"
+    t.string   "name"
+    t.integer  "charge_type"
+    t.decimal  "price"
+    t.integer  "trial_days"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "disco_app_subscriptions", ["plan_id"], name: "index_disco_app_subscriptions_on_plan_id"
+  add_index "disco_app_subscriptions", ["shop_id"], name: "index_disco_app_subscriptions_on_shop_id"
 
 end

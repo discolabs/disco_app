@@ -1,0 +1,26 @@
+widget_store_old:
+  shop: widget_store
+  plan: cheapo
+  status: <%= DiscoApp::Subscription.statuses[:replaced] %>
+  name: Cheapo
+  charge_type: 0
+  price: 0.99
+  trial_days: 14
+
+widget_store:
+  shop: widget_store
+  plan: basic
+  status: <%= DiscoApp::Subscription.statuses[:active] %>
+  name: Basic
+  charge_type: 0
+  price: 9.99
+  trial_days: 14
+
+widget_store_dev:
+  shop: widget_store_dev
+  plan: development
+  status: <%= DiscoApp::Subscription.statuses[:active] %>
+  name: Development
+  charge_type: 0
+  price: 0.00
+  trial_days: 0

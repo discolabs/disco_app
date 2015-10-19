@@ -1,11 +1,11 @@
 Rails.application.configure do
+  # Settings specified here will take precedence over those in config/application.rb.
+
   # Use Sidekiq as the active job backend
   config.active_job.queue_adapter = :sidekiq
 
   # Allow real charges in production with an ENV variable
   config.x.shopify_charges_real = ENV['SHOPIFY_CHARGES_REAL'] == 'true'
-
-  # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
   config.cache_classes = true

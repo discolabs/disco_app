@@ -1,0 +1,10 @@
+widget_store:
+  shopify_domain: widgets.myshopify.com
+  shopify_token: 00000000000000000000000000000000
+  country_name: Australia
+
+widget_store_dev:
+  shopify_domain: widgets-dev.myshopify.com
+  shopify_token: 00000000000000000000000000000000
+  status: 3
+  country_name: Australia

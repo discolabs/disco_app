@@ -4,7 +4,7 @@ module DiscoApp
 
     # Start the installation process for the current shop, then redirect to the installing screen.
     def install
-      ::AppInstalledJob.perform_later(@shop.shopify_domain)
+      AppInstalledJob.perform_later(@shop.shopify_domain)
       redirect_to action: :installing
     end
 
