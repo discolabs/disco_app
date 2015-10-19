@@ -16,7 +16,7 @@ module DiscoApp
     private
 
       def find_shop(job)
-        @shop ||= ::Shop.find_by!(shopify_domain: job.arguments.first)
+        @shop ||= Shop.find_by!(shopify_domain: job.arguments.first)
       end
 
       def shop_context(job, block)

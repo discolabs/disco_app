@@ -1,6 +1,12 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # Use Sidekiq as the active job backend
+  config.active_job.queue_adapter = :sidekiq
+
+  # Allow real charges in production with an ENV variable
+  config.x.shopify_charges_real = ENV['SHOPIFY_CHARGES_REAL'] == 'true'
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
@@ -42,7 +48,7 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  # config.force_ssl = true
+  config.force_ssl = true
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.

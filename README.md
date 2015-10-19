@@ -13,10 +13,8 @@ well as providing common functionality in a single codebase.
 
 ## Getting Started
 Spinning up a new Shopify app with this engine is a simple four-step process,
-detailed below. A short screencast of this process is available
-([View screencast][]).
+detailed below.
 
-[View screencast]: #
 
 ### 1. Setting up
 First make sure you've got all of the tools you need for Shopify and Rails
@@ -46,7 +44,7 @@ add the DiscoApp Rails Engine to your Gemfile, and set up the Engine:
 $ export DISCO_GEM_CREDENTIALS=disco-gems:f361b0fef05c465c85a3d2d297930719617cb583
 $ rails new example_app
 $ cd example_app
-$ echo "gem 'disco_app', git: 'https://$DISCO_GEM_CREDENTIALS@github.com/discolabs/disco_app.git', tag: '0.5.6'" >> Gemfile
+$ echo "gem 'disco_app', git: 'https://$DISCO_GEM_CREDENTIALS@github.com/discolabs/disco_app.git', tag: '0.6.0'" >> Gemfile
 $ bundle update
 $ bundle exec rails generate disco_app --force
 $ bundle install
@@ -152,7 +150,7 @@ The following gems are added during setup:
 - [pg][] for Postgres use in production;
 - [dotenv-rails][] for reading environment variables from `.env` files in
   development;
-- [rails_12factor][] for use with Heroku in production.
+- [rails_12factor][] for use with Heroku/Dokku in production.
 
 The following configuration changes are made:
 
@@ -183,15 +181,10 @@ authentication and storing session information in a `Shop` model. The gem also
 provides a `SessionsController` which is used to log in and authenticate with
 Shopify.
 
-As part of the installation of the ShopifyApp gem, a `Shop` model is created,
-which stores the domain name and API token for a shop that installs the app.
-The DiscoApp gem extends this model with the following:
-
-- A `status` flag indicating the installation status of the app for that Shop;
-- A `charge_status` flag indicating the payment status of the app for that
-  Shop;
-- A number of attributes with general information about the Shop (email
-  address, country, Shopify plan type, et cetera).
+During installation and setup, a `DiscoApp::Shop` model is created, which stores
+the domain name and API token for a shop that installs the app, along with a
+number of other attributes such as email address, country, Shopify plan type,
+et cetera.
 
 ### Charge and Installation Checks
 The gem provides a `DiscoApp::AuthenticatedController` concern that should be
@@ -227,16 +220,22 @@ always* be the Shopify domain of the context shop (eg `example.myshopify.com`).
 During the setup process, DiscoApp creates some default jobs that are queued
 during installation or after specific webhooks are received. They are:
 
-- `AppInstalledJob`, triggered when the application is installed. By default,
-  this job uses the Shopify API to set up webhooks and to perform initial data
-  synchronisation.
-- `AppUninstalledJob`, triggered when the `app/uninstalled` webhook is
-  received. By default, this job simply updates the `status` flag on the `Shop`
-  model, but you may wish to add tasks like sending a cancellation email or the
-  like.
-- `ShopUpdateJob`, triggered when the `shop/update` webhook is received. By
-  default, this task keeps the metadata attributes on the relevant `Shop`
-  model up to date.
+- `DiscoApp::AppInstalledJob`, triggered when the application is installed. By
+  default, this job uses the Shopify API to set up webhooks and to perform
+  initial data synchronisation.
+- `DiscoApp::AppUninstalledJob`, triggered when the `app/uninstalled` webhook is
+  received. By default, this job simply updates the `status` flag on the
+  `DiscoApp::Shop` model, but you may wish to add tasks like sending a
+  cancellation email or the like.
+- `DiscoApp::ShopUpdateJob`, triggered when the `shop/update` webhook is
+  received. By default, this task keeps the metadata attributes on the relevant
+  `DiscoApp::Shop` model up to date.
+
+The default jobs that come with the engine can be extended through the use of
+Concerns in a similar way to the models that come with the engine. See
+[Extending Models][] below.
+
+[Extending Models]: #extending-models
 
 ### Webhooks
 As you may have noticed from the preceding section, webhooks and background
@@ -246,17 +245,17 @@ to the `process_webhook` method on `DiscoApp::WebhooksController`.
 When the controller receives an inbound webhook, it is automatically verified
 using the application's secret key. The controller then attempt to queue a job
 matching the topic name of the incoming webhook (eg `app/uninstalled` will try
-to queue a job named `AppUninstalledJob`). Two arguments will be passed to the
-job's `perform` method: the domain of the shop the webhook was related to, and
-the JSON payload of the webhook as a hash.
+to queue a job named `DiscoApp::AppUninstalledJob`). Two arguments will be
+passed to the job's `perform` method: the domain of the shop the webhook was
+related to, and the JSON payload of the webhook as a hash.
 
-There shouldn't be any need to extend or override
-`DiscoApp::WebhooksController` inside an application - all application logic
-should simply be placed inside the relevant `*Job` class.
+There shouldn't be any need to extend or override `DiscoApp::WebhooksController`
+inside an application - all application logic should simply be placed inside the
+relevant `*Job` class.
 
 Webhooks should generally be created inside the `perform` method of the
-`AppInstalledJob` background task. By default, webhooks are set up to listen
-for the `app/uninstalled` and `shop/update` webhook topics.
+`DiscoApp::AppInstalledJob` background task. By default, webhooks are set up to
+listen for the `app/uninstalled` and `shop/update` webhook topics.
 
 ### Application Proxies
 The gem provides support for Shopify's [Application Proxy][] functionality
@@ -275,7 +274,7 @@ directive on your controller targeting the `:add_liquid_header` method.
 Here's an example controller using the concern, that will return plain HTML
 from its `index` action and Liquid from its `show` action:
 
-```
+```ruby
 class MarblesController < ApplicationController
   include DiscoApp::AppProxyController
   
@@ -298,12 +297,42 @@ in proxied requests.
 [Application Proxy]: https://docs.shopify.com/api/uiintegrations/application-proxies
 [security section]: https://docs.shopify.com/api/uiintegrations/application-proxies#security
 
+### Extending Models
+The models that come with the `DiscoApp` engine (such as `DiscoApp::Shop`) can
+be extended through the use of Rails Concerns (see [Overriding Models][] in the
+official Rails Guides for an idea how this works).
+
+Here's the example used inside the "dummy" app used for testing the engine:
+
+```ruby
+require 'active_utils'
+
+class DiscoApp::Shop < ActiveRecord::Base
+  include DiscoApp::Concerns::Shop
+
+  # Extend the Shop model to return the Shop's country as an ActiveUtils country.
+  def country
+    begin
+      ActiveUtils::Country.find(country_name)
+    rescue ActiveUtils::InvalidCountryCodeError
+      nil
+    end
+  end
+
+end
+```
+
+[Overriding Models]: http://edgeguides.rubyonrails.org/engines.html#overriding-models-and-controllers
+
 
 ## Optional Generators
 A number of "optional" generators are provided to add functionality that's
 useful, but not necessary for every application. They should be run after
 you've completed the "Creating the Rails app" step described in the "Getting
 Started" section above.
+
+These generators are provided as conveniences. You should still carefully check
+the changes they make to your app after running them to tidy up their changes.
 
 A list of available optional generators follows.
 
@@ -314,6 +343,15 @@ $ bundle exec rails generate disco_app:reactify
 
 Adds the `react-rails` gem and installs and configures React.js for use with
 the Rails application.
+
+### Mailify
+```
+$ bundle exec rails generate disco_app:mailify
+```
+
+Adds the `mailgun_rails` and `premailer-rails` gems and configures Active Mailer
+to use the Mailgun API in production for sending email. Adds the
+`MAILGUN_API_KEY` and `MAILGUN_API_DOMAIN` environment variables.
 
 
 ## Contributing
