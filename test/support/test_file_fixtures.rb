@@ -22,7 +22,7 @@ module DiscoApp::Test
     # Webhook fixtures are special-case JSON fixtures.
     def webhook_fixture(path)
       filename = File.join(File.dirname(File.dirname(__FILE__)), 'fixtures', 'webhooks', "#{path}.json")
-      HashWithIndifferentAccess.new(ActiveSupport::JSON.decode(File.read(filename)))
+      File.read(filename)
     end
 
   end
