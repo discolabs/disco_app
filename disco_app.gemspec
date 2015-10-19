@@ -33,4 +33,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'minitest-reporters', '~> 1.0.19'
   s.add_development_dependency 'guard', '~> 2.13.0'
   s.add_development_dependency 'guard-minitest', '~> 2.4.4'
+  s.add_development_dependency 'webmock', '~> 1.22.1'
 end

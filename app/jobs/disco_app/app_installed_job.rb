@@ -13,7 +13,7 @@ module DiscoApp
       end
 
       # Perform initial update of shop information.
-      ::ShopUpdateJob.perform_now(domain)
+      DiscoApp::ShopUpdateJob.perform_now(domain)
 
     end
 

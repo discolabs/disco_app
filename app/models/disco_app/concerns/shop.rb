@@ -46,6 +46,17 @@ module DiscoApp::Concerns::Shop
       subscriptions.active.first
     end
 
+    # Return the absolute URL to the shop's storefront.
+    # @TODO: Account for HTTPS.
+    def url
+      "http://#{domain}"
+    end
+
+    # Return the absolute URL to the shop's admin.
+    def admin_url
+      "https://#{shopify_domain}/admin"
+    end
+
   end
 
 end
