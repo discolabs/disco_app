@@ -30,6 +30,10 @@
   padding: 20px;
 }
 
+.next-card__section--no-bottom-padding {
+  padding-bottom: 0;
+}
+
 .next-card--aside,
 .next-card--disabled {
   background-color: #f5f6f7;
