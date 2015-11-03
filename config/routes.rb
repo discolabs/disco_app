@@ -16,4 +16,11 @@ DiscoApp::Engine.routes.draw do
     get 'uninstalling' => :uninstalling, as: :uninstalling
   end
 
+  # Make the embedded app frame emulator available in development.
+  if Rails.env.development?
+    controller :frame do
+      get 'frame' => :frame, as: :frame
+    end
+  end
+
 end
