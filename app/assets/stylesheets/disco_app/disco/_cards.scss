@@ -30,6 +30,10 @@
   padding: 20px;
 }
 
+.next-card__section ~ .next-card__section {
+  border-top: 1px solid #ebeef0;
+}
+
 .next-card__section--no-bottom-padding {
   padding-bottom: 0;
 }
