@@ -297,6 +297,22 @@ in proxied requests.
 [Application Proxy]: https://docs.shopify.com/api/uiintegrations/application-proxies
 [security section]: https://docs.shopify.com/api/uiintegrations/application-proxies#security
 
+### Helpers
+A number of view helpers designed to encapsulate common Shopify app
+functionality are included with the gem and are automatically imported and made
+available from within the main application helper.
+
+#### link_to_shopify_admin
+Generates a link pointing to an object (such as an order or customer) inside the
+given shop's Shopify admin. This helper makes it easy to  create links to
+objects within the admin that support both right-clicking and opening in a new
+tab as well as capturing a left click and redirecting to the relevant object
+using `ShopifyApp.redirect()`.
+
+```erb
+<%= link_to_shopify_admin(@shop, 'Order 1234', "orders/1234") %>
+```
+  
 ### Extending Models
 The models that come with the `DiscoApp` engine (such as `DiscoApp::Shop`) can
 be extended through the use of Rails Concerns (see [Overriding Models][] in the
