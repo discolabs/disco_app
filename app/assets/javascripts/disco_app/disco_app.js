@@ -4,4 +4,4 @@
  * Assumes that jQuery will be loaded in the parent application.js.
  */
 //= require bootstrap-sprockets
-//= require_tree .
+//= require disco_app/shopify-turbolinks
