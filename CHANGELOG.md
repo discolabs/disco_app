@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 No unreleased changes.
 
+## 0.6.2 - 2015-11-04
+### Added
+- Start of the Dev Frame for aiding local development
+- `link_to_shopify_admin` view helper
+- Better support for Turbolinks and URL state changes
+
+### Changed
+- Card content is no longer wrapped in card sections by default 
+
 ## 0.6.1 - 2015-10-20
 ### Changed
 - Made app installed and shop update jobs extensible with Concerns pattern
