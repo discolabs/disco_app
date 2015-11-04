@@ -5,9 +5,7 @@
       <%= content_for :card_header %>
     </header>
   <% end %>
-  <section class="next-card__section">
-    <%= content_for :card_content %>
-  </section>
+  <%= content_for :card_content %>
   <% if content_for?(:card_footer) %>
     <footer class="next-card__footer">
       <%= content_for :card_footer %>
