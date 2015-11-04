@@ -369,6 +369,22 @@ Adds the `mailgun_rails` and `premailer-rails` gems and configures Active Mailer
 to use the Mailgun API in production for sending email. Adds the
 `MAILGUN_API_KEY` and `MAILGUN_API_DOMAIN` environment variables.
 
+## Upgrading
+To upgrade your application from a previous version of the gem, these are the
+steps you should take:
+
+- Update the `disco_app` entry in your `Gemfile` to point to the latest tagged
+  release of the gem (check the [release list][] to find the latest available
+  version).
+- Run `bundle update`. You may have to resolve some gem dependencies.
+- Run `bundle exec rake disco_app:install:migrations` to copy over any new
+  migrations from the gem into your application, ready to be run with a
+  `bundle exec rake db:migrate`.
+- Carefully read through `CHANGELOG.md` and the commit history for `disco_app`
+  between the previous version of the gem you were using and the new one. You
+  may have to make some changes to your application code to adapt to change.
+
+[release list]: https://github.com/discolabs/disco_app/releases
 
 ## Contributing
 While developing Shopify applications using the DiscoApp Engine, you may see
