@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 No unreleased changes.
 
+## 0.6.3 - 2015-11-05
+### Added
+- React component library
+- More admin styles for tables and grids 
+
+### Changed
+- Upgraded to React v0.14
+
 ## 0.6.2 - 2015-11-04
 ### Added
 - Start of the Dev Frame for aiding local development
