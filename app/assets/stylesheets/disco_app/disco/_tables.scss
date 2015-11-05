@@ -40,6 +40,10 @@ td {
   background: transparent;
 }
 
+tr:last-child > td {
+  border-bottom: none;
+}
+
 .table-hover {
   tr:hover td {
     background: #eff9fd;
