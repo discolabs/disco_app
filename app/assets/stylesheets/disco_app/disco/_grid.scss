@@ -1,0 +1,19 @@
+//
+// Replicate the styles for Shopify Admin grid.
+// --------------------------------------------------
+
+.next-grid {
+  display: flex;
+  width: calc(100% - 20px);
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding-top: 10px;
+}
+
+.next-grid__cell {
+  @include flex(1, 1, 0%);
+  padding: 10px;
+  box-sizing: border-box;
+  max-width: 100%;
+  min-width: 0;
+}

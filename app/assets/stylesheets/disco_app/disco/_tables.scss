@@ -1,0 +1,47 @@
+//
+// Replicate the styles for Shopify Admin tables.
+// --------------------------------------------------
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+
+  &.expanded td {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+}
+
+th {
+  font-weight: 400;
+  text-align: left;
+  color: #31373d;
+  padding: 8px 10px;
+  border-bottom: 1px solid #ebeef0;
+
+  &.right-aligned {
+    text-align: right;
+  }
+
+  &.is-sortable {
+    cursor: pointer;
+
+    &:hover {
+      background: #eff9fd;
+      color: #479ccf;
+    }
+  }
+}
+
+td {
+  border-bottom: 1px solid #ebeef0;
+  padding: 6px 10px;
+  background: transparent;
+}
+
+.table-hover {
+  tr:hover td {
+    background: #eff9fd;
+  }
+}

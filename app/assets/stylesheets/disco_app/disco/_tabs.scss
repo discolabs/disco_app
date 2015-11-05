@@ -43,6 +43,14 @@
   align-items: center;
   justify-content: center;
 
+  &:focus,
+  &:hover {
+    outline: none;
+    background-color: #fafbfc;
+    color: #479ccf;
+    text-decoration: none;
+  }
+
   &.next-tab--is-active {
     background-color: #ffffff;
     color: #31373d;
