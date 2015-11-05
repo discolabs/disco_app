@@ -4,7 +4,6 @@ module DiscoApp
 
       source_root File.expand_path('../templates', __FILE__)
 
-      # Install the react-rails gem and run its setup.
       def install_gem
         # Add premailer gem to Gemfile.
         gem 'premailer-rails', '~> 1.8.2'
