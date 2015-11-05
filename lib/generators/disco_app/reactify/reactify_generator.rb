@@ -26,6 +26,20 @@ module DiscoApp
         application "# Use production variant of React in production.", env: :production
       end
 
+      # Include the DiscoApp component library in the application.js manifest.
+      def add_to_manifest
+        inject_into_file manifest, "//= require disco_app/components\n", { before: "//= require components\n" }
+      end
+
+      private
+
+        # This method of finding the application.js manifest taken from the
+        # install generator in react-rails.
+        # See https://github.com/reactjs/react-rails/blob/3f0af13fa755d6e95969c17728d0354c234f3a37/lib/generators/react/install_generator.rb#L53-L55
+        def manifest
+          Pathname.new(destination_root).join('app/assets/javascripts', 'application.js')
+        end
+
     end
   end
 end

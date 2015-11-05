@@ -358,7 +358,8 @@ $ bundle exec rails generate disco_app:reactify
 ```
 
 Adds the `react-rails` gem and installs and configures React.js for use with
-the Rails application.
+the Rails application. Adds a line to `application.js` which imports a library
+of React components provided by the engine.
 
 ### Mailify
 ```
