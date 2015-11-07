@@ -33,12 +33,24 @@
   justify-content: center;
 }
 
+.next-grid--right-aligned {
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+
 .next-grid__cell {
   @include flex(1, 1, 0%);
   padding: 10px;
   box-sizing: border-box;
   max-width: 100%;
   min-width: 0;
+}
+
+.next-grid__cell--third {
+  @include flex(0, 0, 33.333%);
+  max-width: 33.333%;
 }
 
 .next-grid__cell--no-flex {
