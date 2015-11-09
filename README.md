@@ -41,7 +41,7 @@ Running the following commands from your terminal to create a new Rails app,
 add the DiscoApp Rails Engine to your Gemfile, and set up the Engine:
 
 ```
-$ export DISCO_GEM_CREDENTIALS=disco-gems:f361b0fef05c465c85a3d2d297930719617cb583
+$ export DISCO_GEM_CREDENTIALS=disco-gems:0dfbd458c126baa2744cef477b24c7cf7227fae5
 $ rails new example_app
 $ cd example_app
 $ echo "gem 'disco_app', git: 'https://$DISCO_GEM_CREDENTIALS@github.com/discolabs/disco_app.git', tag: '0.6.3'" >> Gemfile
