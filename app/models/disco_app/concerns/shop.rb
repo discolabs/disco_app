@@ -17,7 +17,7 @@ module DiscoApp::Concerns::Shop
     # Define some useful scopes.
     scope :status, -> (status) { where status: status }
     scope :installed, -> { where status: statuses[:installed] }
-    scope :has_active_shopify_plan, -> { where.not(plan_name: [:cancelled, :frozen]) }
+    scope :has_active_shopify_plan, -> { where.not(plan_name: [:cancelled, :frozen, :fraudulent]) }
 
     # Alias 'with_shopify_session' as 'temp', as per our existing conventions.
     alias_method :temp, :with_shopify_session
