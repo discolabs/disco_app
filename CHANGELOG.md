@@ -5,6 +5,9 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Disco App test helper, which injects into an app's `test/test_helper.rb`
 
+### Changed
+- Webhook controller now passes data as an indifferent hash by default
+
 ## 0.6.3 - 2015-11-05
 ### Added
 - React component library

@@ -22,7 +22,7 @@ module DiscoApp
       end
 
       # Decode the body data and enqueue the appropriate job.
-      data = ActiveSupport::JSON::decode(request.body.read)
+      data = ActiveSupport::JSON::decode(request.body.read).with_indifferent_access
       job_class.perform_later(domain, data)
 
       render nothing: true
