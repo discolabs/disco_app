@@ -9,38 +9,12 @@ module DiscoApp::Concerns::AppInstalledJob
 
   # Perform application installation.
   #
-  # - Install webhooks, using a list generated from the base_webhook_topics and
-  #   webhook_topics methods.
+  # - Synchronise webhooks.
   # - Perform initial update of shop information.
   #
   def perform(domain)
-    (base_webhook_topics + webhook_topics).each do |topic|
-      ShopifyAPI::Webhook.create(topic: topic, address: webhooks_url, format: 'json')
-    end
-
+    DiscoApp::SynchroniseWebhooksJob.perform_now(domain)
     DiscoApp::ShopUpdateJob.perform_now(domain)
   end
-
-  protected
-
-    # Return a list of additional webhook topics to listen for. This method
-    # can be overridden in the application to provide a list of app-specific
-    # webhooks that should be created during installation.
-    def webhook_topics
-      []
-    end
-
-  private
-
-    # Return a list of webhook topics that will always be set up for the
-  # # application.
-    def base_webhook_topics
-      [:'app/uninstalled', :'shop/update']
-    end
-
-    # Return the absolute URL to the webhooks endpoint.
-    def webhooks_url
-      DiscoApp::Engine.routes.url_helpers.webhooks_url
-    end
 
 end
