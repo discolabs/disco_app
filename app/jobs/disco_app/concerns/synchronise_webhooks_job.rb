@@ -38,9 +38,7 @@ module DiscoApp::Concerns::SynchroniseWebhooksJob
 
     # Return a list of current registered webhooks.
     def current_webhooks
-      @current_webhooks ||= @shop.with_shopify_session {
-        ShopifyAPI::Webhook.find(:all)
-      }
+      @current_webhooks ||= ShopifyAPI::Webhook.find(:all)
     end
 
     # Return the absolute URL to the webhooks endpoint.
