@@ -2,7 +2,8 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
-No unreleased changes.
+### Added
+- Disco App test helper, which injects into an app's `test/test_helper.rb`
 
 ## 0.6.3 - 2015-11-05
 ### Added

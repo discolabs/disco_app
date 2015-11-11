@@ -135,6 +135,11 @@ class DiscoAppGenerator < Rails::Generators::Base
     remove_file 'app/views/layout/embedded_app.html.erb'
   end
 
+  # Add the Disco App test helper to test/test_helper.rb
+  def add_test_helper
+    inject_into_file 'test/test_helper.rb', "require 'disco_app/test_help'\n", { after: "require 'rails/test_help'\n" }
+  end
+
   # Copy engine migrations over.
   def install_migrations
     rake 'disco_app:install:migrations'
