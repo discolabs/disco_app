@@ -83,24 +83,6 @@ class DiscoAppGenerator < Rails::Generators::Base
     copy_file 'config/puma.rb', 'config/puma.rb'
   end
 
-  # Create Rakefiles
-  def create_rakefiles
-    rakefile 'start.rake' do
-      <<-RAKEFILE.strip_heredoc
-        task start: :environment do
-          system 'bundle exec rails server -b 127.0.0.1 -p 3000'
-        end
-      RAKEFILE
-    end
-    rakefile 'console.rake' do
-      <<-RAKEFILE.strip_heredoc
-        task console: :environment do
-          system 'bundle exec rails console'
-        end
-      RAKEFILE
-    end
-  end
-
   # Set up routes.
   def setup_routes
     route "mount DiscoApp::Engine, at: '/'"
