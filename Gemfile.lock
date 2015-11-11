@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    disco_app (0.6.3)
+    disco_app (0.6.4)
       active_utils (~> 3.2.0)
       bootstrap-sass (~> 3.3.5.1)
       jquery-rails (~> 4.0.5)
@@ -61,7 +61,7 @@ GEM
     addressable (2.3.8)
     ansi (1.5.0)
     arel (6.0.3)
-    autoprefixer-rails (6.0.3)
+    autoprefixer-rails (6.1.0.1)
       execjs
       json
     bootstrap-sass (3.3.5.1)
@@ -222,7 +222,7 @@ GEM
     safe_yaml (1.0.4)
     sass (3.4.19)
     shellany (0.0.1)
-    shopify_api (4.0.6)
+    shopify_api (4.0.7)
       activeresource
       rack
     shopify_app (6.2.1)

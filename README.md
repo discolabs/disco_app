@@ -44,7 +44,7 @@ add the DiscoApp Rails Engine to your Gemfile, and set up the Engine:
 $ export DISCO_GEM_CREDENTIALS=disco-gems:0dfbd458c126baa2744cef477b24c7cf7227fae5
 $ rails new example_app
 $ cd example_app
-$ echo "gem 'disco_app', git: 'https://$DISCO_GEM_CREDENTIALS@github.com/discolabs/disco_app.git', tag: '0.6.3'" >> Gemfile
+$ echo "gem 'disco_app', git: 'https://$DISCO_GEM_CREDENTIALS@github.com/discolabs/disco_app.git', tag: '0.6.4'" >> Gemfile
 $ bundle update
 $ bundle exec rails generate disco_app --force
 $ bundle install
@@ -165,8 +165,7 @@ Finally, the following environment changes are made:
 - Add default `.env` and `.env.sample` files for development environment
   management;
 - Add a `Procfile` for deployment to Heroku;
-- Update the `.gitignore` with some additional useful defaults;
-- Add a `start` Rake tasks to spin up Puma in development.
+- Update the `.gitignore` with some additional useful defaults.
 
 [shopify_app]: https://github.com/Shopify/shopify_app
 [puma]: http://puma.io/
@@ -200,6 +199,14 @@ panel. The concern performs the following checks:
   begins the installation and displays an "Installing..." progress page until
   installation is complete (provided by `DiscoApp::InstallController`).
 
+### Rake Tasks
+A couple of useful Rake tasks are baked into the app. They are:
+
+- `rake start`: Spin up a local Puma development server, bound correctly to the
+  local IP.
+- `rake webhooks:sync`: Trigger a re-synchronisation of webhooks for all
+  shops on active Shopify plans and with the application currently installed.
+
 ### Background Tasks
 The `DiscoApp::ShopJob` class inherits from `ActiveJob::Base`, and can be used
 to queue jobs that need to take place in the API context of a particular shop.
@@ -217,8 +224,8 @@ end
 Note that the first argument of the `perform` method on a `ShopJob` *must
 always* be the Shopify domain of the context shop (eg `example.myshopify.com`).
 
-During the setup process, DiscoApp creates some default jobs that are queued
-during installation or after specific webhooks are received. They are:
+The gem includes some default jobs that are queued during installation or after
+specific webhooks are received. They are:
 
 - `DiscoApp::AppInstalledJob`, triggered when the application is installed. By
   default, this job uses the Shopify API to set up webhooks and to perform
@@ -230,6 +237,9 @@ during installation or after specific webhooks are received. They are:
 - `DiscoApp::ShopUpdateJob`, triggered when the `shop/update` webhook is
   received. By default, this task keeps the metadata attributes on the relevant
   `DiscoApp::Shop` model up to date.
+- `DiscoApp::SynchroniseWebhooksJob`, called by the installation job but also
+  enqueued by the `webhooks:sync` rake task to allow for re-synchronisation of
+  webhooks after installation.
 
 The default jobs that come with the engine can be extended through the use of
 Concerns in a similar way to the models that come with the engine. See
