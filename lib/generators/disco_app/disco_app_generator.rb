@@ -61,7 +61,8 @@ class DiscoAppGenerator < Rails::Generators::Base
     application "# Set defaults for charges created by the application"
 
     # Set the "real charges" config variable to false explicitly by default.
-    # Only in production do we read from the environment variable and potentially have it become true.
+    # Only in production do we read from the environment variable and
+    # potentially have it become true.
     application "config.x.shopify_charges_real = false\n"
     application "# Explicitly prevent real charges being created by default"
     application "config.x.shopify_charges_real = ENV['SHOPIFY_CHARGES_REAL'] == 'true'\n", env: :production
@@ -71,11 +72,18 @@ class DiscoAppGenerator < Rails::Generators::Base
     application "config.active_job.queue_adapter = :sidekiq\n", env: :production
     application "# Use Sidekiq as the active job backend", env: :production
 
-    # Ensure the application configuration uses the DEFAULT_HOST environment variable to set up support for reverse
-    # routing absolute URLS (needed when generating Webhook URLs for example).
+    # Ensure the application configuration uses the DEFAULT_HOST environment
+    # variable to set up support for reverse routing absolute URLS (needed when
+    # generating Webhook URLs for example).
     application "routes.default_url_options[:host] = ENV['DEFAULT_HOST']\n"
     application "# Set the default host for absolute URL routing purposes"
 
+    # Add loading of the default application proxy prefix to set up support for
+    # reverse routings absolute proxy URLS.
+    application "config.x.shopify_app_proxy_prefix = ENV['SHOPIFY_APP_PROXY_PREFIX']\n"
+    application "# Set the application proxy path for absolute URL routing purposes"
+
+    # Add the Shopify application name to the configuration.
     application "config.x.shopify_app_name = ENV['SHOPIFY_APP_NAME']\n"
     application "# Set the name of the application"
 
@@ -113,8 +121,8 @@ class DiscoAppGenerator < Rails::Generators::Base
     remove_file 'app/assets/stylesheets/application.css'
 
     # Remove the layout files created by ShopifyApp
-    remove_file 'app/views/layout/application.html.erb'
-    remove_file 'app/views/layout/embedded_app.html.erb'
+    remove_file 'app/views/layouts/application.html.erb'
+    remove_file 'app/views/layouts/embedded_app.html.erb'
   end
 
   # Add the Disco App test helper to test/test_helper.rb
