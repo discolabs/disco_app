@@ -4,12 +4,12 @@ class DiscoAppGenerator < Rails::Generators::Base
 
   # Copy a number of template files to the top-level directory of our application:
   #
-  #  - .env and .env.sample for settings environment variables in development with dotenv-rails;
+  #  - .env and .env.local for settings environment variables in development with dotenv-rails;
   #  - Slightly customised version of the default Rails .gitignore;
   #  - Default simple Procfile for Heroku.
   #
   def copy_root_files
-    %w(.env .env.sample .gitignore Procfile).each do |file|
+    %w(.env .env.local .gitignore Procfile).each do |file|
       copy_file "root/#{file}", file
     end
   end

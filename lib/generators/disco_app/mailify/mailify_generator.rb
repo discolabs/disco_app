@@ -38,7 +38,7 @@ module DiscoApp
         application configuration, env: :production
       end
 
-      # Add entries to .env and .env.sample
+      # Add entries to .env and .env.local
       def add_env_variables
         configuration = <<-CONFIG.strip_heredoc
 
@@ -46,7 +46,7 @@ module DiscoApp
           MAILGUN_API_DOMAIN=
         CONFIG
         append_to_file '.env', configuration
-        append_to_file '.env.sample', configuration
+        append_to_file '.env.local', configuration
       end
 
     end
