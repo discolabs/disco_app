@@ -47,9 +47,15 @@ module DiscoApp::Concerns::Shop
     end
 
     # Return the absolute URL to the shop's storefront.
-    # @TODO: Account for HTTPS.
     def url
-      "http://#{domain}"
+      "#{protocol}://#{domain}"
+    end
+
+    # Return the protocol the shop's storefront uses.
+    # @TODO: Consider when we may want to allow https: here. For now, automatic
+    # redirection should do most of the work.
+    def protocol
+      'http'
     end
 
     # Return the absolute URL to the shop's admin.
