@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 - No unreleased changes.
 
+## 0.6.5 - 2015-11-16
+### Added
+- `SHOPIFY_APP_PROXY_PREFIX` configuration and environment variable
+
 ## 0.6.4 - 2015-11-11
 ### Added
 - Disco App test helper, which injects into an app's `test/test_helper.rb`
