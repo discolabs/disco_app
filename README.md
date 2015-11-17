@@ -164,7 +164,7 @@ Finally, the following environment changes are made:
 
 - Add `.ruby-version` file and update Gemfile to lock down Ruby version being
   used;
-- Add default `.env` and `.env.sample` files for development environment
+- Add default `.env` and `.env.local` files for development environment
   management;
 - Add a `Procfile` for deployment to Heroku;
 - Update the `.gitignore` with some additional useful defaults.
