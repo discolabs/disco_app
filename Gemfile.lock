@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    disco_app (0.6.5)
+    disco_app (0.6.6)
       active_utils (~> 3.2.0)
       bootstrap-sass (~> 3.3.5.1)
       jquery-rails (~> 4.0.5)

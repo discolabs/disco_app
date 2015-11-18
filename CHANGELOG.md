@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 - No unreleased changes.
 
+## 0.6.6 - 2015-11-18
+### Added
+- Added carrier service synchronisation with same pattern as for webhooks
+- Added `carrier_services:sync` rake task
+
 ## 0.6.5 - 2015-11-16
 ### Added
 - `SHOPIFY_APP_PROXY_PREFIX` configuration and environment variable
@@ -16,7 +21,7 @@ All notable changes to this project will be documented in this file.
 - Webhook controller now passes data as an indifferent hash by default
 - Rake tasks now stored inside Disco App engine rather than created in app
 - Moved webhook synchronisation to its own independent job
-- Added `webhooks:sync` rake tasks
+- Added `webhooks:sync` rake task
 
 ## 0.6.3 - 2015-11-05
 ### Added
