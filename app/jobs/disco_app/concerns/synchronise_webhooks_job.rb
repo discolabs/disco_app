@@ -9,7 +9,11 @@ module DiscoApp::Concerns::SynchroniseWebhooksJob
 
     # Registered any webhooks that haven't been registered yet.
     (expected_topics - current_topics).each do |topic|
-      ShopifyAPI::Webhook.create(topic: topic, address: webhooks_url, format: 'json')
+      ShopifyAPI::Webhook.create(
+        topic: topic,
+        address: webhooks_url,
+        format: 'json'
+      )
     end
 
     # Remove any extraneous topics.

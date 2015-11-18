@@ -10,10 +10,12 @@ module DiscoApp::Concerns::AppInstalledJob
   # Perform application installation.
   #
   # - Synchronise webhooks.
+  # - Synchronise carrier services.
   # - Perform initial update of shop information.
   #
   def perform(domain)
     DiscoApp::SynchroniseWebhooksJob.perform_now(domain)
+    DiscoApp::SynchroniseCarrierServicesJob.perform_now(domain)
     DiscoApp::ShopUpdateJob.perform_now(domain)
   end
 
