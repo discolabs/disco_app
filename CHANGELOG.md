@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 - No unreleased changes.
 
+## 0.6.7 - 2015-11-18
+### Changed
+- Change to registering a single carrier service
+
 ## 0.6.6 - 2015-11-18
 ### Added
 - Added carrier service synchronisation with same pattern as for webhooks
