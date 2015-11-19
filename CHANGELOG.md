@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 - No unreleased changes.
 
+## 0.6.8 - 2015-11-19
+### Added
+- Add `link_to_modal` helper
+- Add modal layout
+
 ## 0.6.7 - 2015-11-18
 ### Changed
 - Change to registering a single carrier service
