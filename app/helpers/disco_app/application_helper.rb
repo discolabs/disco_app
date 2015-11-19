@@ -11,4 +11,18 @@ module DiscoApp::ApplicationHelper
     link_to(name, "https://#{shop.shopify_domain}/admin/#{admin_path}", options)
   end
 
+  # Generate a link that will open its href in an embedded Shopify modal.
+  def link_to_modal(name, path, options = {})
+    modal_options = {
+      src: path,
+      title: options.delete(:modal_title),
+      width: options.delete(:modal_width),
+      height: options.delete(:modal_height),
+      buttons: options.delete(:modal_buttons),
+    }
+    options[:onclick] = "ShopifyApp.Modal.open(#{modal_options.to_json}); return false;"
+    options[:onclick].gsub!(/"function(.*?)"/, 'function\1')
+    link_to(name, path, options)
+  end
+
 end
