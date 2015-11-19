@@ -19,3 +19,21 @@ h6, .h6 {
 p {
   margin: 0;
 }
+
+
+//== Type
+//
+//## Type modifiers.
+
+.type--subdued {
+  color: #798c9c;
+}
+
+a.type--subdued {
+  color: inherit;
+  text-decoration: underline;
+
+  &:hover {
+    color: #272c30;
+  }
+}

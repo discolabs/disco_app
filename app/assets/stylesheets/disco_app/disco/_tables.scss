@@ -20,10 +20,6 @@ th {
   padding: 8px 10px;
   border-bottom: 1px solid #ebeef0;
 
-  &.right-aligned {
-    text-align: right;
-  }
-
   &.is-sortable {
     cursor: pointer;
 
@@ -38,6 +34,16 @@ td {
   border-bottom: 1px solid #ebeef0;
   padding: 6px 10px;
   background: transparent;
+}
+
+th, td {
+  &.right-aligned {
+    text-align: right;
+  }
+
+  &.center-aligned {
+    text-align: center;
+  }
 }
 
 tr:last-child > td {
