@@ -382,6 +382,15 @@ Adds the `mailgun_rails` and `premailer-rails` gems and configures Active Mailer
 to use the Mailgun API in production for sending email. Adds the
 `MAILGUN_API_KEY` and `MAILGUN_API_DOMAIN` environment variables.
 
+### Rollbarify
+```
+$ bundle exec rails generate disco_app:rollbarify
+```
+
+Adds support for Rollbar exception tracking in production, when a
+`ROLLBAR_ACCESS_TOKEN` environment variable is present.
+
+
 ## Upgrading
 To upgrade your application from a previous version of the gem, these are the
 steps you should take:
