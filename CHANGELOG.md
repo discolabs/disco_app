@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 - No unreleased changes.
 
+## 0.6.9 - 2015-11-30
+### Added
+- Add `disco_app:rollbarify` optional generator
+
 ## 0.6.8 - 2015-11-19
 ### Added
 - Add `link_to_modal` helper
