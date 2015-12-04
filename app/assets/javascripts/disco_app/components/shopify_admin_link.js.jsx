@@ -18,7 +18,7 @@ var ShopifyAdminLink = React.createClass({
     },
 
     render: function() {
-        var href = '/admin' + this.props.href;
+        var href = ShopifyApp.shopOrigin + '/admin' + this.props.href;
         return (
             <a className={this.props.className} href={href} onClick={this.handleClick}>
                 {this.props.label}
