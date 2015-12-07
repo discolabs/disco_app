@@ -78,17 +78,17 @@ fields for **Preferences URL** and **Support URL** for now. The
 `https://example.ngrok.io/auth/shopify/callback`.
 
 Once the application has been created on Shopify, copy over the API credentials
-to the `SHOPIFY_APP_API_KEY` and `SHOPIFY_APP_SECRET` values in the `.env` file
+to the `SHOPIFY_APP_API_KEY` and `SHOPIFY_APP_SECRET` values in the `.env.local` file
 located in the root directory of the Rails app (this file was created by the
 DiscoApp generator during step 2).
 
-While the `.env` file is open, add in values for `DEFAULT_HOST` (this should be
+While the `.env.local` file is open, add in values for `DEFAULT_HOST` (this should be
 the tunnel endpoint), `SHOPIFY_APP_NAME`, `SHOPIFY_APP_REDIRECT_URI`,
 `SHOPIFY_APP_PROXY_PREFIX`, and `SHOPIFY_APP_SCOPE` (view a [list of scopes][]).
 The `SHOPIFY_CHARGES_REAL`, `SECRET_KEY_BASE` and `REDIS_PROVIDER` values can be
 left blank in development.
 
-When you're done, your `.env` file should look something like this:
+When you're done, your `.env.local` file should look something like this:
 
 ```
 DEFAULT_HOST=https://example.ngrok.io
@@ -106,6 +106,10 @@ SECRET_KEY_BASE=
 
 REDIS_PROVIDER=
 ```
+
+Notice that `.env.local` should not be added to Git, and is therefore
+added to `.gitignore`. On the other side, `.env` is added to Git and should keep
+all the environment variables that are kept equal across the different environments.
 
 [list of scopes]: https://docs.shopify.com/api/authentication/oauth#scopes
 
