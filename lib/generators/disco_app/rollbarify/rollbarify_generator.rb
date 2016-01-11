@@ -7,8 +7,8 @@ module DiscoApp
       # Install the Rollbar and OJ gems.
       def install_gems
         # Add gem to Gemfile
-        gem 'rollbar', '~> 2.4.0'
-        gem 'oj', '~> 2.12.14'
+        gem 'rollbar', '~> 2.7.1'
+        gem 'oj', '~> 2.14.3'
 
         # Install gem.
         Bundler.with_clean_env do

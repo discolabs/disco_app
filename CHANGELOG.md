@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
-- No unreleased changes.
+- Update Rollbar and OJ gems for optional generator
 
 ## 0.6.9 - 2015-11-30
 ### Added
