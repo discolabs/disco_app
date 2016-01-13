@@ -27,6 +27,9 @@ module Dummy
     # Set the default host for absolute URL routing purposes
     routes.default_url_options[:host] = ENV['DEFAULT_HOST']
 
+    # Configure custom session storage
+    ActiveRecord::SessionStore::Session.table_name = 'disco_app_sessions'
+
     # Explicitly prevent real charges being created by default
     config.x.shopify_charges_real = false
 
