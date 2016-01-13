@@ -31,6 +31,7 @@ class DiscoAppGenerator < Rails::Generators::Base
     gem 'sidekiq', '~> 3.5.1'
     gem 'puma', '~> 2.14.0'
     gem 'bootstrap-sass', '~> 3.3.5.1'
+    gem 'activerecord-session_store', '~> 0.1.2'
 
     # Add gems for development and testing only.
     gem_group :development, :test do
@@ -67,6 +68,10 @@ class DiscoAppGenerator < Rails::Generators::Base
     application "# Explicitly prevent real charges being created by default"
     application "config.x.shopify_charges_real = ENV['SHOPIFY_CHARGES_REAL'] == 'true'\n", env: :production
     application "# Allow real charges in production with an ENV variable", env: :production
+
+    # Configure session storage.
+    application "ActiveRecord::SessionStore::Session.table_name = 'disco_app_sessions'"
+    application "# Configure custom session storage"
 
     # Set Sidekiq as the queue adapter in production.
     application "config.active_job.queue_adapter = :sidekiq\n", env: :production
@@ -108,6 +113,7 @@ class DiscoAppGenerator < Rails::Generators::Base
     copy_file 'initializers/shopify_app.rb', 'config/initializers/shopify_app.rb'
     copy_file 'initializers/disco_app.rb', 'config/initializers/disco_app.rb'
     copy_file 'initializers/shopify_session_repository.rb', 'config/initializers/shopify_session_repository.rb'
+    copy_file 'initializers/session_store.rb', 'config/initializers/session_store.rb'
 
     # Copy default home controller and view
     copy_file 'controllers/home_controller.rb', 'app/controllers/home_controller.rb'
