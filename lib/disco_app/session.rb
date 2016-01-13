@@ -1,12 +1,14 @@
-class DiscoApp::Session < ActiveRecord::SessionStore::Session
+module DiscoApp
+  class Session < ActiveRecord::SessionStore::Session
 
-  before_save :set_shop_id!
+    before_save :set_shop_id!
 
-  private
+    private
 
-    def set_shop_id!
-      return false unless loaded?
-      write_attribute(:shop_id, data[:shopify] || data['shopify'])
-    end
+      def set_shop_id!
+        return false unless loaded?
+        write_attribute(:shop_id, data[:shopify] || data['shopify'])
+      end
 
+  end
 end
