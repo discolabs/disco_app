@@ -17,7 +17,7 @@ module DiscoApp
 
     # Ensure our frame assets are included for precompilation.
     initializer 'disco_app.assets.precompile' do |app|
-      app.config.assets.precompile += %w(disco_app/frame.css disco_app/frame.js)
+      app.config.assets.precompile += %w(disco_app/icon.svg disco_app/frame.css disco_app/frame.js)
     end
 
   end
