@@ -2,8 +2,14 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
-- Update Rollbar and OJ gems for optional generator
+- No unreleased changes.
+
+## 0.7.0 - 2016-01-13
+### Added
 - Moved session storage to Active Record, with clearout after uninstall
+
+### Changed
+- Update Rollbar and OJ gems for optional generator
 
 ## 0.6.9 - 2015-11-30
 ### Added
