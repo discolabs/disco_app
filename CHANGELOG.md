@@ -4,7 +4,12 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 - No unreleased changes.
 
+## 0.7.1 - 2016-01-13
+### Changed
+- Minor bugfix
+
 ## 0.7.0 - 2016-01-13
+### Changed
 - Move session storage to Active Record with `DiscoApp::Session`
 - Update `shopify_app` gem to v6.4.1
 - Update Rollbar and OJ gems for optional generator
