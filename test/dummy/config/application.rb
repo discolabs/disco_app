@@ -28,6 +28,7 @@ module Dummy
     routes.default_url_options[:host] = ENV['DEFAULT_HOST']
 
     # Configure custom session storage
+    ActionDispatch::Session::ActiveRecordStore.session_class = DiscoApp::Session
     ActiveRecord::SessionStore::Session.table_name = 'disco_app_sessions'
 
     # Explicitly prevent real charges being created by default

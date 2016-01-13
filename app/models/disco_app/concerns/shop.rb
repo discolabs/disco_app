@@ -8,6 +8,9 @@ module DiscoApp::Concerns::Shop
     has_many :subscriptions
     has_many :plans, through: :subscriptions
 
+    # Define relationship to sessions.
+    has_many :sessions, class_name: 'DiscoApp::Session', dependent: :destroy
+
     # Define possible installation statuses as an enum.
     enum status: [:never_installed, :awaiting_install, :installing, :installed, :awaiting_uninstall, :uninstalling, :uninstalled]
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160112233706) do
+ActiveRecord::Schema.define(version: 20160113194418) do
 
   create_table "disco_app_plans", force: :cascade do |t|
     t.integer  "status"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20160112233706) do
     t.text     "data"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "shop_id"
   end
 
   add_index "disco_app_sessions", ["session_id"], name: "index_disco_app_sessions_on_session_id", unique: true

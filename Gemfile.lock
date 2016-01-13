@@ -73,6 +73,7 @@ GEM
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.3.0)
     builder (3.2.2)
+    byebug (8.2.1)
     celluloid (0.17.2)
       celluloid-essentials
       celluloid-extras
@@ -267,6 +268,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  byebug
   disco_app!
   dotenv-rails (~> 2.0.2)
   guard (~> 2.13.0)

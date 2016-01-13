@@ -71,6 +71,7 @@ class DiscoAppGenerator < Rails::Generators::Base
 
     # Configure session storage.
     application "ActiveRecord::SessionStore::Session.table_name = 'disco_app_sessions'"
+    application "ActionDispatch::Session::ActiveRecordStore.session_class = DiscoApp::Session"
     application "# Configure custom session storage"
 
     # Set Sidekiq as the queue adapter in production.

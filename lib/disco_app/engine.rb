@@ -3,6 +3,7 @@ require 'bootstrap-sass'
 require 'jquery-rails'
 require 'turbolinks'
 require 'activerecord/session_store'
+require 'disco_app/session'
 
 module DiscoApp
   class Engine < ::Rails::Engine
