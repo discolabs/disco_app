@@ -10,7 +10,7 @@ PATH
       puma (~> 2.14.0)
       rails (~> 4.2.4)
       rails_12factor (~> 0.0.3)
-      shopify_app (~> 6.2.0)
+      shopify_app (~> 6.4.1)
       sidekiq (~> 3.5.1)
       turbolinks (~> 2.5.3)
 
@@ -231,8 +231,8 @@ GEM
     shopify_api (4.0.7)
       activeresource
       rack
-    shopify_app (6.2.1)
-      omniauth-shopify-oauth2 (~> 1.1.10)
+    shopify_app (6.4.1)
+      omniauth-shopify-oauth2 (~> 1.1.11)
       rails (>= 3.1, < 5.0)
       shopify_api (~> 4.0.2)
     sidekiq (3.5.3)

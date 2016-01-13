@@ -2,6 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+- Update `shopify_app` gem to v6.4.1
 - Update Rollbar and OJ gems for optional generator
 
 ## 0.6.9 - 2015-11-30
