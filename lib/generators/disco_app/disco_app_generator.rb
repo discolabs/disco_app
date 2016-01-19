@@ -50,6 +50,13 @@ class DiscoAppGenerator < Rails::Generators::Base
     end
   end
 
+  # Run bundle install to add our new gems before running tasks.
+  def bundle_install
+    Bundler.with_clean_env do
+      run 'bundle install'
+    end
+  end
+
   # Make any required adjustments to the application configuration.
   def configure_application
     # The force_ssl flag is commented by default for production.
