@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 ### Changed
 - Update `rails` gem to v4.2.5
+- Update `sidekiq` gem to v4.0.2
 
 ## 0.7.1 - 2016-01-13
 ### Changed
