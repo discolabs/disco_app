@@ -32,6 +32,7 @@ class DiscoAppGenerator < Rails::Generators::Base
     gem 'puma', '~> 2.14.0'
     gem 'bootstrap-sass', '~> 3.3.5.1'
     gem 'activerecord-session_store', '~> 0.1.2'
+    gem 'activeresource', github: 'shopify/activeresource', tag: '4.2-threadsafe'
 
     # Add gems for development and testing only.
     gem_group :development, :test do
