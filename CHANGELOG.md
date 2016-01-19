@@ -2,7 +2,8 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
-- No unreleased changes.
+### Changed
+- Update `rails` gem to v4.2.5
 
 ## 0.7.1 - 2016-01-13
 ### Changed
