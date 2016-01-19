@@ -2,7 +2,8 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
-No unreleased changes.
+### Changed
+- Use Ruby 2.3.0
 
 ## 0.7.2 - 2016-01-19
 ### Changed
