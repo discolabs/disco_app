@@ -25,7 +25,7 @@ to note are:
 - You should have set up a Shopify Partner account to allow you to create
   development stores and applications;
 - [rbenv][] is recommended for Ruby version management;
-- You should have the latest version of Ruby 2.2 installed locally, along with
+- You should have the latest version of Ruby 2.3 installed locally, along with
   the `rails` and `bundler` gems;
 - You should have some form of HTTP tunnelling software like [ngrok][] or
   [localtunnel][] installed.
