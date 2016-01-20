@@ -2,7 +2,8 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
-No unreleased changes.
+### Changed
+- Fix for ShopifyApp generator not being run
 
 ## 0.8.0 - 2016-01-20
 ### Changed

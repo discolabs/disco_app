@@ -110,9 +110,10 @@ class DiscoAppGenerator < Rails::Generators::Base
     route "mount DiscoApp::Engine, at: '/'"
   end
 
-  # Run shopify_app:install
+  # Run shopify_app:install and shopify_app:home_controller
   def shopify_app_install
     generate 'shopify_app:install'
+    generate 'shopify_app:home_controller'
   end
 
   # Copy template files to the appropriate location. In some cases, we'll be
