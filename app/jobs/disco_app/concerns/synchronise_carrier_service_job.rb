@@ -16,14 +16,6 @@ module DiscoApp::Concerns::SynchroniseCarrierServiceJob
       service_discovery: true,
       format: 'json'
     )
-
-    # De-activate and extraneous carrier services.
-    current_carrier_services.each do |carrier_service|
-      unless carrier_service.name == carrier_service_name
-        carrier_service.active = false
-        carrier_service.save
-      end
-    end
   end
 
   protected
