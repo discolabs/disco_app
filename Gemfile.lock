@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    disco_app (0.8.0)
+    disco_app (0.8.1)
       active_utils (~> 3.2.0)
       activerecord-session_store (~> 0.1.2)
       bootstrap-sass (~> 3.3.5.1)
