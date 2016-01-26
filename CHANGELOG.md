@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 - Fix for ShopifyApp generator not being run
 - Update `rails` gem to v4.2.5.1 for security patches
+- Update `react-rails` gem to 1.5.0
 
 ## 0.8.0 - 2016-01-20
 ### Changed
