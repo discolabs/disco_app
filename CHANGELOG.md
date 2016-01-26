@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 ### Changed
 - Fix for ShopifyApp generator not being run
+- Update `rails` gem to v4.2.5.1 for security patches
 
 ## 0.8.0 - 2016-01-20
 ### Changed
