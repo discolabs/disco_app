@@ -61,7 +61,7 @@ with the DiscoApp Engine configured and mounted.
 There are some additional "optional" generators that you can run to add
 additional functionality or features to the application. See the section
 [Optional Generators][] for more.
-  
+
 [Optional Generators]: #optional-generators
 
 ### 3. Setting up the Shopify app
@@ -73,7 +73,7 @@ To do this, open your Shopify Partner dashboard and create a new application
 from the "Apps" tab. Make sure the "Embedded App" option is selected. When
 prompted for the **Application URL**, enter the endpoint provided by your
 tunneling software - for example, `https://example.ngrok.io`. You can ignore the
-fields for **Preferences URL** and **Support URL** for now. The 
+fields for **Preferences URL** and **Support URL** for now. The
 **Redirection URL** should be set to something like
 `https://example.ngrok.io/auth/shopify/callback`.
 
@@ -293,17 +293,17 @@ from its `index` action and Liquid from its `show` action:
 ```ruby
 class MarblesController < ApplicationController
   include DiscoApp::AppProxyController
-  
+
   skip_after_action :add_liquid_header, only: [:index]
-  
+
   def index
     @marbles = Marble.all
   end
-  
+
   def show
     @marble = Marble.find(params[:id])
-  end  
-end  
+  end
+end
 ```
 
 Note that in this instance it's important that `ApplicationController` doesn't
@@ -328,7 +328,7 @@ using `ShopifyApp.redirect()`.
 ```erb
 <%= link_to_shopify_admin(@shop, 'Order 1234', "orders/1234") %>
 ```
-  
+
 ### Extending Models
 The models that come with the `DiscoApp` engine (such as `DiscoApp::Shop`) can
 be extended through the use of Rails Concerns (see [Overriding Models][] in the
