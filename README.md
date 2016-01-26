@@ -55,6 +55,17 @@ DiscoApp you'll be using and avoid accidentally pulling incompatible changes
 into your project when you run a `bundle update`. Double check that the tag
 number you're using is the latest version available.
 
+Note if you face any issue running this command `bundle exec rails generate disco_app --force`
+try stopping `spring` and restarting again using this commands:
+```
+$ spring stop
+$ bin/spring
+```
+This seems to be a bug from spring. For more info please read:
+[Spring hangs when it can't connect to the server][]
+
+[Spring hangs when it can't connect to the server]: https://github.com/rails/spring/issues/265
+
 Once this is complete, you'll have a new Rails app created in `/example_app`,
 with the DiscoApp Engine configured and mounted.
 
