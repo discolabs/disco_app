@@ -6,16 +6,25 @@ module DiscoApp::Concerns::SynchroniseCarrierServiceJob
     # Don't proceed unless we have a name and callback url.
     return unless carrier_service_name and callback_url
 
-    # Don't proceed if the carrier service is already registered.
-    return if current_carrier_service_names.include?(carrier_service_name)
+    # Registered the carrier service if it hasn't been registered yet.
+    unless current_carrier_service_names.include?(carrier_service_name)
+      ShopifyAPI::CarrierService.create(
+        name: carrier_service_name,
+        callback_url: callback_url,
+        service_discovery: true,
+        format: :json
+      )
+    end
 
-    # Otherwise, register the carrier service.
-    ShopifyAPI::CarrierService.create(
-      name: carrier_service_name,
-      callback_url: callback_url,
-      service_discovery: true,
-      format: 'json'
-    )
+    # Ensure any existing carrier services (with the correct name) are active
+    # and have a current callback URL.
+    current_carrier_services.each do |carrier_service|
+      if carrier_service.name == carrier_service_name
+        carrier_service.callback_url = callback_url
+        carrier_service.active = true
+        carrier_service.save
+      end
+    end
   end
 
   protected
@@ -30,7 +39,7 @@ module DiscoApp::Concerns::SynchroniseCarrierServiceJob
 
   private
 
-    # Return a list of currently registered callback URLs.
+    # Return a list of currently registered carrier service names.
     def current_carrier_service_names
       current_carrier_services.map(&:name)
     end
