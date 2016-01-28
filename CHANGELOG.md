@@ -2,10 +2,14 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+No unreleased changes.
+
+## 0.8.2 - 2016-01-28
 ### Changed
 - `rollbarify` generator renamed to `monitorify`
 - Added New Relic support in new `monitorify` generator
 - Ensure webhook addresses are current when synchronising webhooks
+- Improved carrier service syncing
 
 ## 0.8.1 - 2016-01-26
 ### Changed
