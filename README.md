@@ -397,13 +397,23 @@ Adds the `mailgun_rails` and `premailer-rails` gems and configures Active Mailer
 to use the Mailgun API in production for sending email. Adds the
 `MAILGUN_API_KEY` and `MAILGUN_API_DOMAIN` environment variables.
 
-### Rollbarify
+### Monitorify
 ```
-$ bundle exec rails generate disco_app:rollbarify
+$ bundle exec rails generate disco_app:monitorify
 ```
 
-Adds support for Rollbar exception tracking in production, when a
-`ROLLBAR_ACCESS_TOKEN` environment variable is present.
+Adds support for both exception reporting and application performance monitoring
+to the application.
+
+[Rollbar][] is used for exception tracking, and will be activated when a
+`ROLLBAR_ACCESS_TOKEN` environment variable is present. Rollbar access tokens
+are unique to each app - if you're deploying a new app and don't have a token,
+ask Gavin for one.
+
+[New Relic][] is used for application performance monitoring, and will be
+activated when a `NEW_RELIC_LICENSE_KEY` environment variable is present. There
+is a single New Relic license key across all Disco apps - contact Gavin if you
+need it to deploy a new application.
 
 
 ## Upgrading

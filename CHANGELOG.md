@@ -2,7 +2,9 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
-No unreleased changes.
+### Changed
+- `rollbarify` generator renamed to `monitorify`
+- Added New Relic support in new `monitorify` generator
 
 ## 0.8.1 - 2016-01-26
 ### Changed
