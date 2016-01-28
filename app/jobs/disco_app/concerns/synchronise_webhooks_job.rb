@@ -22,6 +22,14 @@ module DiscoApp::Concerns::SynchroniseWebhooksJob
         webhook.delete
       end
     end
+
+    # Ensure webhook addresses are current.
+    current_webhooks.each do |webhook|
+      unless webhook.address == webhooks_url
+        webhook.address = webhooks_url
+        webhook.save
+      end
+    end
   end
 
   protected
