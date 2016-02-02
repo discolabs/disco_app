@@ -324,6 +324,21 @@ in proxied requests.
 [Application Proxy]: https://docs.shopify.com/api/uiintegrations/application-proxies
 [security section]: https://docs.shopify.com/api/uiintegrations/application-proxies#security
 
+### Administration
+
+There is a standard administration panel of the app, that is located at `/admin`.
+It is available by running the `adminify` generator.
+At the moment it consists of a listing of shops that installed the app and has
+some filtering possiblities.
+This admin section is currently secured via a basic authentication. In order to
+define the username and password to access this section of the app, fill in
+the following variables to the generated app `.env.local` file:
+
+```
+ADMIN_APP_USERNAME=
+ADMIN_APP_PASSWORD=
+```
+
 ### Helpers
 A number of view helpers designed to encapsulate common Shopify app
 functionality are included with the gem and are automatically imported and made
@@ -401,6 +416,15 @@ $ bundle exec rails generate disco_app:reactify
 Adds the `react-rails` gem and installs and configures React.js for use with
 the Rails application. Adds a line to `application.js` which imports a library
 of React components provided by the engine.
+
+### Adminify
+```
+$ bundle exec rails generate disco_app:adminify
+```
+
+Provides support for an admin site, with an overview of all shops.
+Runs the `reactify` generator under the hood and provides dotenv variables
+necessary for basic auth.
 
 ### Mailify
 ```
