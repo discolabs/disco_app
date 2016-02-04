@@ -54,11 +54,10 @@ module DiscoApp::Concerns::Shop
       "#{protocol}://#{domain}"
     end
 
-    # Return the protocol the shop's storefront uses.
-    # @TODO: Consider when we may want to allow https: here. For now, automatic
-    # redirection should do most of the work.
+    # Return the protocol the shop's storefront uses. This should now always be
+    # https as all Shopify stores have SSL enabled.
     def protocol
-      'http'
+      'https'
     end
 
     # Return the absolute URL to the shop's admin.
