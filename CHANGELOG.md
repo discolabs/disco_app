@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 No unreleased changes.
 
+## 0.8.3 - 2016-02-04
+### Changed
+- `DiscoApp::Shop.protocol` now always returns `https`
+
 ## 0.8.2 - 2016-01-28
 ### Changed
 - `rollbarify` generator renamed to `monitorify`
