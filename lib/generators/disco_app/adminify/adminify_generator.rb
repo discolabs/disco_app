@@ -9,31 +9,6 @@ module DiscoApp
         generate 'disco_app:reactify'
       end
 
-      def configure_gem
-        #install jsonapi-resources
-        gem 'jsonapi-resources', '~> 0.7.0'
-      end
-
-      def setup_routes
-        routes = <<-CONFIG.strip_heredoc
-
-          controller 'admin' do
-            get 'admin', to: redirect('/admin/shops') 
-            get 'admin/shops' => 'admin/shops#index'
-          end
-
-          namespace :admin do
-            resources :shops, path: '/shops', only: [:index, :edit, :update]
-            
-            # JSON-API resources for admins."
-            namespace :resources do
-              jsonapi_resources :shops
-            end
-          end
-        CONFIG
-        route routes
-      end
-
       def add_env_variables
         env_variables = <<-CONFIG.strip_heredoc
 
