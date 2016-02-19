@@ -2,7 +2,8 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
-No unreleased changes.
+### Changed
+- All `id` fields default to `bigint` thanks to `rails-bigint-pk` gem
 
 ## 0.8.3 - 2016-02-04
 ### Changed

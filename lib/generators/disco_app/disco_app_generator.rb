@@ -33,6 +33,7 @@ class DiscoAppGenerator < Rails::Generators::Base
     gem 'bootstrap-sass', '~> 3.3.5.1'
     gem 'activerecord-session_store', '~> 0.1.2'
     gem 'activeresource', github: 'shopify/activeresource', tag: '4.2-threadsafe'
+    gem 'rails-bigint-pk', '~> 1.2.0'
 
     # Add gems for development and testing only.
     gem_group :development, :test do
@@ -110,10 +111,11 @@ class DiscoAppGenerator < Rails::Generators::Base
     route "mount DiscoApp::Engine, at: '/'"
   end
 
-  # Run shopify_app:install and shopify_app:home_controller
-  def shopify_app_install
+  # Run generators.
+  def run_generators
     generate 'shopify_app:install'
     generate 'shopify_app:home_controller'
+    generate 'bigint_pk:install'
   end
 
   # Copy template files to the appropriate location. In some cases, we'll be
