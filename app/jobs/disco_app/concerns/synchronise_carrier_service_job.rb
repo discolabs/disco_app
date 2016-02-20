@@ -30,7 +30,7 @@ module DiscoApp::Concerns::SynchroniseCarrierServiceJob
   protected
 
     def carrier_service_name
-      Rails.application.config.x.shopify_app_name
+      DiscoApp.configuration.app_name
     end
 
     def callback_url

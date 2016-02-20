@@ -21,9 +21,6 @@ module Dummy
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    # Set the name of the application
-    config.x.shopify_app_name = ENV['SHOPIFY_APP_NAME']
-
     # Set the default host for absolute URL routing purposes
     routes.default_url_options[:host] = ENV['DEFAULT_HOST']
 

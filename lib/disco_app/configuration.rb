@@ -2,7 +2,10 @@ module DiscoApp
 
   class Configuration
 
-    # Disco App settings.
+    # Required configuration.
+    attr_accessor :app_name
+
+    # Optional configuration, usually useful for development environments.
     attr_accessor :skip_proxy_verification
     alias_method  :skip_proxy_verification?, :skip_proxy_verification
     attr_accessor :skip_webhook_verification

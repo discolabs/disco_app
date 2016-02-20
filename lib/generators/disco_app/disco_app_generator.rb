@@ -98,10 +98,6 @@ class DiscoAppGenerator < Rails::Generators::Base
     application "config.x.shopify_app_proxy_prefix = ENV['SHOPIFY_APP_PROXY_PREFIX']\n"
     application "# Set the application proxy path for absolute URL routing purposes"
 
-    # Add the Shopify application name to the configuration.
-    application "config.x.shopify_app_name = ENV['SHOPIFY_APP_NAME']\n"
-    application "# Set the name of the application"
-
     # Copy over the default puma configuration.
     copy_file 'config/puma.rb', 'config/puma.rb'
   end
