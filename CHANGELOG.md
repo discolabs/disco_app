@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 ### Added
 - `DiscoApp::Configuration` model, to be set up with `disco_app.rb` initializer
+- Automatically set `@shop` instance variable on Proxy Controller concern
 
 ### Changed
 - All `id` fields default to `bigint` thanks to `rails-bigint-pk` gem
