@@ -20,7 +20,7 @@ module DiscoApp
       end
 
       def proxy_signature_is_valid?
-        return true unless Rails.env.production?
+        return true if DiscoApp.configuration.skip_proxy_verification?
         query_hash = Rack::Utils.parse_query(request.query_string)
         signature = query_hash.delete("signature")
         sorted_params = query_hash.collect{ |k, v| "#{k}=#{Array(v).join(',')}" }.sort.join
