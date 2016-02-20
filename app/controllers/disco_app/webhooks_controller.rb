@@ -30,12 +30,16 @@ module DiscoApp
 
     private
 
-      # Verify a webhook request.
       def verify_webhook
-        unless DiscoApp::WebhookService.is_valid_hmac?(request.body.read.to_s, ShopifyApp.configuration.secret, request.headers['HTTP_X_SHOPIFY_HMAC_SHA256'])
+        unless webhook_is_valid?
           head :unauthorized
         end
         request.body.rewind
+      end
+
+      def webhook_is_valid?
+        return true if DiscoApp.configuration.skip_webhook_verification?
+        DiscoApp::WebhookService.is_valid_hmac?(request.body.read.to_s, ShopifyApp.configuration.secret, request.headers['HTTP_X_SHOPIFY_HMAC_SHA256'])
       end
 
   end
