@@ -8,7 +8,9 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 - All `id` fields default to `bigint` thanks to `rails-bigint-pk` gem
-- Move `Rails.configuration.x.shopify_app_name` to `DiscoApp.configuration.app_name`
+- Move `Rails.configuration.x.shopify_app_name` to `DiscoApp.configuration`
+- Move `Rails.configuration.x.shopify_app_proxy_prefix` to
+  `DiscoApp.configuration.app_proxy_prefix`
 
 ## 0.8.3 - 2016-02-04
 ### Changed

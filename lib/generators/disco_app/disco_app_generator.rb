@@ -93,11 +93,6 @@ class DiscoAppGenerator < Rails::Generators::Base
     application "routes.default_url_options[:host] = ENV['DEFAULT_HOST']\n"
     application "# Set the default host for absolute URL routing purposes"
 
-    # Add loading of the default application proxy prefix to set up support for
-    # reverse routings absolute proxy URLS.
-    application "config.x.shopify_app_proxy_prefix = ENV['SHOPIFY_APP_PROXY_PREFIX']\n"
-    application "# Set the application proxy path for absolute URL routing purposes"
-
     # Copy over the default puma configuration.
     copy_file 'config/puma.rb', 'config/puma.rb'
   end
