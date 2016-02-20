@@ -1,9 +1,9 @@
 class DiscoApp::WebhookService
 
   # Return true iff the provided hmac_to_verify matches that calculated from the
-  # give data and secret.
+  # given data and secret.
   def self.is_valid_hmac?(body, secret, hmac_to_verify)
-    self.calculated_hmac(body, secret) == hmac_to_verify
+    ActiveSupport::SecurityUtils.secure_compare(self.calculated_hmac(body, secret), hmac_to_verify)
   end
 
   # Calculate the HMAC for the given data and secret.
