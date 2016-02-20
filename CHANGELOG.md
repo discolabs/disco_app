@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 - Move `Rails.configuration.x.shopify_app_name` to `DiscoApp.configuration`
 - Move `Rails.configuration.x.shopify_app_proxy_prefix` to
   `DiscoApp.configuration.app_proxy_prefix`
+- Update to latest versions of monitoring gems   
 
 ## 0.8.3 - 2016-02-04
 ### Changed

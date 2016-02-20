@@ -7,9 +7,9 @@ module DiscoApp
       # Install the Rollbar, OJ and New Relic gems.
       def install_gems
         # Add gem to Gemfile
-        gem 'rollbar', '~> 2.7.1'
-        gem 'oj', '~> 2.14.3'
-        gem 'newrelic_rpm', '~> 3.14.1.311'
+        gem 'rollbar', '~> 2.8.0'
+        gem 'oj', '~> 2.14.5'
+        gem 'newrelic_rpm', '~> 3.14.1.314'
 
         # Install gem.
         Bundler.with_clean_env do
