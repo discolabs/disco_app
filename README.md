@@ -367,6 +367,20 @@ end
 
 [Overriding Models]: http://edgeguides.rubyonrails.org/engines.html#overriding-models-and-controllers
 
+### Model Primary Keys
+We use the `rails-bigint-pk` gem in order to default to 64-bit integer IDs in
+our models (the Rails default is 32-bit). This allows us to have a 1:1 mapping
+on the `id` column between our application and Shopify, which uses 64-bit
+integers for their IDs.
+
+On installation, the `rails-bigint-pk` gem migrates all existing models to use
+the `bigint` type for the `id` field, and adds a `bigint_pk.rb` initializer
+which ensures `bigint` is used in all future migrations automatically. To make
+sure that this all works okay, make sure you use the `references` keyword in
+your migrations, rather than `integer`. If you do for some reason need to
+manually create columns storing references to other models, make sure you use
+`limit: 8` in the column definition.
+
 
 ## Optional Generators
 A number of "optional" generators are provided to add functionality that's
