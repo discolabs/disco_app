@@ -447,6 +447,7 @@ steps you should take:
 
 [release list]: https://github.com/discolabs/disco_app/releases
 
+
 ## Contributing
 While developing Shopify applications using the DiscoApp Engine, you may see
 something that could be improved, or perhaps notice a pattern that's becoming
@@ -455,3 +456,23 @@ common across a number of applications.
 In those cases, please consider taking the time to raise an issue or pull
 request against the DiscoApp repository. If contributing code, please make sure
 to update the relevant section of this README as well.
+
+
+## Releasing
+To create a new release of the application:
+
+1. Ensure the CHANGELOG is up to date by reviewing all commits since the last
+   release;
+2. Ensure the README is accurate and up to date by reviewing all commits since
+   the last release;
+3. Update `lib/disco_app/version.rb` with the new version number;
+4. Run `bundle install` to update `Gemfile.lock` with the new version number; 
+5. Update references to the latest version number in the README;
+6. Create a new commit with a commit message `vX.Y.Z`, where `X.Y.Z` is the
+   version number;
+7. Tag the new commit with a tag `X.Y.Z`;
+8. `git push && git push --tags` to push the new release.
+      
+See [an example release commit][].
+
+[an example release commit]: https://github.com/discolabs/disco_app/commit/0cb60a1c212f480af85ebb7c42188befb932a818
