@@ -1,11 +1,12 @@
 PATH
   remote: .
   specs:
-    disco_app (0.8.4)
+    disco_app (0.8.5)
       active_utils (~> 3.2.0)
       activerecord-session_store (~> 0.1.2)
       bootstrap-sass (~> 3.3.5.1)
       jquery-rails (~> 4.0.5)
+      omniauth-shopify-oauth2 (= 1.1.11)
       pg (~> 0.18.3)
       puma (~> 2.14.0)
       rails (~> 4.2.5.1)
@@ -158,7 +159,7 @@ GEM
     omniauth-oauth2 (1.4.0)
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
-    omniauth-shopify-oauth2 (1.1.12)
+    omniauth-shopify-oauth2 (1.1.11)
       omniauth-oauth2 (~> 1.2)
     pg (0.18.4)
     pry (0.10.3)

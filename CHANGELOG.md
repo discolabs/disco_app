@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 No unreleased changes.
 
+## 0.8.5 - 2016-02-22
+### Changed
+- Fix `omniauth-shopify-oauth2` to `1.1.11`
+
 ## 0.8.4 - 2016-02-22
 ### Added
 - `DiscoApp::Configuration` model, to be set up with `disco_app.rb` initializer
