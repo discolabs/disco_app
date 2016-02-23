@@ -4,6 +4,7 @@ require 'jquery-rails'
 require 'turbolinks'
 require 'activerecord/session_store'
 require 'disco_app/session'
+require 'jsonapi-resources'
 
 module DiscoApp
   class Engine < ::Rails::Engine

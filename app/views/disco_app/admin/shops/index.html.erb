@@ -1,0 +1,12 @@
+<% provide(:title, 'Shops') %>
+
+<div class="next-grid">
+  <div class="next-grid__cell">
+
+    <%= react_component('FilterableShopList', {
+      shopsUrl: admin_resources_shops_path(format: :json),
+      editShopUrl: edit_admin_shop_path(':id')
+    }) %>
+
+  </div>
+</div>
