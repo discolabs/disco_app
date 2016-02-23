@@ -9,6 +9,10 @@ module DiscoApp
         generate 'disco_app:reactify'
       end
 
+      def configure_gems
+        gem 'active_link_to', '~> 1.0.2'
+      end
+
       def add_env_variables
         env_variables = <<-CONFIG.strip_heredoc
 
@@ -17,6 +21,13 @@ module DiscoApp
         CONFIG
         append_to_file '.env', env_variables 
         append_to_file '.env.local', env_variables 
+      end
+
+      # Run bundle install to add our new gems before running tasks.
+      def bundle_install
+        Bundler.with_clean_env do
+          run 'bundle install'
+        end
       end
 
     end
