@@ -23,6 +23,7 @@ DiscoApp::Engine.routes.draw do
 
   namespace :admin do
     resources :shops, path: '/shops', only: [:index, :edit, :update]
+    resource :app_settings, only: [:edit, :update]
 
     # JSON-API resources for admins."
     namespace :resources do

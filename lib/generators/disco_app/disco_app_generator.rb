@@ -34,6 +34,7 @@ class DiscoAppGenerator < Rails::Generators::Base
     gem 'activerecord-session_store', '~> 0.1.2'
     gem 'activeresource', github: 'shopify/activeresource', tag: '4.2-threadsafe'
     gem 'rails-bigint-pk', '~> 1.2.0'
+    gem 'acts_as_singleton', '~> 0.0.8'
 
     # Add gems for development and testing only.
     gem_group :development, :test do
