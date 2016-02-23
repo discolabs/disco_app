@@ -12,7 +12,7 @@ module DiscoApp
       private
         def authenticate_administrator
           authenticate_or_request_with_http_basic do |username, password|
-            username == ENV['ADMIN_APP_USERNAME'] && password == ENV['ADMIN_APP_PASSWORD']
+            (not username.blank?) && (not password.blank?) && username == ENV['ADMIN_APP_USERNAME'] && password == ENV['ADMIN_APP_PASSWORD']
           end
         end
     end
