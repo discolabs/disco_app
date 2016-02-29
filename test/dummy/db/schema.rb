@@ -11,7 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160113194418) do
+ActiveRecord::Schema.define(version: 20160223111044) do
+
+  create_table "disco_app_app_settings", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "disco_app_plans", force: :cascade do |t|
     t.integer  "status"

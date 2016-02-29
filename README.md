@@ -426,6 +426,56 @@ Provides support for an admin site, with an overview of all shops.
 Runs the `reactify` generator under the hood and provides dotenv variables
 necessary for basic auth.
 
+It also provides support for an App Settings Page.
+
+Add settings to the DiscoApp::AppSettings model. At the controller level you
+can can permit the new params by creating:
+`app/controllers/disco_app/admin/app_settings_controller.rb`. Here's an example:
+```
+class DiscoApp::Admin::AppSettingsController < DiscoApp::Admin::ApplicationController
+  include DiscoApp::Admin::Concerns::AppSettingsController
+
+  private
+
+    def app_settings_params
+      params.require(:app_settings).permit(:default_recurring_price, :trial_days, :test_charges, :mailchimp_api_key, :mailchimp_list_id, :sidebar_message_enabled, :sidebar_message)
+    end
++end
+```
+
+At the view level, you should override the original file:
+`app/views/disco_app/admin/app_settings/edit.html.erb`. Here's an example:
+```
+<% provide(:title, 'Settings') %>
+
+<%= form_for(@app_settings, url: admin_app_settings_path) do |f| %>
+
+    <%= render 'shared/error_messages', object: f.object %>
+
+    <div class="row">
+      <div class="col-md-4">
+        <h3>Pricing</h3>
+
+        <div class="form-group">
+          <%= f.label :default_recurring_price, 'Default recurring charge' %>
+          <%= f.number_field :default_recurring_price, step: 0.01, class: 'form-control' %>
+          <p class="help-block">
+            Help text about this field
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+      </div>
+    </div>
+
+<% end %>
+
+```
+
 ### Mailify
 ```
 $ bundle exec rails generate disco_app:mailify

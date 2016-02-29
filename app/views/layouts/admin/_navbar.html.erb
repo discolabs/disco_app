@@ -1,0 +1,24 @@
+<nav class="navbar navbar-default navbar-static-top">
+  <div class="container-fluid">
+
+    <!-- Brand & Toggle -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="<%= admin_shops_path %>">Credible</a>
+    </div>
+
+    <!-- Collapsing Navigation Links -->
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <%= active_link_to 'Shops', admin_shops_path, wrap_tag: :li %>
+        <%= active_link_to 'Settings', edit_admin_app_settings_path, wrap_tag: :li %>
+      </ul>
+    </div>
+
+  </div>
+</nav>
