@@ -1,6 +1,6 @@
 module DiscoApp
   class InstallController < ApplicationController
-    include DiscoApp::AuthenticatedController
+    include DiscoApp::Concerns::AuthenticatedController
 
     # Start the installation process for the current shop, then redirect to the installing screen.
     def install

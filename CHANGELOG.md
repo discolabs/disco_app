@@ -2,8 +2,13 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+### Added
 - Add application administration panel, mounted at `/admin` and protected with
-  HTTP Basic Auth  
+  HTTP Basic Auth
+
+### Changed
+- Moved all controller concerns inside the `DiscoApp::Concerns` namespace for
+  consistency with the way model concerns are patterned.    
 
 ## 0.8.5 - 2016-02-22
 ### Changed

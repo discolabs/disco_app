@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  include DiscoApp::AuthenticatedController
+  include DiscoApp::Concerns::AuthenticatedController
 
   def index
   end

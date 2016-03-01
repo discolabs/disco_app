@@ -203,9 +203,9 @@ number of other attributes such as email address, country, Shopify plan type,
 et cetera.
 
 ### Charge and Installation Checks
-The gem provides a `DiscoApp::AuthenticatedController` concern that should be
-included into any controller that handles actions inside the embedded admin
-panel. The concern performs the following checks:
+The gem provides a `DiscoApp::Concerns::AuthenticatedController` concern that
+should be included into any controller that handles actions inside the embedded
+admin panel. The concern performs the following checks:
 
 - Checks the shop has an authenticated session. If not, redirects to the OAuth
   authentication flow provided by the `ShopifyApp` gem;

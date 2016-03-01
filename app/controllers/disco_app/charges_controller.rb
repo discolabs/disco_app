@@ -1,6 +1,6 @@
 module DiscoApp
   class ChargesController < ApplicationController
-    include DiscoApp::AuthenticatedController
+    include DiscoApp::Concerns::AuthenticatedController
 
     skip_before_action :verify_status, only: [:create, :activate]
 

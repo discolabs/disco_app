@@ -1,5 +1,5 @@
 class ProxyController < ActionController::Base
-  include DiscoApp::AppProxyController
+  include DiscoApp::Concerns::AppProxyController
 
   def index
     render text: 'ok'
