@@ -2,7 +2,8 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
-No unreleased changes.
+- Add application administration panel, mounted at `/admin` and protected with
+  HTTP Basic Auth  
 
 ## 0.8.5 - 2016-02-22
 ### Changed
