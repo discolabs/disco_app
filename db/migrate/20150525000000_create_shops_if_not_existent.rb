@@ -5,7 +5,7 @@ class CreateShopsIfNotExistent < ActiveRecord::Migration
       create_table :shops  do |t|
         t.string :shopify_domain, null: false
         t.string :shopify_token, null: false
-        t.timestamps
+        t.timestamps null: false
       end
 
       add_index :shops, :shopify_domain, unique: true

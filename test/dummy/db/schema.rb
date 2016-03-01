@@ -31,8 +31,8 @@ ActiveRecord::Schema.define(version: 20160223111044) do
   create_table "disco_app_sessions", force: :cascade do |t|
     t.string   "session_id", null: false
     t.text     "data"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer  "shop_id"
   end
 
@@ -42,8 +42,8 @@ ActiveRecord::Schema.define(version: 20160223111044) do
   create_table "disco_app_shops", force: :cascade do |t|
     t.string   "shopify_domain",                         null: false
     t.string   "shopify_token",                          null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.integer  "status",                     default: 0
     t.string   "email"
     t.string   "country_name"
