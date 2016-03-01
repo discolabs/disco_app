@@ -24,11 +24,14 @@ ActiveRecord::Schema.define(version: 20160307182229) do
   create_table "disco_app_plans", force: :cascade do |t|
     t.integer  "status"
     t.string   "name"
-    t.integer  "charge_type"
-    t.decimal  "default_price"
-    t.integer  "default_trial_days"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.integer  "plan_type",         default: 0
+    t.integer  "trial_period_days"
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.integer  "amount",            default: 0
+    t.string   "currency",          default: "USD"
+    t.integer  "interval",          default: 0
+    t.integer  "interval_count",    default: 1
   end
 
   create_table "disco_app_sessions", force: :cascade do |t|

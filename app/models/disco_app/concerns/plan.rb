@@ -6,7 +6,9 @@ module DiscoApp::Concerns::Plan
     has_many :subscriptions
     has_many :shops, through: :subscriptions
 
-    enum status: [:available, :unavailable, :hidden]
+    enum status: [:available, :unavailable]
+    enum plan_type: [:recurring, :one_time]
+    enum interval: [:month, :year]
 
     scope :available, -> { where status: statuses[:available] }
 
