@@ -4,6 +4,7 @@ class DiscoApp::Admin::Resources::ShopResource < JSONAPI::Resource
 
   attributes :shopify_domain, :status, :email, :country_name
   attributes :currency, :domain, :plan_display_name, :created_at
+  attributes :installed_duration
 
   model_name 'DiscoApp::Shop'
 
