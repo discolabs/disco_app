@@ -3,6 +3,7 @@ module DiscoApp::Concerns::Shop
 
   included do
     include ShopifyApp::Shop
+    include ActionView::Helpers::DateHelper
 
     # Define relationships to plans and subscriptions.
     has_many :subscriptions
@@ -63,6 +64,10 @@ module DiscoApp::Concerns::Shop
     # Return the absolute URL to the shop's admin.
     def admin_url
       "https://#{shopify_domain}/admin"
+    end
+
+    def installed_duration
+      distance_of_time_in_words_to_now(created_at.time)
     end
 
   end

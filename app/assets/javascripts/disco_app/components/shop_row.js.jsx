@@ -2,12 +2,13 @@ var ShopRow = (props) => {
 
     var shop = props.shop,
         editShopUrl = props.editShopUrl.replace(':id', shop.id),
-        shopifyDomain = shop.attributes['shopify-domain'],
-        countryName = shop.attributes['country-name'],
+        shopifyDomain = shop.attributes['shopify_domain'],
+        countryName = shop.attributes['country_name'],
         currency = shop.attributes['currency'],
         domainName = shop.attributes['domain'],
-        planName = shop.attributes['plan-display-name'],
-        createdDate = shop.attributes['created-at']
+        planName = shop.attributes['plan_display_name'],
+        createdDate = shop.attributes['created_at'],
+        installedDuration = shop.attributes['installed_duration']
 
     return (
         <tr>
@@ -20,6 +21,7 @@ var ShopRow = (props) => {
             <td>{shop.attributes.domain}</td>
             <td>{planName}</td>
             <td>{createdDate}</td>
+            <td>{installedDuration}</td>
         </tr>
     )
 };

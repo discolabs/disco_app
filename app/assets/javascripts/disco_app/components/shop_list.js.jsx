@@ -84,6 +84,7 @@ var ShopList = React.createClass({
                                 <th>Domain</th>
                                 <th>Plan</th>
                                 <th>Created</th>
+                                <th>Installed Duration</th>
                             </tr>
                         </thead>
                         <tbody>
