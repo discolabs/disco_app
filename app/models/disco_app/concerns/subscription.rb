@@ -6,8 +6,10 @@ module DiscoApp::Concerns::Subscription
     belongs_to :shop
     belongs_to :plan
 
-    enum status: [:active, :replaced, :cancelled]
+    enum status: [:trial, :active, :cancelled]
+    enum subscription_type: [:recurring, :one_time]
 
+    scope :trial, -> { where status: statuses[:trial] }
     scope :active, -> { where status: statuses[:active] }
 
   end

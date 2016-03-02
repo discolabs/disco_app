@@ -78,12 +78,12 @@ ActiveRecord::Schema.define(version: 20160307182229) do
     t.integer  "shop_id"
     t.integer  "plan_id"
     t.integer  "status"
-    t.string   "name"
-    t.integer  "charge_type"
-    t.decimal  "price"
-    t.integer  "trial_days"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "subscription_type"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.datetime "trial_start_at"
+    t.datetime "trial_end_at"
+    t.datetime "cancelled_at"
   end
 
   add_index "disco_app_subscriptions", ["plan_id"], name: "index_disco_app_subscriptions_on_plan_id", using: :btree
