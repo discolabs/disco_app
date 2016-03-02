@@ -2,6 +2,7 @@ require 'test_helper'
 
 class DiscoApp::ChargesControllerTest < ActionController::TestCase
   include ActiveJob::TestHelper
+  include DiscoApp::Test::ShopifyAPI
 
   def setup
     @shop = disco_app_shops(:widget_store)
@@ -37,6 +38,14 @@ class DiscoApp::ChargesControllerTest < ActionController::TestCase
     @current_subscription.accepted_charge.destroy
     get(:new, subscription_id: @current_subscription)
     assert_response :ok
+  end
+
+  test 'logged-in, installed user with unpaid current subscription can create new charge and is redirected to confirmation url' do
+    stub_api_request(:post, "#{@shop.admin_url}/recurring_application_charges.json", 'widget_store/charges/create_recurring_application_charge')
+
+    @current_subscription.accepted_charge.destroy
+    post(:create, subscription_id: @current_subscription)
+    assert_redirected_to 'https://apple.myshopify.com/admin/charges/654381179/confirm_recurring_application_charge?signature=BAhpBHsQASc%3D--b2e90c6e4e94fbae15a464c566a31a1c23e6bffa'
   end
 
 end

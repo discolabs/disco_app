@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class DiscoApp::ChargesServiceTest < ActiveSupport::TestCase
+  include DiscoApp::Test::ShopifyAPI
 
   def setup
     @shop = disco_app_shops(:widget_store)
@@ -15,9 +16,7 @@ class DiscoApp::ChargesServiceTest < ActiveSupport::TestCase
   end
 
   test 'creating a new charge for a recurring subscription is successful' do
-    stub_request(:post, "#{@shop.admin_url}/recurring_application_charges.json")
-      .with(body: api_fixture('widget_store/charges/create_recurring_application_charge_request').to_json)
-      .to_return(status: 201, body: api_fixture('widget_store/charges/create_recurring_application_charge_response').to_json)
+    stub_api_request(:post, "#{@shop.admin_url}/recurring_application_charges.json", 'widget_store/charges/create_recurring_application_charge')
 
     new_charge = DiscoApp::ChargesService.create(@shop, @subscription)
     assert_equal 654381179, new_charge.shopify_id
@@ -25,9 +24,7 @@ class DiscoApp::ChargesServiceTest < ActiveSupport::TestCase
   end
 
   test 'creating a new charge for a one-off subscription is successful' do
-    stub_request(:post, "#{@shop.admin_url}/application_charges.json")
-        .with(body: api_fixture('widget_store/charges/create_application_charge_request').to_json)
-        .to_return(status: 201, body: api_fixture('widget_store/charges/create_application_charge_response').to_json)
+    stub_api_request(:post, "#{@shop.admin_url}/application_charges.json", 'widget_store/charges/create_application_charge')
 
     subscription = DiscoApp::SubscriptionService.subscribe(@shop, disco_app_plans(:lifetime))
 

@@ -15,6 +15,7 @@ require "rails/test_help"
 
 # Require our additional test support helpers.
 require 'support/test_file_fixtures'
+require 'support/test_shopify_api'
 
 # Require WebMock
 require 'webmock/minitest'

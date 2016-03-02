@@ -1,6 +1,7 @@
 class DiscoApp::ChargesController < ApplicationController
   include DiscoApp::Concerns::AuthenticatedController
 
+  skip_before_action :check_accepted_charge
   before_action :find_subscription
 
   # Display a "pre-charge" page, giving the opportunity to explain why a charge
