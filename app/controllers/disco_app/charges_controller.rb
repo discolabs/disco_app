@@ -1,7 +1,7 @@
 class DiscoApp::ChargesController < ApplicationController
   include DiscoApp::Concerns::AuthenticatedController
 
-  skip_before_action :check_accepted_charge
+  skip_before_action :check_active_charge
   before_action :find_subscription
 
   # Display a "pre-charge" page, giving the opportunity to explain why a charge
@@ -20,21 +20,26 @@ class DiscoApp::ChargesController < ApplicationController
     end
   end
 
-  # Attempt to activate a charge after a user has accepted or declined it. Redirect to the main application's root URL
-  # immediately afterwards - if the charge wasn't accepted, the flow will start again.
+  # Attempt to activate a charge after a user has accepted or declined it.
+  # Redirect to the main application's root URL immediately afterwards - if the
+  # charge wasn't accepted, the flow will start again.
   def activate
-    # if (shopify_charge = DiscoApp::ChargesService.get_accepted_charge(@shop, params[:charge_id])).nil?
-    #   redirect_to action: :new and return
-    # end
-    # DiscoApp::ChargesService.activate(@shop, shopify_charge)
-    # redirect_to main_app.root_url
+    # First attempt to find a matching charge.
+    if(charge = @subscription.charges.find_by(id: params[:id], shopify_id: params[:charge_id])).nil?
+      redirect_to action: :new and return
+    end
+    if DiscoApp::ChargesService.activate(@shop, charge)
+      redirect_to main_app.root_url
+    else
+      redirect_to action: :new
+    end
   end
 
   private
 
     def find_subscription
       @subscription = @shop.subscriptions.find_by_id!(params[:subscription_id])
-      unless @subscription.requires_accepted_charge? and not @subscription.accepted_charge?
+      unless @subscription.requires_active_charge? and not @subscription.active_charge?
         redirect_to main_app.root_url
       end
     end

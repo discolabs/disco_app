@@ -29,23 +29,27 @@ class DiscoApp::ChargesControllerTest < ActionController::TestCase
     assert_redirected_to DiscoApp::Engine.routes.url_helpers.install_path
   end
 
-  test 'logged-in, installed user with paid-for current subscription can not access page' do
+  test 'user with paid-for current subscription can not access page' do
     get(:new, subscription_id: @current_subscription)
     assert_redirected_to Rails.application.routes.url_helpers.root_path
   end
 
-  test 'logged-in, installed user with unpaid current subscription can access page' do
-    @current_subscription.accepted_charge.destroy
+  test 'user with unpaid current subscription can access page' do
+    @current_subscription.active_charge.destroy
     get(:new, subscription_id: @current_subscription)
     assert_response :ok
   end
 
-  test 'logged-in, installed user with unpaid current subscription can create new charge and is redirected to confirmation url' do
+  test 'user with unpaid current subscription can create new charge and is redirected to confirmation url' do
     stub_api_request(:post, "#{@shop.admin_url}/recurring_application_charges.json", 'widget_store/charges/create_recurring_application_charge')
 
-    @current_subscription.accepted_charge.destroy
+    @current_subscription.active_charge.destroy
     post(:create, subscription_id: @current_subscription)
     assert_redirected_to 'https://apple.myshopify.com/admin/charges/654381179/confirm_recurring_application_charge?signature=BAhpBHsQASc%3D--b2e90c6e4e94fbae15a464c566a31a1c23e6bffa'
+  end
+
+  test 'user ' do
+
   end
 
 end

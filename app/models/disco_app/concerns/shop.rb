@@ -36,12 +36,6 @@ module DiscoApp::Concerns::Shop
       }
     end
 
-    # Update this Shop's charge_status attribute based on the given Shopify charge object.
-    def update_charge_status(shopify_charge)
-      status_update_method_name = "charge_#{shopify_charge.status}!"
-      self.public_send(status_update_method_name) if self.respond_to? status_update_method_name
-    end
-
     # Convenience method to check if this shop has a current subscription.
     def current_subscription?
       current_subscription.present?

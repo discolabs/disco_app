@@ -6,7 +6,7 @@ module DiscoApp::Concerns::AuthenticatedController
     before_action :shopify_shop
     before_action :check_installed
     before_action :check_current_subscription
-    before_action :check_accepted_charge
+    before_action :check_active_charge
     around_filter :shopify_session
     layout 'embedded_app'
   end
@@ -41,8 +41,8 @@ module DiscoApp::Concerns::AuthenticatedController
       end
     end
 
-    def check_accepted_charge
-      if @shop.current_subscription? and @shop.current_subscription.requires_accepted_charge? and not @shop.current_subscription.accepted_charge?
+    def check_active_charge
+      if @shop.current_subscription? and @shop.current_subscription.requires_active_charge? and not @shop.current_subscription.active_charge?
         redirect_if_not_current_path disco_app.new_subscription_charge_path(@shop.current_subscription)
       end
     end

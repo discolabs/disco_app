@@ -16,22 +16,22 @@ module DiscoApp::Concerns::Subscription
 
   end
 
-  # Only require an accepted charge if the amount to be charged is > 0.
-  def requires_accepted_charge?
+  # Only require an active charge if the amount to be charged is > 0.
+  def requires_active_charge?
     plan.amount > 0
   end
 
-  # Convenience method to check if this subscription has an accepted charge.
-  def accepted_charge?
-    accepted_charge.present?
+  # Convenience method to check if this subscription has an active charge.
+  def active_charge?
+    active_charge.present?
   end
 
-  # Convenience method to get the accepted charge for this subscription.
-  def accepted_charge
+  # Convenience method to get the active charge for this subscription.
+  def active_charge
     if recurring?
-      recurring_charges.accepted.first
+      recurring_charges.active.first
     else
-      charges.accepted.first
+      charges.active.first
     end
   end
 
