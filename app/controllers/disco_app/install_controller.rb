@@ -1,6 +1,9 @@
 class DiscoApp::InstallController < ApplicationController
   include DiscoApp::Concerns::AuthenticatedController
 
+  skip_before_action :check_current_subscription
+  skip_before_action :check_active_charge
+
   # Start the installation process for the current shop, then redirect to the installing screen.
   def install
     DiscoApp::AppInstalledJob.perform_later(@shop.shopify_domain)
