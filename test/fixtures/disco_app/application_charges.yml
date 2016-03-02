@@ -1,0 +1,11 @@
+current_widget_store_dev_subscription_one_time_charge:
+  shop: widget_store
+  subscription: current_widget_store_dev_subscription
+  status: <%= DiscoApp::ApplicationCharge.statuses[:active] %>
+
+new_widget_store_dev_subscription_one_time_charge:
+  shop: widget_store_dev
+  subscription: current_widget_store_dev_subscription
+  status: <%= DiscoApp::ApplicationCharge.statuses[:pending] %>
+  shopify_id: 1012637323
+  confirmation_url: "https://apple.myshopify.com/admin/charges/1012637323/confirm_application_charge?signature=BAhpBIueWzw%3D--0ea1abacaf9d6fd538b7e9a7023e9b71ce1c7e98"

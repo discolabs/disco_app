@@ -6,7 +6,7 @@ module DiscoApp::Concerns::Subscription
     belongs_to :shop
     belongs_to :plan
 
-    has_many :charges, class_name: 'DiscoApp::ApplicationCharge'
+    has_many :one_time_charges, class_name: 'DiscoApp::ApplicationCharge'
     has_many :recurring_charges, class_name: 'DiscoApp::RecurringApplicationCharge'
 
     enum status: [:trial, :active, :cancelled]
@@ -28,11 +28,12 @@ module DiscoApp::Concerns::Subscription
 
   # Convenience method to get the active charge for this subscription.
   def active_charge
-    if recurring?
-      recurring_charges.active.first
-    else
-      charges.active.first
-    end
+    charges.active.first
+  end
+
+  # Return the appropriate set of charges for this subscription's type.
+  def charges
+    recurring? ? recurring_charges : one_time_charges
   end
 
   def charge_class

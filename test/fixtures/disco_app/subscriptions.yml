@@ -10,3 +10,9 @@ current_widget_store_subscription:
   plan: basic
   status: <%= DiscoApp::Subscription.statuses[:active] %>
   subscription_type: 0
+
+current_widget_store_dev_subscription:
+  shop: widget_store_dev
+  plan: lifetime
+  status: <%= DiscoApp::Subscription.statuses[:active] %>
+  subscription_type: 1
