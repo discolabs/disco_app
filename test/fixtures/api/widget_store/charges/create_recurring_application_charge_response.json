@@ -9,7 +9,7 @@
     "billing_on": null,
     "created_at": "2015-09-02T14:51:23-04:00",
     "updated_at": "2015-09-02T14:51:23-04:00",
-    "test": null,
+    "test": true,
     "activated_on": null,
     "trial_ends_on": "",
     "cancelled_on": null,

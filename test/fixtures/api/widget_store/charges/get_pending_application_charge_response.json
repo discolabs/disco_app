@@ -8,7 +8,7 @@
     "return_url": "https://test.example.com/subscriptions/304261385/charges/629961174/activate",
     "created_at": "2015-09-02T14:52:56-04:00",
     "updated_at": "2015-09-02T14:52:56-04:00",
-    "test": null,
+    "test": true,
     "charge_type": null,
     "decorated_return_url": "https://test.example.com/subscriptions/304261385/charges/1/activate?charge_id=1012637323",
     "confirmation_url": "https://apple.myshopify.com/admin/charges/1012637323/confirm_recurring_application_charge?signature=BAhpBHsQASc%3D--b2e90c6e4e94fbae15a464c566a31a1c23e6bffa"
