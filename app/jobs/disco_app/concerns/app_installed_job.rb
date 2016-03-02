@@ -13,10 +13,11 @@ module DiscoApp::Concerns::AppInstalledJob
   # - Synchronise carrier service, if required.
   # - Perform initial update of shop information.
   #
-  def perform(domain)
-    DiscoApp::SynchroniseWebhooksJob.perform_now(domain)
-    DiscoApp::SynchroniseCarrierServiceJob.perform_now(domain)
-    DiscoApp::ShopUpdateJob.perform_now(domain)
+  def perform(shopify_domain)
+    DiscoApp::SynchroniseWebhooksJob.perform_now(shopify_domain)
+    DiscoApp::SynchroniseCarrierServiceJob.perform_now(shopify_domain)
+    DiscoApp::ShopUpdateJob.perform_now(shopify_domain)
+    @shop.reload
   end
 
 end
