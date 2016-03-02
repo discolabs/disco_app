@@ -18,7 +18,7 @@
 
   <h2><%= plan.name %></h2>
   <%= form_for(@subscription) do |f| %>
-    <%= f.hidden_field :plan, value: plan %>
+    <%= f.hidden_field :plan, value: plan.id %>
     <%= f.submit %>
   <% end %>
 
