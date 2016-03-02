@@ -16,6 +16,7 @@ class DiscoApp::ChargesControllerTest < ActionController::TestCase
   def teardown
     @shop = nil
     @current_subscription = nil
+    WebMock.reset!
   end
 
   test 'non-logged in user is redirected to the login page' do

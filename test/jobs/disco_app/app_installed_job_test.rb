@@ -9,6 +9,7 @@ class DiscoApp::AppInstalledJobTest < ActionController::TestCase
 
   def teardown
     @shop = nil
+    WebMock.reset!
   end
 
   test 'app installed job performs shop update job' do
