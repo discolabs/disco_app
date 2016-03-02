@@ -4,7 +4,8 @@ class HomeControllerTest < ActionController::TestCase
 
   def setup
     @shop = disco_app_shops(:widget_store)
-    @current_subscription = @shop.current_subscription
+    @current_subscription = disco_app_subscriptions(:current_widget_store_subscription)
+    @current_recurring_charge = disco_app_recurring_application_charges(:current_widget_store_subscription_recurring_charge)
     log_in_as(@shop)
   end
 
@@ -56,6 +57,13 @@ class HomeControllerTest < ActionController::TestCase
 
   test 'logged-in, installed user with no current subscription is redirected to new subscription page' do
     @shop.installed!
+    @current_subscription.destroy
+    get(:index)
+    assert_redirected_to DiscoApp::Engine.routes.url_helpers.new_subscription_path
+  end
+
+  test 'logged-in, installed user with no cancelled subscription is redirected to new subscription page' do
+    @shop.installed!
     @current_subscription.cancelled!
     get(:index)
     assert_redirected_to DiscoApp::Engine.routes.url_helpers.new_subscription_path
@@ -63,6 +71,14 @@ class HomeControllerTest < ActionController::TestCase
 
   test 'logged-in, installed user with current but unpaid subscription is redirected to new charges page' do
     @shop.installed!
+    @current_recurring_charge.destroy
+    get(:index)
+    assert_redirected_to DiscoApp::Engine.routes.url_helpers.new_subscription_charge_path(@current_subscription)
+  end
+
+  test 'logged-in, installed user with current subscription with declined charge is redirected to new charges page' do
+    @shop.installed!
+    @current_recurring_charge.declined!
     get(:index)
     assert_redirected_to DiscoApp::Engine.routes.url_helpers.new_subscription_charge_path(@current_subscription)
   end

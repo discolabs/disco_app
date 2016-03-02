@@ -1,0 +1,4 @@
+current_widget_store_subscription_recurring_charge:
+  shop: widget_store
+  subscription: current_widget_store_subscription
+  status: <%= DiscoApp::RecurringApplicationCharge.statuses[:accepted] %>
