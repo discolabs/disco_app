@@ -9,10 +9,11 @@ module DiscoApp::Concerns::AppUninstalledJob
 
   # Perform application uninstallation.
   #
-  # - Mark charge status as "cancelled" unless charges have been waived.
+  # - Mark any recurring application charges as cancelled.
   # - Remove any stored sessions for the shop.
   #
   def perform(domain, shop_data)
+    DiscoApp::ChargesService.cancel_recurring_charges(@shop)
     @shop.sessions.delete_all
   end
 

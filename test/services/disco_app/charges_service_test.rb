@@ -47,7 +47,21 @@ class DiscoApp::ChargesServiceTest < ActiveSupport::TestCase
     assert @new_charge.declined?
   end
 
-  test 'activating an accepted recurring charge is successful' do
+  test 'activating an accepted recurring charge is successful and cancels any existing recurring charges' do
+    stub_api_request(:get, "#{@shop.admin_url}/recurring_application_charges/654381179.json", 'widget_store/charges/get_accepted_recurring_application_charge')
+    stub_api_request(:post, "#{@shop.admin_url}/recurring_application_charges/654381179/activate.json", 'widget_store/charges/activate_recurring_application_charge')
+
+    old_charge = @subscription.active_charge
+    assert old_charge.active?
+
+    assert DiscoApp::ChargesService.activate(@shop, @new_charge)
+    assert @new_charge.active?
+
+    old_charge.reload
+    assert old_charge.cancelled?
+  end
+
+  test 'activating an accepted recurring charge cancels other recurring charges' do
     stub_api_request(:get, "#{@shop.admin_url}/recurring_application_charges/654381179.json", 'widget_store/charges/get_accepted_recurring_application_charge')
     stub_api_request(:post, "#{@shop.admin_url}/recurring_application_charges/654381179/activate.json", 'widget_store/charges/activate_recurring_application_charge')
 

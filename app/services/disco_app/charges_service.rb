@@ -48,10 +48,16 @@ class DiscoApp::ChargesService
       # If the charge wasn't accepted, fail and return.
       return false unless charge.accepted?
 
-      # If the charge was indeed accepted, activate it and return true.
+      # If the charge was indeed accepted, activate it via Shopify.
       charge.shop.temp {
         shopify_charge.activate
       }
+
+      # If the charge was recurring, make sure that all other local recurring
+      # charges are marked inactive.
+      if charge.recurring?
+        self.cancel_recurring_charges(shop, charge)
+      end
 
       charge.active!
 
@@ -59,6 +65,16 @@ class DiscoApp::ChargesService
     rescue
       false
     end
+  end
+
+  # Cancel all recurring charges for the given shop. If the optional charge
+  # parameter is given, it will be excluded from the cancellation.
+  def self.cancel_recurring_charges(shop, charge = nil)
+    charges = DiscoApp::RecurringApplicationCharge.where(shop: shop)
+    if charge.present?
+      charges = charges.where.not(id: charge)
+    end
+    charges.update_all(status: DiscoApp::RecurringApplicationCharge.statuses[:cancelled])
   end
 
 end

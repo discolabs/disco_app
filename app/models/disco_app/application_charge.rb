@@ -7,6 +7,10 @@ class DiscoApp::ApplicationCharge < ActiveRecord::Base
 
   scope :active, -> { where status: statuses[:active] }
 
+  def recurring?
+    false
+  end
+
   def activate_url
     DiscoApp::Engine.routes.url_helpers.activate_subscription_charge_url(subscription, self)
   end
