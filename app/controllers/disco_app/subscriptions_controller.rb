@@ -1,6 +1,8 @@
 class DiscoApp::SubscriptionsController < ApplicationController
   include DiscoApp::Concerns::AuthenticatedController
 
+  skip_before_action :check_current_subscription
+
   def new
     @subscription = DiscoApp::Subscription.new
   end
@@ -13,10 +15,10 @@ class DiscoApp::SubscriptionsController < ApplicationController
     end
 
     # Subscribe the current shop to the selected plan.
-    if DiscoApp::SubscriptionService.subscribe(@shop, plan)
-      redirect_to main_app.root_path
-    else
+    if(subscription = DiscoApp::SubscriptionService.subscribe(@shop, plan)).nil?
       redirect_to action: :new
+    else
+      redirect_to main_app.root_path
     end
   end
 

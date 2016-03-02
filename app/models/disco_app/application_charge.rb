@@ -7,4 +7,8 @@ class DiscoApp::ApplicationCharge < ActiveRecord::Base
 
   scope :accepted, -> { where status: statuses[:accepted] }
 
+  def activate_url
+    DiscoApp::Engine.routes.url_helpers.activate_subscription_charge_url(subscription, self)
+  end
+
 end

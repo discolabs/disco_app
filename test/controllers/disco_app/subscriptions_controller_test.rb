@@ -44,7 +44,7 @@ class DiscoApp::SubscriptionsControllerTest < ActionController::TestCase
     assert_equal disco_app_plans(:premium), @shop.current_plan
   end
 
-  test 'logged-in, installed user with no subscription can create new subscription' do
+  test 'logged-in, installed user with no subscription can create new subscription for available plan' do
     @current_subscription.destroy
     post(:create, subscription: { plan: disco_app_plans(:premium) })
     assert_redirected_to Rails.application.routes.url_helpers.root_path

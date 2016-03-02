@@ -5,7 +5,6 @@ class DiscoApp::AppUninstalledJobTest < ActionController::TestCase
 
   def setup
     @shop = disco_app_shops(:widget_store)
-    @shop.charge_active!
 
     perform_enqueued_jobs do
       DiscoApp::AppUninstalledJob.perform_later(@shop.shopify_domain, {})
@@ -25,7 +24,6 @@ class DiscoApp::AppUninstalledJobTest < ActionController::TestCase
   test 'app uninstalled job can be extended using concerns' do
     assert_performed_jobs 1
     @shop.reload
-    assert @shop.charge_cancelled? # Assert base methods still called.
     assert_equal 'Nowhere', @shop.country_name # Assert extended method called.
   end
 

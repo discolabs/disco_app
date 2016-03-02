@@ -15,9 +15,6 @@ module DiscoApp::Concerns::Shop
     # Define possible installation statuses as an enum.
     enum status: [:never_installed, :awaiting_install, :installing, :installed, :awaiting_uninstall, :uninstalling, :uninstalled]
 
-    # Define possible charge statuses as an enum.
-    enum charge_status: [:charge_none, :charge_pending, :charge_accepted, :charge_declined, :charge_active, :charge_cancelled, :charge_waived]
-
     # Define some useful scopes.
     scope :status, -> (status) { where status: status }
     scope :installed, -> { where status: statuses[:installed] }

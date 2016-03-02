@@ -35,4 +35,19 @@ module DiscoApp::Concerns::Subscription
     end
   end
 
+  def charge_class
+    recurring? ? DiscoApp::RecurringApplicationCharge : DiscoApp::ApplicationCharge
+  end
+
+  def shopify_charge_class
+    recurring? ? ShopifyAPI::RecurringApplicationCharge : ShopifyAPI::ApplicationCharge
+  end
+
+  # Return the amount chargeable for this subscription. Currently just passes
+  # through the plan's amount value, but in the future this will be usable for
+  # per-subscription discounting.
+  def amount
+    plan.amount
+  end
+
 end

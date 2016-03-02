@@ -5,7 +5,11 @@ DiscoApp::Engine.routes.draw do
   end
 
   resources :subscriptions, only: [:new, :create] do
-    resources :charges, only: [:new, :create]
+    resources :charges, only: [:new, :create] do
+      member do
+        get 'activate'
+      end
+    end
   end
 
   controller :install do

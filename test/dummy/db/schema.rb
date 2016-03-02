@@ -24,16 +24,18 @@ ActiveRecord::Schema.define(version: 20160307182229) do
   create_table "disco_app_application_charges", force: :cascade do |t|
     t.integer  "shop_id"
     t.integer  "subscription_id"
-    t.integer  "status",          default: 0
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.integer  "status",                     default: 0
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.integer  "shopify_id",       limit: 8
+    t.string   "confirmation_url"
   end
 
   add_index "disco_app_application_charges", ["shop_id"], name: "index_charges_on_shops"
   add_index "disco_app_application_charges", ["subscription_id"], name: "index_charges_on_subscriptions"
 
   create_table "disco_app_plans", force: :cascade do |t|
-    t.integer  "status"
+    t.integer  "status",            default: 0
     t.string   "name"
     t.integer  "plan_type",         default: 0
     t.integer  "trial_period_days"
@@ -48,9 +50,11 @@ ActiveRecord::Schema.define(version: 20160307182229) do
   create_table "disco_app_recurring_application_charges", force: :cascade do |t|
     t.integer  "shop_id"
     t.integer  "subscription_id"
-    t.integer  "status",          default: 0
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.integer  "status",                     default: 0
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.integer  "shopify_id",       limit: 8
+    t.string   "confirmation_url"
   end
 
   add_index "disco_app_recurring_application_charges", ["shop_id"], name: "index_recurring_charges_on_shops"
@@ -80,7 +84,6 @@ ActiveRecord::Schema.define(version: 20160307182229) do
     t.string   "money_with_currency_format"
     t.string   "domain"
     t.string   "plan_name"
-    t.integer  "charge_status",              default: 6
     t.string   "plan_display_name"
     t.decimal  "latitude"
     t.decimal  "longitude"
