@@ -11,9 +11,11 @@ class UpdatePlans < ActiveRecord::Migration
     reversible do |direction|
       direction.up do
         change_column :disco_app_plans, :plan_type, :integer, default: 0
+        change_column :disco_app_plans, :status, :integer, default: 0
       end
       direction.down do
         change_column :disco_app_plans, :plan_type, :integer
+        change_column :disco_app_plans, :status, :integer
       end
     end
   end

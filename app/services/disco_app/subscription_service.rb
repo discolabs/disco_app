@@ -2,24 +2,21 @@ class DiscoApp::SubscriptionService
 
   # Subscribe the given shop to the given plan.
   def self.subscribe(shop, plan)
-    # Mark all existing active subscriptions as replaced.
-    shop.subscriptions.active.update_all(status: DiscoApp::Subscription.statuses[:replaced])
+    # Cancel any existing current subscriptions.
+    shop.subscriptions.current.update_all(
+      status: DiscoApp::Subscription.statuses[:cancelled],
+      cancelled_at: Time.now
+    )
 
-    # Add the new subscription.
+    # Create the new subscription.
     DiscoApp::Subscription.create!(
       shop: shop,
       plan: plan,
-      status: DiscoApp::Subscription.statuses[:active],
-      name: plan.name,
-      charge_type: plan.charge_type,
-      price: plan.default_price,
-      trial_days: plan.default_trial_days
+      status: DiscoApp::Subscription.statuses[plan.has_trial? ? :trial : :active],
+      subscription_type: plan.plan_type,
+      trial_start_at: plan.has_trial? ? Time.now : nil,
+      trial_end_at: plan.has_trial? ? plan.trial_period_days.days.from_now : nil
     )
-  end
-
-  # Cancel any active subscription for the given shop.
-  def self.cancel(shop)
-    shop.subscriptions.active.update_all(status: DiscoApp::Subscription.statuses[:cancelled])
   end
 
 end

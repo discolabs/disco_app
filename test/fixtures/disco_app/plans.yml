@@ -1,17 +1,18 @@
 development:
   name: Development
   plan_type: 0
-  trial_period_days: 14
+  trial_period_days: 0
   amount: 0
 
 comped:
   name: Comped
   plan_type: 0
-  trial_period_days: 14
+  trial_period_days: 0
   amount: 0
 
 cheapo:
   name: Cheapo
+  status: <%= DiscoApp::Plan.statuses[:unavailable] %>
   plan_type: 0
   trial_period_days: 14
   amount: 99
@@ -25,5 +26,5 @@ basic:
 premium:
   name: Premium
   plan_type: 0
-  trial_period_days: 14
+  trial_period_days: 28
   amount: 9999

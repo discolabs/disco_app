@@ -13,4 +13,9 @@ module DiscoApp::Concerns::Plan
     scope :available, -> { where status: statuses[:available] }
 
   end
+
+  def has_trial?
+    trial_period_days.present? and trial_period_days > 0
+  end
+
 end

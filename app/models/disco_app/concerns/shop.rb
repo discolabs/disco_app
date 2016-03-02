@@ -50,9 +50,14 @@ module DiscoApp::Concerns::Shop
       current_subscription.present?
     end
 
-    # Convenience method to get the current subscription for this Shop.
+    # Convenience method to get the current subscription for this shop, if any.
     def current_subscription
       subscriptions.current.first
+    end
+
+    # Convenience method to get the current plan for this shop, if any.
+    def current_plan
+      current_subscription&.plan
     end
 
     # Return the absolute URL to the shop's storefront.

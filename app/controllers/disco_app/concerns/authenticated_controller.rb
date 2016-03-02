@@ -42,7 +42,7 @@ module DiscoApp::Concerns::AuthenticatedController
     end
 
     def check_accepted_charge
-      if @shop.current_subscription.requires_accepted_charge? and not @shop.current_subscription.accepted_charge?
+      if @shop.current_subscription? and @shop.current_subscription.requires_accepted_charge? and not @shop.current_subscription.accepted_charge?
         redirect_if_not_current_path disco_app.new_subscription_charge_path(@shop.current_subscription)
       end
     end
