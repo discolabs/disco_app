@@ -10,6 +10,12 @@ comped:
   trial_period_days: 0
   amount: 0
 
+lifetime:
+  name: Lifetime
+  plan_type: 1
+  trial_period_days: 0
+  amount: 4900
+
 cheapo:
   name: Cheapo
   status: <%= DiscoApp::Plan.statuses[:unavailable] %>

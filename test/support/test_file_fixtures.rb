@@ -16,7 +16,7 @@ module DiscoApp::Test
     # API fixtures are special-case JSON fixtures.
     def api_fixture(path)
       filename = File.join(File.dirname(File.dirname(__FILE__)), 'fixtures', 'api', "#{path}.json")
-      File.read(filename)
+      HashWithIndifferentAccess.new(ActiveSupport::JSON.decode(File.read(filename)))
     end
 
     # Webhook fixtures are special-case JSON fixtures.
