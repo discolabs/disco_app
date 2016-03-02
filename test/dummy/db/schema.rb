@@ -21,6 +21,17 @@ ActiveRecord::Schema.define(version: 20160307182229) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "disco_app_application_charges", force: :cascade do |t|
+    t.integer  "shop_id"
+    t.integer  "subscription_id"
+    t.integer  "status",          default: 0
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "disco_app_application_charges", ["shop_id"], name: "index_charges_on_shops"
+  add_index "disco_app_application_charges", ["subscription_id"], name: "index_charges_on_subscriptions"
+
   create_table "disco_app_plans", force: :cascade do |t|
     t.integer  "status"
     t.string   "name"
@@ -33,6 +44,17 @@ ActiveRecord::Schema.define(version: 20160307182229) do
     t.integer  "interval",          default: 0
     t.integer  "interval_count",    default: 1
   end
+
+  create_table "disco_app_recurring_application_charges", force: :cascade do |t|
+    t.integer  "shop_id"
+    t.integer  "subscription_id"
+    t.integer  "status",          default: 0
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "disco_app_recurring_application_charges", ["shop_id"], name: "index_recurring_charges_on_shops"
+  add_index "disco_app_recurring_application_charges", ["subscription_id"], name: "index_recurring_charges_on_subscriptions"
 
   create_table "disco_app_sessions", force: :cascade do |t|
     t.string   "session_id", null: false
