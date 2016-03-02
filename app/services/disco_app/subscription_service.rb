@@ -9,7 +9,7 @@ class DiscoApp::SubscriptionService
     )
 
     # Create the new subscription.
-    DiscoApp::Subscription.create!(
+    new_subscription = DiscoApp::Subscription.create!(
       shop: shop,
       plan: plan,
       status: DiscoApp::Subscription.statuses[plan.has_trial? ? :trial : :active],
@@ -17,6 +17,12 @@ class DiscoApp::SubscriptionService
       trial_start_at: plan.has_trial? ? Time.now : nil,
       trial_end_at: plan.has_trial? ? plan.trial_period_days.days.from_now : nil
     )
+
+    # Enqueue the subscription changed background job.
+    DiscoApp::SubscriptionChangedJob.perform_later(shop.shopify_domain, new_subscription)
+
+    # Return the new subscription.
+    new_subscription
   end
 
 end

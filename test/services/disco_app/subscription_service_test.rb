@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class DiscoApp::SubscriptionServiceTest < ActiveSupport::TestCase
+  include ActiveJob::TestHelper
 
   def setup
     @shop = disco_app_shops(:widget_store)
@@ -19,6 +20,12 @@ class DiscoApp::SubscriptionServiceTest < ActiveSupport::TestCase
     @subscription.reload
     assert @subscription.cancelled?
     assert_equal disco_app_plans(:premium), @shop.current_subscription.plan
+  end
+
+  test 'subscribing to a new plan enqueues subscription changed background job' do
+    assert_enqueued_with(job: DiscoApp::SubscriptionChangedJob) do
+      DiscoApp::SubscriptionService.subscribe(@shop, disco_app_plans(:premium))
+    end
   end
 
   test 'subscribing to a new plan works for a shop without a subscription' do
