@@ -6,8 +6,8 @@ module DiscoApp::Concerns::Subscription
     belongs_to :shop
     belongs_to :plan
 
-    has_many :one_time_charges, class_name: 'DiscoApp::ApplicationCharge'
-    has_many :recurring_charges, class_name: 'DiscoApp::RecurringApplicationCharge'
+    has_many :one_time_charges, class_name: 'DiscoApp::ApplicationCharge', dependent: :destroy
+    has_many :recurring_charges, class_name: 'DiscoApp::RecurringApplicationCharge', dependent: :destroy
 
     enum status: [:trial, :active, :cancelled]
     enum subscription_type: [:recurring, :one_time]
