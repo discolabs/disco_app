@@ -382,6 +382,60 @@ end
 
 [Overriding Models]: http://edgeguides.rubyonrails.org/engines.html#overriding-models-and-controllers
 
+### Synchronising Models
+In many situations, it's useful to store a version of a Shopify resource in our
+application's local database. Disco App provides a way to simplify the process
+of keeping this local version in sync with the version on Shopify with a concern
+(`DiscoApp::Concerns::Synchronises`).
+
+The steps below walk you through what you need to do for the implementation of
+synchronisation of product resources as an example. You can also refer to the 
+implementation of this inside the dummy app used for testing Disco App in
+`test/dummy/app/models/product.rb` and `test/dummy/app/jobs/products_*.rb`.
+
+1. Create a local model to represent the resource, for example a `Product`
+   model. Make sure it includes a `shop_id` foreign key referencing its owning
+   `DiscoApp::Shop` and a `data` attribute with a JSONB datatype.
+2. Include the `Synchronises` concern to the model class, along with the
+   `belongs_to` association:
+      
+   ```ruby
+   class Product < ActiveRecord::Base
+     include DiscoApp::Concerns::Synchronises  
+     belongs_to :shop, class_name: 'DiscoApp::Shop'  
+   end
+   ```
+3. Add background jobs to handle possible webhook calls we could receive to keep
+   the information updated (eg `products/create`, `products/update`,
+   `products/delete`) and ensure these webhooks are registered on application
+   installation. Implement these jobs to simply call the `synchronise` or
+   `synchronise_deletion` method as appropriate, eg:
+   
+   ```ruby
+   class ProductsCreateJob < DiscoApp::ShopJob   
+     def perform(shopify_domain, product_data)
+       Product.synchronise(@shop, product_data)
+     end  
+   end
+   ```
+
+This should be all you need to do to have your local models stay up to date with
+any changes made by the store owner on Shopify. If needed, you can override the
+individual `should_synchronise?`, `synchronise`, `should_synchronise_deletion?`
+and `synchronise_deletion` class methods on your model. For example, if you only
+wanted to synchronise products of a particular type, you could implement:
+
+```ruby
+class Product < ActiveRecord::Base
+  include DiscoApp::Concerns::Synchronises  
+  belongs_to :shop, class_name: 'DiscoApp::Shop'
+     
+  def should_synchronise?(shop, data)
+    data[:product_type] == 'Shoes'
+  end
+end
+```
+
 ### Model Primary Keys
 We use the `rails-bigint-pk` gem in order to default to 64-bit integer IDs in
 our models (the Rails default is 32-bit). This allows us to have a 1:1 mapping
