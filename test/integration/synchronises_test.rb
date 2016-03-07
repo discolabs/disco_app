@@ -5,6 +5,7 @@ class SynchronisesTest < ActionDispatch::IntegrationTest
 
   def setup
     @shop = disco_app_shops(:widget_store)
+    @product = products(:ipod)
     @routes = DiscoApp::Engine.routes
   end
 
@@ -12,10 +13,23 @@ class SynchronisesTest < ActionDispatch::IntegrationTest
     @shop = nil
   end
 
-  test 'product is created when product created webhooks is received' do
+  test 'new product is created when product created webhook is received' do
     post_webhook('product_created', :'products/create')
-    # Assert the product was created locally.
-    assert_equal 632910392, Product.last.id
+
+    # Assert the product was created locally, with the correct attributes.
+    product = Product.find(632910392)
+    assert_equal 'IPod Nano - 8GB', product.data['title']
+  end
+
+  test 'existing product is updated when product updated webhook is received' do
+    assert_equal({}, @product.data)
+
+    post_webhook('product_updated', :'products/update')
+
+    # Assert the product was updated locally, with the correct attributes.
+    @product.reload
+    assert_equal 632910393, @product.id
+    assert_equal 'IPod Nano - 8GB', @product.data['title']
   end
 
   private
