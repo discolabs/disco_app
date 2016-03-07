@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20160223111044) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "disco_app_app_settings", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -36,8 +39,8 @@ ActiveRecord::Schema.define(version: 20160223111044) do
     t.integer  "shop_id"
   end
 
-  add_index "disco_app_sessions", ["session_id"], name: "index_disco_app_sessions_on_session_id", unique: true
-  add_index "disco_app_sessions", ["updated_at"], name: "index_disco_app_sessions_on_updated_at"
+  add_index "disco_app_sessions", ["session_id"], name: "index_disco_app_sessions_on_session_id", unique: true, using: :btree
+  add_index "disco_app_sessions", ["updated_at"], name: "index_disco_app_sessions_on_updated_at", using: :btree
 
   create_table "disco_app_shops", force: :cascade do |t|
     t.string   "shopify_domain",                         null: false
@@ -66,7 +69,7 @@ ActiveRecord::Schema.define(version: 20160223111044) do
     t.boolean  "has_storefront"
   end
 
-  add_index "disco_app_shops", ["shopify_domain"], name: "index_disco_app_shops_on_shopify_domain", unique: true
+  add_index "disco_app_shops", ["shopify_domain"], name: "index_disco_app_shops_on_shopify_domain", unique: true, using: :btree
 
   create_table "disco_app_subscriptions", force: :cascade do |t|
     t.integer  "shop_id"
@@ -80,7 +83,8 @@ ActiveRecord::Schema.define(version: 20160223111044) do
     t.datetime "updated_at",  null: false
   end
 
-  add_index "disco_app_subscriptions", ["plan_id"], name: "index_disco_app_subscriptions_on_plan_id"
-  add_index "disco_app_subscriptions", ["shop_id"], name: "index_disco_app_subscriptions_on_shop_id"
+  add_index "disco_app_subscriptions", ["plan_id"], name: "index_disco_app_subscriptions_on_plan_id", using: :btree
+  add_index "disco_app_subscriptions", ["shop_id"], name: "index_disco_app_subscriptions_on_shop_id", using: :btree
 
+  add_foreign_key "disco_app_sessions", "disco_app_shops", column: "shop_id", on_delete: :cascade
 end
