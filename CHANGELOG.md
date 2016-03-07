@@ -9,7 +9,9 @@ All notable changes to this project will be documented in this file.
 ### Changed
 - Moved all controller concerns inside the `DiscoApp::Concerns` namespace for
   consistency with the way model concerns are patterned.
-- Update `rails` gem to v4.2.5.2 for security patches      
+- Update `rails` gem to v4.2.5.2 for security patches.
+- Rename `SynchroniseWithShopify` concern to simply `Synchronises`, and add a
+  couple of helper methods for deciding whether to synchronise models.
 
 ## 0.8.5 - 2016-02-22
 ### Changed
