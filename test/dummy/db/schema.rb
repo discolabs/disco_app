@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160223111044) do
+ActiveRecord::Schema.define(version: 20160307182229) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,5 +86,13 @@ ActiveRecord::Schema.define(version: 20160223111044) do
   add_index "disco_app_subscriptions", ["plan_id"], name: "index_disco_app_subscriptions_on_plan_id", using: :btree
   add_index "disco_app_subscriptions", ["shop_id"], name: "index_disco_app_subscriptions_on_shop_id", using: :btree
 
+  create_table "products", force: :cascade do |t|
+    t.integer  "shop_id",    limit: 8
+    t.jsonb    "data"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
   add_foreign_key "disco_app_sessions", "disco_app_shops", column: "shop_id", on_delete: :cascade
+  add_foreign_key "products", "disco_app_shops", column: "shop_id"
 end
