@@ -2,6 +2,149 @@
 // Replicate the styles for Shopify Admin forms.
 // --------------------------------------------------
 
+
+//
+// Wrappers around input elements and groups of input elements.
+//
+
+.next-input-wrapper {
+  position: relative;
+}
+
+.next-input-wrapper+.next-input-wrapper {
+  margin-top: 20px;
+}
+
+.next-input-wrapper+.next-input-wrapper--halved {
+  margin-top: 10px;
+}
+
+.wrappable {
+  @include flexbox();
+  @include flex-wrap(wrap);
+  margin-top: -20px;
+  margin-left: -20px;
+}
+
+.wrappable--half-spacing {
+  margin-top: -10px;
+}
+
+.wrappable__item {
+  @include flex(1 1 auto);
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.wrappable__item--no-flex {
+  @include flex-grow(0);
+}
+
+
+//
+// Overrides for specific types of elements (inline, right margins).
+//
+
+.inline {
+  display: inline !important;
+  width: auto !important;
+}
+
+.sr {
+  margin-right: 10px !important;
+}
+
+
+//
+// Labels
+//
+
+.next-label {
+  display: block;
+  margin-bottom: 5px;
+  color: #31373d;
+  font-size: 13px;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+.next-label--switch {
+  display: inline-block;
+  position: relative;
+  padding-left: 26px;
+  margin-bottom: 0;
+}
+
+
+//
+// Radio and Checkbox inputs
+//
+
+.next-radio,
+input[type=radio].next-radio,
+[type=radio].next-radio.autocomplete-field,
+.next-checkbox,
+input[type=checkbox].next-checkbox,
+[type=checkbox].next-checkbox.autocomplete-field {
+  z-index: 2;
+  opacity: 0;
+}
+
+.next-radio,
+input[type=radio].next-radio,
+[type=radio].next-radio.autocomplete-field,
+.next-checkbox, input[type=checkbox].next-checkbox,
+[type=checkbox].next-checkbox.autocomplete-field,
+.next-radio--styled,
+.next-checkbox--styled {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 16px;
+  width: 16px;
+  border: 1px solid #d3dbe2;
+  background-color: #ffffff;
+  margin: 0;
+  box-sizing: border-box;
+  vertical-align: middle;
+}
+
+.next-radio--styled {
+  border-radius: 100%;
+  z-index: 1;
+
+  &:after {
+    content: "";
+    display: block;
+    height: 8px;
+    width: 8px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 100%;
+    background-color: transparent;
+    -webkit-transform: translate(-50%, -50%) scale(0);
+    transform: translate(-50%, -50%) scale(0);
+    -webkit-transition: -webkit-transform 0.15s ease-in-out;
+    transition: -webkit-transform 0.15s ease-in-out;
+    transition: transform 0.15s ease-in-out;
+    transition: transform 0.15s ease-in-out,-webkit-transform 0.15s ease-in-out;
+  }
+}
+
+.next-radio:checked ~ .next-radio--styled:after {
+  background-color: #479ccf;
+  -webkit-transform: translate(-50%, -50%) scale(1);
+  transform: translate(-50%, -50%) scale(1);
+}
+
+
+//
+// Styles below here are deprecated and will be removed in a future version of
+// disco_app.
+//
+
 .form-control {
   -webkit-box-shadow: none;
   box-shadow: none;
