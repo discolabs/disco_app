@@ -15,6 +15,8 @@ module DiscoApp
     alias_method  :skip_webhook_verification?, :skip_webhook_verification
     attr_accessor :skip_carrier_request_verification
     alias_method  :skip_carrier_request_verification?, :skip_carrier_request_verification
+    attr_accessor :skip_oauth
+    alias_method  :skip_oauth?, :skip_oauth
 
   end
 

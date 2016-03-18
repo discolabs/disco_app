@@ -12,4 +12,5 @@ DiscoApp.configure do |config|
   config.skip_proxy_verification = ENV['SKIP_PROXY_VERIFICATION'] == 'true'
   config.skip_webhook_verification = ENV['SKIP_WEBHOOK_VERIFICATION'] == 'true'
   config.skip_carrier_request_verification = ENV['SKIP_CARRIER_REQUEST_VERIFICATION'] == 'true'
+  config.skip_oauth = ENV['SKIP_OAUTH'] == 'true'
 end
