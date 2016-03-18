@@ -20,7 +20,7 @@ module DiscoApp::Concerns::AppProxyController
     end
 
     def proxy_signature_is_valid?
-      return true if DiscoApp.configuration.skip_proxy_verification?
+      return true if Rails.env.development? and DiscoApp.configuration.skip_proxy_verification?
       DiscoApp::ProxyService.proxy_signature_is_valid?(request.query_string, ShopifyApp.configuration.secret)
     end
 

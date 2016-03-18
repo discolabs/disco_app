@@ -38,7 +38,7 @@ module DiscoApp
       end
 
       def webhook_is_valid?
-        return true if DiscoApp.configuration.skip_webhook_verification?
+        return true if Rails.env.development? and DiscoApp.configuration.skip_webhook_verification?
         DiscoApp::WebhookService.is_valid_hmac?(request.body.read.to_s, ShopifyApp.configuration.secret, request.headers['HTTP_X_SHOPIFY_HMAC_SHA256'])
       end
 

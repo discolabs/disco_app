@@ -7,8 +7,9 @@ DiscoApp.configure do |config|
   # Set the below if using an application proxy.
   config.app_proxy_prefix = ENV['SHOPIFY_APP_PROXY_PREFIX']
 
-  # Optional configuration, usually useful for development environments.
-  config.skip_proxy_verification = ENV['SKIP_PROXY_VERIFICATION']
-  config.skip_webhook_verification = ENV['SKIP_WEBHOOK_VERIFICATION']
-  config.skip_carrier_request_verification = ENV['SKIP_CARRIER_REQUEST_VERIFICATION']
+  # Optional configuration. These flags are only respected in the development
+  # environment and will have no effect in production.
+  config.skip_proxy_verification = ENV['SKIP_PROXY_VERIFICATION'] == 'true'
+  config.skip_webhook_verification = ENV['SKIP_WEBHOOK_VERIFICATION'] == 'true'
+  config.skip_carrier_request_verification = ENV['SKIP_CARRIER_REQUEST_VERIFICATION'] == 'true'
 end
