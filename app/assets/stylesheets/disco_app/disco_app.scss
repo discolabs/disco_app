@@ -2,15 +2,4 @@
 // Styles for Disco applications.
 // --------------------------------------------------
 
-@import 'bootstrap-sprockets';
-@import 'bootstrap/variables';
-@import 'bootstrap/custom';
-@import 'disco/mixins/flexbox';
-@import 'disco/grid';
-@import 'disco/type';
-@import 'disco/sections';
-@import 'disco/cards';
-@import 'disco/buttons';
-@import 'disco/forms';
-@import 'disco/tables';
-@import 'disco/tabs';
+@import 'ui-kit/ui-kit';
