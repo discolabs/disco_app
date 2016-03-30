@@ -14,4 +14,6 @@ $ npm install
 
 # 2. Start development server
 $ npm run watch
+
+# examples/ folder now served at http://localhost:8080
 ```
