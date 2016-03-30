@@ -3,6 +3,7 @@
     "watch": "webpack-dev-server --inline --hot --content-base examples/"
   },
   "dependencies": {
+    "classnames": "^2.2.3",
     "react": "^0.14.8",
     "react-dom": "^0.14.8"
   },
