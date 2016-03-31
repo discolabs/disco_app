@@ -5,6 +5,9 @@ module DiscoApp::Concerns::Plan
 
     has_many :subscriptions
     has_many :shops, through: :subscriptions
+    has_many :plan_codes
+
+    accepts_nested_attributes_for :plan_codes
 
     enum status: [:available, :unavailable]
     enum plan_type: [:recurring, :one_time]

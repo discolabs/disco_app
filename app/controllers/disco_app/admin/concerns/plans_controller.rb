@@ -11,6 +11,7 @@ module DiscoApp::Admin::Concerns::PlansController
 
   def new
     @plan = DiscoApp::Plan.new
+    @plan.plan_codes.build
   end
 
   def create
@@ -23,6 +24,7 @@ module DiscoApp::Admin::Concerns::PlansController
   end
 
   def edit
+    @plan.plan_codes.build
   end
 
   def update
@@ -40,7 +42,10 @@ module DiscoApp::Admin::Concerns::PlansController
     end
 
     def plan_params
-      params.require(:plan).permit(:name, :status, :plan_type, :trial_period_days, :amount)
+      params.require(:plan).permit(
+        :name, :status, :plan_type, :trial_period_days, :amount,
+        :plan_codes_attributes => [:code, :trial_period_days, :amount]
+      )
     end
 
 end

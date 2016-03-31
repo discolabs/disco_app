@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160307182229) do
+ActiveRecord::Schema.define(version: 20160331093148) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,17 @@ ActiveRecord::Schema.define(version: 20160307182229) do
     t.integer  "shopify_id",       limit: 8
     t.string   "confirmation_url"
   end
+
+  create_table "disco_app_plan_codes", force: :cascade do |t|
+    t.integer  "disco_app_plan_id"
+    t.string   "code"
+    t.integer  "trial_period_days"
+    t.integer  "amount"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "disco_app_plan_codes", ["disco_app_plan_id"], name: "index_disco_app_plan_codes_on_disco_app_plan_id", using: :btree
 
   create_table "disco_app_plans", force: :cascade do |t|
     t.integer  "status",            default: 0
@@ -115,11 +126,11 @@ ActiveRecord::Schema.define(version: 20160307182229) do
     t.datetime "updated_at",           null: false
   end
 
-  add_foreign_key "disco_app_sessions", "disco_app_shops", column: "shop_id", on_delete: :cascade
-  add_foreign_key "products", "disco_app_shops", column: "shop_id"
   add_foreign_key "disco_app_application_charges", "disco_app_shops", column: "shop_id"
   add_foreign_key "disco_app_application_charges", "disco_app_subscriptions", column: "subscription_id"
+  add_foreign_key "disco_app_plan_codes", "disco_app_plans"
   add_foreign_key "disco_app_recurring_application_charges", "disco_app_shops", column: "shop_id"
   add_foreign_key "disco_app_recurring_application_charges", "disco_app_subscriptions", column: "subscription_id"
   add_foreign_key "disco_app_sessions", "disco_app_shops", column: "shop_id", on_delete: :cascade
+  add_foreign_key "products", "disco_app_shops", column: "shop_id"
 end
