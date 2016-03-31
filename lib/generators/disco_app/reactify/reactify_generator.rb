@@ -7,7 +7,7 @@ module DiscoApp
       # Install the react-rails gem and run its setup.
       def install_gem
         # Add gem to Gemfile
-        gem 'react-rails', '~> 1.5.0'
+        gem 'react-rails', '~> 1.6.0'
 
         # Install gem.
         Bundler.with_clean_env do

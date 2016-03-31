@@ -2,7 +2,8 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
-No unreleased changes.
+### Changed
+- Update `react-rails` gem to 1.6.0
 
 ## 0.8.7 - 2016-03-10
 - Fixed bug when deleting webhook resource instances
