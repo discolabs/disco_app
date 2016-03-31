@@ -12,6 +12,8 @@ module DiscoApp::Concerns::Plan
 
     scope :available, -> { where status: statuses[:available] }
 
+    validates_presence_of :name
+
   end
 
   def has_trial?
