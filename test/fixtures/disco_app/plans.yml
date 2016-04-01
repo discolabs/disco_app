@@ -1,32 +1,37 @@
 development:
-  status: 2
+  id: 1
   name: Development
-  charge_type: 0
-  default_price: 0.00
-  default_trial_days: 14
+  plan_type: 0
+  trial_period_days: 0
+  amount: 0
 
 comped:
-  status: 2
   name: Comped
-  charge_type: 0
-  default_price: 0.00
-  default_trial_days: 0
+  plan_type: 0
+  trial_period_days: 0
+  amount: 0
+
+lifetime:
+  name: Lifetime
+  plan_type: 1
+  trial_period_days: 0
+  amount: 4900
 
 cheapo:
-  status: 1
   name: Cheapo
-  charge_type: 0
-  default_price: 0.99
-  default_trial_days: 14
+  status: <%= DiscoApp::Plan.statuses[:unavailable] %>
+  plan_type: 0
+  trial_period_days: 14
+  amount: 99
 
 basic:
   name: Basic
-  charge_type: 0
-  default_price: 9.99
-  default_trial_days: 14
+  plan_type: 0
+  trial_period_days: 14
+  amount: 999
 
 premium:
   name: Premium
-  charge_type: 0
-  default_price: 49.99
-  default_trial_days: 14
+  plan_type: 0
+  trial_period_days: 28
+  amount: 9999

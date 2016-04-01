@@ -1,0 +1,6 @@
+podcast:
+  id: 1
+  plan: premium
+  code: PODCAST
+  trial_period_days: 60
+  amount: 8999

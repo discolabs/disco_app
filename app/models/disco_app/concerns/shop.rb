@@ -15,9 +15,6 @@ module DiscoApp::Concerns::Shop
     # Define possible installation statuses as an enum.
     enum status: [:never_installed, :awaiting_install, :installing, :installed, :awaiting_uninstall, :uninstalling, :uninstalled]
 
-    # Define possible charge statuses as an enum.
-    enum charge_status: [:charge_none, :charge_pending, :charge_accepted, :charge_declined, :charge_active, :charge_cancelled, :charge_waived]
-
     # Define some useful scopes.
     scope :status, -> (status) { where status: status }
     scope :installed, -> { where status: statuses[:installed] }
@@ -39,15 +36,19 @@ module DiscoApp::Concerns::Shop
       }
     end
 
-    # Update this Shop's charge_status attribute based on the given Shopify charge object.
-    def update_charge_status(shopify_charge)
-      status_update_method_name = "charge_#{shopify_charge.status}!"
-      self.public_send(status_update_method_name) if self.respond_to? status_update_method_name
+    # Convenience method to check if this shop has a current subscription.
+    def current_subscription?
+      current_subscription.present?
     end
 
-    # Convenience method to get the currently active subscription for this Shop.
+    # Convenience method to get the current subscription for this shop, if any.
     def current_subscription
-      subscriptions.active.first
+      subscriptions.current.first
+    end
+
+    # Convenience method to get the current plan for this shop, if any.
+    def current_plan
+      current_subscription&.plan
     end
 
     # Return the absolute URL to the shop's storefront.

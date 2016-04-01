@@ -1,0 +1,20 @@
+{
+  "recurring_application_charge": {
+    "id": 654381179,
+    "name": "Basic",
+    "api_client_id": 755357713,
+    "price": "9.99",
+    "status": "pending",
+    "return_url": "https://test.example.com/subscriptions/304261385/charges/532970502/activate",
+    "billing_on": null,
+    "created_at": "2015-09-02T14:51:23-04:00",
+    "updated_at": "2015-09-02T14:51:23-04:00",
+    "test": true,
+    "activated_on": null,
+    "trial_ends_on": "",
+    "cancelled_on": null,
+    "trial_days": 14,
+    "decorated_return_url": "https://test.example.com/subscriptions/304261385/charges/532970502/activate?charge_id=654381179",
+    "confirmation_url": "https://apple.myshopify.com/admin/charges/654381179/confirm_recurring_application_charge?signature=BAhpBHsQASc%3D--b2e90c6e4e94fbae15a464c566a31a1c23e6bffa"
+  }
+}

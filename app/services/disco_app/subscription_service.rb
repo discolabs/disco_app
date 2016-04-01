@@ -1,25 +1,37 @@
 class DiscoApp::SubscriptionService
 
-  # Subscribe the given shop to the given plan.
-  def self.subscribe(shop, plan)
-    # Mark all existing active subscriptions as replaced.
-    shop.subscriptions.active.update_all(status: DiscoApp::Subscription.statuses[:replaced])
+  # Subscribe the given shop to the given plan, optionally using the given plan
+  # code.
+  def self.subscribe(shop, plan, plan_code = nil)
+    # Cancel any existing current subscriptions.
+    shop.subscriptions.current.update_all(
+      status: DiscoApp::Subscription.statuses[:cancelled],
+      cancelled_at: Time.now
+    )
 
-    # Add the new subscription.
-    DiscoApp::Subscription.create!(
+    # Get the amount that should be charged for the subscription.
+    subscription_amount = plan_code.present? ? plan_code.amount : plan.amount
+
+    # Get the date the subscription trial should end.
+    subscription_trial_end_at = plan.has_trial? ? (plan_code.present? ? plan_code.trial_period_days: plan.trial_period_days).days.from_now : nil
+
+    # Create the new subscription.
+    new_subscription = DiscoApp::Subscription.create!(
       shop: shop,
       plan: plan,
-      status: DiscoApp::Subscription.statuses[:active],
-      name: plan.name,
-      charge_type: plan.charge_type,
-      price: plan.default_price,
-      trial_days: plan.default_trial_days
+      plan_code: plan_code,
+      status: DiscoApp::Subscription.statuses[plan.has_trial? ? :trial : :active],
+      subscription_type: plan.plan_type,
+      amount: subscription_amount,
+      trial_start_at: plan.has_trial? ? Time.now : nil,
+      trial_end_at: plan.has_trial? ? subscription_trial_end_at : nil
     )
-  end
 
-  # Cancel any active subscription for the given shop.
-  def self.cancel(shop)
-    shop.subscriptions.active.update_all(status: DiscoApp::Subscription.statuses[:cancelled])
+    # Enqueue the subscription changed background job.
+    DiscoApp::SubscriptionChangedJob.perform_later(shop.shopify_domain, new_subscription)
+
+    # Return the new subscription.
+    new_subscription
   end
 
 end

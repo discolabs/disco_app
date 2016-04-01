@@ -7,6 +7,9 @@ DiscoApp.configure do |config|
   # Set the below if using an application proxy.
   config.app_proxy_prefix = ENV['SHOPIFY_APP_PROXY_PREFIX']
 
+  # Set the below to create real charges.
+  config.real_charges = ENV['SHOPIFY_REAL_CHARGES'] === 'true'
+
   # Optional configuration. These flags are only respected in the development
   # environment and will have no effect in production.
   config.skip_proxy_verification = ENV['SKIP_PROXY_VERIFICATION'] == 'true'

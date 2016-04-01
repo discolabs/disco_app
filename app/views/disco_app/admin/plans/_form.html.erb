@@ -1,0 +1,27 @@
+<%= f.label(:name, 'Name') %>
+<%= f.text_field(:name) %>
+
+<%= f.label(:status, 'Status') %>
+<%= f.select(:status, DiscoApp::Plan.statuses.map { |s| [s.first.humanize, s.first] }) %>
+
+<%= f.label(:plan_type, 'Plan Type') %>
+<%= f.select(:plan_type, DiscoApp::Plan.plan_types.map { |s| [s.first.humanize, s.first] }) %>
+
+<%= f.label(:trial_period_days, 'Trial Period Days') %>
+<%= f.number_field(:trial_period_days) %>
+
+<%= f.label(:amount, 'Amount') %>
+<%= f.number_field(:amount) %>
+
+<%= f.fields_for :plan_codes do |plan_code| %>
+  <%= plan_code.label(:code, 'Code') %>
+  <%= plan_code.text_field(:code) %>
+
+  <%= plan_code.label(:trial_period_days, 'Trial Period Days') %>
+  <%= plan_code.number_field(:trial_period_days) %>
+
+  <%= plan_code.label(:amount, 'Amount') %>
+  <%= plan_code.number_field(:amount) %>
+<% end %>
+
+<%= f.submit %>

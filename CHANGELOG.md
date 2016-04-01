@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+### Added
+- New subscriptions and charges framework.
+
 ### Changed
 - Update `react-rails` gem to 1.6.0
 

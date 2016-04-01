@@ -1,0 +1,25 @@
+<% if @shop.current_subscription? %>
+  <p>
+    You are currently on the <%= @shop.current_subscription.plan.name %> plan.
+  </p>
+  <p>
+    Choose a new plan:
+  </p>
+<% else %>
+  <p>
+    Welcome!
+  </p>
+  <p>
+    Choose a plan below to get started:
+  </p>
+<% end %>
+
+<% for plan in DiscoApp::Plan.available %>
+
+  <h2><%= plan.name %></h2>
+  <%= form_for(@subscription) do |f| %>
+    <%= f.hidden_field :plan, value: plan.id %>
+    <%= f.submit %>
+  <% end %>
+
+<% end %>

@@ -4,10 +4,12 @@ DiscoApp::Engine.routes.draw do
     post 'webhooks' => :process_webhook, as: :webhooks
   end
 
-  controller :charges do
-    get 'charges/new' => :new, as: :new_charge
-    post 'charges/create' => :create, as: :create_charge
-    get 'charges/activate' => :activate, as: :activate_charge
+  resources :subscriptions, only: [:new, :create] do
+    resources :charges, only: [:new, :create] do
+      member do
+        get 'activate'
+      end
+    end
   end
 
   controller :install do
@@ -22,7 +24,8 @@ DiscoApp::Engine.routes.draw do
   end
 
   namespace :admin do
-    resources :shops, path: '/shops', only: [:index, :edit, :update]
+    resources :shops, only: [:index, :edit, :update]
+    resources :plans
     resource :app_settings, only: [:edit, :update]
 
     # JSON-API resources for admins."

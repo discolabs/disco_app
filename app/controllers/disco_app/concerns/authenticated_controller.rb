@@ -4,7 +4,9 @@ module DiscoApp::Concerns::AuthenticatedController
   included do
     before_action :login_again_if_different_shop
     before_action :shopify_shop
-    before_action :verify_status
+    before_action :check_installed
+    before_action :check_current_subscription
+    before_action :check_active_charge
     around_filter :shopify_session
     layout 'embedded_app'
   end
@@ -19,17 +21,29 @@ module DiscoApp::Concerns::AuthenticatedController
       end
     end
 
-    def verify_status
-      if not (@shop.charge_active? or @shop.charge_waived?)
-        redirect_if_not_current_path(disco_app.new_charge_path)
-      elsif @shop.charge_accepted?
-        redirect_if_not_current_path(disco_app.activate_charge_path)
-      elsif @shop.never_installed? or @shop.uninstalled?
-        redirect_if_not_current_path(disco_app.install_path)
-      elsif @shop.awaiting_install? or @shop.installing?
-        redirect_if_not_current_path(disco_app.installing_path)
-      elsif @shop.awaiting_uninstall? or @shop.uninstalling?
-        redirect_if_not_current_path(disco_app.uninstalling_path)
+    def check_installed
+      if @shop.awaiting_install? or @shop.installing?
+        redirect_if_not_current_path disco_app.installing_path
+        return
+      end
+      if @shop.awaiting_uninstall? or @shop.uninstalling?
+        redirect_if_not_current_path disco_app.uninstalling_path
+        return
+      end
+      unless @shop.installed?
+        redirect_if_not_current_path disco_app.install_path
+      end
+    end
+
+    def check_current_subscription
+      unless @shop.current_subscription?
+        redirect_if_not_current_path disco_app.new_subscription_path
+      end
+    end
+
+    def check_active_charge
+      if @shop.current_subscription? and @shop.current_subscription.requires_active_charge? and not @shop.current_subscription.active_charge?
+        redirect_if_not_current_path disco_app.new_subscription_charge_path(@shop.current_subscription)
       end
     end
 

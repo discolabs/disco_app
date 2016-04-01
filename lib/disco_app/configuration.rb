@@ -8,6 +8,10 @@ module DiscoApp
     # Set the below if using an application proxy.
     attr_accessor :app_proxy_prefix
 
+    # Set the below to create real Shopify charges.
+    attr_accessor :real_charges
+    alias_method  :real_charges?, :real_charges
+
     # Optional configuration, usually useful for development environments.
     attr_accessor :skip_proxy_verification
     alias_method  :skip_proxy_verification?, :skip_proxy_verification

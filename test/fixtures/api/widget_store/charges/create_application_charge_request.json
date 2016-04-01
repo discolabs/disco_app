@@ -1,0 +1,9 @@
+{
+  "application_charge": {
+    "name": "Lifetime",
+    "price": "49.00",
+    "trial_days": null,
+    "return_url": "https://test.example.com/subscriptions/31191756/charges/550483572/activate",
+    "test": true
+  }
+}

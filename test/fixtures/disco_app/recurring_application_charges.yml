@@ -1,0 +1,11 @@
+current_widget_store_subscription_recurring_charge:
+  shop: widget_store
+  subscription: current_widget_store_subscription
+  status: <%= DiscoApp::RecurringApplicationCharge.statuses[:active] %>
+
+new_widget_store_subscription_recurring_charge:
+  shop: widget_store
+  subscription: current_widget_store_subscription
+  status: <%= DiscoApp::RecurringApplicationCharge.statuses[:pending] %>
+  shopify_id: 654381179
+  confirmation_url: "https://apple.myshopify.com/admin/charges/654381179/confirm_recurring_application_charge?signature=BAhpBHsQASc%3D--b2e90c6e4e94fbae15a464c566a31a1c23e6bffa"

@@ -18,9 +18,10 @@ class DiscoApp::ShopTest < ActiveSupport::TestCase
     assert_equal 2, @shop.subscriptions.size
   end
 
-  test 'can fetch a shops active subscription' do
+  test 'can fetch a shops current subscription' do
     assert_equal 1, @shop.subscriptions.active.size
-    assert_equal disco_app_subscriptions(:widget_store), @shop.subscriptions.active.first
+    assert @shop.current_subscription?
+    assert_equal disco_app_subscriptions(:current_widget_store_subscription), @shop.current_subscription
   end
 
 end
