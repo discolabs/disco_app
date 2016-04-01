@@ -1,6 +1,7 @@
 old_widget_store_subscription:
   shop: widget_store
   plan: cheapo
+  amount: 99
   status: <%= DiscoApp::Subscription.statuses[:cancelled] %>
   subscription_type: 0
   cancelled_at: <%= 1.week.ago.to_s(:db) %>
@@ -8,11 +9,13 @@ old_widget_store_subscription:
 current_widget_store_subscription:
   shop: widget_store
   plan: basic
+  amount: 999
   status: <%= DiscoApp::Subscription.statuses[:active] %>
   subscription_type: 0
 
 current_widget_store_dev_subscription:
   shop: widget_store_dev
   plan: lifetime
+  amount: 4900
   status: <%= DiscoApp::Subscription.statuses[:active] %>
   subscription_type: 1
