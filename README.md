@@ -202,19 +202,50 @@ the domain name and API token for a shop that installs the app, along with a
 number of other attributes such as email address, country, Shopify plan type,
 et cetera.
 
-### Charge and Installation Checks
-The gem provides a `DiscoApp::Concerns::AuthenticatedController` concern that
-should be included into any controller that handles actions inside the embedded
-admin panel. The concern performs the following checks:
+### Plans, Subscriptions, and Charges
+The gem provides a framework for billing merchants for the use of applications.
+This framework consists of plans, subscriptions, plan codes, and charges.
+ 
+**Plans** represent the different pricing levels you can offer your merchants.
+They are configurable from the application admin pages (if enabled for the app
+in question), allowing application owners to set different prices, trial
+periods, and charging patterns.
+
+**Subscriptions** are the mapping between a particular shop and their current
+plan. A shop can only have a single active subscription at a time.
+
+**Plan Codes** belong to a particular plan, and allow for a particular store to
+have their subscription to a plan adjusted or discounted. For example, if you
+have a "Premium" plan, you might add a Plan Code to it with a code `PODCAST` for
+your podcast listeners that reduces the monthly price by 10% and extends the
+trial period to 60 days.
+
+**Charges** are a local representation of the Shopify charge objects that are
+created and approved by merchants. The appropriate charge object is generated
+based on a current store's subscription.
+
+The `DiscoApp::Concerns::AuthenticatedController` concern (which should be
+included by all embedded application controllers in an app) performs a series of
+checks to make sure that the current user is able to access the insides of the
+page. It:
 
 - Checks the shop has an authenticated session. If not, redirects to the OAuth
   authentication flow provided by the `ShopifyApp` gem;
-- Checks the current shop has successfully authorised any relevant charge for
-  the use of the application. If not, redirects to a charge creation and
-  authorisation flow (provided by `DiscoApp::ChargesController`);
-- Checks the app has completed installation for the current shop. If not,
-  begins the installation and displays an "Installing..." progress page until
-  installation is complete (provided by `DiscoApp::InstallController`).
+- Checks the shop has completed the installation steps. If not, redirects to
+  begin the installation process.
+- Checks the shop has a currently active subscription. If not, redirects to the
+  new subscription selection controller.
+- Checks the currently active subscription has a valid, active charge (or that
+  the currently active subscription doesn't require a charge, as may happen when
+  the amount to be charged is zero). If not, redirects to begin the charge
+  approval process for the current subscription.
+  
+If you're building an app that doesn't need to worry about charging store
+owners, you should ensure it creates a Plan with an `amount` value of zero, and
+that all stores are subscribed to that plan during `DiscoApp::AppInstalledJob`.
+
+Whenever a store's subscription level is changed,
+`DiscoApp::SubscriptionChangedJob` is queued.
 
 ### Rake Tasks
 A couple of useful Rake tasks are baked into the app. They are:
