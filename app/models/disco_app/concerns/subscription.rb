@@ -5,6 +5,7 @@ module DiscoApp::Concerns::Subscription
 
     belongs_to :shop
     belongs_to :plan
+    belongs_to :plan_code
 
     has_many :one_time_charges, class_name: 'DiscoApp::ApplicationCharge', dependent: :destroy
     has_many :recurring_charges, class_name: 'DiscoApp::RecurringApplicationCharge', dependent: :destroy
@@ -42,13 +43,6 @@ module DiscoApp::Concerns::Subscription
 
   def shopify_charge_class
     recurring? ? ShopifyAPI::RecurringApplicationCharge : ShopifyAPI::ApplicationCharge
-  end
-
-  # Return the amount chargeable for this subscription. Currently just passes
-  # through the plan's amount value, but in the future this will be usable for
-  # per-subscription discounting.
-  def amount
-    plan.amount
   end
 
 end

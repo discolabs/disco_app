@@ -5,6 +5,8 @@ module DiscoApp::Concerns::PlanCode
 
     belongs_to :disco_app_plan
 
+    enum status: [:available, :unavailable]
+
     validates_presence_of :code
     validates_presence_of :amount
 

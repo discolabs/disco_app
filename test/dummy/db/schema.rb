@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160331093148) do
+ActiveRecord::Schema.define(version: 20160401045551) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,15 +32,14 @@ ActiveRecord::Schema.define(version: 20160331093148) do
   end
 
   create_table "disco_app_plan_codes", force: :cascade do |t|
-    t.integer  "disco_app_plan_id"
+    t.integer  "plan_id",           limit: 8
     t.string   "code"
     t.integer  "trial_period_days"
     t.integer  "amount"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.integer  "status",                      default: 0
   end
-
-  add_index "disco_app_plan_codes", ["disco_app_plan_id"], name: "index_disco_app_plan_codes_on_disco_app_plan_id", using: :btree
 
   create_table "disco_app_plans", force: :cascade do |t|
     t.integer  "status",            default: 0
@@ -109,11 +108,13 @@ ActiveRecord::Schema.define(version: 20160331093148) do
     t.integer  "plan_id"
     t.integer  "status"
     t.integer  "subscription_type"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.datetime "trial_start_at"
     t.datetime "trial_end_at"
     t.datetime "cancelled_at"
+    t.integer  "amount",                      default: 0
+    t.integer  "plan_code_id",      limit: 8
   end
 
   add_index "disco_app_subscriptions", ["plan_id"], name: "index_disco_app_subscriptions_on_plan_id", using: :btree
@@ -128,9 +129,10 @@ ActiveRecord::Schema.define(version: 20160331093148) do
 
   add_foreign_key "disco_app_application_charges", "disco_app_shops", column: "shop_id"
   add_foreign_key "disco_app_application_charges", "disco_app_subscriptions", column: "subscription_id"
-  add_foreign_key "disco_app_plan_codes", "disco_app_plans"
+  add_foreign_key "disco_app_plan_codes", "disco_app_plans", column: "plan_id"
   add_foreign_key "disco_app_recurring_application_charges", "disco_app_shops", column: "shop_id"
   add_foreign_key "disco_app_recurring_application_charges", "disco_app_subscriptions", column: "subscription_id"
   add_foreign_key "disco_app_sessions", "disco_app_shops", column: "shop_id", on_delete: :cascade
+  add_foreign_key "disco_app_subscriptions", "disco_app_plan_codes", column: "plan_code_id"
   add_foreign_key "products", "disco_app_shops", column: "shop_id"
 end
