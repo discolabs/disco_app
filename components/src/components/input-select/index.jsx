@@ -23,14 +23,14 @@ const InputSelect = ({ label, name, options, value, onChange }) => {
 };
 
 InputSelect.propTypes = {
-  label: React.PropTypes.string,
+  label: React.PropTypes.string.isRequired,
   name: React.PropTypes.string.isRequired,
   options: React.PropTypes.arrayOf(
     React.PropTypes.shape({
-      label: React.PropTypes.string,
-      value: React.PropTypes.string
+      label: React.PropTypes.string.isRequired,
+      value: React.PropTypes.string.isRequired
     })
-  )
-}
+  ).isRequired
+};
 
 export default InputSelect;

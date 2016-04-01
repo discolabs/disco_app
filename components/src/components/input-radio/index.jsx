@@ -11,7 +11,14 @@ const InputRadio = ({ label, name, value, checked, onChange }) => {
   return(
     <div className="next-input-wrapper next-input-wrapper--halved">
       <label htmlFor={id} className="next-label next-label--switch">{label}</label>
-      <input id={id} className="next-radio" type="radio" value={value} name={name} checked={checked} onChange={handleChange} />
+      <input
+        className="next-radio"
+        defaultChecked={checked}
+        id={id}
+        name={name}
+        onChange={handleChange}
+        type="radio"
+        value={value} />
       <span className="next-radio--styled" />
     </div>
   )
@@ -19,11 +26,11 @@ const InputRadio = ({ label, name, value, checked, onChange }) => {
 };
 
 InputRadio.propTypes = {
-  label: React.PropTypes.string,
+  label: React.PropTypes.string.isRequired,
   name: React.PropTypes.string.isRequired,
   value: React.PropTypes.string.isRequired,
   checked: React.PropTypes.bool,
-  onChange: React.PropTypes.func.isRequired
+  onChange: React.PropTypes.func
 };
 
 export default InputRadio;
