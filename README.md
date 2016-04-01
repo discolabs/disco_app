@@ -285,9 +285,14 @@ specific webhooks are received. They are:
 - `DiscoApp::ShopUpdateJob`, triggered when the `shop/update` webhook is
   received. By default, this task keeps the metadata attributes on the relevant
   `DiscoApp::Shop` model up to date.
+- `DiscoApp::SubscriptionChangedJob`, called whenever a shop changes the plan
+  that they are subscribed to.  
 - `DiscoApp::SynchroniseWebhooksJob`, called by the installation job but also
   enqueued by the `webhooks:sync` rake task to allow for re-synchronisation of
   webhooks after installation.
+- `DiscoApp::SynchroniseCarrierServiceJob`, called by the installation job but
+  also enqueued by the `carrier_service:sync` rake task to allow for
+  re-synchronisation of the carrier service after installation.  
 
 The default jobs that come with the engine can be extended through the use of
 Concerns in a similar way to the models that come with the engine. See
@@ -385,6 +390,10 @@ using `ShopifyApp.redirect()`.
 ```erb
 <%= link_to_shopify_admin(@shop, 'Order 1234', "orders/1234") %>
 ```
+
+#### link_to_modal
+Generates a link that will open its given `href` inside an embedded Shopify
+model.
 
 ### Extending Models
 The models that come with the `DiscoApp` engine (such as `DiscoApp::Shop`) can
