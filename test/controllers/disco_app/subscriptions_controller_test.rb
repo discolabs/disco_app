@@ -57,4 +57,17 @@ class DiscoApp::SubscriptionsControllerTest < ActionController::TestCase
     assert_equal @current_subscription, @shop.current_subscription
   end
 
+  test 'logged-in, installed user with current subscription can not create new subscription with invalid plan code' do
+    post(:create, subscription: { plan: disco_app_plans(:premium), plan_code: 'BANANA' })
+    assert_redirected_to DiscoApp::Engine.routes.url_helpers.new_subscription_path
+    assert_equal @current_subscription, @shop.current_subscription
+  end
+
+  test 'logged-in, installed user with current subscription can create new subscription with valid plan code' do
+    post(:create, subscription: { plan: disco_app_plans(:premium), plan_code: 'PODCAST' })
+    assert_redirected_to Rails.application.routes.url_helpers.root_path
+    assert_equal disco_app_plans(:premium), @shop.current_plan
+    assert_equal 8999, @shop.current_subscription.amount
+  end
+
 end
