@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+No unreleased changes.
+
+## 0.8.8 - 2016-04-01
 ### Added
 - New subscriptions and charges framework.
 
