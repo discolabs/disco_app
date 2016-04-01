@@ -1,9 +1,13 @@
 import React from 'react';
 
-const Card = (props) => {
+const Card = ({ children }) => {
   return (
-    <div className="next-card">{props.children}</div>
+    <div className="next-card">{children}</div>
   );
-}
+};
+
+Card.PropTypes = {
+  children: React.PropTypes.node
+};
 
 export default Card;
