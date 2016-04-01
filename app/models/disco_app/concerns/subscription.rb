@@ -19,7 +19,7 @@ module DiscoApp::Concerns::Subscription
 
   # Only require an active charge if the amount to be charged is > 0.
   def requires_active_charge?
-    plan.amount > 0
+    amount > 0
   end
 
   # Convenience method to check if this subscription has an active charge.

@@ -3,7 +3,7 @@ module DiscoApp::Concerns::PlanCode
 
   included do
 
-    belongs_to :disco_app_plan
+    belongs_to :plan
 
     enum status: [:available, :unavailable]
 
