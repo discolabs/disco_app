@@ -1,16 +1,30 @@
 import React from 'react';
+import CardSectionTitle from './title';
 
 const CardSection = ({ title, children }) => {
+
+  const showTitle = () => {
+    if (title) {
+      return <CardSectionTitle title={title}/>;
+    } else {
+      return null;
+    }
+  };
+
   return (
     <div className="next-card__section">
-      <h3 className="next-heading">{title}</h3>
+
+      {showTitle()}
+
       {children}
+
     </div>
   );
-}
+};
 
 CardSection.propTypes = {
-  title: React.PropTypes.string
+  title: React.PropTypes.string,
+  children: React.PropTypes.node
 };
 
 export default CardSection;

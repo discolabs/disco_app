@@ -1,20 +1,36 @@
 import React from 'react';
 import classNames from 'classnames';
 
-const InputText = ({ label, name, placeholder, helpMessage, error, disabled, onChange }) => {
+const InputText = ({
+  defaultValue,
+  disabled,
+  error,
+  helpMessage,
+  label,
+  name,
+  onChange,
+  placeholder
+}) => {
 
   const wrapperClasses = classNames({
     'next-input-wrapper': true,
     'next-input-wrapper--is-error': error
   });
 
+  const handleChange = (e) => {
+    onChange(e.target.value);
+  };
+
   return (
     <div className={wrapperClasses}>
 
-      <label className="next-label">{label}</label>
+      <label className="next-label" htmlFor={name}>{label}</label>
       <input
         className="next-input"
         disabled={disabled}
+        defaultValue={defaultValue}
+        name={name}
+        onChange={handleChange}
         placeholder={placeholder}
         type="text"/>
 
@@ -26,6 +42,7 @@ const InputText = ({ label, name, placeholder, helpMessage, error, disabled, onC
 InputText.propTypes = {
   label: React.PropTypes.string,
   name: React.PropTypes.string,
+  onChange: React.PropTypes.func,
   placeholder: React.PropTypes.string,
   helpMessage: React.PropTypes.string,
   error: React.PropTypes.bool,
