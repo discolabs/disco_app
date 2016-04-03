@@ -8,6 +8,7 @@ import InputText from 'components/input-text';
 import InputTextarea from 'components/input-textarea';
 import InputConnectedDropdown from 'components/input-connected-dropdown';
 import UILayout from 'components/ui-layout';
+import UILayoutItem from 'components/ui-layout-item';
 import UILayoutSections from 'components/ui-layout-sections';
 import UILayoutSection from 'components/ui-layout-section';
 
@@ -18,7 +19,7 @@ const Forms = (props) => {
     <UILayout>
       <UILayoutSections>
         <UILayoutSection>
-          <div className="ui-layout__item">
+          <UILayoutItem>
 
             <Card>
 
@@ -112,7 +113,7 @@ const Forms = (props) => {
 
             </Card>
 
-          </div>
+          </UILayoutItem>
         </UILayoutSection>
       </UILayoutSections>
     </UILayout>
