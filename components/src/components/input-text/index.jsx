@@ -40,9 +40,9 @@ const InputText = ({
 }
 
 InputText.propTypes = {
-  label: React.PropTypes.string,
-  name: React.PropTypes.string,
-  onChange: React.PropTypes.func,
+  label: React.PropTypes.string.isRequired,
+  name: React.PropTypes.string.isRequired,
+  onChange: React.PropTypes.func.isRequired,
   placeholder: React.PropTypes.string,
   helpMessage: React.PropTypes.string,
   error: React.PropTypes.bool,
