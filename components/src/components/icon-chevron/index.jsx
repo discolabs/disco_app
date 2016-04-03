@@ -1,16 +1,16 @@
 import React from 'react';
 import classNames from 'classnames';
 
-const IconChevron = ({ direction, disabled }) => {
+const IconChevron = ({ size, direction, disabled }) => {
 
   const directionClass = direction === 'previous' ? true : false;
 
   const iconClasses = classNames({
     "next-icon": true,
-    "next-icon--12": true,
     "next-icon--blue": disabled === false,
     "next-icon--sky-darker": disabled,
-    "next-icon--rotate-180": directionClass
+    "next-icon--rotate-180": directionClass,
+    ['next-icon--' + size]: true
   });
 
   return (
@@ -30,11 +30,13 @@ const IconChevron = ({ direction, disabled }) => {
 
 IconChevron.propTypes = {
   direction: React.PropTypes.oneOf(['next', 'previous']).isRequired,
-  disabled: React.PropTypes.bool
+  disabled: React.PropTypes.bool,
+  size: React.PropTypes.number
 };
 
 IconChevron.defaultProps = {
-  disabled: false
+  disabled: false,
+  size: 10
 };
 
 export default IconChevron;

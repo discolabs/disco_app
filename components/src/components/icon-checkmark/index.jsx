@@ -1,9 +1,16 @@
 import React from 'react';
+import classNames from 'classnames';
 
-const IconCheckmark = (props) => {
+const IconCheckmark = ({ size }) => {
+  const svgClasses = classNames({
+    'next-icon': true,
+    'next-icon--blue': true,
+    'checkmark': true,
+    ['next-icon--' + size]: true
+  });
   return (
     <svg
-      className="next-icon next-icon--10 next-icon--blue checkmark"
+      className={svgClasses}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       enableBackground="new 0 0 24 24">
@@ -13,6 +20,14 @@ const IconCheckmark = (props) => {
 
     </svg>
   );
+};
+
+IconCheckmark.propTypes = {
+  size: React.PropTypes.number
+};
+
+IconCheckmark.defaultProps = {
+  size: 10
 };
 
 export default IconCheckmark;
