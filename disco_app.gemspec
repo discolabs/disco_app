@@ -30,6 +30,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'activerecord-session_store', '~> 0.1.2'
   s.add_dependency 'omniauth-shopify-oauth2', '1.1.11'
   s.add_dependency 'jsonapi-resources', '~> 0.7.0'
+  s.add_dependency 'react-rails', '~> 1.6.0'
 
   s.add_development_dependency 'sqlite3', '~> 1.3.11'
   s.add_development_dependency 'dotenv-rails', '~> 2.0.2'

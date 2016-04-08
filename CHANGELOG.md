@@ -2,7 +2,8 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
-No unreleased changes.
+### Changed
+- `react-rails` is now a core part of `disco_app`
 
 ## 0.8.9 - 2016-04-25
 ### Added
