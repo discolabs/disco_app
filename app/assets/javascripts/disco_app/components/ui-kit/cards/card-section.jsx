@@ -1,4 +1,10 @@
-const CardSection = ({ title, children }) => {
+const CardSection = ({ title, children, wrappable }) => {
+
+  const className = classNames({
+    'next-card__section': true,
+    'wrappable': wrappable,
+    'wrappable--half-spacing': wrappable
+  });
 
   const showTitle = () => {
     if (title) {
@@ -9,12 +15,9 @@ const CardSection = ({ title, children }) => {
   };
 
   return (
-    <div className="next-card__section">
-
+    <div className={className}>
       {showTitle()}
-
       {children}
-
     </div>
   );
 };
