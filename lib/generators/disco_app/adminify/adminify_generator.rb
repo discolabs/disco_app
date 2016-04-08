@@ -4,11 +4,6 @@ module DiscoApp
 
       source_root File.expand_path('../templates', __FILE__)
 
-      # Run disco_app:reactfy since the admin section needs react
-      def reactify_install
-        generate 'disco_app:reactify'
-      end
-
       def configure_gems
         gem 'active_link_to', '~> 1.0.2'
       end

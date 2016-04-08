@@ -502,14 +502,6 @@ the changes they make to your app after running them to tidy up their changes.
 
 A list of available optional generators follows.
 
-### Reactify
-```
-$ bundle exec rails generate disco_app:reactify
-```
-
-Adds the `react-rails` gem and installs and configures React.js for use with
-the Rails application. Adds a line to `application.js` which imports a library
-of React components provided by the engine.
 
 ### Adminify
 ```

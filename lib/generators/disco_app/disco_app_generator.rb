@@ -36,6 +36,7 @@ class DiscoAppGenerator < Rails::Generators::Base
     gem 'rails-bigint-pk', '~> 1.2.0'
     gem 'acts_as_singleton', '~> 0.0.8'
     gem 'pg', '~> 0.18.3'
+    gem 'react-rails', '~> 1.6.0'
 
     # Add gems for development and testing only.
     gem_group :development, :test do
@@ -93,6 +94,12 @@ class DiscoAppGenerator < Rails::Generators::Base
     application "routes.default_url_options[:host] = ENV['DEFAULT_HOST']\n"
     application "# Set the default host for absolute URL routing purposes"
 
+    # Configure React in development and production.
+    application "config.react.variant = :development", env: :development
+    application "# Use development variant of React in development.", env: :development
+    application "config.react.variant = :production", env: :production
+    application "# Use production variant of React in production.", env: :production
+
     # Copy over the default puma configuration.
     copy_file 'config/puma.rb', 'config/puma.rb'
   end
@@ -107,6 +114,7 @@ class DiscoAppGenerator < Rails::Generators::Base
     generate 'shopify_app:install'
     generate 'shopify_app:home_controller'
     generate 'bigint_pk:install'
+    generate 'react:install'
   end
 
   # Copy template files to the appropriate location. In some cases, we'll be
@@ -139,6 +147,11 @@ class DiscoAppGenerator < Rails::Generators::Base
     inject_into_file 'test/test_helper.rb', "require 'disco_app/test_help'\n", { after: "require 'rails/test_help'\n" }
   end
 
+  # Include DiscoApp React components in the application's components.js
+  def add_react_components_to_manifest
+    inject_into_file components, "//= require disco_app/components\n", { before: "//= require_tree ./components\n" }
+  end
+
   # Copy engine migrations over.
   def install_migrations
     rake 'disco_app:install:migrations'
@@ -159,5 +172,14 @@ class DiscoAppGenerator < Rails::Generators::Base
     copy_file 'root/.ruby-version', '.ruby-version'
     prepend_to_file 'Gemfile', "ruby '2.3.0'\n"
   end
+
+  private
+
+    # This method of finding the component.js manifest taken from the
+    # install generator in react-rails.
+    # See https://github.com/reactjs/react-rails/blob/3f0af13fa755d6e95969c17728d0354c234f3a37/lib/generators/react/install_generator.rb#L53-L55
+    def manifest
+      Pathname.new(destination_root).join('app/assets/javascripts', 'components.js')
+    end
 
 end
