@@ -1,0 +1,94 @@
+//
+// ui-empty-state.scss
+// Styles for empty states not provided by the
+// Channel SDK UI Kit.
+// --------------------------------------------------
+
+.ui-empty-state {
+  text-align: center;
+
+  .next-heading {
+    font-weight: 300;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.ui-empty-state__section {
+  padding: 60px 0;
+}
+
+.ui-empty-state__subsection {
+  @include flexbox();
+  @include flex-direction(column);
+  @include align-items(center);
+
+  max-width: 1000px;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 0 30px;
+
+  & > *+* {
+    margin-bottom: 20px;
+  }
+}
+
+.ui-empty-state__items {
+  @include flexbox();
+  @include flex-wrap(wrap);
+  @include justify-content(center);
+
+  margin-top: -30px;
+  margin-left: -30px;
+  max-width: calc(100% + 30px);
+  width: calc(100% + 30px);
+}
+
+.ui-empty-state__item {
+  @include flex(1 1 263.33333px);
+  margin-top: 30px;
+  margin-left: 30px;
+
+  &:only-of-type {
+    @include flex(0 1 454px);
+  }
+}
+
+.ui-empty-state__subitems {
+  @include flexbox();
+  @include flex-wrap(wrap);
+
+  margin-top: -20px;
+  margin-left: -20px;
+  max-width: calc(100% + 20px);
+  width: calc(100% + 20px);
+}
+
+.ui-empty-state__subitem {
+  margin-top: 20px;
+  margin-left: 20px;
+  position: relative;
+
+  &:first-child {
+    @include flex(1 1 150px);
+    height: 90px;
+    min-width: 0;
+  }
+
+  &:last-child {
+    @include flex(1 1 60%);
+  }
+
+
+  img {
+    margin: 0 auto;
+    max-height: 100%;
+    position: absolute;
+    bottom: 0;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    left: 50%;
+  }
+}
