@@ -1,4 +1,4 @@
-const InputSelect = ({ label, name, options, value, onChange }) => {
+const InputSelectOld = ({ label, name, options, value, onChange }) => {
 
   const id = name;
 

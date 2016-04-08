@@ -37,6 +37,7 @@ class DiscoAppGenerator < Rails::Generators::Base
     gem 'acts_as_singleton', '~> 0.0.8'
     gem 'pg', '~> 0.18.3'
     gem 'react-rails', '~> 1.6.0'
+    gem 'classnames-rails', '~> 2.1.5'
 
     # Add gems for development and testing only.
     gem_group :development, :test do
