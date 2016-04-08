@@ -53,6 +53,13 @@ class DiscoAppGenerator < Rails::Generators::Base
     end
   end
 
+  # copy template for pg configuration
+  def update_database_config
+    template 'config/database.yml.tt'
+  end
+
+
+
   # Run bundle install to add our new gems before running tasks.
   def bundle_install
     Bundler.with_clean_env do
@@ -158,6 +165,11 @@ class DiscoAppGenerator < Rails::Generators::Base
     rake 'disco_app:install:migrations'
   end
 
+  # Create PG database
+  def create_database
+    rake 'db:create'
+  end
+
   # Run migrations.
   def migrate
     rake 'db:migrate'
@@ -179,7 +191,7 @@ class DiscoAppGenerator < Rails::Generators::Base
     # This method of finding the component.js manifest taken from the
     # install generator in react-rails.
     # See https://github.com/reactjs/react-rails/blob/3f0af13fa755d6e95969c17728d0354c234f3a37/lib/generators/react/install_generator.rb#L53-L55
-    def manifest
+    def components
       Pathname.new(destination_root).join('app/assets/javascripts', 'components.js')
     end
 
