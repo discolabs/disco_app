@@ -244,6 +244,10 @@ If you're building an app that doesn't need to worry about charging store
 owners, you should ensure it creates a Plan with an `amount` value of zero, and
 that all stores are subscribed to that plan during `DiscoApp::AppInstalledJob`.
 
+The default set of plans for your app should be placed into the `db/seeds.rb`
+file. Make sure you run `bundle exec rake db:seed` after resetting your database
+to ensure the plans are correctly set up.
+
 Whenever a store's subscription level is changed,
 `DiscoApp::SubscriptionChangedJob` is queued.
 

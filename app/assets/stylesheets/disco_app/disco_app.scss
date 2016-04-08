@@ -1,4 +1,11 @@
 //
 // Styles for Disco applications.
 // --------------------------------------------------
+
+// Mixins and utilities.
+@import 'mixins/flexbox';
+
+// UI Kit - Core and our addons.
 @import 'ui-kit/ui-kit';
+@import 'ui-kit/ui-layout';
+@import 'ui-kit/ui-empty-state';
