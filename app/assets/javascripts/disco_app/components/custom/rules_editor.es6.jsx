@@ -176,25 +176,30 @@ class RulesEditor extends React.Component {
         onColumnChange={this.onRuleColumnChange.bind(this, i)}
         onRelationChange={this.onRuleRelationChange.bind(this, i)}
         onConditionChange={this.onRuleConditionChange.bind(this, i)}
+        ruleCount={rules.length}
       />
     });
 
     const rulesJSON = JSON.stringify(this.state.rules);
 
     return(
-      <div>
-        {ruleElements}
-        <button type="button" className="btn btn-default" onClick={this.onAddRule.bind(this)}>
-          Add condition
+      <CardSection>
+        <div className="next-grid next-grid--no-outside-padding">
+          <div style={{ width: '100%'}}>
+            {ruleElements}
+          </div>
+        </div>
+        <button type="button" className="btn" onClick={this.onAddRule.bind(this)}>
+          Add another condition
         </button>
         <input type="hidden" name={name} value={rulesJSON} />
-      </div>
+      </CardSection>
     );
   }
 
 }
 
-const RulesEditorRule = ({ rule, columns, onRemove, onColumnChange, onRelationChange, onConditionChange }) => {
+const RulesEditorRule = ({ rule, columns, onRemove, onColumnChange, onRelationChange, onConditionChange, ruleCount }) => {
   const { column, relation, condition } = rule;
 
   const currentColumn = columns[column];
@@ -206,20 +211,36 @@ const RulesEditorRule = ({ rule, columns, onRemove, onColumnChange, onRelationCh
       conditionEditor = <RulesEditorConditionInputText condition={condition} onChange={onConditionChange} />;
   }
 
+  let deleteIconCell = null;
+  if(ruleCount > 1) {
+    deleteIconCell = (
+      <div className="sl">
+        <button type="button" className="btn btn--icon" onClick={onRemove}>
+          <i className="ico ico-14-svg ico-delete" />
+        </button>
+      </div>
+    );
+  }
+
   return (
-    <div className="row">
-      <div className="col-md-6">
-        <RulesEditorColumnSelect currentColumnName={column} columns={columns} onChange={onColumnChange} />
+    <div>
+      <div className="next-grid next-grid--no-padding next-grid--compact">
+        <div className="next-grid__cell">
+          <div className="next-grid next-grid--compact next-grid--no-outside-padding">
+            <div className="next-grid__cell">
+              <RulesEditorColumnSelect currentColumnName={column} columns={columns} onChange={onColumnChange} />
+            </div>
+            <div className="next-grid__cell">
+              <RulesEditorRelationSelect currentRelationName={relation} relations={currentColumn.relations} onChange={onRelationChange} />
+            </div>
+            <div className="next-grid__cell">
+              {conditionEditor}
+            </div>
+          </div>
+        </div>
+        {deleteIconCell}
       </div>
-      <div className="col-md-6">
-        <RulesEditorRelationSelect currentRelationName={relation} relations={currentColumn.relations} onChange={onRelationChange} />
-      </div>
-      <div className="col-md-6">
-        {conditionEditor}
-      </div>
-      <div className="col-md-6">
-        <button type="button" class="btn btn-link btn-sm" onClick={onRemove}>Remove</button>
-      </div>
+      <hr className="next-card__section__separator" />
     </div>
   );
 
@@ -230,7 +251,7 @@ const RulesEditorColumnSelect = ({ currentColumnName, columns, onChange }) => {
     return { label: columns[columnName].label, value: columnName }
   });
 
-  return <InputSelect options={options} value={currentColumnName} onChange={onChange} />;
+  return <InputSelect options={options} value={currentColumnName} onChange={onChange} label="Field" labelHidden={true} />;
 };
 
 const RulesEditorRelationSelect = ({ currentRelationName, relations, onChange }) => {
@@ -238,7 +259,7 @@ const RulesEditorRelationSelect = ({ currentRelationName, relations, onChange })
     return { label: relations[relationName].label, value: relationName }
   });
 
-  return <InputSelect options={options} value={currentRelationName} onChange={onChange} />;
+  return <InputSelect options={options} value={currentRelationName} onChange={onChange} label="Relation" labelHidden={true} />;
 };
 
 const RulesEditorConditionInputText = ({ condition, onChange }) => {
@@ -248,7 +269,7 @@ const RulesEditorConditionInputText = ({ condition, onChange }) => {
   };
 
   return (
-    <input type="text" value={condition} onChange={handleChange} />
+    <InputText value={condition} onChange={handleChange} label="Value" labelHidden={true} />
   );
 
 };
