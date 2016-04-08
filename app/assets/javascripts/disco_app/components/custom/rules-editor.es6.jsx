@@ -32,6 +32,12 @@ class RulesEditor extends React.Component {
     }
   }
 
+  componentDidMount() {
+    if(this.state.rules.length === 0) {
+      this.onAddRule();
+    }
+  }
+
   /**
    * Add a new rule, with an immutable state change.
    */
