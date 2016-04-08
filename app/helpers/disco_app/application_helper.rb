@@ -25,4 +25,11 @@ module DiscoApp::ApplicationHelper
     link_to(name, path, options)
   end
 
+  # Render a React component with inner HTML content.
+  # Thanks to https://github.com/reactjs/react-rails/pull/166#issuecomment-86178980
+  def react_component_with_content(name, args = {}, options = {}, &block)
+    args[:__html] = capture(&block) if block.present?
+    react_component(name, args, options)
+  end
+
 end

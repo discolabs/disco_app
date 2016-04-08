@@ -1,0 +1,25 @@
+//
+// ui-footer-help.scss
+// Styles for footer help not provided by the Channel
+// SDK UI Kit.
+// --------------------------------------------------
+
+.ui-footer-help {
+  margin: 40px 0;
+  text-align: center;
+  width: 100%;
+}
+
+.ui-footer-help__content {
+  @include inline-flex();
+  @include align-items(center);
+
+  border: 1px solid #d3dbe2;
+  border-radius: 3px;
+  color: #798c9c;
+
+  font-size: 13px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: left;
+}
