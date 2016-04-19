@@ -33,7 +33,7 @@ class RulesEditor extends React.Component {
   }
 
   componentDidMount() {
-    if(this.state.rules.length === 0) {
+    if(this.state.rules.length === 0 && this.props.blankOk === false) {
       this.onAddRule();
     }
   }
@@ -183,6 +183,7 @@ class RulesEditor extends React.Component {
         onRelationChange={this.onRuleRelationChange.bind(this, i)}
         onConditionChange={this.onRuleConditionChange.bind(this, i)}
         ruleCount={rules.length}
+        blankOk = {this.props.blankOk}
       />
     });
 
@@ -205,7 +206,7 @@ class RulesEditor extends React.Component {
 
 }
 
-const RulesEditorRule = ({ rule, columns, onRemove, onColumnChange, onRelationChange, onConditionChange, ruleCount }) => {
+const RulesEditorRule = ({ rule, columns, onRemove, onColumnChange, onRelationChange, onConditionChange, ruleCount, blankOk }) => {
   const { column, relation, condition } = rule;
 
   const currentColumn = columns[column];
@@ -218,7 +219,7 @@ const RulesEditorRule = ({ rule, columns, onRemove, onColumnChange, onRelationCh
   }
 
   let deleteIconCell = null;
-  if(ruleCount > 1) {
+  if(ruleCount > 1 || blankOk === true) {
     deleteIconCell = (
       <div className="sl">
         <button type="button" className="btn btn--icon" onClick={onRemove}>
