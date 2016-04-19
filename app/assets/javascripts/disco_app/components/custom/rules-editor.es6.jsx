@@ -271,7 +271,7 @@ const RulesEditorRelationSelect = ({ currentRelationName, relations, onChange })
 const RulesEditorConditionInputText = ({ condition, onChange }) => {
 
   const handleChange = (e) => {
-    onChange && onChange(e.target.value);
+    onChange && onChange(e);
   };
 
   return (
