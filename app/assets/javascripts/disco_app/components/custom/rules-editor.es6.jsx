@@ -195,9 +195,9 @@ class RulesEditor extends React.Component {
             {ruleElements}
           </div>
         </div>
-        <button type="button" className="btn" onClick={this.onAddRule.bind(this)}>
+        <Button onClick={this.onAddRule.bind(this)}>
           Add another condition
-        </button>
+        </Button>
         <input type="hidden" name={name} value={rulesJSON} />
       </CardSection>
     );

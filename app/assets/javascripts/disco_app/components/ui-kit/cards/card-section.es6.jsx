@@ -1,9 +1,11 @@
-const CardSection = ({ title, children, wrappable }) => {
+const CardSection = ({ title, children, wrappable, borderless }) => {
 
   const className = classNames({
     'next-card__section': true,
     'wrappable': wrappable,
-    'wrappable--half-spacing': wrappable
+    'wrappable--half-spacing': wrappable,
+    'next-card__section--no-border': borderless,
+    'next-card__section--no-top-spacing': borderless
   });
 
   const showTitle = () => {

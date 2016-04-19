@@ -17,7 +17,7 @@ const InputSelect = ({ id, label, labelHidden, name, options, value, onChange })
     <div className="next-input-wrapper">
       <label className={labelClassName} htmlFor={id}>{label}</label>
       <div className="next-select__wrapper next-input--has-content">
-        <select id={id} className="next-select rule-field">
+        <select className="next-select rule-field" id={id} name={name} value={value} onChange={handleChange}>
           {optionElements}
         </select>
         <NextIcon name="next-chevron-down" size={12} />

@@ -1,4 +1,4 @@
-const InputText = ({ defaultValue, disabled, error, helpMessage, label, labelHidden, name, onChange, placeholder }) => {
+const InputText = ({ name, value, disabled, error, helpMessage, label, labelHidden, onChange, placeholder }) => {
 
   const wrapperClassName = classNames({
     'next-input-wrapper': true,
@@ -26,7 +26,7 @@ const InputText = ({ defaultValue, disabled, error, helpMessage, label, labelHid
         id={name}
         className="next-input"
         disabled={disabled}
-        defaultValue={defaultValue}
+        value={value}
         name={name}
         onChange={handleChange}
         placeholder={placeholder}
