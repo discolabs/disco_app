@@ -66,6 +66,10 @@ class DiscoAppGenerator < Rails::Generators::Base
     # Uncomment to ensure config.force_ssl = true in production.
     uncomment_lines 'config/environments/production.rb', /force_ssl/
 
+    # Set server side rendereing for components.js
+    application "config.react.server_renderer_options = {\nfiles: ['components.js'], # files to load for prerendering\n}"
+    application "# Enable server side react rendering"
+
     # Set defaults for various charge attributes.
     application "config.x.shopify_charges_default_trial_days = 14\n"
     application "config.x.shopify_charges_default_price = 10.00"
@@ -150,6 +154,7 @@ class DiscoAppGenerator < Rails::Generators::Base
 
   # Include DiscoApp React components in the application's components.js
   def add_react_components_to_manifest
+    inject_into_file components, "//= require react-server\n", { before: "//= require_tree ./components\n" }
     inject_into_file components, "//= require disco_app/components\n", { before: "//= require_tree ./components\n" }
   end
 
