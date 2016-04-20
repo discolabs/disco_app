@@ -179,7 +179,7 @@ class DiscoAppGenerator < Rails::Generators::Base
     # This method of finding the component.js manifest taken from the
     # install generator in react-rails.
     # See https://github.com/reactjs/react-rails/blob/3f0af13fa755d6e95969c17728d0354c234f3a37/lib/generators/react/install_generator.rb#L53-L55
-    def manifest
+    def components
       Pathname.new(destination_root).join('app/assets/javascripts', 'components.js')
     end
 
