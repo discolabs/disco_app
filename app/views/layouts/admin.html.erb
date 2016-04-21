@@ -12,8 +12,12 @@
   <%= render 'layouts/admin/navbar' %>
 
   <div class="container-fluid">
-    <div class="page-header">
-      <h1><%= yield(:title) %></h1>
+    <div class="next-grid">
+      <div class="next-grid__cell">
+        <div class="next-card">
+            <h1><%= yield(:title) %></h1>
+        </div>
+      </div>
     </div>
 
     <% flash.each do |message_type, message| %>

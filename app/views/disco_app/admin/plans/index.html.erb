@@ -1,32 +1,41 @@
 <% provide(:title, 'Plans') %>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Status</th>
-      <th>Plan Type</th>
-      <th>Trial Period</th>
-      <th>Amount</th>
-      <th>Currency</th>
-      <th>Interval</th>
-      <th>Interval Count</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @plans.each do |plan| %>
-    <tr>
-      <td><%= link_to(plan.name, edit_admin_plan_path(plan)) %></td>
-      <td><%= plan.status %></td>
-      <td><%= plan.plan_type %></td>
-      <td><%= plan.trial_period_days %></td>
-      <td><%= plan.amount %></td>
-      <td><%= plan.currency %></td>
-      <td><%= plan.interval %></td>
-      <td><%= plan.interval_count %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="next-grid">
+  <div class="next-grid__cell">
+    <div class="next-card">
+      <% unless @plans.empty? %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Plan Type</th>
+            <th>Trial Period</th>
+            <th>Amount</th>
+            <th>Currency</th>
+            <th>Interval</th>
+            <th>Interval Count</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @plans.each do |plan| %>
+          <tr>
+            <td><%= link_to(plan.name, edit_admin_plan_path(plan)) %></td>
+            <td><%= plan.status %></td>
+            <td><%= plan.plan_type %></td>
+            <td><%= plan.trial_period_days %></td>
+            <td><%= plan.amount %></td>
+            <td><%= plan.currency %></td>
+            <td><%= plan.interval %></td>
+            <td><%= plan.interval_count %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <% end %>
+    </div>
+    <hr/>
+    <%= link_to 'Create new plan', new_admin_plan_path, { class: 'btn btn-primary' } %>
+  </div>
+</div>
 
-<%= link_to 'Create new plan', new_admin_plan_path %>
