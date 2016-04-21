@@ -153,12 +153,6 @@ class DiscoAppGenerator < Rails::Generators::Base
     inject_into_file 'test/test_helper.rb', "require 'disco_app/test_help'\n", { after: "require 'rails/test_help'\n" }
   end
 
-  # Include DiscoApp React components in the application's components.js
-  def add_react_components_to_manifest
-    #inject_into_file components, "//= require react-server\n", { before: "//= require_tree ./components\n" }
-    #inject_into_file components, "//= require disco_app/components\n", { before: "//= require_tree ./components\n" }
-  end
-
   # Copy engine migrations over.
   def install_migrations
     rake 'disco_app:install:migrations'
