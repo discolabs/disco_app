@@ -137,6 +137,7 @@ class DiscoAppGenerator < Rails::Generators::Base
 
     # Copy assets
     copy_file 'assets/javascripts/application.js', 'app/assets/javascripts/application.js'
+    copy_file 'assets/javascripts/components.js', 'app/assets/javascripts/components.js'
     copy_file 'assets/stylesheets/application.scss', 'app/assets/stylesheets/application.scss'
 
     # Remove application.css
@@ -154,8 +155,8 @@ class DiscoAppGenerator < Rails::Generators::Base
 
   # Include DiscoApp React components in the application's components.js
   def add_react_components_to_manifest
-    inject_into_file components, "//= require react-server\n", { before: "//= require_tree ./components\n" }
-    inject_into_file components, "//= require disco_app/components\n", { before: "//= require_tree ./components\n" }
+    #inject_into_file components, "//= require react-server\n", { before: "//= require_tree ./components\n" }
+    #inject_into_file components, "//= require disco_app/components\n", { before: "//= require_tree ./components\n" }
   end
 
   # Copy engine migrations over.
