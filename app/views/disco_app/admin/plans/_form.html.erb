@@ -1,27 +1,75 @@
-<%= f.label(:name, 'Name') %>
-<%= f.text_field(:name) %>
+<section class="section">
+  <div class="layout-content">
+    <section class="layout-content__main">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="next-card">
 
-<%= f.label(:status, 'Status') %>
-<%= f.select(:status, DiscoApp::Plan.statuses.map { |s| [s.first.humanize, s.first] }) %>
+              <header class="next-card__header">
+                <h3>Plan</h3>
+              </header>
 
-<%= f.label(:plan_type, 'Plan Type') %>
-<%= f.select(:plan_type, DiscoApp::Plan.plan_types.map { |s| [s.first.humanize, s.first] }) %>
+              <section class="next-card__section">
+                <div class="form-group">
+                  <%= f.label(:name, 'Name') %>
+                  <%= f.text_field(:name) %>
+                </div>
 
-<%= f.label(:trial_period_days, 'Trial Period Days') %>
-<%= f.number_field(:trial_period_days) %>
+                <div class="form-group">
+                <%= f.label(:status, 'Status') %>
+                <%= f.select(:status, DiscoApp::Plan.statuses.map { |s| [s.first.humanize, s.first] }) %>
+                </div>
 
-<%= f.label(:amount, 'Amount') %>
-<%= f.number_field(:amount) %>
+                <div class="form-group">
+                <%= f.label(:plan_type, 'Plan Type') %>
+                <%= f.select(:plan_type, DiscoApp::Plan.plan_types.map { |s| [s.first.humanize, s.first] }) %>
+                </div>
 
-<%= f.fields_for :plan_codes do |plan_code| %>
-  <%= plan_code.label(:code, 'Code') %>
-  <%= plan_code.text_field(:code) %>
+                <div class="form-group">
+                <%= f.label(:trial_period_days, 'Trial Period Days') %>
+                <%= f.number_field(:trial_period_days) %>
+                </div>
 
-  <%= plan_code.label(:trial_period_days, 'Trial Period Days') %>
-  <%= plan_code.number_field(:trial_period_days) %>
+                <div class="form-group">
+                <%= f.label(:amount, 'Amount') %>
+                <%= f.number_field(:amount) %>
+                </div>
+              </section>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="next-card">
 
-  <%= plan_code.label(:amount, 'Amount') %>
-  <%= plan_code.number_field(:amount) %>
-<% end %>
+              <header class="next-card__header">
+                <h3>Plan Codes</h3>
+              </header>
 
-<%= f.submit %>
+              <section class="next-card__section">
+                <%= f.fields_for :plan_codes do |plan_code| %>
+                  <div class="row">
+                    <div class="col-md-24">
+                      <%= plan_code.label(:code, 'Code') %>
+                      <%= plan_code.text_field(:code) %>
+
+                      <%= plan_code.label(:trial_period_days, 'Trial Period Days') %>
+                      <%= plan_code.number_field(:trial_period_days) %>
+
+                      <%= plan_code.label(:amount, 'Amount') %>
+                      <%= plan_code.number_field(:amount) %>
+                      <hr>
+                    </div>
+                  </div>
+                <% end %>
+              </section>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-md-12">
+          <%= f.submit 'Save', { class: 'btn btn-primary' } %>
+        </div>
+      </div>
+    </section>
+  </div>
+</section>
