@@ -4,12 +4,7 @@ var FilterableShopList = React.createClass({
         return {
             filterTabs: [
                 { label: 'All Shops', filter: {} },
-                { label: 'Never Installed', filter: { 'filter[status]': 'never_installed' } },
-                { label: 'Awaiting Install', filter: { 'filter[status]': 'awaiting_install' } },
-                { label: 'Installing', filter: { 'filter[status]': 'installing' } },
                 { label: 'Installed', filter: { 'filter[status]': 'installed' } },
-                { label: 'Awaiting Uninstall', filter: { 'filter[status]': 'awaiting_uninstall' } },
-                { label: 'Uninstalling', filter: { 'filter[status]': 'uninstalling' } },
                 { label: 'Uninstalled', filter: { 'filter[status]': 'uninstalled' } }
             ],
             availableFilters: {

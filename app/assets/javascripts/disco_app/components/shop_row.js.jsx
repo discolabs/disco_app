@@ -7,8 +7,8 @@ var ShopRow = (props) => {
         currency = shop.attributes['currency'],
         domainName = shop.attributes['domain'],
         planName = shop.attributes['plan_display_name'],
-        createdDate = shop.attributes['created_at'],
-        installedDuration = shop.attributes['installed_duration']
+        prettyCreatedDate = shop.attributes['pretty_created_at'],
+        installedDuration = shop.attributes['installed_duration'];
 
     return (
         <tr>
@@ -20,7 +20,7 @@ var ShopRow = (props) => {
             <td>{shop.attributes.currency}</td>
             <td>{shop.attributes.domain}</td>
             <td>{planName}</td>
-            <td>{createdDate}</td>
+            <td>{prettyCreatedDate}</td>
             <td>{installedDuration}</td>
         </tr>
     )

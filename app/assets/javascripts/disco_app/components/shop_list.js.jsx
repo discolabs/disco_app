@@ -2,7 +2,7 @@ var ShopList = React.createClass({
 
     getDefaultProps: function() {
         return {
-            pageSize: 50
+            pageSize: 20
         }
     },
 
@@ -63,10 +63,14 @@ var ShopList = React.createClass({
     },
 
     render: function() {
-        var shopRows = this.state.shops.map(function(shop) {
+        var shopRows = this.state.shops.map(function(shop, index) {
+            if ((index >= ((this.state.page - 1) * this.props.pageSize)) && (index <  this.state.page * this.props.pageSize)) {
             return (
                 <ShopRow shop={shop} editShopUrl={this.props.editShopUrl} key={shop.id} />
             )
+            } else {
+              return null;
+            }
         }.bind(this));
 
         return (
@@ -122,7 +126,7 @@ ShopList.Paginator = React.createClass({
         return (
             <div className="btn-group" role="group">
                 <ShopList.PaginatorButton label="&lsaquo;" isDisabled={this.props.page < 2} onClick={this.handlePreviousClick} />
-                <ShopList.PaginatorButton label="&rsaquo;" isDisabled={this.props.items.length < this.props.pageSize} onClick={this.handleNextClick} />
+                <ShopList.PaginatorButton label="&rsaquo;" isDisabled={this.props.items.length < this.props.pageSize * this.props.page} onClick={this.handleNextClick} />
             </div>
         )
     }

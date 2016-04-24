@@ -6,8 +6,8 @@ module DiscoApp::Admin::Resources::Concerns::ShopResource
   included do
 
     attributes :shopify_domain, :status, :email, :country_name
-    attributes :currency, :domain, :plan_display_name, :created_at
-    attributes :installed_duration
+    attributes :currency, :domain, :plan_display_name, :created_at 
+    attributes :pretty_created_at, :installed_duration
 
     model_name 'DiscoApp::Shop'
 
@@ -41,6 +41,5 @@ module DiscoApp::Admin::Resources::Concerns::ShopResource
     def self.creatable_fields(context)
       []
     end
-
   end
 end
