@@ -2,7 +2,8 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
-No unreleased changes.
+### Changed
+- Minor style and function improvements to admin
 
 ## 0.8.8 - 2016-04-01
 ### Added
