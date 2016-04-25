@@ -1,5 +1,7 @@
 DiscoApp::Engine.routes.draw do
 
+  get 'ref', to: '/sessions#referral'
+
   controller :webhooks do
     post 'webhooks' => :process_webhook, as: :webhooks
   end
