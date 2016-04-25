@@ -12,14 +12,6 @@
   <%= render 'layouts/admin/navbar' %>
 
   <div class="container-fluid">
-    <div class="next-grid">
-      <div class="next-grid__cell">
-        <div class="next-card">
-            <h1><%= yield(:title) %></h1>
-        </div>
-      </div>
-    </div>
-
     <% flash.each do |message_type, message| %>
         <div class="alert alert-<%= message_type %>"><%= message %></div>
     <% end %>
