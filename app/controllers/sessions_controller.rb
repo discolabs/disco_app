@@ -1,6 +1,8 @@
 class SessionsController < ApplicationController
   include ShopifyApp::SessionsController
 
+  before_action :set_referral_cookies, only: [:new]
+
   protected
 
     # Override the authenticate method to allow skipping OAuth in development
@@ -17,6 +19,13 @@ class SessionsController < ApplicationController
         redirect_to disco_app.frame_path and return
       end
       super
+    end
+
+  private
+
+    def set_referral_cookies
+      cookies[DiscoApp::REF_COOKIE_KEY] = params[:ref]
+      cookies[DiscoApp::CODE_COOKIE_KEY] = params[:code]
     end
 
 end
