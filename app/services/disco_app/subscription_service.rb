@@ -20,7 +20,7 @@ class DiscoApp::SubscriptionService
     subscription_amount = plan_code_instance.present? ? plan_code_instance.amount : plan.amount
 
     # Get the date the subscription trial should end.
-    subscription_trial_end_at = plan.has_trial? ? (plan_code_instance.present? ? plan_code_instance.trial_period_days: plan.trial_period_days).days.from_now : nil
+    subscription_trial_period_days = plan_code_instance.present? ? plan_code_instance.trial_period_days : plan.trial_period_days
 
     # Create the new subscription.
     new_subscription = DiscoApp::Subscription.create!(
@@ -30,8 +30,9 @@ class DiscoApp::SubscriptionService
       status: DiscoApp::Subscription.statuses[plan.has_trial? ? :trial : :active],
       subscription_type: plan.plan_type,
       amount: subscription_amount,
+      trial_period_days: plan.has_trial? ? subscription_trial_period_days : nil,
       trial_start_at: plan.has_trial? ? Time.now : nil,
-      trial_end_at: plan.has_trial? ? subscription_trial_end_at : nil,
+      trial_end_at: plan.has_trial? ? subscription_trial_period_days.days.from_now : nil,
       source: source
     )
 

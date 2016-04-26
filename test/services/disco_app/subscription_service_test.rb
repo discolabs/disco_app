@@ -53,6 +53,7 @@ class DiscoApp::SubscriptionServiceTest < ActiveSupport::TestCase
     assert new_subscription.trial?
     assert_equal Time.now, new_subscription.trial_start_at
     assert_equal 60.days.from_now, new_subscription.trial_end_at
+    assert_equal 60, new_subscription.trial_period_days
     assert_equal 8999, new_subscription.amount
   end
 
