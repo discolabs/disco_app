@@ -1,6 +1,12 @@
 class SessionsController < ApplicationController
   include ShopifyApp::SessionsController
 
+  def referral
+    cookies[DiscoApp::SOURCE_COOKIE_KEY] = params[:source] if params[:source].present?
+    cookies[DiscoApp::CODE_COOKIE_KEY] = params[:code] if params[:code].present?
+    redirect_to root_path
+  end
+
   protected
 
     # Override the authenticate method to allow skipping OAuth in development

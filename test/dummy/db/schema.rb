@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160401045551) do
+ActiveRecord::Schema.define(version: 20160426033520) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,6 +115,8 @@ ActiveRecord::Schema.define(version: 20160401045551) do
     t.datetime "cancelled_at"
     t.integer  "amount",                      default: 0
     t.integer  "plan_code_id",      limit: 8
+    t.string   "source"
+    t.integer  "trial_period_days"
   end
 
   add_index "disco_app_subscriptions", ["plan_id"], name: "index_disco_app_subscriptions_on_plan_id", using: :btree

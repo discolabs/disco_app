@@ -2,8 +2,11 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+### Added
+- Source tracking, cookie-based plan code application.
+
 ### Changed
-- Minor style and function improvements to admin
+- Minor style and function improvements to admin.
 
 ## 0.8.8 - 2016-04-01
 ### Added

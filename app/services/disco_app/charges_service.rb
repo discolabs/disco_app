@@ -14,7 +14,7 @@ class DiscoApp::ChargesService
       subscription.shopify_charge_class.create(
         name: subscription.plan.name,
         price: '%.2f' % (subscription.amount.to_f / 100.0),
-        trial_days: subscription.plan.has_trial? ? subscription.plan.trial_period_days : nil,
+        trial_days: subscription.plan.has_trial? ? subscription.trial_period_days : nil,
         return_url: charge.activate_url,
         test: !DiscoApp.configuration.real_charges?
       )
