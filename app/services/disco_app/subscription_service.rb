@@ -3,9 +3,11 @@ class DiscoApp::SubscriptionService
   # Subscribe the given shop to the given plan, optionally using the given plan
   # code and optionally tracking the subscription source.
   def self.subscribe(shop, plan, plan_code = nil, source = nil)
+
     # If a plan code was provided, fetch it for the given plan.
+    plan_code_instance = nil
     if plan_code.present?
-      plan_code = DiscoApp::PlanCode.available.find_by(plan: plan, code: plan_code)
+      plan_code_instance = DiscoApp::PlanCode.available.find_by(plan: plan, code: plan_code)
     end
 
     # Cancel any existing current subscriptions.
@@ -15,16 +17,16 @@ class DiscoApp::SubscriptionService
     )
 
     # Get the amount that should be charged for the subscription.
-    subscription_amount = plan_code.present? ? plan_code.amount : plan.amount
+    subscription_amount = plan_code_instance.present? ? plan_code_instance.amount : plan.amount
 
     # Get the date the subscription trial should end.
-    subscription_trial_end_at = plan.has_trial? ? (plan_code.present? ? plan_code.trial_period_days: plan.trial_period_days).days.from_now : nil
+    subscription_trial_end_at = plan.has_trial? ? (plan_code_instance.present? ? plan_code_instance.trial_period_days: plan.trial_period_days).days.from_now : nil
 
     # Create the new subscription.
     new_subscription = DiscoApp::Subscription.create!(
       shop: shop,
       plan: plan,
-      plan_code: plan_code,
+      plan_code: plan_code_instance,
       status: DiscoApp::Subscription.statuses[plan.has_trial? ? :trial : :active],
       subscription_type: plan.plan_type,
       amount: subscription_amount,

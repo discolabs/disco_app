@@ -14,7 +14,7 @@ module DiscoApp::Concerns::AppInstalledJob
   # - Perform initial update of shop information.
   # - Subscribe to default plan, if any exists.
   #
-  def perform(shopify_domain)
+  def perform(shopify_domain, plan_code = nil, source = nil)
     DiscoApp::SynchroniseWebhooksJob.perform_now(shopify_domain)
     DiscoApp::SynchroniseCarrierServiceJob.perform_now(shopify_domain)
     DiscoApp::ShopUpdateJob.perform_now(shopify_domain)
@@ -22,7 +22,7 @@ module DiscoApp::Concerns::AppInstalledJob
     @shop.reload
 
     if default_plan.present?
-      DiscoApp::SubscriptionService.subscribe(@shop, default_plan)
+      DiscoApp::SubscriptionService.subscribe(@shop, default_plan, plan_code, source)
     end
   end
 

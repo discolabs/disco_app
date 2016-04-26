@@ -4,3 +4,10 @@ podcast:
   code: PODCAST
   trial_period_days: 60
   amount: 8999
+
+podcast_dev:
+  id: 2
+  plan_id: 1
+  code: PODCAST
+  trial_period_days: 60
+  amount: 0
