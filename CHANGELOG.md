@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+No unreleased changes.
+
+## 0.8.9 - 2016-04-25
 ### Added
 - Source tracking, cookie-based plan code application.
 
