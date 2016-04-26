@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   include ShopifyApp::SessionsController
 
   def referral
-    cookies[DiscoApp::REF_COOKIE_KEY] = params[:ref] if params[:ref].present?
+    cookies[DiscoApp::SOURCE_COOKIE_KEY] = params[:source] if params[:source].present?
     cookies[DiscoApp::CODE_COOKIE_KEY] = params[:code] if params[:code].present?
     redirect_to root_path
   end
