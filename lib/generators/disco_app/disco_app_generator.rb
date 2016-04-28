@@ -53,6 +53,11 @@ class DiscoAppGenerator < Rails::Generators::Base
     end
   end
 
+  # copy template for pg configuration
+  def update_database_config
+    template 'config/database.yml.tt'
+  end
+
   # Run bundle install to add our new gems before running tasks.
   def bundle_install
     Bundler.with_clean_env do
@@ -156,6 +161,11 @@ class DiscoAppGenerator < Rails::Generators::Base
   # Copy engine migrations over.
   def install_migrations
     rake 'disco_app:install:migrations'
+  end
+
+  # Create PG database
+  def create_database
+    rake 'db:create'
   end
 
   # Run migrations.
