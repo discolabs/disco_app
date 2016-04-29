@@ -5,6 +5,9 @@ All notable changes to this project will be documented in this file.
 ### Changed
 - `react-rails` is now a core part of `disco_app`
 
+### Removed
+- Removed the adminify generator, admin is installed by default
+
 ## 0.8.9 - 2016-04-25
 ### Added
 - Source tracking, cookie-based plan code application.

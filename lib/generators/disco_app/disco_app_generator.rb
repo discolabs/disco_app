@@ -38,6 +38,7 @@ class DiscoAppGenerator < Rails::Generators::Base
     gem 'pg', '~> 0.18.3'
     gem 'react-rails', '~> 1.6.0'
     gem 'classnames-rails', '~> 2.1.5'
+    gem 'active_link_to', '~> 1.0.2'
 
     # Add gems for development and testing only.
     gem_group :development, :test do
