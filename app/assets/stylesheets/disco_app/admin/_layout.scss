@@ -1,0 +1,40 @@
+//
+// layout.scss
+// Styles for admin layout.
+// --------------------------------------------------
+
+body {
+  line-height: 18px;
+  font-size: 13px;
+  color: #31373d;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: #ebeef0;
+}
+
+#wrapper {
+  min-height: 100%;
+  background: #ebeef0;
+}
+
+#content {
+  padding: 56px 0 0 230px;
+  width: 100%;
+  box-sizing: border-box;
+  outline: 0;
+  display: block;
+  max-width: 3000px;
+  margin: 0 auto;
+  position: relative;
+  -webkit-transition: -webkit-transform 200ms ease;
+  transition: -webkit-transform 200ms ease;
+  transition: transform 200ms ease;
+  transition: transform 200ms ease, -webkit-transform 200ms ease;
+}
