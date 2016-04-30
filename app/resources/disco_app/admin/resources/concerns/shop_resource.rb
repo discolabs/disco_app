@@ -5,9 +5,10 @@ module DiscoApp::Admin::Resources::Concerns::ShopResource
 
   included do
 
-    attributes :shopify_domain, :status, :email, :country_name
-    attributes :currency, :domain, :plan_display_name, :created_at 
-    attributes :pretty_created_at, :installed_duration
+    attributes :domain, :status, :email, :country_name
+    attributes :currency, :plan_display_name, :created_at
+    attributes :current_subscription_id, :current_subscription_display_amount, :current_subscription_display_plan
+    attributes :installed_duration
 
     model_name 'DiscoApp::Shop'
 
@@ -41,5 +42,29 @@ module DiscoApp::Admin::Resources::Concerns::ShopResource
     def self.creatable_fields(context)
       []
     end
+
+    def current_subscription_id
+      if @model.current_subscription?
+        @model.current_subscription.id
+      end
+    end
+
+    def current_subscription_display_amount
+      if @model.current_subscription?
+        @model.current_subscription.amount
+      else
+        '-'
+      end
+    end
+
+    def current_subscription_display_plan
+      if @model.current_subscription?
+        @model.current_plan.name
+      else
+        'None'
+      end
+    end
+
   end
+
 end

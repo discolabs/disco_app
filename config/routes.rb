@@ -27,10 +27,11 @@ DiscoApp::Engine.routes.draw do
 
   namespace :admin do
     resources :shops, only: [:index, :edit, :update]
+    resources :subscriptions, only: [:edit, :update]
     resources :plans
     resource :app_settings, only: [:edit, :update]
 
-    # JSON-API resources for admins."
+    # JSON-API resources for admins.
     namespace :resources do
       jsonapi_resources :shops
     end

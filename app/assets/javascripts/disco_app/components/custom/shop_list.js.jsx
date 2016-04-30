@@ -66,7 +66,7 @@ var ShopList = React.createClass({
         var shopRows = this.state.shops.map(function(shop, index) {
             if ((index >= ((this.state.page - 1) * this.props.pageSize)) && (index <  this.state.page * this.props.pageSize)) {
             return (
-                <ShopRow shop={shop} editShopUrl={this.props.editShopUrl} key={shop.id} />
+                <ShopRow shop={shop} editShopUrl={this.props.editShopUrl} editSubscriptionUrl={this.props.editSubscriptionUrl} key={shop.id} />
             )
             } else {
               return null;
@@ -79,16 +79,13 @@ var ShopList = React.createClass({
                     <table className="table-hover expanded">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Shopify Domain</th>
-                                <th>Status</th>
+                                <th>Shop</th>
                                 <th>Email</th>
-                                <th>Country Name</th>
-                                <th>Currency</th>
-                                <th>Domain</th>
-                                <th>Plan</th>
-                                <th>Created</th>
-                                <th>Installed Duration</th>
+                                <th>Status</th>
+                                <th>Country</th>
+                                <th>Shopify Plan</th>
+                                <th>Subscription</th>
+                                <th>Installed for</th>
                             </tr>
                         </thead>
                         <tbody>

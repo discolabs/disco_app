@@ -2,25 +2,30 @@ var ShopRow = (props) => {
 
     var shop = props.shop,
         editShopUrl = props.editShopUrl.replace(':id', shop.id),
-        shopifyDomain = shop.attributes['shopify_domain'],
-        countryName = shop.attributes['country_name'],
-        currency = shop.attributes['currency'],
         domainName = shop.attributes['domain'],
-        planName = shop.attributes['plan_display_name'],
-        prettyCreatedDate = shop.attributes['pretty_created_at'],
-        installedDuration = shop.attributes['installed_duration'];
+        countryName = shop.attributes['country-name'],
+        currency = shop.attributes['currency'],
+        planName = shop.attributes['plan-display-name'],
+        editSubscriptionUrl = props.editSubscriptionUrl.replace(':id', shop.attributes['current-subscription-id']),
+        subscriptionPlan = shop.attributes['current-subscription-display-plan'],
+        subscriptionAmount = shop.attributes['current-subscription-display-amount'],
+        installedDuration = shop.attributes['installed-duration'];
+
+    var subscriptionContent = null;
+    if(shop.attributes['current-subscription-id']) {
+      subscriptionContent = <a href={editSubscriptionUrl}>{subscriptionPlan} ({subscriptionAmount})</a>;
+    } else {
+      subscriptionContent = <span>{subscriptionPlan} ({subscriptionAmount})</span>;
+    }
 
     return (
         <tr>
-            <td><a href={editShopUrl}>#{shop.id}</a></td>
-            <td>{shopifyDomain}</td>
-            <td>{shop.attributes.status}</td>
+            <td><a href={editShopUrl}>{domainName}</a></td>
             <td>{shop.attributes.email}</td>
+            <td>{shop.attributes.status}</td>
             <td>{countryName}</td>
-            <td>{shop.attributes.currency}</td>
-            <td>{shop.attributes.domain}</td>
             <td>{planName}</td>
-            <td>{prettyCreatedDate}</td>
+            <td>{subscriptionContent}</td>
             <td>{installedDuration}</td>
         </tr>
     )

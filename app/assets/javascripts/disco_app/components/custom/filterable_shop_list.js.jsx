@@ -52,7 +52,7 @@ var FilterableShopList = React.createClass({
         return (
             <div className="next-card">
               <ShopFilterTabs filterTabs={this.props.filterTabs} filter={this.state.filter} onFilterReplace={this.onFilterReplace} />
-              <ShopList shopsUrl={this.props.shopsUrl} editShopUrl={this.props.editShopUrl} filter={this.state.filter} />
+              <ShopList shopsUrl={this.props.shopsUrl} editShopUrl={this.props.editShopUrl} editSubscriptionUrl={this.props.editSubscriptionUrl} filter={this.state.filter} />
             </div>
         );
     }

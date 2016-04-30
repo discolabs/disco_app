@@ -71,10 +71,6 @@ module DiscoApp::Concerns::Shop
       distance_of_time_in_words_to_now(created_at.time)
     end
 
-    def pretty_created_at
-        created_at.strftime("%B %d, %Y")
-    end
-
   end
 
 end
