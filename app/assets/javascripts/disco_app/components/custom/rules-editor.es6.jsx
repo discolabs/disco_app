@@ -204,7 +204,49 @@ class RulesEditor extends React.Component {
     );
   }
 
+  static buildRelationsObj(relations) {
+    var relationsObj = {};
+
+    relations.forEach(function (relation) {
+      return relationsObj[relation.relation] = relation;
+    });
+
+    return relationsObj;
+  }
+
 }
+
+
+RulesEditor.EQUALS_STRING = {
+  label: 'is equal to',
+  relation: 'is_equal_to',
+  type: 'text'
+};
+RulesEditor.EQUALS_COUNTRY_CODE = {
+  label: 'is equal to',
+  relation: 'is_equal_to',
+  type: 'country_code'
+};
+RulesEditor.CONTAINS_STRING = {
+  label: 'contains',
+  relation: 'contains_string',
+  type: 'text'
+};
+RulesEditor.EQUALS_TAG = {
+  label: 'is equal to',
+  relation: 'find_in_set',
+  type: 'tag'
+};
+RulesEditor.GREATER_THAN = {
+  label: 'is greater than',
+  relation: 'is_greater_than',
+  type: 'numeric'
+};
+RulesEditor.LESS_THAN = {
+  label: 'is less than',
+  relation: 'is_less_than',
+  type: 'numeric'
+};
 
 const RulesEditorRule = ({ rule, columns, onRemove, onColumnChange, onRelationChange, onConditionChange, ruleCount, blankOk }) => {
   const { column, relation, condition } = rule;
