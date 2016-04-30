@@ -7,7 +7,7 @@ module DiscoApp::Admin::Resources::Concerns::ShopResource
 
     attributes :domain, :status, :email, :country_name
     attributes :currency, :plan_display_name, :created_at
-    attributes :current_subscription_id, :current_subscription_display_amount, :current_subscription_display_plan
+    attributes :current_subscription_id, :current_subscription_display_amount, :current_subscription_display_plan, :current_subscription_display_plan_code, :current_subscription_source
     attributes :installed_duration
 
     model_name 'DiscoApp::Shop'
@@ -62,6 +62,18 @@ module DiscoApp::Admin::Resources::Concerns::ShopResource
         @model.current_plan.name
       else
         'None'
+      end
+    end
+
+    def current_subscription_display_plan_code
+      @model.current_subscription&.plan_code&.code
+    end
+
+    def current_subscription_source
+      if @model.current_subscription?
+        @model.current_subscription.source || '-'
+      else
+        '-'
       end
     end
 

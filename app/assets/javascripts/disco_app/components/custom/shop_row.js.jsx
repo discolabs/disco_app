@@ -11,6 +11,7 @@ var ShopRow = (props) => {
           .replace(':id', shop.attributes['current-subscription-id']),
         subscriptionPlan = shop.attributes['current-subscription-display-plan'],
         subscriptionAmount = shop.attributes['current-subscription-display-amount'],
+        subscriptionSource = shop.attributes['current-subscription-source'],
         installedDuration = shop.attributes['installed-duration'];
 
     var subscriptionContent = null;
@@ -20,14 +21,22 @@ var ShopRow = (props) => {
       subscriptionContent = <span>{subscriptionPlan} ({subscriptionAmount})</span>;
     }
 
+    var planCodeContent = null;
+    if(shop.attributes['current-subscription-display-plan-code']) {
+      planCodeContent = <span><br />{shop.attributes['current-subscription-display-plan-code']}</span>;
+    }
+
     return (
         <tr>
-            <td><a href={editShopUrl}>{domainName}</a></td>
-            <td>{shop.attributes.email}</td>
+            <td>
+              <a href={editShopUrl}>{domainName}</a><br />
+              <a href={'mailto:' + shop.attributes.email}>{shop.attributes.email}</a>
+            </td>
             <td>{shop.attributes.status}</td>
             <td>{countryName}</td>
             <td>{planName}</td>
-            <td>{subscriptionContent}</td>
+            <td>{subscriptionContent}{planCodeContent}</td>
+            <td>{subscriptionSource}</td>
             <td>{installedDuration}</td>
         </tr>
     )

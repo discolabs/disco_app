@@ -80,11 +80,11 @@ var ShopList = React.createClass({
                         <thead>
                             <tr>
                                 <th>Shop</th>
-                                <th>Email</th>
                                 <th>Status</th>
                                 <th>Country</th>
                                 <th>Shopify Plan</th>
                                 <th>Subscription</th>
+                                <th>Source</th>
                                 <th>Installed for</th>
                             </tr>
                         </thead>
