@@ -187,7 +187,15 @@ class RulesEditor extends React.Component {
       />
     });
 
-    const rulesJSON = JSON.stringify(this.state.rules);
+    // Convert the current rules JSON into a format using the correct column
+    // format used by our more advanced key checker.
+    const rulesJSON = JSON.stringify(this.state.rules.map((rule, i) => {
+      return {
+        column: this.props.columns[rule.column].column,
+        relation: rule.relation,
+        condition: rule.condition
+      }
+    }));
 
     return(
       <CardSection>
@@ -257,6 +265,9 @@ const RulesEditorRule = ({ rule, columns, onRemove, onColumnChange, onRelationCh
   let conditionEditor = null;
   switch(currentRelation.type) {
     case 'text':
+    case 'numeric':
+    case 'tag':
+    case 'country_code':
       conditionEditor = <RulesEditorConditionInputText condition={condition} onChange={onConditionChange} />;
   }
 
