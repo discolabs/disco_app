@@ -26,8 +26,9 @@ DiscoApp::Engine.routes.draw do
   end
 
   namespace :admin do
-    resources :shops, only: [:index, :edit, :update]
-    resources :subscriptions, only: [:edit, :update]
+    resources :shops, only: [:index, :edit, :update] do
+      resources :subscriptions, only: [:edit, :update]
+    end
     resources :plans
     resource :app_settings, only: [:edit, :update]
 

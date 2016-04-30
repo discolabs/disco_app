@@ -45,8 +45,14 @@
           <svg class="next-icon next-icon--size-20 next-icon--header">
             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-collections"></use>
           </svg>
+          <% if content_for?(:breadcrumb) %>
           <span class="breadcrumb">
-            <a href="<%= yield(:url) %>"><%= yield(:title) %></a>
+            <a href="<%= yield(:breadcrumb_url) %>"><%= yield(:breadcrumb) %></a>
+            /
+          </span>
+          <% end %>
+          <span>
+            <%= yield(:title) %>
           </span>
         </h1>
       </header>

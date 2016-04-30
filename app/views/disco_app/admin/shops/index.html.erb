@@ -6,7 +6,7 @@
     <%= react_component('FilterableShopList', {
       shopsUrl: admin_resources_shops_path(format: :json),
       editShopUrl: edit_admin_shop_path(':id'),
-      editSubscriptionUrl: edit_admin_subscription_path(':id')
+      editSubscriptionUrl: edit_admin_shop_subscription_path(':shop_id', ':id')
     }) %>
 
   </div>

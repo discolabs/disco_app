@@ -6,7 +6,9 @@ var ShopRow = (props) => {
         countryName = shop.attributes['country-name'],
         currency = shop.attributes['currency'],
         planName = shop.attributes['plan-display-name'],
-        editSubscriptionUrl = props.editSubscriptionUrl.replace(':id', shop.attributes['current-subscription-id']),
+        editSubscriptionUrl = props.editSubscriptionUrl
+          .replace(':shop_id', shop.id)
+          .replace(':id', shop.attributes['current-subscription-id']),
         subscriptionPlan = shop.attributes['current-subscription-display-plan'],
         subscriptionAmount = shop.attributes['current-subscription-display-amount'],
         installedDuration = shop.attributes['installed-duration'];

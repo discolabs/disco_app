@@ -1,9 +1,11 @@
+<% provide(:breadcrumb, 'Shops') %>
+<% provide(:breadcrumb_url, admin_shops_path) %>
 <% provide(:title, 'Edit subscription') %>
 
 <div class="next-grid">
   <div class="next-grid__cell">
 
-    <%= form_for(@subscription, url: admin_subscription_path(@subscription)) do |f| %>
+    <%= form_for(@subscription, url: admin_shop_subscription_path(@subscription.shop, @subscription)) do |f| %>
 
       <%= f.label(:amount) %>
       <%= f.number_field(:amount) %>
