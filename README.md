@@ -55,6 +55,13 @@ DiscoApp you'll be using and avoid accidentally pulling incompatible changes
 into your project when you run a `bundle update`. Double check that the tag
 number you're using is the latest version available.
 
+Mac OS X users often have problems installing nokogiri, with issues with libxml2 
+reported missing. Try the following:
+```
+xcode-select --install
+gem install nokogiri -- --use-system-libraries --with-xml2-include=/usr/include/libxml2 --with-xml2-lib=/usr/lib/
+```
+
 Note if you face any issue running this command `bundle exec rails generate disco_app --force`
 try stopping `spring` and restarting again using this commands:
 ```
