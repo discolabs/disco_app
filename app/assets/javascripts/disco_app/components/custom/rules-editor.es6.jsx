@@ -28,7 +28,15 @@ class RulesEditor extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      rules: props.rules
+      rules: props.rules.map((rule, i) => {
+        return {
+          column: Object.keys(this.props.columns).filter((columnKey) => {
+            return this.props.columns[columnKey].column == rule.column;
+          })[0],
+          relation: rule.relation,
+          condition: rule.condition
+        }
+      })
     }
   }
 
@@ -191,7 +199,6 @@ class RulesEditor extends React.Component {
     // format used by our more advanced key checker.
     const rulesJSON = JSON.stringify(this.state.rules.map((rule, i) => {
       return {
-        label: this.props.columns[rule.column].label,
         column: this.props.columns[rule.column].column,
         relation: rule.relation,
         condition: rule.condition
