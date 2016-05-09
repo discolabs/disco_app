@@ -2,7 +2,7 @@ module DiscoApp::Admin::Concerns::PlansController
   extend ActiveSupport::Concern
 
   included do
-    before_action :find_plan, only: [:edit, :update]
+    before_action :find_plan, only: [:edit, :update, :destroy]
   end
 
   def index
@@ -33,6 +33,11 @@ module DiscoApp::Admin::Concerns::PlansController
     else
       render 'edit'
     end
+  end
+
+  def destroy
+    @plan.destroy
+    redirect_to action: :index
   end
 
   private
