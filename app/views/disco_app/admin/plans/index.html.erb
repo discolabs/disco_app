@@ -15,6 +15,7 @@
             <th>Currency</th>
             <th>Interval</th>
             <th>Interval Count</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -28,6 +29,7 @@
             <td><%= plan.currency %></td>
             <td><%= plan.interval %></td>
             <td><%= plan.interval_count %></td>
+            <td><%= link_to 'Delete', admin_plan_path(plan), action: 'destroy', method: :delete,  data: {confirm: "About to delete plan: #{plan.name}. Are you sure?"} %></td>
           </tr>
           <% end %>
         </tbody>

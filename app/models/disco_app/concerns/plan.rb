@@ -5,7 +5,7 @@ module DiscoApp::Concerns::Plan
 
     has_many :subscriptions
     has_many :shops, through: :subscriptions
-    has_many :plan_codes
+    has_many :plan_codes, dependent: :destroy
 
     accepts_nested_attributes_for :plan_codes
 
