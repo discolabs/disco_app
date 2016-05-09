@@ -24,7 +24,7 @@ var ShopList = React.createClass({
 
     componentDidUpdate: function (prevProps, prevState) {
         if(prevProps.filter != this.props.filter) {
-            this.getShops();
+          this.onShopsChanged();
         }
         if(prevState.page != this.state.page) {
             this.getShops();
@@ -35,6 +35,7 @@ var ShopList = React.createClass({
         this.setState({page: this.state.page + increment});
     },
 
+    /* get shops with a different filter */
     onShopsChanged: function() {
         this.setState({page: 1});
         this.getShops();
