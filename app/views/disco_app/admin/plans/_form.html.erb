@@ -1,12 +1,12 @@
 <section class="section">
   <div class="layout-content">
     <section class="layout-content__main">
-      <div class="row">
-        <div class="col-md-12">
+      <div class="next-grid">
+        <div class="next-grid__cell">
           <div class="next-card">
 
               <header class="next-card__header">
-                <h3>Plan</h3>
+                <h1>Plan</h1>
               </header>
 
               <section class="next-card__section">
@@ -37,30 +37,19 @@
               </section>
           </div>
         </div>
-        <div class="col-md-12">
-          <div class="next-card">
-
+        <div class="next-grid__cell">
+          <div class="next-card  next-card--aside">
               <header class="next-card__header">
-                <h3>Plan Codes</h3>
+                <h1>Plan Codes</h1>
               </header>
 
-              <section class="next-card__section">
                 <%= f.fields_for :plan_codes do |plan_code| %>
-                  <div class="row">
-                    <div class="col-md-24">
-                      <%= plan_code.label(:code, 'Code') %>
-                      <%= plan_code.text_field(:code) %>
-
-                      <%= plan_code.label(:trial_period_days, 'Trial Period Days') %>
-                      <%= plan_code.number_field(:trial_period_days) %>
-
-                      <%= plan_code.label(:amount, 'Amount') %>
-                      <%= plan_code.number_field(:amount) %>
-                      <hr>
-                    </div>
-                  </div>
+                  <%= render 'plan_code_fields', f: plan_code %> 
                 <% end %>
-              </section>
+
+                <br>
+
+                <%= link_to_add_fields('Add New Plan Code', f, :plan_codes) %>
           </div>
         </div>
       </div>
@@ -73,3 +62,11 @@
     </section>
   </div>
 </section>
+<script type="text/javascript">
+  $('form').on('click', '.add_fields', function(event) {
+    var time = new Date().getTime();
+    var regexp = new RegExp($(this).data('id'), 'g');
+    $(this).before($(this).data('fields').replace(regexp, time));
+    event.preventDefault();
+  });
+</script>
