@@ -10,6 +10,7 @@ current_widget_store_subscription:
   shop: widget_store
   plan: basic
   amount: 999
+  trial_period_days: 14
   status: <%= DiscoApp::Subscription.statuses[:active] %>
   subscription_type: 0
 

@@ -43,7 +43,6 @@ class DiscoApp::ChargesControllerTest < ActionController::TestCase
   end
 
   test 'user with unpaid current subscription can create new charge and is redirected to confirmation url' do
-    skip('some indeterminancy in this test')
     stub_api_request(:post, "#{@shop.admin_url}/recurring_application_charges.json", 'widget_store/charges/create_second_recurring_application_charge')
 
     @current_subscription.active_charge.destroy
