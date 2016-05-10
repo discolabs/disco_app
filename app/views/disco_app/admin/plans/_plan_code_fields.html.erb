@@ -1,0 +1,15 @@
+<section class="next-card__section">
+    <div class="app-container">
+        <%= f.label(:code, 'Code') %>
+        <%= f.text_field(:code) %>
+
+        <%= f.label(:trial_period_days, 'Trial Period Days') %>
+        <%= f.number_field(:trial_period_days) %>
+
+        <%= f.label(:amount, 'Amount') %>
+        <%= f.number_field(:amount) %>
+        
+        <%= f.label :_destroy, 'Remove Plan' %>
+        <%= f.check_box :_destroy %>
+    </div>
+</section>
