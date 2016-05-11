@@ -3,7 +3,7 @@
     "name": "Basic",
     "price": "9.99",
     "trial_days": 14,
-    "return_url": "https://test.example.com/subscriptions/304261385/charges/532970502/activate",
+    "return_url": /^https:\/\/test\.example\.com\/subscriptions\/304261385\/charges\/53297050(1|2)\/activate$/,
     "test": true
   }
 }
