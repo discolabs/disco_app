@@ -42,4 +42,9 @@ module DiscoApp::ApplicationHelper
     link_to(name, '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", "")})
   end
 
+  # Helper method that provides detailed error information from an active record as JSON
+  def errors_to_react(record)
+    {type: record.model_name.human.downcase, errors: record.errors.keys, messages: record.errors.full_messages}.as_json
+  end
+
 end

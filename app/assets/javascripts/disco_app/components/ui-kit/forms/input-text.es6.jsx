@@ -1,44 +1,49 @@
-const InputText = ({ name, value, defaultValue, disabled, error, helpMessage, label, labelHidden, onChange, placeholder }) => {
+class InputText extends BaseInput {
 
-  const wrapperClassName = classNames({
-    'next-input-wrapper': true,
-    'next-input-wrapper--is-error': error
-  });
+  render() {
+    const { errors, name, value, defaultValue, disabled, helpMessage, label, labelHidden, onChange, placeholder } = this.props;
 
-  const labelClassName = classNames({
-    'next-label': true,
-    'helper--visually-hidden': labelHidden
-  });
+    const wrapperClassName = classNames({
+      'next-input-wrapper': true,
+      'next-input-wrapper--is-error': this.hasError() 
+    });
 
-  const handleChange = (e) => {
-    onChange(e.target.value);
-  };
+    const labelClassName = classNames({
+      'next-label': true,
+      'helper--visually-hidden': labelHidden
+    });
 
-  let helpElement = null;
-  if(helpMessage) {
-    helpElement = <p className="next-input__help-text">{helpMessage}</p>;
+    const handleChange = (e) => {
+      onChange(e.target.value);
+    };
+
+    let helpElement = null;
+    if(helpMessage) {
+      helpElement = <p className="next-input__help-text">{helpMessage}</p>;
+    }
+
+    return (
+      <div className={wrapperClassName}>
+        <label className={labelClassName} htmlFor={name}>{label}</label>
+        <input
+          id={name}
+          className="next-input"
+          disabled={disabled}
+          value={value}
+          defaultValue={defaultValue}
+          name={name}
+          onChange={handleChange}
+          placeholder={placeholder}
+          type="text"
+        />
+        {helpElement}
+      </div>
+    );
   }
-
-  return (
-    <div className={wrapperClassName}>
-      <label className={labelClassName} htmlFor={name}>{label}</label>
-      <input
-        id={name}
-        className="next-input"
-        disabled={disabled}
-        value={value}
-        defaultValue={defaultValue}
-        name={name}
-        onChange={handleChange}
-        placeholder={placeholder}
-        type="text"
-      />
-      {helpElement}
-    </div>
-  );
-};
+}
 
 InputText.propTypes = {
+  errors: React.PropTypes.object,
   label: React.PropTypes.string.isRequired,
   name: React.PropTypes.string,
   onChange: React.PropTypes.func,
@@ -49,6 +54,6 @@ InputText.propTypes = {
 };
 
 InputText.defaultProps = {
-  error: false,
+  errors: {},
   disabled: false
 };
