@@ -2,7 +2,7 @@ module DiscoApp::Admin::Concerns::PlansController
   extend ActiveSupport::Concern
 
   included do
-    before_action :find_plan, only: [:edit, :update]
+    before_action :find_plan, only: [:edit, :update, :destroy]
   end
 
   def index
@@ -11,7 +11,6 @@ module DiscoApp::Admin::Concerns::PlansController
 
   def new
     @plan = DiscoApp::Plan.new
-    @plan.plan_codes.build
   end
 
   def create
@@ -24,15 +23,19 @@ module DiscoApp::Admin::Concerns::PlansController
   end
 
   def edit
-    @plan.plan_codes.build
   end
 
   def update
     if @plan.update_attributes(plan_params)
-      redirect_to admin_plans_path
+      redirect_to edit_admin_plan_path(@plan)
     else
       render 'edit'
     end
+  end
+
+  def destroy
+    @plan.destroy
+    redirect_to admin_plans_path
   end
 
   private
@@ -44,7 +47,7 @@ module DiscoApp::Admin::Concerns::PlansController
     def plan_params
       params.require(:plan).permit(
         :name, :status, :plan_type, :trial_period_days, :amount,
-        :plan_codes_attributes => [:code, :trial_period_days, :amount]
+        :plan_codes_attributes => [:id, :_destroy, :code, :trial_period_days, :amount]
       )
     end
 

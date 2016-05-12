@@ -15,6 +15,8 @@ module DiscoApp::Concerns::Subscription
 
     scope :current, -> { where status: [statuses[:trial], statuses[:active]] }
 
+    after_commit :cancel_charge
+
   end
 
   # Only require an active charge if the amount to be charged is > 0.
@@ -44,5 +46,15 @@ module DiscoApp::Concerns::Subscription
   def shopify_charge_class
     recurring? ? ShopifyAPI::RecurringApplicationCharge : ShopifyAPI::ApplicationCharge
   end
+
+  private
+
+    # If the amount or trial period for this subscription changes, clear any
+    # active charge, as the user will need to re-authorize the charge.
+    def cancel_charge
+      return if (previous_changes.keys & ['amount', 'trial_period_days']).empty?
+      return unless active_charge?
+      active_charge.cancelled!
+    end
 
 end

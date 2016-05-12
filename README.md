@@ -40,6 +40,8 @@ to note are:
 Running the following commands from your terminal to create a new Rails app,
 add the DiscoApp Rails Engine to your Gemfile, and set up the Engine:
 
+Check that the rails version required in your Gemfile matches the one specified in the Disco gemspec.
+
 ```
 $ export DISCO_GEM_CREDENTIALS=disco-gems:0dfbd458c126baa2744cef477b24c7cf7227fae5
 $ rails new example_app
@@ -251,6 +253,10 @@ If you're building an app that doesn't need to worry about charging store
 owners, you should ensure it creates a Plan with an `amount` value of zero, and
 that all stores are subscribed to that plan during `DiscoApp::AppInstalledJob`.
 
+The default set of plans for your app should be placed into the `db/seeds.rb`
+file. Make sure you run `bundle exec rake db:seed` after resetting your database
+to ensure the plans are correctly set up.
+
 Whenever a store's subscription level is changed,
 `DiscoApp::SubscriptionChangedJob` is queued.
 
@@ -368,19 +374,40 @@ in proxied requests.
 [security section]: https://docs.shopify.com/api/uiintegrations/application-proxies#security
 
 ### Administration
+There is a standard administration site for the app, located at `/admin`. It
+provides a filtered list of shops that have installed the app, a way to manage
+plans and plan codes for the application, and a page to manage application-wide
+settings.
 
-There is a standard administration panel of the app, that is located at `/admin`.
-It is available by running the `adminify` generator.
-At the moment it consists of a listing of shops that installed the app and has
-some filtering possiblities.
-This admin section is currently secured via a basic authentication. In order to
-define the username and password to access this section of the app, fill in
-the following variables to the generated app `.env.local` file:
+This admin section is secured via HTTP basic authentication. In order to define
+the username and password to access this section of the app, fill in the
+following variables to the generated app `.env.local` file:
 
 ```
 ADMIN_APP_USERNAME=
 ADMIN_APP_PASSWORD=
 ```
+
+Application-wide settings should be added to the `DiscoApp::AppSettings` model.
+At the controller level you can can permit the new params by overriding the
+admin controller at: `app/controllers/disco_app/admin/app_settings_controller.rb`.
+
+```
+class DiscoApp::Admin::AppSettingsController < DiscoApp::Admin::ApplicationController
+  include DiscoApp::Admin::Concerns::AppSettingsController
+
+  private
+
+    def app_settings_params
+      params.require(:app_settings).permit(:default_recurring_price, :trial_days, :test_charges, :mailchimp_api_key, :mailchimp_list_id, :sidebar_message_enabled, :sidebar_message)
+    end
+    
+end
+```
+
+At the view level, you should override `app/views/disco_app/admin/app_settings/edit.html.erb`
+in order to add fields for the new settings you've created.
+
 
 ### Helpers
 A number of view helpers designed to encapsulate common Shopify app
@@ -509,73 +536,6 @@ the changes they make to your app after running them to tidy up their changes.
 
 A list of available optional generators follows.
 
-### Reactify
-```
-$ bundle exec rails generate disco_app:reactify
-```
-
-Adds the `react-rails` gem and installs and configures React.js for use with
-the Rails application. Adds a line to `application.js` which imports a library
-of React components provided by the engine.
-
-### Adminify
-```
-$ bundle exec rails generate disco_app:adminify
-```
-
-Provides support for an admin site, with an overview of all shops.
-Runs the `reactify` generator under the hood and provides dotenv variables
-necessary for basic auth.
-
-It also provides support for an App Settings Page.
-
-Add settings to the DiscoApp::AppSettings model. At the controller level you
-can can permit the new params by creating:
-`app/controllers/disco_app/admin/app_settings_controller.rb`. Here's an example:
-```
-class DiscoApp::Admin::AppSettingsController < DiscoApp::Admin::ApplicationController
-  include DiscoApp::Admin::Concerns::AppSettingsController
-
-  private
-
-    def app_settings_params
-      params.require(:app_settings).permit(:default_recurring_price, :trial_days, :test_charges, :mailchimp_api_key, :mailchimp_list_id, :sidebar_message_enabled, :sidebar_message)
-    end
-+end
-```
-
-At the view level, you should override the original file:
-`app/views/disco_app/admin/app_settings/edit.html.erb`. Here's an example:
-```
-<% provide(:title, 'Settings') %>
-
-<%= form_for(@app_settings, url: admin_app_settings_path) do |f| %>
-
-    <%= render 'shared/error_messages', object: f.object %>
-
-    <div class="row">
-      <div class="col-md-4">
-        <h3>Pricing</h3>
-
-        <div class="form-group">
-          <%= f.label :default_recurring_price, 'Default recurring charge' %>
-          <%= f.number_field :default_recurring_price, step: 0.01, class: 'form-control' %>
-          <p class="help-block">
-            Help text about this field
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-12">
-        <button type="submit" class="btn btn-primary">Save Changes</button>
-      </div>
-    </div>
-
-<% end %>
-
-```
 
 ### Mailify
 ```

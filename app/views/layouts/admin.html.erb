@@ -2,22 +2,66 @@
 <html>
 <head>
   <title><%= yield(:title) %></title>
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'disco_app/admin', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body class="next-ui">
 
-  <%= render 'layouts/admin/navbar' %>
-
-  <div class="container-fluid">
-    <% flash.each do |message_type, message| %>
-        <div class="alert alert-<%= message_type %>"><%= message %></div>
-    <% end %>
-
-    <%= yield %>
+  <div class="nav-drawer">
+    <div class="next-nav next-nav--is-expanded">
+      <div class="next-nav__panel next-nav__panel--primary">
+        <header role="banner" class="next-nav__logo next-nav__logo--shopify">
+          <h1>
+            <a href="/admin">
+              <span role="img" class="ui-inline-svg">
+                <svg class="next-nav__svg-logo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0" y="0" viewBox="0 0 609 177" xml:space="preserve" enable-background="new 0 0 609 177"><style type="text/css">
+                  .st0{fill:#231F20;}
+                  .st1{fill:#FBAF41;}
+                  .st2{fill:#8676D5;}
+                  .st3{fill:#9CCC6B;}
+                  .st4{fill:#FBCC6B;}
+                  .st5{fill:#9CCCD5;}
+                  .st6{fill:#FFFFFF;}
+                </style><path id="XMLID_36_" class="st0" d="M80.9 176l-37.2-21.5L6.4 133V90 47l37.2-21.5L80.9 4l37.2 21.5L155.4 47v43 43l-37.2 21.5L80.9 176z"/><polygon id="XMLID_13_" class="st1" points="16 52.5 16 127.5 145.9 127.5 "/><polygon id="XMLID_12_" class="st2" points="16 127.5 145.9 127.5 145.9 52.5 "/><polygon id="XMLID_11_" class="st3" points="145.9 127.5 80.9 15.1 16 127.5 "/><polygon id="XMLID_10_" class="st4" points="48.5 71.3 16 127.5 145.9 127.5 "/><polygon id="XMLID_9_" class="st5" points="16 127.5 145.9 127.5 113.4 71.3 "/><polygon id="XMLID_8_" class="st6" points="80.9 90 16 127.5 80.9 165 145.9 127.5 "/><g id="XMLID_17_"><path id="XMLID_27_" class="st6" d="M205.4 125.4V55h27.7c22 0 37.3 14 37.3 35.1 0 21.3-15.3 35.2-37.2 35.2H205.4zM255.2 90.2c0-12.3-7.6-21.9-21.9-21.9h-12.9v44h12.8C247.1 112.2 255.2 102.2 255.2 90.2z"/><path id="XMLID_25_" class="st6" d="M286.4 125.4V55h15v70.3H286.4z"/><path id="XMLID_23_" class="st6" d="M315.7 115.5l8.2-11.7c5 5.2 12.7 9.6 22.4 9.6 8.3 0 12.2-3.7 12.2-7.8 0-12.2-40.5-3.7-40.5-30.2 0-11.7 10.1-21.4 26.7-21.4 11.2 0 20.5 3.4 27.4 9.8L363.8 75c-5.7-5.3-13.3-7.7-20.5-7.7 -6.3 0-9.9 2.7-9.9 7 0 11.1 40.4 3.6 40.4 29.8 0 12.9-9.3 22.6-28.2 22.6C332.1 126.7 322.4 122.1 315.7 115.5z"/><path id="XMLID_21_" class="st6" d="M385.8 90.3c0-21.7 16.3-36.4 37.5-36.4 15.4 0 24.4 8.3 29.3 17.2l-12.9 6.3c-3-5.7-9.3-10.2-16.5-10.2 -12.9 0-22.1 9.8-22.1 23.1 0 13.3 9.3 23.1 22.1 23.1 7.2 0 13.5-4.5 16.5-10.2l12.9 6.2c-5 8.8-13.9 17.3-29.3 17.3C402.1 126.7 385.8 111.9 385.8 90.3z"/><path id="XMLID_18_" class="st6" d="M463.5 90.3c0-21.2 15.5-36.4 36.8-36.4 21.2 0 36.7 15.2 36.7 36.4 0 21.2-15.5 36.4-36.7 36.4C479 126.7 463.5 111.5 463.5 90.3zM521.6 90.3c0-13.2-8.3-23.1-21.3-23.1 -13.1 0-21.4 9.9-21.4 23.1 0 13.1 8.3 23.1 21.4 23.1C513.2 113.4 521.6 103.3 521.6 90.3z"/></g></svg>
+              </span>
+            </a>
+          </h1>
+        </header>
+        <nav role="navigation">
+          <ol class="next-nav__list next-nav__list--primary">
+            <%= render 'layouts/admin/nav_items' %>
+          </ol>
+        </nav>
+      </div>
+    </div>
   </div>
+
+  <main id="content" role="main">
+    <div class="header-row">
+      <header class="header">
+        <h1 class="header__main">
+          <svg class="next-icon next-icon--size-20 next-icon--header">
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-collections"></use>
+          </svg>
+          <% if content_for?(:breadcrumb) %>
+          <span class="breadcrumb">
+            <a href="<%= yield(:breadcrumb_url) %>"><%= yield(:breadcrumb) %></a>
+            /
+          </span>
+          <% end %>
+          <span>
+            <%= yield(:title) %>
+          </span>
+        </h1>
+      </header>
+    </div>
+
+    <div class="page">
+      <%= yield %>
+    </div>
+  </main>
 
 </body>
 </html>

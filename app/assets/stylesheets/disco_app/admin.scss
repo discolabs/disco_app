@@ -1,0 +1,11 @@
+//
+// Styles for the Disco application admin.
+// --------------------------------------------------
+
+// Import the core.
+@import 'disco_app';
+
+// Admin-specific styling.
+@import 'admin/layout';
+@import 'admin/nav';
+@import 'admin/header';

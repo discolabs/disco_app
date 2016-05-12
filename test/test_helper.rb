@@ -1,3 +1,6 @@
+# Prevent warnings from showing up during testing.
+$VERBOSE=nil
+
 # Configure Rails Environment
 ENV['RAILS_ENV'] = 'test'
 ENV['DEFAULT_HOST'] = 'https://test.example.com'

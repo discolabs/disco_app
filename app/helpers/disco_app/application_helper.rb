@@ -25,4 +25,26 @@ module DiscoApp::ApplicationHelper
     link_to(name, path, options)
   end
 
+  # Render a React component with inner HTML content.
+  # Thanks to https://github.com/reactjs/react-rails/pull/166#issuecomment-86178980
+  def react_component_with_content(name, args = {}, options = {}, &block)
+    args[:__html] = capture(&block) if block.present?
+    react_component(name, args, options)
+  end
+
+  # Provide link to dynamically add a new nested fields association 
+  def link_to_add_fields(name, f, association)
+    new_object = f.object.send(association).klass.new
+    id = new_object.object_id
+    fields = f.fields_for(association, new_object, child_index: id) do |builder|
+      render(association.to_s.singularize + "_fields", f: builder)
+    end
+    link_to(name, '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", "")})
+  end
+
+  # Helper method that provides detailed error information from an active record as JSON
+  def errors_to_react(record)
+    {type: record.model_name.human.downcase, errors: record.errors.keys, messages: record.errors.full_messages}.as_json
+  end
+
 end

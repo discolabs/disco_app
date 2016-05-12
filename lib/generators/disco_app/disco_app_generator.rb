@@ -35,10 +35,13 @@ class DiscoAppGenerator < Rails::Generators::Base
     gem 'activeresource', github: 'shopify/activeresource', tag: '4.2-threadsafe'
     gem 'rails-bigint-pk', '~> 1.2.0'
     gem 'acts_as_singleton', '~> 0.0.8'
+    gem 'pg', '~> 0.18.3'
+    gem 'react-rails', '~> 1.6.0'
+    gem 'classnames-rails', '~> 2.1.5'
+    gem 'active_link_to', '~> 1.0.2'
 
     # Add gems for development and testing only.
     gem_group :development, :test do
-      gem 'sqlite3', '~> 1.3.11'
       gem 'dotenv-rails', '~> 2.0.2'
       gem 'minitest-reporters', '~> 1.0.19'
       gem 'guard', '~> 2.13.0'
@@ -47,9 +50,13 @@ class DiscoAppGenerator < Rails::Generators::Base
 
     # Add gems for production only.
     gem_group :production do
-      gem 'pg', '~> 0.18.3'
       gem 'rails_12factor', '~> 0.0.3'
     end
+  end
+
+  # copy template for pg configuration
+  def update_database_config
+    template 'config/database.yml.tt'
   end
 
   # Run bundle install to add our new gems before running tasks.
@@ -64,6 +71,10 @@ class DiscoAppGenerator < Rails::Generators::Base
     # The force_ssl flag is commented by default for production.
     # Uncomment to ensure config.force_ssl = true in production.
     uncomment_lines 'config/environments/production.rb', /force_ssl/
+
+    # Set server side rendereing for components.js
+    application "config.react.server_renderer_options = {\nfiles: ['components.js'], # files to load for prerendering\n}"
+    application "# Enable server side react rendering"
 
     # Set defaults for various charge attributes.
     application "config.x.shopify_charges_default_trial_days = 14\n"
@@ -94,6 +105,12 @@ class DiscoAppGenerator < Rails::Generators::Base
     application "routes.default_url_options[:host] = ENV['DEFAULT_HOST']\n"
     application "# Set the default host for absolute URL routing purposes"
 
+    # Configure React in development and production.
+    application "config.react.variant = :development", env: :development
+    application "# Use development variant of React in development.", env: :development
+    application "config.react.variant = :production", env: :production
+    application "# Use production variant of React in production.", env: :production
+
     # Copy over the default puma configuration.
     copy_file 'config/puma.rb', 'config/puma.rb'
   end
@@ -108,6 +125,7 @@ class DiscoAppGenerator < Rails::Generators::Base
     generate 'shopify_app:install'
     generate 'shopify_app:home_controller'
     generate 'bigint_pk:install'
+    generate 'react:install'
   end
 
   # Copy template files to the appropriate location. In some cases, we'll be
@@ -125,6 +143,7 @@ class DiscoAppGenerator < Rails::Generators::Base
 
     # Copy assets
     copy_file 'assets/javascripts/application.js', 'app/assets/javascripts/application.js'
+    copy_file 'assets/javascripts/components.js', 'app/assets/javascripts/components.js'
     copy_file 'assets/stylesheets/application.scss', 'app/assets/stylesheets/application.scss'
 
     # Remove application.css
@@ -145,6 +164,11 @@ class DiscoAppGenerator < Rails::Generators::Base
     rake 'disco_app:install:migrations'
   end
 
+  # Create PG database
+  def create_database
+    rake 'db:create'
+  end
+
   # Run migrations.
   def migrate
     rake 'db:migrate'
@@ -160,5 +184,14 @@ class DiscoAppGenerator < Rails::Generators::Base
     copy_file 'root/.ruby-version', '.ruby-version'
     prepend_to_file 'Gemfile', "ruby '2.3.0'\n"
   end
+
+  private
+
+    # This method of finding the component.js manifest taken from the
+    # install generator in react-rails.
+    # See https://github.com/reactjs/react-rails/blob/3f0af13fa755d6e95969c17728d0354c234f3a37/lib/generators/react/install_generator.rb#L53-L55
+    def components
+      Pathname.new(destination_root).join('app/assets/javascripts', 'components.js')
+    end
 
 end

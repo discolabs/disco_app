@@ -1,0 +1,33 @@
+<% provide(:breadcrumb, 'Shops') %>
+<% provide(:breadcrumb_url, admin_shops_path) %>
+<% provide(:title, 'Edit subscription') %>
+
+<div class="next-grid">
+  <div class="next-grid__cell">
+
+    <%= form_for(@subscription, url: admin_shop_subscription_path(@subscription.shop, @subscription)) do |f| %>
+
+      <%= f.label(:amount) %>
+      <%= f.number_field(:amount) %>
+
+      <%= f.label(:trial_period_days) %>
+      <%= f.number_field(:trial_period_days) %>
+
+      <p>
+        Note that adjusting the amount or trial days of the subscription will
+        clear any charge previously authorized by the user, and they'll be asked
+        to re-authorize the next time they open the application.
+      </p>
+
+      <p>
+        If you're changing the amount of a subscription for an existing user and
+        don't want them to get another trial period, make sure to set "Trial
+        period days" to zero.
+      </p>
+
+      <%= f.submit 'Save', { class: 'btn btn-primary' } %>
+
+    <% end %>
+
+  </div>
+</div>
