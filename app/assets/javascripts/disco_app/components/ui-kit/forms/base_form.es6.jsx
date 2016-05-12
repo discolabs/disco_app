@@ -5,17 +5,12 @@
 class BaseForm extends React.Component {
 
   /**
-   * checks if there are errors associated with the form
-   **/
-  hasErrors() {
-    return this.errorKeys().length > 0;
-  }
-
-  /**
-   * check if the field parameter has errors associated
+   * check if the field parameter has errors associated.
+   * if no parameters are given, it checks if there's at least an error at all
    **/
   hasErrors(field) {
-    if (this.props.errors && this.props.errors.errors.indexOf(field) > -1) {
+    if ((arguments.length === 0 && this.errorKeys().length > 0) ||
+        (this.props.errors && this.props.errors.errors.indexOf(field) > -1)) {
       return true;
     }
     return false;
