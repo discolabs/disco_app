@@ -46,7 +46,7 @@ Check that the rails version required in your Gemfile matches the one specified 
 $ export DISCO_GEM_CREDENTIALS=disco-gems:0dfbd458c126baa2744cef477b24c7cf7227fae5
 $ rails new example_app
 $ cd example_app
-$ echo "gem 'disco_app', git: 'https://$DISCO_GEM_CREDENTIALS@github.com/discolabs/disco_app.git', tag: '0.8.9'" >> Gemfile
+$ echo "gem 'disco_app', git: 'https://$DISCO_GEM_CREDENTIALS@github.com/discolabs/disco_app.git', tag: '0.9.0'" >> Gemfile
 $ bundle update
 $ bundle exec rails generate disco_app --force
 $ bundle install
@@ -428,6 +428,19 @@ using `ShopifyApp.redirect()`.
 #### link_to_modal
 Generates a link that will open its given `href` inside an embedded Shopify
 model.
+
+#### react_component_with_content
+Renders a react component with inner HTML content.
+
+#### errors_to_react
+Provides detailed information from an ActiveRecord to JSON object. Useful for 
+passing the information into React components.
+
+```erb
+  <%= react_component('ExampleResourceForm', @example_resource.as_json.merge({
+    errors: errors_to_react(@example_resource)
+  })) %>
+```
 
 ### Extending Models
 The models that come with the `DiscoApp` engine (such as `DiscoApp::Shop`) can

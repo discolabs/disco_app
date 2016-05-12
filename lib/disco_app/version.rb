@@ -1,3 +1,3 @@
 module DiscoApp
-  VERSION = '0.8.9'
+  VERSION = '0.9.0'
 end

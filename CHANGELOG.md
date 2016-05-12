@@ -2,11 +2,21 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+
+## 0.9.0 - 2016-05-12
+### Added
+- Basic Form React components
+- React Rule Editor component
+- Support for Postgresql only
+- Use Shopify's UI-Kit for styling: https://help.shopify.com/api/sdks/sales-channel-sdk/ui-kit
+- Postgres Sequence ID update task.
+
 ### Changed
 - `react-rails` is now a core part of `disco_app`
 
 ### Removed
 - Removed the adminify generator, admin is installed by default
+- Removed Bootstrap support
 
 ## 0.8.9 - 2016-04-25
 ### Added
