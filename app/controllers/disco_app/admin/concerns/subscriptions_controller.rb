@@ -10,7 +10,7 @@ module DiscoApp::Admin::Concerns::SubscriptionsController
 
   def update
     if @subscription.update_attributes(subscription_params)
-      redirect_to edit_admin_shop_subscription(@subscription.shop, @subscription)
+      redirect_to edit_admin_shop_subscription_path(@subscription.shop, @subscription)
     else
       render 'edit'
     end
