@@ -27,7 +27,7 @@ module DiscoApp::Admin::Resources::Concerns::ShopResource
       # Perform appropriate filtering.
       case filter
         when :query
-          return records.where('name LIKE ? OR shopify_domain LIKE ? OR domain LIKE ?', "%#{value}%", "%#{value}%", "%#{value}%")
+          return records.where('name LIKE ? OR shopify_domain LIKE ? OR domain LIKE ?', "%#{value.first}%", "%#{value.first}%", "%#{value.first}%")
         when :status
           return records.where(status: value.map { |v| DiscoApp::Shop.statuses[v.to_sym] } )
         else
