@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160426033520) do
+ActiveRecord::Schema.define(version: 20160513140727) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,6 +99,7 @@ ActiveRecord::Schema.define(version: 20160426033520) do
     t.string   "timezone"
     t.string   "iana_timezone"
     t.boolean  "has_storefront"
+    t.string   "name"
   end
 
   add_index "disco_app_shops", ["shopify_domain"], name: "index_disco_app_shops_on_shopify_domain", unique: true, using: :btree
