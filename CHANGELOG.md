@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+No unreleased changes.
+
+## 0.9.1 - 2016-05-13
+### Changed
+- Minor bugfix for admin
 
 ## 0.9.0 - 2016-05-12
 ### Added
