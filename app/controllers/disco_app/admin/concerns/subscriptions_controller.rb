@@ -10,10 +10,7 @@ module DiscoApp::Admin::Concerns::SubscriptionsController
 
   def update
     if @subscription.update_attributes(subscription_params)
-      unless (@subscription.previous_changes.keys & ['amount', 'trial_period_days']).empty?
-
-      end
-      redirect_to edit_admin_subscription_path(@subscription)
+      redirect_to edit_admin_shop_subscription(@subscription.shop, @subscription)
     else
       render 'edit'
     end
