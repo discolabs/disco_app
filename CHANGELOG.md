@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 No unreleased changes.
 
+## 0.9.2 - 2016-05-13
+### Added
+- Support for filtering shops with a query in the admin
+
 ## 0.9.1 - 2016-05-13
 ### Changed
 - Minor bugfix for admin
