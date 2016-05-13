@@ -12,7 +12,7 @@ module DiscoApp::Admin::Resources::Concerns::ShopResource
 
     model_name 'DiscoApp::Shop'
 
-    filters :status
+    filters :query, :status
 
     # Adjust the base records method to ensure only models for the authenticated domain are retrieved.
     def self.records(options = {})
@@ -26,6 +26,8 @@ module DiscoApp::Admin::Resources::Concerns::ShopResource
 
       # Perform appropriate filtering.
       case filter
+        when :query
+          return records.where('name LIKE ? OR shopify_domain LIKE ? OR domain LIKE ?', "%#{value}%", "%#{value}%", "%#{value}%")
         when :status
           return records.where(status: value.map { |v| DiscoApp::Shop.statuses[v.to_sym] } )
         else
