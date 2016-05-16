@@ -1,7 +1,7 @@
 /**
  * Defines a generic RulesEditor class. This class can't be used directly, but
  * should be inherited, with the inheriting class defining a list of column
- * types and correponding relations and condition data types, like so:
+ * types and corresponding relations and condition data types, like so:
  *
  *    class MyRulesEditor extends RulesEditor {};
  *    MyRulesEditor.defaultProps = {
@@ -9,13 +9,7 @@
  *        title: {
  *        label: 'Product title',
  *        column: 'title',
- *        relations: {
- *          is_equal_to: {
- *            label: 'is equal to',
- *            relation: 'is_equal_to',
- *            type: 'text'
- *          }
- *        }
+ *        relations: RulesEditor.buildRelationsObj([RulesEditor.EQUALS_STRING])
  *      }
  *    }
  */
