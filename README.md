@@ -173,10 +173,12 @@ The following gems are added during setup:
 - [shopify_app][] for basic Shopify application functionality;
 - [puma][] for serving the app in development and production;
 - [sidekiq][] for background job processing in production;
-- [pg][] for Postgres use in production;
+- [pg][] for Postgres use in all environments: development, test and production;
 - [dotenv-rails][] for reading environment variables from `.env` files in
   development;
 - [rails_12factor][] for use with Heroku/Dokku in production.
+- [activeresource][] , the threadsafe branch, which is used by the Shopify API gem.
+- 
 
 The following configuration changes are made:
 
@@ -191,6 +193,7 @@ Finally, the following environment changes are made:
 - Add default `.env` and `.env.local` files for development environment
   management;
 - Add a `Procfile` for deployment to Heroku;
+- Add a `CHECKS` file for use with Dokku deployments
 - Update the `.gitignore` with some additional useful defaults.
 
 [shopify_app]: https://github.com/Shopify/shopify_app
@@ -199,6 +202,7 @@ Finally, the following environment changes are made:
 [pg]: https://bitbucket.org/ged/ruby-pg
 [dotenv-rails]: https://github.com/bkeepers/dotenv
 [rails_12factor]: https://github.com/heroku/rails_12factor
+[activeresource]: https://github.com/Shopify/activeresource/tree/4.2-threadsafe
 
 ### Authentication, Sessions and the Shop Model
 The functionality provided by the ShopifyApp engine includes support for OAuth
@@ -267,6 +271,8 @@ A couple of useful Rake tasks are baked into the app. They are:
   local IP.
 - `rake webhooks:sync`: Trigger a re-synchronisation of webhooks for all
   shops on active Shopify plans and with the application currently installed.
+- `rake database:update_sequences`: Update postgres sequence numbers in case 
+  the database has been imported or migrated.
 
 ### Background Tasks
 The `DiscoApp::ShopJob` class inherits from `ActiveJob::Base`, and can be used
