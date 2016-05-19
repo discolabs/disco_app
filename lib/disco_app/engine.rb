@@ -1,5 +1,4 @@
 require 'shopify_app'
-require 'bootstrap-sass'
 require 'jquery-rails'
 require 'turbolinks'
 require 'activerecord/session_store'

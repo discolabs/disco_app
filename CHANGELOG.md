@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 ### Removed
 - A large number of attributes on the `Shop` model were removed, as they are now
   accessible from within the `data` attribute
+- Remove bootstrap-sass
 
 ## 0.9.2 - 2016-05-13
 ### Added
