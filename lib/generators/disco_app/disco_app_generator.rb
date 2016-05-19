@@ -174,6 +174,11 @@ class DiscoAppGenerator < Rails::Generators::Base
     rake 'db:migrate'
   end
 
+  #Add dokku CHECKS file to root folder
+  def add_dokku_checks
+    copy_file 'root/CHECKS', 'CHECKS'
+  end
+
   # Lock down the application to a specific Ruby version:
   #
   #  - Via .ruby-version file for rbenv in development;
