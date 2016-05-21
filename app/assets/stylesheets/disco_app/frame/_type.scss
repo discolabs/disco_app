@@ -2,16 +2,9 @@
 // Type
 // --------------------------------------------------
 
-@font-face {
-  font-family: 'ProximaNovaLight';
-  src: local('ProximaNovaLight'), local('ProximaNova-Light');
-  font-weight: normal;
-  font-style: normal;
-}
-
 // Base
 html, body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: $font-family;
   font-size: 13px;
 }
 
@@ -20,7 +13,7 @@ h1 {
   font-size: 24px;
   line-height: 32px;
   height: 32px;
-  font-family: ProximaNovaLight,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: $font-family;
   font-weight: 300;
   margin: 0;
   padding: 0;
