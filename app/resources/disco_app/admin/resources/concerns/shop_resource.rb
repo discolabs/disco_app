@@ -5,8 +5,8 @@ module DiscoApp::Admin::Resources::Concerns::ShopResource
 
   included do
 
-    attributes :domain, :status, :email, :country_name
-    attributes :currency, :plan_display_name, :created_at
+    attributes :domain, :status, :created_at
+    attributes :email, :country_name, :currency, :plan_display_name
     attributes :current_subscription_id, :current_subscription_display_amount, :current_subscription_display_plan, :current_subscription_display_plan_code, :current_subscription_source
     attributes :installed_duration
 
@@ -43,6 +43,22 @@ module DiscoApp::Admin::Resources::Concerns::ShopResource
     # Don't allow the creation of any fields via the API.
     def self.creatable_fields(context)
       []
+    end
+
+    def email
+      @model.data['email']
+    end
+
+    def country_name
+      @model.data['country_name']
+    end
+
+    def currency
+      @model.data['currency']
+    end
+
+    def plan_display_name
+      @model.data['plan_display_name']
     end
 
     def current_subscription_id
