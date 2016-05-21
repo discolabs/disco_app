@@ -5,10 +5,10 @@ class MoveShopToSynchronises < ActiveRecord::Migration
 
   ATTRIBUTES_TO_MIGRATE = [
     :email, :country_name, :currency, :money_format,
-    :money_with_currency_format, :domain, :plan_name, :plan_display_name,
+    :money_with_currency_format, :plan_display_name,
     :latitude, :longitude, :customer_email, :password_enabled, :phone,
     :primary_locale, :ships_to_countries, :timezone, :iana_timezone,
-    :has_storefront, :name
+    :has_storefront
   ]
 
   def up
