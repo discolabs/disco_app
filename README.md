@@ -589,9 +589,10 @@ steps you should take:
 - Run `bundle exec rake disco_app:install:migrations` to copy over any new
   migrations from the gem into your application, ready to be run with a
   `bundle exec rake db:migrate`.
-- Carefully read through `CHANGELOG.md` and the commit history for `disco_app`
-  between the previous version of the gem you were using and the new one. You
-  may have to make some changes to your application code to adapt to change.
+- Carefully read through `CHANGELOG.md`, `UPGRADING.md`, and the commit history
+  for `disco_app` between the previous version of the gem you were using and the
+  new one. You may have to make some changes to your application code to adapt
+  to change.
 
 [release list]: https://github.com/discolabs/disco_app/releases
 
@@ -611,15 +612,17 @@ To create a new release of the application:
 
 1. Ensure the CHANGELOG is up to date by reviewing all commits since the last
    release;
-2. Ensure the README is accurate and up to date by reviewing all commits since
+2. Ensure the UPGRADING file contains all necessary instructions for upgrading
+   an application to the latest version of the gem.
+3. Ensure the README is accurate and up to date by reviewing all commits since
    the last release;
-3. Update `lib/disco_app/version.rb` with the new version number;
-4. Run `bundle install` to update `Gemfile.lock` with the new version number; 
-5. Update references to the latest version number in the README;
-6. Create a new commit with a commit message `vX.Y.Z`, where `X.Y.Z` is the
+4. Update `lib/disco_app/version.rb` with the new version number;
+5. Run `bundle install` to update `Gemfile.lock` with the new version number; 
+6. Update references to the latest version number in the README;
+7. Create a new commit with a commit message `vX.Y.Z`, where `X.Y.Z` is the
    version number;
-7. Tag the new commit with a tag `X.Y.Z`;
-8. `git push && git push --tags` to push the new release.
+8. Tag the new commit with a tag `X.Y.Z`;
+9. `git push && git push --tags` to push the new release.
       
 See [an example release commit][].
 
