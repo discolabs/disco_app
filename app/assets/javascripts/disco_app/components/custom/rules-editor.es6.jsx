@@ -23,13 +23,11 @@ class RulesEditor extends React.Component {
     super(props);
     this.state = {
       rules: props.rules.map((rule, i) => {
-        return {
+        return Object.assign({}, rule, {
           column: Object.keys(this.props.columns).filter((columnKey) => {
             return this.props.columns[columnKey].column == rule.column;
-          })[0],
-          relation: rule.relation,
-          condition: rule.condition
-        }
+          })[0]
+        });
       })
     }
   }
@@ -114,6 +112,19 @@ class RulesEditor extends React.Component {
   }
 
   /**
+   * Handle a change in a rule's variables
+   *
+   * @param index
+   * @param name
+   * @param value
+   */
+  onRuleVariableChange(index, name, value) {
+    this.updateRule(index, {
+      [name]: value
+    });
+  }
+
+  /**
    * Given the column we're changing to and the current rule, return the next
    * relation value.
    *
@@ -159,10 +170,21 @@ class RulesEditor extends React.Component {
    * @param updates
    */
   updateRule(index, updates) {
+    let updatedRule = Object.assign({}, this.state.rules[index], updates);
+
+    // Ensure only valid variables are present in the rule
+    const columnPath = this.props.columns[updatedRule.column].column;
+    const columnVariables = RulesEditor.getColumnPathVariables(columnPath);
+    Object.keys(updatedRule).forEach(function (key) {
+      if ('$' === key[0] && -1 === columnVariables.indexOf(key)) {
+        delete updatedRule[key];
+      }
+    });
+
     this.setState({
       rules: [
         ...this.state.rules.slice(0, index),
-        Object.assign({}, this.state.rules[index], updates),
+        updatedRule,
         ...this.state.rules.slice(index + 1)
       ]
     });
@@ -184,6 +206,7 @@ class RulesEditor extends React.Component {
         onColumnChange={this.onRuleColumnChange.bind(this, i)}
         onRelationChange={this.onRuleRelationChange.bind(this, i)}
         onConditionChange={this.onRuleConditionChange.bind(this, i)}
+        onVariableChange={this.onRuleVariableChange.bind(this, i)}
         ruleCount={rules.length}
         blankOk = {this.props.blankOk}
       />
@@ -192,11 +215,9 @@ class RulesEditor extends React.Component {
     // Convert the current rules JSON into a format using the correct column
     // format used by our more advanced key checker.
     const rulesJSON = JSON.stringify(this.state.rules.map((rule, i) => {
-      return {
-        column: this.props.columns[rule.column].column,
-        relation: rule.relation,
-        condition: rule.condition
-      }
+      return Object.assign({}, rule, {
+        column: this.props.columns[rule.column].column
+      });
     }));
 
     return(
@@ -214,6 +235,23 @@ class RulesEditor extends React.Component {
     );
   }
 
+  /**
+   * Get the variable names present in a column definition
+   *
+   * @param column
+   * @returns {Array.<String>}
+   */
+  static getColumnPathVariables(column) {
+    return column.split(/[^$a-z_A-Z]/).filter((key) => '$' === key[0]);
+  }
+
+  /**
+   * Return a relations object, which is just the passed array
+   * turned into an object which is keyed by the `relation` value
+   *
+   * @param relations
+   * @returns {{}}
+   */
   static buildRelationsObj(relations) {
     var relationsObj = {};
 
@@ -258,7 +296,7 @@ RulesEditor.LESS_THAN = {
   type: 'numeric'
 };
 
-const RulesEditorRule = ({ rule, columns, onRemove, onColumnChange, onRelationChange, onConditionChange, ruleCount, blankOk }) => {
+const RulesEditorRule = ({ rule, columns, onRemove, onColumnChange, onVariableChange, onRelationChange, onConditionChange, ruleCount, blankOk }) => {
   const { column, relation, condition } = rule;
 
   const currentColumn = columns[column];
@@ -287,6 +325,16 @@ const RulesEditorRule = ({ rule, columns, onRemove, onColumnChange, onRelationCh
     );
   }
 
+  const columnVariables = RulesEditor.getColumnPathVariables(currentColumn.column);
+
+  let variablesEditor = columnVariables.map(function(name) {
+    return (
+      <div className="next-grid__cell" key={name}>
+        <RulesEditorVariableInput name={name} value={rule[name]} onChange={onVariableChange.bind(this, name)} />
+      </div>
+    );
+  });
+
   return (
     <div>
       <div className="next-grid next-grid--no-padding next-grid--compact">
@@ -295,6 +343,7 @@ const RulesEditorRule = ({ rule, columns, onRemove, onColumnChange, onRelationCh
             <div className="next-grid__cell">
               <RulesEditorColumnSelect currentColumnName={column} columns={columns} onChange={onColumnChange} />
             </div>
+            {variablesEditor}
             <div className="next-grid__cell">
               <RulesEditorRelationSelect currentRelationName={relation} relations={currentColumn.relations} onChange={onRelationChange} />
             </div>
@@ -317,6 +366,20 @@ const RulesEditorColumnSelect = ({ currentColumnName, columns, onChange }) => {
   });
 
   return <InputSelect options={options} value={currentColumnName} onChange={onChange} label="Field" labelHidden={true} />;
+};
+
+const RulesEditorVariableInput = ({ name, value, onChange }) => {
+
+  const handleChange = (e) => {
+    onChange && onChange(e);
+  };
+
+  let label = name.substr(1).trim().replace( /([A-Z])/g, " $1" );
+  label = label.charAt(0).toUpperCase() + label.substr(1);
+
+  return (
+    <InputText value={value} onChange={handleChange} label={label} labelHidden={true} placeholder={label} required={true} />
+  );
 };
 
 const RulesEditorRelationSelect = ({ currentRelationName, relations, onChange }) => {
