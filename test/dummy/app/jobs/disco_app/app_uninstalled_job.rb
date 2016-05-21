@@ -5,7 +5,7 @@ class DiscoApp::AppUninstalledJob < DiscoApp::ShopJob
   # 'Nowhere' on uninstallation.
   def perform(domain, shop_data)
     super(domain, shop_data)
-    @shop.update(country_name: 'Nowhere')
+    @shop.update(data: @shop.data.merge(country_name: 'Nowhere'))
   end
 
 end

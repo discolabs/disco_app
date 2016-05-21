@@ -6,11 +6,8 @@ module DiscoApp::Concerns::ShopUpdateJob
     # If we weren't provided with shop data (eg from a webhook), fetch it.
     shop_data ||= ActiveSupport::JSON::decode(ShopifyAPI::Shop.current.to_json)
 
-    # Ensure we can access shop data through symbols.
-    shop_data = HashWithIndifferentAccess.new(shop_data)
-
-    # Update model attributes present in both our model and the data hash.
-    @shop.update_attributes(shop_data.except(:id, :created_at).slice(*DiscoApp::Shop.column_names))
+    # Update attributes stored directly on the Shop model, along with the data hash itself.
+    @shop.update(shop_data.with_indifferent_access.slice(*DiscoApp::Shop.column_names).except(:id, :created_at).merge(data: shop_data))
   end
 
 end
