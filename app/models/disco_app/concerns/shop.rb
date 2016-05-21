@@ -23,19 +23,6 @@ module DiscoApp::Concerns::Shop
     # Alias 'with_shopify_session' as 'temp', as per our existing conventions.
     alias_method :temp, :with_shopify_session
 
-    # Return a hash of attributes that should be used to create a new charge for this shop.
-    # This method can be overridden by the inheriting Shop class in order to provide charges
-    # customised to a particular shop. Otherwise, the default settings configured in application.rb
-    # will be used.
-    def new_charge_attributes
-      {
-          type: Rails.configuration.x.shopify_charges_default_type,
-          name: DiscoApp.configuration.app_name,
-          price: Rails.configuration.x.shopify_charges_default_price,
-          trial_days: Rails.configuration.x.shopify_charges_default_trial_days,
-      }
-    end
-
     # Convenience method to check if this shop has a current subscription.
     def current_subscription?
       current_subscription.present?
