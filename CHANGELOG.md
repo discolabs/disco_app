@@ -2,7 +2,13 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
-No unreleased changes.
+### Added
+- Added a `data` attribute to the `Shop` model, to synchronise all Shop data from
+  Shopify in a `jsonb` field
+  
+### Removed
+- A large number of attributes on the `Shop` model were removed, as they are now
+  accessible from within the `data` attribute
 
 ## 0.9.2 - 2016-05-13
 ### Added
