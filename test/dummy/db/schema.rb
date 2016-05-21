@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160513140727) do
+ActiveRecord::Schema.define(version: 20160521135510) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,30 +76,12 @@ ActiveRecord::Schema.define(version: 20160513140727) do
   add_index "disco_app_sessions", ["updated_at"], name: "index_disco_app_sessions_on_updated_at", using: :btree
 
   create_table "disco_app_shops", force: :cascade do |t|
-    t.string   "shopify_domain",                         null: false
-    t.string   "shopify_token",                          null: false
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-    t.integer  "status",                     default: 0
-    t.string   "email"
-    t.string   "country_name"
-    t.string   "currency"
-    t.string   "money_format"
-    t.string   "money_with_currency_format"
-    t.string   "domain"
-    t.string   "plan_name"
-    t.string   "plan_display_name"
-    t.decimal  "latitude"
-    t.decimal  "longitude"
-    t.string   "customer_email"
-    t.boolean  "password_enabled"
-    t.string   "phone"
-    t.string   "primary_locale"
-    t.string   "ships_to_countries"
-    t.string   "timezone"
-    t.string   "iana_timezone"
-    t.boolean  "has_storefront"
-    t.string   "name"
+    t.string   "shopify_domain",              null: false
+    t.string   "shopify_token",               null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "status",         default: 0
+    t.jsonb    "data",           default: {}
   end
 
   add_index "disco_app_shops", ["shopify_domain"], name: "index_disco_app_shops_on_shopify_domain", unique: true, using: :btree
