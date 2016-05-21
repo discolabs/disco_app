@@ -5,7 +5,7 @@
 
 .next-nav {
   z-index: 221;
-  width: 230px;
+  width: 240px;
   position: fixed;
   top: 0;
   left: 0;
@@ -29,7 +29,7 @@
 
 .next-nav__panel--primary {
   z-index: 1;
-  width: 230px;
+  width: 240px;
   background-color: #31373d;
   -webkit-transition: background-color 200ms ease;
   transition: background-color 200ms ease;
@@ -110,6 +110,15 @@
 }
 
 .next-nav__link {
+  color: rgba(0,0,0,0.9);
+  font-size: 1.07143rem;
+  line-height: 1.42857rem;
+  font-weight: 400;
+  text-transform: initial;
+  letter-spacing: initial;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 500;
   color: #c3cfd8;
   padding: 0 10px 0 20px;
   height: 40px;
@@ -123,9 +132,12 @@
   align-items: center;
   background-color: transparent;
   border: none;
-  font-size: 13px;
   cursor: pointer;
   line-height: normal;
+
+  @media screen and (min-width: 640px) {
+    font-size: 1rem;
+  }
 }
 
 .next-nav__link:hover, .next-nav__link:focus, .next-nav__link:active, .next-nav__link.next-nav__link--is-selected {

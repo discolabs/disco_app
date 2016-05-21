@@ -394,31 +394,28 @@ hr.helper--divider {
   margin: 20px 0;
 }
 
-@font-face {
-  font-family: 'Golos-Bold';
-  src: url(/golos-bold.eot);
-}
-
-@font-face {
-  font-family: 'Golos-Bold';
-  src: url(/golos-bold.woff) format("woff"), url(/golos-bold.ttf) format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
 html {
-  font-size: 62.5%;
+  font-size: 87.5%;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
 }
 
 body {
-  line-height: 18px;
-  font-size: 13px;
-  color: #31373d;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  text-rendering: optimizeLegibility;
+  color: rgba(0,0,0,0.9);
+  font-size: 1.07143rem;
+  line-height: 1.42857rem;
+  font-weight: 400;
+  text-transform: initial;
+  letter-spacing: initial;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: $font-family;
+
+  @media screen and (min-width: 640px) {
+    font-size: 1rem;
+  }
 }
 
 strong {
@@ -533,7 +530,7 @@ code {
 input {
   font-size: 13px;
   line-height: 18px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: $font-family;
 }
 
 del {
@@ -1519,7 +1516,7 @@ a.type--subdued:hover {
   height: auto;
   white-space: nowrap;
   text-transform: none;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: $font-family;
   font-weight: normal;
   position: relative;
   vertical-align: middle;
@@ -1636,7 +1633,7 @@ input[type="submit"].btn-disabled.btn--outline,
   z-index: 226;
   border-radius: 0;
   left: 0;
-  min-width: 230px;
+  min-width: 240px;
   padding: 20px 0 !important;
   text-align: center;
   top: 0;
@@ -2545,7 +2542,7 @@ input, textarea {
   max-width: 100%;
   vertical-align: top;
   height: 28px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: $font-family;
   font-size: 13px;
   padding: 4px;
   margin: 0;
@@ -2739,7 +2736,7 @@ textarea.is-expanded {
 
 select {
   margin: 0;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: $font-family;
   font-size: 13px;
   display: inline-block;
   color: #222;
