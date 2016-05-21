@@ -24,7 +24,7 @@ class DiscoApp::AppUninstalledJobTest < ActionController::TestCase
   test 'app uninstalled job can be extended using concerns' do
     assert_performed_jobs 1
     @shop.reload
-    assert_equal 'Nowhere', @shop.country_name # Assert extended method called.
+    assert_equal 'Nowhere', @shop.data['country_name'] # Assert extended method called.
   end
 
 end
