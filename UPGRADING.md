@@ -19,7 +19,14 @@ attributes have been removed from the Shop model:
 
 You should replace any parts of your application code that uses these attributes
 to access them through the `data` attribute instead, eg: `@shop.currency`
-becomes `@shop.data['currency']`.
+becomes `@shop.data['currency']`. For commonly-accessed attributes, you may wish
+to simply add an accessor method on your model:
+
+```
+def currency
+  data['currency']
+end
+```
 
 There is a new rake task, `shops:sync`, which you should run from your app once
 this change is deployed. It will pull in and update all shop information from
@@ -28,7 +35,7 @@ the Shopify API.
 ### Removal of Bootstrap CSS styles
 
 From this version onwards, the Bootstrap CSS styles were removed. Please use
-the UI Kit styles instead - these were already introduced in a previous verion
+the UI Kit styles instead - these were already introduced in a previous version
 of disco_app.
 
 
