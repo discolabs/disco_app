@@ -5,11 +5,19 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Added a `data` attribute to the `Shop` model, to synchronise all Shop data from
   Shopify in a `jsonb` field
+- Added explicit dependency on `nokogiri` gem version 1.6.7.2.
   
 ### Removed
 - A large number of attributes on the `Shop` model were removed, as they are now
   accessible from within the `data` attribute
-- Remove bootstrap-sass
+- Removed bootstrap-sass
+
+### Changed
+- The `mailify` and `monitorify` optional generators are not available. Instead, they
+  are available as part of the main `disco_app` generator.
+- Updated the version of `ruby` to 2.3.1.
+- Updated the version of `newrelic_rpm` to 3.15.2.317.
+
 
 ## 0.9.2 - 2016-05-13
 ### Added
