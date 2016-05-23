@@ -5,7 +5,8 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Added a `data` attribute to the `Shop` model, to synchronise all Shop data from
   Shopify in a `jsonb` field
-- Added explicit dependency on `nokogiri` gem version 1.6.7.2.
+- Explicit dependency on `nokogiri` gem version 1.6.7.2.
+- New rake task: `shops:sync`, for updating shop data information.
   
 ### Removed
 - A large number of attributes on the `Shop` model were removed, as they are now

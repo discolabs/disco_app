@@ -271,7 +271,7 @@ Whenever a store's subscription level is changed,
 `DiscoApp::SubscriptionChangedJob` is queued.
 
 ### Rake Tasks
-A couple of useful Rake tasks are baked into the app. They are:
+There's a number of useful Rake tasks that are baked into the app. They are:
 
 - `rake start`: Spin up a local Puma development server, bound correctly to the
   local IP.
@@ -279,6 +279,7 @@ A couple of useful Rake tasks are baked into the app. They are:
   shops on active Shopify plans and with the application currently installed.
 - `rake database:update_sequences`: Update postgres sequence numbers in case 
   the database has been imported or migrated.
+- `rake shops:sync`: Synchronises shop data across all installed shops.
 
 ### Background Tasks
 The `DiscoApp::ShopJob` class inherits from `ActiveJob::Base`, and can be used
