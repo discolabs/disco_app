@@ -9,7 +9,7 @@ class DiscoAppGenerator < Rails::Generators::Base
   #  - Default simple Procfile for Heroku.
   #
   def copy_root_files
-    %w(.env .env.local .gitignore Procfile).each do |file|
+    %w(.env .env.local .gitignore Procfile CHECKS).each do |file|
       copy_file "root/#{file}", file
     end
   end
@@ -211,11 +211,6 @@ class DiscoAppGenerator < Rails::Generators::Base
   # Run migrations.
   def migrate
     rake 'db:migrate'
-  end
-
-  #Add dokku CHECKS file to root folder
-  def add_dokku_checks
-    copy_file 'root/CHECKS', 'CHECKS'
   end
 
   # Lock down the application to a specific Ruby version:
