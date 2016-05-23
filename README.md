@@ -552,8 +552,9 @@ manually create columns storing references to other models, make sure you use
 
 ### Email Support
 
-
-
+DiscoApp has support for the Mailgun and configures Active Mailer to use the 
+Mailgun API in production for sending email. Adds the `MAILGUN_API_KEY` and 
+`MAILGUN_API_DOMAIN` environment variables.
 
 ### Monitoring
 
