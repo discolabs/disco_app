@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## 0.9.3 - 2016-05-23
 ### Added
 - Added a `data` attribute to the `Shop` model, to synchronise all Shop data from
   Shopify in a `jsonb` field

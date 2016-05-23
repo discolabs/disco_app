@@ -3,7 +3,7 @@ This file contains more detailed instructions on what's required when updating
 an application between one release version of the gem to the next. It's intended
 as more in-depth accompaniment to the notes in `CHANGELOG.md` for each version.
 
-## Upgrading from 0.9.2 to (Unreleased)
+## Upgrading from 0.9.2 to 0.9.3
 
 ### New data attribute on Shops
 The Shop model now has a `data` attribute, which stores all shop information
@@ -24,6 +24,12 @@ becomes `@shop.data['currency']`.
 There is a new rake task, `shops:sync`, which you should run from your app once
 this change is deployed. It will pull in and update all shop information from
 the Shopify API.
+
+### Removal of Bootstrap CSS styles
+
+From this version onwards, the Bootstrap CSS styles were removed. Please use
+the UI Kit styles instead - these were already introduced in a previous verion
+of disco_app.
 
 
 ## Upgrading to 0.9.2
