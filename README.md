@@ -7,7 +7,6 @@ well as providing common functionality in a single codebase.
 
 - [Getting Started](#getting-started)
 - [Engine Overview](#engine-overview)
-- [Optional Generators](#optional-generators)
 - [Contributing](#contributing)
 
 
@@ -25,7 +24,7 @@ to note are:
 - You should have set up a Shopify Partner account to allow you to create
   development stores and applications;
 - [rbenv][] is recommended for Ruby version management;
-- You should have the latest version of Ruby 2.3 installed locally, along with
+- You should have the latest version of Ruby 2.3.1 installed locally, along with
   the `rails` and `bundler` gems;
 - You should have some form of HTTP tunnelling software like [ngrok][] or
   [localtunnel][] installed.
@@ -173,10 +172,15 @@ The following gems are added during setup:
 - [shopify_app][] for basic Shopify application functionality;
 - [puma][] for serving the app in development and production;
 - [sidekiq][] for background job processing in production;
-- [pg][] for Postgres use in production;
+- [pg][] for Postgres use in all environments: development, test and production;
 - [dotenv-rails][] for reading environment variables from `.env` files in
   development;
 - [rails_12factor][] for use with Heroku/Dokku in production.
+- [activeresource][] , the threadsafe branch, which is used by the Shopify API gem.
+- [mailgun_rails][] for sending email programatically via the Mailgun service.
+- [premailer_rails][] support for styling HTML emails with CSS
+- [rollbar][] Exception tracking and logging
+- [newrelic_rpm][] New Relic RPM Ruby Agent
 
 The following configuration changes are made:
 
@@ -191,6 +195,7 @@ Finally, the following environment changes are made:
 - Add default `.env` and `.env.local` files for development environment
   management;
 - Add a `Procfile` for deployment to Heroku;
+- Add a `CHECKS` file for use with Dokku deployments
 - Update the `.gitignore` with some additional useful defaults.
 
 [shopify_app]: https://github.com/Shopify/shopify_app
@@ -199,6 +204,11 @@ Finally, the following environment changes are made:
 [pg]: https://bitbucket.org/ged/ruby-pg
 [dotenv-rails]: https://github.com/bkeepers/dotenv
 [rails_12factor]: https://github.com/heroku/rails_12factor
+[activeresource]: https://github.com/Shopify/activeresource/tree/4.2-threadsafe
+[mailgun_rails]: https://github.com/jorgemanrubia/mailgun_rails
+[premailer_rails]: https://github.com/fphilipe/premailer-rails
+[rollbar]: https://github.com/rollbar/rollbar-gem
+[newrelic_rpm]: https://github.com/newrelic/rpm
 
 ### Authentication, Sessions and the Shop Model
 The functionality provided by the ShopifyApp engine includes support for OAuth
@@ -261,12 +271,15 @@ Whenever a store's subscription level is changed,
 `DiscoApp::SubscriptionChangedJob` is queued.
 
 ### Rake Tasks
-A couple of useful Rake tasks are baked into the app. They are:
+There's a number of useful Rake tasks that are baked into the app. They are:
 
 - `rake start`: Spin up a local Puma development server, bound correctly to the
   local IP.
 - `rake webhooks:sync`: Trigger a re-synchronisation of webhooks for all
   shops on active Shopify plans and with the application currently installed.
+- `rake database:update_sequences`: Update postgres sequence numbers in case 
+  the database has been imported or migrated.
+- `rake shops:sync`: Synchronises shop data across all installed shops.
 
 ### Background Tasks
 The `DiscoApp::ShopJob` class inherits from `ActiveJob::Base`, and can be used
@@ -537,35 +550,16 @@ your migrations, rather than `integer`. If you do for some reason need to
 manually create columns storing references to other models, make sure you use
 `limit: 8` in the column definition.
 
+### Email Support
 
-## Optional Generators
-A number of "optional" generators are provided to add functionality that's
-useful, but not necessary for every application. They should be run after
-you've completed the "Creating the Rails app" step described in the "Getting
-Started" section above.
+DiscoApp has support for the Mailgun and configures Active Mailer to use the 
+Mailgun API in production for sending email. Adds the `MAILGUN_API_KEY` and 
+`MAILGUN_API_DOMAIN` environment variables.
 
-These generators are provided as conveniences. You should still carefully check
-the changes they make to your app after running them to tidy up their changes.
+### Monitoring
 
-A list of available optional generators follows.
-
-
-### Mailify
-```
-$ bundle exec rails generate disco_app:mailify
-```
-
-Adds the `mailgun_rails` and `premailer-rails` gems and configures Active Mailer
-to use the Mailgun API in production for sending email. Adds the
-`MAILGUN_API_KEY` and `MAILGUN_API_DOMAIN` environment variables.
-
-### Monitorify
-```
-$ bundle exec rails generate disco_app:monitorify
-```
-
-Adds support for both exception reporting and application performance monitoring
-to the application.
+DiscoApp has support for both exception reporting and application performance 
+monitoring to the application.
 
 [Rollbar][] is used for exception tracking, and will be activated when a
 `ROLLBAR_ACCESS_TOKEN` environment variable is present. Rollbar access tokens

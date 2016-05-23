@@ -9,7 +9,7 @@ class DiscoAppGenerator < Rails::Generators::Base
   #  - Default simple Procfile for Heroku.
   #
   def copy_root_files
-    %w(.env .env.local .gitignore Procfile).each do |file|
+    %w(.env .env.local .gitignore Procfile CHECKS).each do |file|
       copy_file "root/#{file}", file
     end
   end
@@ -30,7 +30,6 @@ class DiscoAppGenerator < Rails::Generators::Base
     gem 'shopify_app', '~> 6.4.1'
     gem 'sidekiq', '~> 4.0.2'
     gem 'puma', '~> 2.14.0'
-    gem 'bootstrap-sass', '~> 3.3.5.1'
     gem 'activerecord-session_store', '~> 0.1.2'
     gem 'activeresource', github: 'shopify/activeresource', tag: '4.2-threadsafe'
     gem 'rails-bigint-pk', '~> 1.2.0'
@@ -39,6 +38,10 @@ class DiscoAppGenerator < Rails::Generators::Base
     gem 'react-rails', '~> 1.6.0'
     gem 'classnames-rails', '~> 2.1.5'
     gem 'active_link_to', '~> 1.0.2'
+    # Add premailer gem to Gemfile.
+    gem 'premailer-rails', '~> 1.8.2'
+    # Add explicit dependency on Nokogiri
+    gem 'nokogiri', '~> 1.6.7.2'
 
     # Add gems for development and testing only.
     gem_group :development, :test do
@@ -51,7 +54,13 @@ class DiscoAppGenerator < Rails::Generators::Base
     # Add gems for production only.
     gem_group :production do
       gem 'rails_12factor', '~> 0.0.3'
+      gem 'mailgun_rails', '~> 0.7.0'
     end
+
+    # Add monitoring gems to Gemfile
+    gem 'rollbar', '~> 2.8.0'
+    gem 'oj', '~> 2.14.5'
+    gem 'newrelic_rpm', '~> 3.15.2.317'
   end
 
   # copy template for pg configuration
@@ -113,6 +122,36 @@ class DiscoAppGenerator < Rails::Generators::Base
 
     # Copy over the default puma configuration.
     copy_file 'config/puma.rb', 'config/puma.rb'
+
+    # Mail configuration
+    configuration = <<-CONFIG.strip_heredoc
+
+        # Configure ActionMailer to use MailGun
+        if ENV['MAILGUN_API_KEY']
+          config.action_mailer.delivery_method = :mailgun
+          config.action_mailer.mailgun_settings = {
+            api_key: ENV['MAILGUN_API_KEY'],
+            domain: ENV['MAILGUN_API_DOMAIN']
+          }
+        end
+    CONFIG
+    application configuration, env: :production
+
+    # Monitoring configuration
+    copy_file 'initializers/rollbar.rb', 'config/initializers/rollbar.rb'
+    copy_file 'config/newrelic.yml', 'config/newrelic.yml'
+  end
+
+
+  # Add entries to .env and .env.local
+  def add_env_variables
+    configuration = <<-CONFIG.strip_heredoc
+
+      MAILGUN_API_KEY=
+      MAILGUN_API_DOMAIN=
+    CONFIG
+    append_to_file '.env', configuration
+    append_to_file '.env.local', configuration
   end
 
   # Set up routes.
@@ -182,7 +221,7 @@ class DiscoAppGenerator < Rails::Generators::Base
   # This should be the last operation, to allow all other operations to run in the initial Ruby version.
   def set_ruby_version
     copy_file 'root/.ruby-version', '.ruby-version'
-    prepend_to_file 'Gemfile', "ruby '2.3.0'\n"
+    prepend_to_file 'Gemfile', "ruby '2.3.1'\n"
   end
 
   private
