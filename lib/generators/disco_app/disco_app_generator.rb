@@ -38,6 +38,10 @@ class DiscoAppGenerator < Rails::Generators::Base
     gem 'react-rails', '~> 1.6.0'
     gem 'classnames-rails', '~> 2.1.5'
     gem 'active_link_to', '~> 1.0.2'
+    # Add premailer gem to Gemfile.
+    gem 'premailer-rails', '~> 1.8.2'
+    # Add explicit dependency on Nokogiri
+    gem 'nokogiri', '~> 1.6.7.2'
 
     # Add gems for development and testing only.
     gem_group :development, :test do
@@ -50,6 +54,7 @@ class DiscoAppGenerator < Rails::Generators::Base
     # Add gems for production only.
     gem_group :production do
       gem 'rails_12factor', '~> 0.0.3'
+      gem 'mailgun_rails', '~> 0.7.0'
     end
   end
 
@@ -112,6 +117,32 @@ class DiscoAppGenerator < Rails::Generators::Base
 
     # Copy over the default puma configuration.
     copy_file 'config/puma.rb', 'config/puma.rb'
+
+    # Mail configuration
+    configuration = <<-CONFIG.strip_heredoc
+
+        # Configure ActionMailer to use MailGun
+        if ENV['MAILGUN_API_KEY']
+          config.action_mailer.delivery_method = :mailgun
+          config.action_mailer.mailgun_settings = {
+            api_key: ENV['MAILGUN_API_KEY'],
+            domain: ENV['MAILGUN_API_DOMAIN']
+          }
+        end
+    CONFIG
+    application configuration, env: :production
+  end
+
+
+  # Add entries to .env and .env.local
+  def add_env_variables
+    configuration = <<-CONFIG.strip_heredoc
+
+      MAILGUN_API_KEY=
+      MAILGUN_API_DOMAIN=
+    CONFIG
+    append_to_file '.env', configuration
+    append_to_file '.env.local', configuration
   end
 
   # Set up routes.

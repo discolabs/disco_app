@@ -178,7 +178,8 @@ The following gems are added during setup:
   development;
 - [rails_12factor][] for use with Heroku/Dokku in production.
 - [activeresource][] , the threadsafe branch, which is used by the Shopify API gem.
-- 
+- [mailgun_rails][] for sending email programatically via the Mailgun service.
+- [premailer_rails][] support for styling HTML emails with CSS
 
 The following configuration changes are made:
 
@@ -203,6 +204,8 @@ Finally, the following environment changes are made:
 [dotenv-rails]: https://github.com/bkeepers/dotenv
 [rails_12factor]: https://github.com/heroku/rails_12factor
 [activeresource]: https://github.com/Shopify/activeresource/tree/4.2-threadsafe
+[mailgun_rails]: https://github.com/jorgemanrubia/mailgun_rails
+[premailer_rails]: https://github.com/fphilipe/premailer-rails
 
 ### Authentication, Sessions and the Shop Model
 The functionality provided by the ShopifyApp engine includes support for OAuth
@@ -555,15 +558,6 @@ the changes they make to your app after running them to tidy up their changes.
 
 A list of available optional generators follows.
 
-
-### Mailify
-```
-$ bundle exec rails generate disco_app:mailify
-```
-
-Adds the `mailgun_rails` and `premailer-rails` gems and configures Active Mailer
-to use the Mailgun API in production for sending email. Adds the
-`MAILGUN_API_KEY` and `MAILGUN_API_DOMAIN` environment variables.
 
 ### Monitorify
 ```
