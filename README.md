@@ -180,6 +180,8 @@ The following gems are added during setup:
 - [activeresource][] , the threadsafe branch, which is used by the Shopify API gem.
 - [mailgun_rails][] for sending email programatically via the Mailgun service.
 - [premailer_rails][] support for styling HTML emails with CSS
+- [rollbar][] Exception tracking and logging
+- [newrelic_rpm][] New Relic RPM Ruby Agent
 
 The following configuration changes are made:
 
@@ -206,6 +208,8 @@ Finally, the following environment changes are made:
 [activeresource]: https://github.com/Shopify/activeresource/tree/4.2-threadsafe
 [mailgun_rails]: https://github.com/jorgemanrubia/mailgun_rails
 [premailer_rails]: https://github.com/fphilipe/premailer-rails
+[rollbar]: https://github.com/rollbar/rollbar-gem
+[newrelic_rpm]: https://github.com/newrelic/rpm
 
 ### Authentication, Sessions and the Shop Model
 The functionality provided by the ShopifyApp engine includes support for OAuth
@@ -546,26 +550,15 @@ your migrations, rather than `integer`. If you do for some reason need to
 manually create columns storing references to other models, make sure you use
 `limit: 8` in the column definition.
 
-
-## Optional Generators
-A number of "optional" generators are provided to add functionality that's
-useful, but not necessary for every application. They should be run after
-you've completed the "Creating the Rails app" step described in the "Getting
-Started" section above.
-
-These generators are provided as conveniences. You should still carefully check
-the changes they make to your app after running them to tidy up their changes.
-
-A list of available optional generators follows.
+### Email Support
 
 
-### Monitorify
-```
-$ bundle exec rails generate disco_app:monitorify
-```
 
-Adds support for both exception reporting and application performance monitoring
-to the application.
+
+### Monitoring
+
+DiscoApp has support for both exception reporting and application performance 
+monitoring to the application.
 
 [Rollbar][] is used for exception tracking, and will be activated when a
 `ROLLBAR_ACCESS_TOKEN` environment variable is present. Rollbar access tokens

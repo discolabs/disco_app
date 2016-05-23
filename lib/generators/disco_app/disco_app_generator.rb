@@ -56,6 +56,11 @@ class DiscoAppGenerator < Rails::Generators::Base
       gem 'rails_12factor', '~> 0.0.3'
       gem 'mailgun_rails', '~> 0.7.0'
     end
+
+    # Add monitoring gems to Gemfile
+    gem 'rollbar', '~> 2.8.0'
+    gem 'oj', '~> 2.14.5'
+    gem 'newrelic_rpm', '~> 3.15.2.317'
   end
 
   # copy template for pg configuration
@@ -131,6 +136,10 @@ class DiscoAppGenerator < Rails::Generators::Base
         end
     CONFIG
     application configuration, env: :production
+
+    # Monitoring configuration
+    copy_file 'initializers/rollbar.rb', 'config/initializers/rollbar.rb'
+    copy_file 'config/newrelic.yml', 'config/newrelic.yml'
   end
 
 
