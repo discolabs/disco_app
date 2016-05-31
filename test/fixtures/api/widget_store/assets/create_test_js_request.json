@@ -1,0 +1,6 @@
+{
+  "asset":{
+    "key":"assets/test.js",
+    "value":"var locale = 'sv';\n"
+  }
+}

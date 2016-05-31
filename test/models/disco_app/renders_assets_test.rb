@@ -2,16 +2,23 @@ require 'test_helper'
 
 class DiscoApp::RendersAssetsTest < ActiveSupport::TestCase
   include ActiveJob::TestHelper
+  include DiscoApp::Test::ShopifyAPI
 
   def setup
+    @shop = disco_app_shops(:widget_store)
     @js_configuration = js_configurations(:js_swedish)
     @widget_configuration = widget_configurations(:widget_swedish)
   end
 
   def teardown
+    @shop = nil
     @js_configuration = nil
     @widget_configuration = nil
   end
+
+  ##
+  # Test queueing behaviour.
+  ##
 
   test 'rendering of javascript asset group queued when locale changed' do
     assert_enqueued_with(job: DiscoApp::RenderAssetGroupJob) do
@@ -48,5 +55,26 @@ class DiscoApp::RendersAssetsTest < ActiveSupport::TestCase
       @widget_configuration.update(background_color: '#FF0000')
     end
   end
+
+  ##
+  # Test rendering behaviour.
+  ##
+
+  test 'individual js asset renders correctly' do
+    assert_equal asset_fixture('test.js'), @js_configuration.send('render_asset_group_asset', 'test.js')
+  end
+
+  test 'js asset group renders and uploads to shopify' do
+    stub_api_request(:put, "#{@shop.admin_url}/assets.json", 'widget_store/assets/create_test_js')
+    @js_configuration.render_asset_group(:js_assets)
+  end
+
+  private
+
+    # Return an asset fixture as a string.
+    def asset_fixture(path)
+      filename = File.join(File.dirname(File.dirname(File.dirname(__FILE__))), 'fixtures', 'assets', "#{path}")
+      File.read(filename)
+    end
 
 end
