@@ -61,7 +61,7 @@ class DiscoApp::RendersAssetsTest < ActiveSupport::TestCase
   ##
 
   test 'individual js asset renders correctly' do
-    assert_equal asset_fixture('test.js'), @js_configuration.send('render_asset_group_asset', 'test.js')
+    assert_equal asset_fixture('test.js'), @js_configuration.send('render_asset_group_asset', 'test.js', {})
   end
 
   test 'js asset group renders and uploads to shopify' do
