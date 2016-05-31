@@ -349,6 +349,75 @@ Webhooks should generally be created inside the `perform` method of the
 `DiscoApp::AppInstalledJob` background task. By default, webhooks are set up to
 listen for the `app/uninstalled` and `shop/update` webhook topics.
 
+### Asset Rendering
+It's a pretty common pattern for apps to want to render and update Shopify
+assets (Javascript, stylesheets, Liquid snippets etc) whenever a store owner
+makes particular changes to a configuration object. To make this pattern easy
+to implement, the gem provides a `renders_assets` macro, which you can use to
+define one or more "asset groups" to render when particular attributes on a
+model change. Here's an example:
+
+```
+# app/models/widget_configuration.rb
+class WidgetConfiguration < ActiveRecord::Base
+  include DiscoApp::Concerns::RendersAssets  
+  renders_assets :js_asset, assets: 'widgets.js', triggered_by: 'locale'  
+end   
+```
+
+With this simple declaration, any time the `locale` attribute on a particular
+`WidgetConfiguration` model changes, an asset template (in this case, located at
+`app/views/assets/widgets.js.erb`) will be freshly rendered and and uploaded to
+the current Shopify theme as `assets/widgets.js`. The template itself might look
+like this:
+
+```
+// app/views/assets/widgets.js.erb
+(function() {
+  var locale = '<%= @widget_configuration.locale %>';
+})();
+```
+
+Both the `assets:` and `triggered_by:` options handle lists, so you can specify
+more than one asset to render and more than one triggering attribute. What's
+more, if you specify a list of `assets:`, then the public CDN url of assets
+earlier in the list will be available in the templates of subsequent assets,
+like this:
+
+```
+# app/models/widget_configuration.rb
+class WidgetConfiguration < ActiveRecord::Base
+  include DiscoApp::Concerns::RendersAssets  
+  renders_assets :widget_assets, assets: ['widgets.scss', 'widgets.js'], triggered_by: ['locale', 'background_color']  
+end
+```
+
+```
+// app/views/assets.widgets.scss.erb
+#widget {
+  background-color: <%= @widget_configuration.background_color %>;
+}
+```
+
+```
+// app/views/assets/widgets.js.erb
+var locale = '<%= @widget_configuration.locale %>';
+var cssUrl = '<%= @public_urls[:'widget.scss'] %>';
+```
+
+Finally, you can pass the name of one or more Javascript assets in a
+`script_tags:` option. If specified, the asset renderer will ensure that a
+Shopify script tag resource is created (or updated) pointing to your newly
+rendered asset:
+
+```
+# app/models/widget_configuration.rb
+class WidgetConfiguration < ActiveRecord::Base
+  include DiscoApp::Concerns::RendersAssets  
+  renders_assets :widget_assets, assets: ['widgets.scss', 'widgets.js'], script_tags: 'widgets.js', triggered_by: ['locale', 'background_color']  
+end
+```
+
 ### Application Proxies
 The gem provides support for Shopify's [Application Proxy][] functionality
 through a controller concern named `DiscoApp::AppProxyController`. Including
