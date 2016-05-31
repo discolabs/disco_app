@@ -20,12 +20,19 @@ module DiscoApp::Concerns::RendersAssets
     # Options
     #
     #   assets:           Required. A list of asset templates to be rendered and
-    #                     uploaded to Shopify.
+    #                     uploaded to Shopify. The order of assets matters only
+    #                     in that subsequent asset templates will have access to
+    #                     the public CDN url of earlier-rendered assets through
+    #                     a "@public_urls" context variable.
     #
     #   triggered_by:     Optional. A list of attributes that should trigger the
     #                     re-rendering and upload of the assets defined by the
     #                     `assets` option, provided as a list of string. If
     #                     empty or nil, nothing will be triggered.
+    #
+    #   script_tags:      Optional. A list of assets that should have script
+    #                     tags created or updated after being rendered to the
+    #                     storefront.
     #
     #   compress:         Optional. Whether Javascript and SCSS assets should be
     #                     compressed after being rendered. Defaults to true in
@@ -35,9 +42,10 @@ module DiscoApp::Concerns::RendersAssets
       options = asset_groups.last.is_a?(Hash) ? asset_groups.pop : {}
       options = renders_assets_default_options.merge(options)
 
-      # Ensure the assets and triggered by options are arrays.
+      # Ensure assets, triggered by and script tag options are arrays.
       options[:assets] = options[:assets] ? Array(options[:assets]).map(&:to_sym) : []
       options[:triggered_by] = options[:triggered_by] ? Array(options[:triggered_by]).map(&:to_s) : []
+      options[:script_tags] = options[:script_tags] ? Array(options[:script_tags]).map(&:to_sym) : []
 
       asset_groups.each do |asset_group|
         renderable_asset_groups[asset_group.to_sym] = options
@@ -83,23 +91,31 @@ module DiscoApp::Concerns::RendersAssets
     public_urls = {}
 
     options[:assets].each do |asset|
+      # Create/replace the asset via the Shopify API.
       shopify_asset = shop.temp {
         ShopifyAPI::Asset.create(
           key: "assets/#{asset}",
-          value: render_asset_group_asset(asset, options, public_urls)
+          value: render_asset_group_asset(asset, public_urls)
         )
       }
 
       # Store the public URL to this asset, so that we're able to use it in
       # subsequent template renders. Adds a .css suffix to .scss assets, so that
-      # we use the Shopify-compiled version.
+      # we use the Shopify-compiled version of any SCSS stylesheets.
       public_urls[asset] = shopify_asset.public_url.gsub(/\.scss\?/, '.scss.css?')
+    end
+
+    # If we specified the creation of any script tags based on newly rendered
+    # assets, do that now.
+    unless options[:script_tags].empty?
+      render_asset_script_tags(options, public_urls)
     end
   end
 
   private
 
-    def render_asset_group_asset(asset, options, public_urls)
+    # Render an individual asset within an asset group.
+    def render_asset_group_asset(asset, public_urls)
       render_asset_renderer.render_to_string(
         template: "assets/#{asset}",
         layout: nil,
@@ -112,6 +128,21 @@ module DiscoApp::Concerns::RendersAssets
 
     def render_asset_renderer
       @render_asset_renderer ||= self.class.const_get('RenderingController').new
+    end
+
+    # Render any script tags defined by the :script_tags options that we have
+    # a public URL for.
+    def render_asset_script_tags(options, public_urls)
+      # Fetch the current set of script tags for the store.
+      current_script_tags = shop.temp { ShopifyAPI::ScriptTag.find(:all) }
+
+      # Iterate each script tag for which we have a known public URL and create
+      # or update the corresponding script tag resource.
+      public_urls.slice(*options[:script_tags]).each do |asset, public_url|
+        script_tag = current_script_tags.find(lambda { ShopifyAPI::ScriptTag.new(event: 'onload') }) { |script_tag| script_tag.src.include?("#{asset}?") }
+        script_tag.src = public_url
+        shop.temp { script_tag.save }
+      end
     end
 
 end

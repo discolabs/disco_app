@@ -1,0 +1,6 @@
+{
+  "asset":{
+    "key":"assets/script_tag.js",
+    "value":"(function() { console.log('Script Tag!') });\n"
+  }
+}

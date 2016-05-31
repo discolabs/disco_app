@@ -75,6 +75,20 @@ class DiscoApp::RendersAssetsTest < ActiveSupport::TestCase
     @widget_configuration.render_asset_group(:widget_assets)
   end
 
+  test 'script tag asset group renders, uploads to shopify and creates new script tag' do
+    stub_api_request(:put, "#{@shop.admin_url}/assets.json", 'widget_store/assets/create_script_tag_js')
+    stub_api_request(:get, "#{@shop.admin_url}/script_tags.json", 'widget_store/assets/get_script_tags_empty')
+    stub_api_request(:post, "#{@shop.admin_url}/script_tags.json", 'widget_store/assets/create_script_tag')
+    @widget_configuration.render_asset_group(:script_tag_assets)
+  end
+
+  test 'script tag asset group renders, uploads to shopify and updates existing script tag' do
+    stub_api_request(:put, "#{@shop.admin_url}/assets.json", 'widget_store/assets/create_script_tag_js')
+    stub_api_request(:get, "#{@shop.admin_url}/script_tags.json", 'widget_store/assets/get_script_tags_preexisting')
+    stub_api_request(:put, "#{@shop.admin_url}/script_tags/38138886.json", 'widget_store/assets/update_script_tag')
+    @widget_configuration.render_asset_group(:script_tag_assets)
+  end
+
   private
 
     # Return an asset fixture as a string.
