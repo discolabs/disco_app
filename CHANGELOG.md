@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+No unreleased changes.
+
+## 0.9.4 - 2016-05-31
 ### Added
 - Asset rendering functionality, allowing the use of a `renders_assets` macro to
   easily define a group of assets to be rendered and updated automatically on

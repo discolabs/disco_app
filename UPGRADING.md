@@ -3,7 +3,12 @@ This file contains more detailed instructions on what's required when updating
 an application between one release version of the gem to the next. It's intended
 as more in-depth accompaniment to the notes in `CHANGELOG.md` for each version.
 
-## Upgrading from 0.9.3 to (Unreleased)
+## Upgrading from 0.9.3 to 0.9.4
+
+### New asset rendered
+You now have access to the asset rendering pattern, for much simplified
+management of Shopify assets. See the section "Asset Rendering" in the README
+for further details.
 
 ### Background jobs can have shop context set with shop instance
 Until now, when queueing a background task inheriting from `DiscoApp::ShopJob`,
