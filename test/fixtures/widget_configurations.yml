@@ -1,3 +1,4 @@
 widget_swedish:
+  shop: widget_store
   locale: sv
   background_color: '#006AA7'
