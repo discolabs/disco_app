@@ -38,10 +38,9 @@ class DiscoAppGenerator < Rails::Generators::Base
     gem 'react-rails', '~> 1.6.0'
     gem 'classnames-rails', '~> 2.1.5'
     gem 'active_link_to', '~> 1.0.2'
-    # Add premailer gem to Gemfile.
     gem 'premailer-rails', '~> 1.8.2'
-    # Add explicit dependency on Nokogiri
     gem 'nokogiri', '~> 1.6.7.2'
+    gem 'render_anywhere', '~> 0.0.12', require: false
 
     # Add gems for development and testing only.
     gem_group :development, :test do

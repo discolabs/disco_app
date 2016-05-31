@@ -1,0 +1,6 @@
+{
+  "asset":{
+    "key":"assets/widget.scss",
+    "value":"#widget {\n  background-color: #006AA7;\n}\n"
+  }
+}

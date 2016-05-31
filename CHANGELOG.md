@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+### Added
+- Asset rendering functionality, allowing the use of a `renders_assets` macro to
+  easily define a group of assets to be rendered and updated automatically on
+  model save.
+
 ### Changed
 - Background jobs inheriting from `DiscoApp::Shop` can now accept a shop model
   directly as the first argument, as well as a Shopify domain.

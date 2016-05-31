@@ -32,6 +32,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'jsonapi-resources', '~> 0.7.0'
   s.add_dependency 'react-rails', '~> 1.6.0'
   s.add_dependency 'classnames-rails', '~> 2.1.5'
+  s.add_dependency 'render_anywhere', '~> 0.0.12'
 
   s.add_development_dependency 'sqlite3', '~> 1.3.11'
   s.add_development_dependency 'dotenv-rails', '~> 2.0.2'

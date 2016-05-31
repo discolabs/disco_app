@@ -14,6 +14,7 @@ PATH
       rails (~> 4.2.5.2)
       rails_12factor (~> 0.0.3)
       react-rails (~> 1.6.0)
+      render_anywhere (~> 0.0.12)
       shopify_app (~> 6.4.1)
       sidekiq (~> 4.0.2)
       turbolinks (~> 2.5.3)
@@ -224,6 +225,8 @@ GEM
       rails (>= 3.2)
       tilt
     redis (3.3.0)
+    render_anywhere (0.0.12)
+      rails (>= 3.0.7)
     ruby-progressbar (1.8.0)
     safe_yaml (1.0.4)
     sass (3.4.22)

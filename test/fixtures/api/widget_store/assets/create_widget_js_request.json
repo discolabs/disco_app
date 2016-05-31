@@ -1,0 +1,6 @@
+{
+  "asset":{
+    "key":"assets/widget.js",
+    "value":"var locale = 'sv';\nvar cssUrl = 'https://cdn.shopify.com/s/files/1/1308/2083/t/1/assets/widget.scss.css?12368054146898033463';\n"
+  }
+}
