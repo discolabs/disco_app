@@ -69,6 +69,12 @@ class DiscoApp::RendersAssetsTest < ActiveSupport::TestCase
     @js_configuration.render_asset_group(:js_assets)
   end
 
+  test 'widget asset group renders and uploads to shopify' do
+    stub_api_request(:put, "#{@shop.admin_url}/assets.json", 'widget_store/assets/create_widget_scss')
+    stub_api_request(:put, "#{@shop.admin_url}/assets.json", 'widget_store/assets/create_widget_js')
+    @widget_configuration.render_asset_group(:widget_assets)
+  end
+
   private
 
     # Return an asset fixture as a string.

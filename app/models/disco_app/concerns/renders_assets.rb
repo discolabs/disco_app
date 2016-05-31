@@ -80,24 +80,32 @@ module DiscoApp::Concerns::RendersAssets
   # Render the specified asset group and upload the result to Shopify.
   def render_asset_group(asset_group)
     options = renderable_asset_groups[asset_group]
+    public_urls = {}
+
     options[:assets].each do |asset|
       shopify_asset = shop.temp {
         ShopifyAPI::Asset.create(
           key: "assets/#{asset}",
-          value: render_asset_group_asset(asset, options)
+          value: render_asset_group_asset(asset, options, public_urls)
         )
       }
+
+      # Store the public URL to this asset, so that we're able to use it in
+      # subsequent template renders. Adds a .css suffix to .scss assets, so that
+      # we use the Shopify-compiled version.
+      public_urls[asset] = shopify_asset.public_url.gsub(/\.scss\?/, '.scss.css?')
     end
   end
 
   private
 
-    def render_asset_group_asset(asset, options)
+    def render_asset_group_asset(asset, options, public_urls)
       render_asset_renderer.render_to_string(
         template: "assets/#{asset}",
         layout: nil,
         locals: {
-          :"@#{self.class.name.underscore}" => self
+          :"@#{self.class.name.underscore}" => self,
+          :@public_urls => public_urls
         }
       )
     end
