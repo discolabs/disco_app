@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## Unreleased
+### Changed
+- Background jobs inheriting from `DiscoApp::Shop` can now accept a shop model
+  directly as the first argument, as well as a Shopify domain.
+
 ## 0.9.3 - 2016-05-23
 ### Added
 - Added a `data` attribute to the `Shop` model, to synchronise all Shop data from

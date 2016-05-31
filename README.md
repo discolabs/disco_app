@@ -289,14 +289,17 @@ automatically be made on behalf of the shop, like so:
 
 ```
 class FindAllProductsJob < DiscoApp::ShopJob
-  def perform(domain)
+  def perform(shop)
     ShopifyAPI::Product.find(:all)
   end
 end
 ```
 
-Note that the first argument of the `perform` method on a `ShopJob` *must
-always* be the Shopify domain of the context shop (eg `example.myshopify.com`).
+Note that the first argument of the `perform` method on any job inheriting from
+`DiscoApp::ShopJob` **must always** provide the shop context the job is
+executing in (the `shop` argument above). This can be done *either* by providing
+a `DiscoApp::Shop` instance directly (preferable) *or* by providing the Shopify
+domain of the shop as a string (eg `example.myshopify.com`).
 
 The gem includes some default jobs that are queued during installation or after
 specific webhooks are received. They are:
@@ -513,9 +516,9 @@ implementation of this inside the dummy app used for testing Disco App in
    
    ```ruby
    class ProductsCreateJob < DiscoApp::ShopJob   
-     def perform(shopify_domain, product_data)
+     def perform(shop, product_data)
        Product.synchronise(@shop, product_data)
-     end  
+     end
    end
    ```
 

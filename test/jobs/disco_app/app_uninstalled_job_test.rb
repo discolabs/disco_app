@@ -7,7 +7,7 @@ class DiscoApp::AppUninstalledJobTest < ActionController::TestCase
     @shop = disco_app_shops(:widget_store)
 
     perform_enqueued_jobs do
-      DiscoApp::AppUninstalledJob.perform_later(@shop.shopify_domain, {})
+      DiscoApp::AppUninstalledJob.perform_later(@shop, {})
     end
   end
 

@@ -37,7 +37,7 @@ class DiscoApp::SubscriptionService
     )
 
     # Enqueue the subscription changed background job.
-    DiscoApp::SubscriptionChangedJob.perform_later(shop.shopify_domain, new_subscription)
+    DiscoApp::SubscriptionChangedJob.perform_later(shop, new_subscription)
 
     # Return the new subscription.
     new_subscription

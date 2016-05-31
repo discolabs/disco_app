@@ -20,7 +20,7 @@ class DiscoApp::AppInstalledJobTest < ActionController::TestCase
   test 'app installed job performs shop update job' do
     # Assert the main install job can be enqueued and performed.
     perform_enqueued_jobs do
-      DiscoApp::AppInstalledJob.perform_later(@shop.shopify_domain)
+      DiscoApp::AppInstalledJob.perform_later(@shop)
     end
 
     # Assert the update shop job was performed.
@@ -32,7 +32,7 @@ class DiscoApp::AppInstalledJobTest < ActionController::TestCase
     @shop.current_subscription.destroy
 
     perform_enqueued_jobs do
-      DiscoApp::AppInstalledJob.perform_later(@shop.shopify_domain)
+      DiscoApp::AppInstalledJob.perform_later(@shop)
     end
 
     # Assert the shop was subscribed to the development plan.
@@ -43,7 +43,7 @@ class DiscoApp::AppInstalledJobTest < ActionController::TestCase
     @shop.current_subscription.destroy
 
     perform_enqueued_jobs do
-      DiscoApp::AppInstalledJob.perform_later(@shop.shopify_domain, 'PODCAST', 'smpodcast')
+      DiscoApp::AppInstalledJob.perform_later(@shop, 'PODCAST', 'smpodcast')
     end
 
     # Assert the shop was subscribed to the development plan.
