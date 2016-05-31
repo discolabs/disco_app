@@ -1,6 +1,6 @@
 class ProductsUpdateJob < DiscoApp::ShopJob
 
-  def perform(shopify_domain, product_data)
+  def perform(shop, product_data)
     Product.synchronise(@shop, product_data)
   end
 

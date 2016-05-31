@@ -513,9 +513,9 @@ implementation of this inside the dummy app used for testing Disco App in
    
    ```ruby
    class ProductsCreateJob < DiscoApp::ShopJob   
-     def perform(shopify_domain, product_data)
+     def perform(shop, product_data)
        Product.synchronise(@shop, product_data)
-     end  
+     end
    end
    ```
 

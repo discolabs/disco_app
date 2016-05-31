@@ -2,7 +2,7 @@ module DiscoApp::Concerns::SynchroniseCarrierServiceJob
   extend ActiveSupport::Concern
 
   # Ensure that any carrier service required by our app is registered.
-  def perform(shopify_domain)
+  def perform(shop)
     # Don't proceed unless we have a name and callback url.
     return unless carrier_service_name and callback_url
 

@@ -3,7 +3,7 @@ module DiscoApp::Concerns::SynchroniseWebhooksJob
 
   # Ensure the webhooks registered with our shop are the same as those listed
   # in our application configuration.
-  def perform(shopify_domain)
+  def perform(shop)
     # Get the full list of expected webhook topics.
     expected_topics = [:'app/uninstalled', :'shop/update'] + topics
 
