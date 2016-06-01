@@ -3,9 +3,15 @@ This file contains more detailed instructions on what's required when updating
 an application between one release version of the gem to the next. It's intended
 as more in-depth accompaniment to the notes in `CHANGELOG.md` for each version.
 
+## Upgrading from 0.9.4 to 0.9.5
+
+### Tweak to assets renderer
+You now need to specify a prefix (eg `assets/`) to the `assets:` argument of the
+`renders_assets` macro. See the README for more.
+
 ## Upgrading from 0.9.3 to 0.9.4
 
-### New asset rendered
+### New asset renderer
 You now have access to the asset rendering pattern, for much simplified
 management of Shopify assets. See the section "Asset Rendering" in the README
 for further details.
