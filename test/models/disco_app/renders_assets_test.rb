@@ -61,7 +61,7 @@ class DiscoApp::RendersAssetsTest < ActiveSupport::TestCase
   ##
 
   test 'individual js asset renders correctly' do
-    assert_equal asset_fixture('test.js'), @js_configuration.send('render_asset_group_asset', 'test.js', {})
+    assert_equal asset_fixture('test.js'), @js_configuration.send('render_asset_group_asset', 'assets/test.js', {})
   end
 
   test 'js asset group renders and uploads to shopify' do
@@ -73,6 +73,11 @@ class DiscoApp::RendersAssetsTest < ActiveSupport::TestCase
     stub_api_request(:put, "#{@shop.admin_url}/assets.json", 'widget_store/assets/create_widget_scss')
     stub_api_request(:put, "#{@shop.admin_url}/assets.json", 'widget_store/assets/create_widget_js')
     @widget_configuration.render_asset_group(:widget_assets)
+  end
+
+  test 'liquid asset group renders and uploads to shopify' do
+    stub_api_request(:put, "#{@shop.admin_url}/assets.json", 'widget_store/assets/create_widget_liquid')
+    @widget_configuration.render_asset_group(:liquid_assets)
   end
 
   test 'script tag asset group renders, uploads to shopify and creates new script tag' do

@@ -3,6 +3,6 @@ class JsConfiguration < ActiveRecord::Base
 
   belongs_to :shop, class_name: 'DiscoApp::Shop'
 
-  renders_assets :js_assets, assets: 'test.js', triggered_by: 'locale'
+  renders_assets :js_assets, assets: 'assets/test.js', triggered_by: 'locale'
 
 end

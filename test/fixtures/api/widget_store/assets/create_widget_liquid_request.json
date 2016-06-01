@@ -1,0 +1,6 @@
+{
+  "asset":{
+    "key":"snippets/widget.liquid",
+    "value":"{{ shop.metafields.locales['sv'] }}\n"
+  }
+}
