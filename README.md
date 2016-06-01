@@ -361,7 +361,7 @@ model change. Here's an example:
 # app/models/widget_configuration.rb
 class WidgetConfiguration < ActiveRecord::Base
   include DiscoApp::Concerns::RendersAssets  
-  renders_assets :js_asset, assets: 'widgets.js', triggered_by: 'locale'  
+  renders_assets :js_asset, assets: 'assets/widgets.js', triggered_by: 'locale'  
 end   
 ```
 
@@ -388,7 +388,7 @@ like this:
 # app/models/widget_configuration.rb
 class WidgetConfiguration < ActiveRecord::Base
   include DiscoApp::Concerns::RendersAssets  
-  renders_assets :widget_assets, assets: ['widgets.scss', 'widgets.js'], triggered_by: ['locale', 'background_color']  
+  renders_assets :widget_assets, assets: ['assets/widgets.scss', 'assets/widgets.js'], triggered_by: ['locale', 'background_color']  
 end
 ```
 
@@ -402,7 +402,7 @@ end
 ```
 // app/views/assets/widgets.js.erb
 var locale = '<%= @widget_configuration.locale %>';
-var cssUrl = '<%= @public_urls[:'widget.scss'] %>';
+var cssUrl = '<%= @public_urls[:'assets/widget.scss'] %>';
 ```
 
 Finally, you can pass the name of one or more Javascript assets in a
@@ -414,7 +414,7 @@ rendered asset:
 # app/models/widget_configuration.rb
 class WidgetConfiguration < ActiveRecord::Base
   include DiscoApp::Concerns::RendersAssets  
-  renders_assets :widget_assets, assets: ['widgets.scss', 'widgets.js'], script_tags: 'widgets.js', triggered_by: ['locale', 'background_color']  
+  renders_assets :widget_assets, assets: ['assets/widgets.scss', 'assets/widgets.js'], script_tags: 'widgets.js', triggered_by: ['locale', 'background_color']  
 end
 ```
 
