@@ -1,4 +1,4 @@
-const UIPageActions = ({ label, disabled, secondaryHref, secondaryLabel }) => {
+const UIPageActions = ({ label, disabled, secondaryButtons, secondaryHref, secondaryLabel }) => {
 
   const buttonClassName = classNames({
     'btn': true,
@@ -7,7 +7,15 @@ const UIPageActions = ({ label, disabled, secondaryHref, secondaryLabel }) => {
   });
 
   let secondaryElement = null;
-  if(secondaryHref) {
+  if(secondaryButtons) {
+    secondaryElement = (
+      <div className="ui-page-actions__secondary">
+        <div className="button-group">
+          {secondaryButtons}
+        </div>
+      </div>
+    );
+  } else if(secondaryHref) {
     secondaryElement = (
       <div className="ui-page-actions__secondary">
         <div className="button-group">
@@ -34,6 +42,7 @@ const UIPageActions = ({ label, disabled, secondaryHref, secondaryLabel }) => {
 UIPageActions.propTypes = {
   label: React.PropTypes.string.isRequired,
   disabled: React.PropTypes.bool,
+  secondaryButtons: React.PropTypes.node,
   secondaryHref: React.PropTypes.string,
   secondaryLabel: React.PropTypes.string
 };

@@ -24,7 +24,8 @@
     ShopifyApp.Bar.initialize({
       title: "<%= yield(:title) %>",
       icon: "<%= image_url("disco_app/icon.svg") %>",
-      buttons: <%= content_for?(:buttons) ? content_for(:buttons) : '{}' %>
+      buttons: <%= content_for?(:buttons) ? content_for(:buttons) : '{}' %>,
+      breadcrumb: <%= content_for?(:breadcrumb) ? content_for(:breadcrumb) : 'undefined' %>
     });
   </script>
 
