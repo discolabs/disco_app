@@ -1,4 +1,5 @@
 require 'render_anywhere'
+require 'uglifier'
 
 module DiscoApp::Concerns::RendersAssets
   extend ActiveSupport::Concern
@@ -34,9 +35,12 @@ module DiscoApp::Concerns::RendersAssets
     #                     tags created or updated after being rendered to the
     #                     storefront.
     #
-    #   compress:         Optional. Whether Javascript and SCSS assets should be
-    #                     compressed after being rendered. Defaults to true in
-    #                     production environments, false otherwise.
+    #   minify:           Optional. Whether Javascript assets should be minified
+    #                     after being rendered. Defaults to true in production
+    #                     environments, false otherwise. Note that stylesheet
+    #                     assets, when uploaded as .scss files, are
+    #                     automatically minified by Shopify, so we don't need to
+    #                     do it on our end.
     #
     def renders_assets(*asset_groups)
       options = asset_groups.last.is_a?(Hash) ? asset_groups.pop : {}
@@ -62,7 +66,8 @@ module DiscoApp::Concerns::RendersAssets
       {
         assets: nil,
         triggered_by: nil,
-        compress: Rails.env.production?
+        script_tags: nil,
+        minify: Rails.env.production?
       }
     end
 
@@ -95,7 +100,7 @@ module DiscoApp::Concerns::RendersAssets
       shopify_asset = shop.temp {
         ShopifyAPI::Asset.create(
           key: asset,
-          value: render_asset_group_asset(asset, public_urls)
+          value: render_asset_group_asset(asset, public_urls, options)
         )
       }
 
@@ -117,8 +122,8 @@ module DiscoApp::Concerns::RendersAssets
   private
 
     # Render an individual asset within an asset group.
-    def render_asset_group_asset(asset, public_urls)
-      render_asset_renderer.render_to_string(
+    def render_asset_group_asset(asset, public_urls, options)
+      rendered_asset = render_asset_renderer.render_to_string(
         template: asset,
         layout: nil,
         locals: {
@@ -126,6 +131,17 @@ module DiscoApp::Concerns::RendersAssets
           :@public_urls => public_urls
         }
       )
+
+      if should_be_minified?(asset, options)
+        ::Uglifier.compile(rendered_asset)
+      else
+        rendered_asset
+      end
+    end
+
+    # Return true if the given asset should be minified with Uglifier.
+    def should_be_minified?(asset, options)
+      asset.to_s.end_with?('.js') and options[:minify]
     end
 
     def render_asset_renderer
