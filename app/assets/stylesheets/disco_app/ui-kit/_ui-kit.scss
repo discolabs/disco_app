@@ -424,12 +424,12 @@ strong {
 
 a {
   text-decoration: none;
-  color: #479ccf;
+  color: #0078bd;
   cursor: pointer;
 }
 
 a:hover {
-  color: #4293c2;
+  color: #0069a6;
   text-decoration: underline;
 }
 
@@ -617,7 +617,7 @@ a.type--blog-category:active {
 }
 
 .type--info {
-  color: #479ccf;
+  color: #0078bd;
 }
 
 .type--white {
@@ -1357,14 +1357,14 @@ a.type--subdued:hover {
 
 .btn-default, .btn {
   background-color: #ffffff;
-  color: #479ccf;
+  color: #0078bd;
   border: 1px solid #d3dbe2;
 }
 
 .btn-default:hover, .btn:hover, .btn-default:focus, .btn:focus, .btn-default.focus, .focus.btn, .btn-default:active, .btn:active, .btn-default.active, .active.btn {
   border: 1px solid #d3dbe2;
   background-color: #f5f6f7;
-  color: #479ccf;
+  color: #0078bd;
   text-decoration: none;
 }
 
@@ -1374,33 +1374,33 @@ a.type--subdued:hover {
 }
 
 .btn-primary {
-  background-color: #479ccf;
+  background-color: #0078bd;
   color: #ffffff;
-  border: 1px solid #479ccf;
+  border: 1px solid #0078bd;
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary.focus, .btn-primary:active, .btn-primary.active {
-  border: 1px solid #4293c2;
-  background-color: #4293c2;
+  border: 1px solid #0069a6;
+  background-color: #0069a6;
   color: #ffffff;
   text-decoration: none;
 }
 
 .btn-primary:active, .btn-primary.active, .btn-primary.rte-command-active {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2) inset;
-  background: #4293c2;
+  background: #0069a6;
 }
 
 .btn-destroy {
   background-color: #ffffff;
-  color: #479ccf;
+  color: #0078bd;
   border: 1px solid #d3dbe2;
 }
 
 .btn-destroy:hover, .btn-destroy:focus, .btn-destroy.focus, .btn-destroy:active, .btn-destroy.active {
   border: 1px solid #d3dbe2;
   background-color: #ff5d5d;
-  color: #479ccf;
+  color: #0078bd;
   text-decoration: none;
 }
 
@@ -1670,7 +1670,7 @@ input[type="submit"].btn-disabled.btn--outline,
   background-color: transparent !important;
   border: none;
   cursor: pointer;
-  color: #479ccf;
+  color: #0078bd;
   text-decoration: none;
   vertical-align: initial;
 }
@@ -1686,7 +1686,7 @@ input[type="submit"].btn-disabled.btn--outline,
 
 .btn--plain:hover,
 .btn--link:hover {
-  color: #4293c2;
+  color: #0069a6;
   text-decoration: underline;
 }
 
@@ -1736,7 +1736,7 @@ input[type="submit"].btn-disabled.btn--outline,
 }
 
 .segmented > li .btn.btn-primary {
-  border: 1px solid #479ccf;
+  border: 1px solid #0078bd;
   border-right-color: #3e89b5;
 }
 
@@ -1756,7 +1756,7 @@ input[type="submit"].btn-disabled.btn--outline,
 }
 
 .segmented > li:last-child .btn.btn-primary {
-  border-right-color: #479ccf;
+  border-right-color: #0078bd;
 }
 
 .segmented > li.middle-child > .btn {
@@ -2297,7 +2297,7 @@ input[type="submit"].btn-disabled.btn--outline,
 }
 
 .next-card__section--accentuated {
-  background-color: #479ccf;
+  background-color: #0078bd;
 }
 
 .next-card__section--accentuated .next-heading {
@@ -2560,7 +2560,7 @@ input, textarea {
 }
 
 input:focus, input.focus, textarea:focus, textarea.focus {
-  border: 1px solid #479ccf;
+  border: 1px solid #0078bd;
   outline: none;
 }
 
@@ -2680,7 +2680,7 @@ input[type=checkbox], input[type=radio] {
 }
 
 input[type=checkbox]:focus, input[type=radio]:focus {
-  outline: 2px auto #479ccf;
+  outline: 2px auto #0078bd;
 }
 
 input[type=file] {
@@ -2763,7 +2763,7 @@ select.error {
 
 select:focus, select.focus {
   outline: none;
-  border: 1px solid #479ccf;
+  border: 1px solid #0078bd;
 }
 
 select.full-width {
@@ -2955,7 +2955,7 @@ span.arrow {
 }
 
 .styled-file-input .btn > span, .styled-file-input .btn--plain > span {
-  color: #479ccf;
+  color: #0078bd;
 }
 
 .styled-file-input .btn > label, .styled-file-input .btn--plain > label {
@@ -3070,8 +3070,8 @@ span.arrow {
 }
 
 .radio-filter-input:checked + .radio-filter-all:before {
-  background: #479ccf;
-  border-color: #479ccf;
+  background: #0078bd;
+  border-color: #0078bd;
 }
 
 .radio-filter-input:checked + .radio-filter-store:before {
@@ -3098,7 +3098,7 @@ span.arrow {
 }
 
 input[type="checkbox"].dom-switch ~ .dom-switch-button {
-  color: #479ccf;
+  color: #0078bd;
   font-weight: normal;
   cursor: pointer;
 }
@@ -3243,7 +3243,7 @@ input[type=button].next-input--button {
 }
 
 .next-input:focus, .next-input--stylized:focus, .next-textarea:focus {
-  border: 1px solid #479ccf;
+  border: 1px solid #0078bd;
 }
 
 .next-form.next-form--full-width {
@@ -3322,7 +3322,7 @@ input[type=submit].next-input--submit {
   padding: 10px 15px;
   border: none;
   border-radius: 3px;
-  background-color: #479ccf;
+  background-color: #0078bd;
   color: #ffffff;
   font-size: 13px;
 }
@@ -3576,11 +3576,11 @@ input[type=checkbox].next-checkbox {
 }
 
 .next-radio:active ~ .next-radio--styled, .next-radio:focus .next-radio--styled {
-  border-color: #479ccf;
+  border-color: #0078bd;
 }
 
 .next-radio:checked ~ .next-radio--styled::after {
-  background-color: #479ccf;
+  background-color: #0078bd;
   -webkit-transform: translate(-50%, -50%) scale(1);
   -ms-transform: translate(-50%, -50%) scale(1);
   transform: translate(-50%, -50%) scale(1);
@@ -3611,11 +3611,11 @@ input[type=checkbox].next-checkbox {
 }
 
 .next-checkbox:active ~ .next-checkbox--styled, .next-checkbox:focus ~ .next-checkbox--styled {
-  border-color: #479ccf;
+  border-color: #0078bd;
 }
 
 .next-input--is-focused {
-  border: 1px solid #479ccf;
+  border: 1px solid #0078bd;
 }
 
 .next-input--has-error {
@@ -3634,7 +3634,7 @@ input[type=checkbox].next-checkbox {
 }
 
 .next-select__wrapper.next-input--is-focused {
-  border-color: #479ccf;
+  border-color: #0078bd;
 }
 
 .next-select__wrapper .next-icon {
@@ -3747,7 +3747,7 @@ input[type=checkbox].next-checkbox {
 }
 
 .next-field--connected:focus:not(.btn) + .next-field--connected, .next-field--connected.next-input--is-focused + .next-field--connected {
-  border-left: solid 1px #479ccf;
+  border-left: solid 1px #0078bd;
 }
 
 .next-field--connected.btn:focus + .next-field--connected {
@@ -4041,11 +4041,11 @@ input[type=checkbox].next-checkbox {
 }
 
 .next-icon--color-blue {
-  fill: #479ccf;
+  fill: #0078bd;
 }
 
 .next-icon--blue {
-  fill: #479ccf;
+  fill: #0078bd;
 }
 
 .next-icon--color-blue-lighter {
@@ -4474,7 +4474,7 @@ th.is-sortable {
 
 th.is-sortable:hover {
   background: #eff9fd;
-  color: #479ccf;
+  color: #0078bd;
 }
 
 th.sorted-desc > span, th.sorted-asc > span {
