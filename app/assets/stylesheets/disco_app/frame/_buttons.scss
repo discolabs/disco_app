@@ -31,19 +31,19 @@
 .btn, .btn-default {
   background-color: #fcfcfc;
   border: 1px solid #e3e3e3;
-  color: #479ccf;
+  color: #0078bd;
 
   &:hover, &:focus, &.focus {
     background-color: #efefef;
     border-color: #d6d6d6;
-    color: #479ccf;
+    color: #0078bd;
   }
 }
 
 // Primary button
 .btn-primary {
-  background-color: #479ccf;
-  border: 1px solid #2f82b4;
+  background-color: #0078bd;
+  border: 1px solid #0078bd;
   color: #fff;
 
   &:hover, &:focus, &.focus {
