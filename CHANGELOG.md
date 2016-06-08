@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 No unreleased changes.
 
+## 0.9.6 - 2016-06-08
+### Added
+- Additional React components (`UISection`, `Table`, `CardFooter`)
+- Minification support for Javascript assets in the Asset Renderer
+- Support for breadcrumbs when initialising the Shopify Bar
+
 ## 0.9.5 - 2016-06-01
 ### Changed
 - Require a folder prefix (eg `assets/`) when using to `render_assets`.
