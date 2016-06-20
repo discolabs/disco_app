@@ -2,7 +2,9 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
-No unreleased changes.
+### Added
+- `Taggable` concern for models representing synchronised Shopify resources that
+  can have tags applied.
 
 ## 0.9.6 - 2016-06-08
 ### Added
