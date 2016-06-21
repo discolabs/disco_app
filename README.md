@@ -590,6 +590,20 @@ implementation of this inside the dummy app used for testing Disco App in
      end
    end
    ```
+4. You may want to perform an initial synchronisation of resources. To do this,
+   the `Synchronises` concern provides a `synchronise_all` method. For this to
+   work, you must define a `SHOPIFY_API_CLASS` constant on your model class, for
+   example:
+   
+   ```
+   class Product < ActiveRecord::Base
+      include DiscoApp::Concerns::Synchronises  
+      belongs_to :shop, class_name: 'DiscoApp::Shop'
+      SHOPIFY_API_CLASS = ShopifyAPI::Product
+   end
+   ```
+   
+   You can then call the synchronisation with `Product.synchronise_all(shop)`.
 
 This should be all you need to do to have your local models stay up to date with
 any changes made by the store owner on Shopify. If needed, you can override the

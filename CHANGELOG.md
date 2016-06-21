@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 - `Taggable` concern for models representing synchronised Shopify resources that
   can have tags applied.
+- `synchronise_all` class method for models with the `Synchronises` concern.  
 
 ## 0.9.6 - 2016-06-08
 ### Added

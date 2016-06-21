@@ -3,6 +3,9 @@ module DiscoApp::Concerns::Synchronises
 
   class_methods do
 
+    # Define the number of resources per page to fetch.
+    SYNCHRONISES_PAGE_LIMIT = 250
+
     def should_synchronise?(shop, data)
       true
     end
@@ -32,6 +35,14 @@ module DiscoApp::Concerns::Synchronises
       return unless should_synchronise_deletion?(shop, data)
 
       self.destroy_all(shop: shop, id: data[:id])
+    end
+
+    def synchronise_all(shop, params = {})
+      resource_count = shop.temp { self::SHOPIFY_API_CLASS.count(params) }
+
+      (1..(resource_count / SYNCHRONISES_PAGE_LIMIT.to_f).ceil).each do |page|
+        DiscoApp::SynchroniseResourcesJob.perform_later(shop, self.name, params.merge(page: page, limit: SYNCHRONISES_PAGE_LIMIT))
+      end
     end
 
   end
