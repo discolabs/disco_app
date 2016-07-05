@@ -3,10 +3,21 @@
 <p>
   Thanks for installing <%= DiscoApp.configuration.app_name %>!
 </p>
-<p>
-  Before we start setting things up, we need you to authorize a charge for the application.
-</p>
+<p id="account-warning"></p>
 
-<%= form_tag disco_app.subscription_charges_path(@subscription), method: 'POST', target: '_parent' do %>
+<%= form_tag disco_app.subscription_charges_path(@subscription), id: 'install-ok', method: 'POST', target: '_parent' do %>
   <%= submit_tag 'Okay', class: 'form-input' %>
 <% end %>
+
+<script>
+  ShopifyApp.ready(function(){
+    var container = document.getElementById('account-warning');
+    if (ShopifyApp.User.current.accountAccess === "Account owner") {
+      container.innerHTML = "Before we start setting things up, we need you to authorize a charge for the application."
+    } else {
+      container.innerHTML = "Since you're not the account owner, you won't be able to setup a charge. Ask the account owner to install the app."
+      var okButton = document.getElementById('install-ok');
+      okButton.parentElement.removeChild(okButton);
+    }
+  });
+</script>
