@@ -43,7 +43,7 @@ Check that the rails version required in your Gemfile matches the one specified 
 
 ```
 $ export DISCO_GEM_CREDENTIALS=disco-gems:0dfbd458c126baa2744cef477b24c7cf7227fae5
-$ rails new example_app
+$ rails _4.2.5.2_ new example_app
 $ cd example_app
 $ echo "gem 'disco_app', git: 'https://$DISCO_GEM_CREDENTIALS@github.com/discolabs/disco_app.git', tag: '0.9.7'" >> Gemfile
 $ bundle update
