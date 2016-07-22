@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 No unreleased changes.
 
+## 0.9.8 - 2016-07-22
+### Added
+- Provide a better warning to store owners
+
+### Changed
+- Development stores no longer charged by default
+- Depend on Nokogiri 1.6.8
+
 ## 0.9.7 - 2016-06-21
 ### Added
 - `Taggable` concern for models representing synchronised Shopify resources that
