@@ -23,6 +23,11 @@ module DiscoApp::Concerns::Shop
     # Alias 'with_shopify_session' as 'temp', as per our existing conventions.
     alias_method :temp, :with_shopify_session
 
+    # Return true if the shop is considered as in development mode.
+    def development?
+      ['staff', 'custom'].include?(plan_name)
+    end
+
     # Convenience method to check if this shop has a current subscription.
     def current_subscription?
       current_subscription.present?
