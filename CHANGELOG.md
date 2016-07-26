@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 No unreleased changes.
 
+## 0.9.9 - 2016-07-26
+### Changed
+- Added affiliate stores to be considered as development stores
+
 ## 0.9.8 - 2016-07-22
 ### Added
 - Provide a better warning to store owners
