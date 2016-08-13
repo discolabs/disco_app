@@ -7,12 +7,18 @@ module DiscoApp::Concerns::CanBeLiquified
 
     # Return this model as an array of Liquid {% assign %} statements.
     def as_liquid
-      as_json.map { |k, v| "{% assign #{model_name.param_key}_#{k} = #{as_liquid_value(v)} %}" }
+      as_json.map { |k, v| "{% assign #{liquid_model_name}_#{k} = #{as_liquid_value(v)} %}" }
     end
 
     # Render this model as a series of concatenated Liquid {% assign %} statements.
     def to_liquid
       as_liquid.join("\n")
+    end
+
+    # Method to allow override of the model name in Liquid. Useful for models
+    # residing in namespaces that would otherwise have very long prefixes.
+    def liquid_model_name
+      model_name.param_key
     end
 
     private

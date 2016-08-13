@@ -13,6 +13,10 @@ class DiscoApp::CanBeLiquifiedTest < ActiveSupport::TestCase
     def as_json
       @attributes.as_json
     end
+
+    def liquid_model_name
+      'model'
+    end
   end
 
   def setup
