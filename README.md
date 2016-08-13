@@ -684,14 +684,38 @@ your migrations, rather than `integer`. If you do for some reason need to
 manually create columns storing references to other models, make sure you use
 `limit: 8` in the column definition.
 
-### Email Support
+### Model Metafields
+If you're writing resource metafields for your models via the Shopify API, you
+can include `DiscoApp::Concerns::HasMetafields` to gain access to a convenient
+`write_metafields` method. Just make sure that `SHOPIFY_API_CLASS` is defined
+on your class and away you go:
 
+```
+class Product < ActiveRecord::Base  
+  include DiscoApp::Concerns::HasMetafields
+  
+  SHOPIFY_API_CLASS = ShopifyAPI::Product
+
+end
+
+@product = Product.find(12345678)
+@product.write_metafields(
+  namespace1: {
+    key1: 'value1',
+    key2: 'value2
+  },
+  namespace2: {
+    key3: 'value3'
+  }
+)
+```
+
+### Email Support
 DiscoApp has support for the Mailgun and configures Active Mailer to use the 
 Mailgun API in production for sending email. Adds the `MAILGUN_API_KEY` and 
 `MAILGUN_API_DOMAIN` environment variables.
 
 ### Monitoring
-
 DiscoApp has support for both exception reporting and application performance 
 monitoring to the application.
 
@@ -704,6 +728,9 @@ ask Gavin for one.
 activated when a `NEW_RELIC_LICENSE_KEY` environment variable is present. There
 is a single New Relic license key across all Disco apps - contact Gavin if you
 need it to deploy a new application.
+
+[Rollbar]: https://www.rollbar.com
+[New Relic]: https://www.newrelic.com
 
 
 ## Upgrading
