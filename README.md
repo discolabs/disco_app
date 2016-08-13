@@ -458,6 +458,54 @@ in proxied requests.
 [Application Proxy]: https://docs.shopify.com/api/uiintegrations/application-proxies
 [security section]: https://docs.shopify.com/api/uiintegrations/application-proxies#security
 
+### Models in Liquid
+If you're making use of an application proxy, you'll often want to provide data
+from one or more of your application's models to a Liquid template. In fact,
+we've generally found that the best pattern for app serving app proxy pages is
+for the app to return a Liquid template with no HTML at all - only relevant data
+and an `{% include 'some-snippet' %}` call.
+
+This pattern allows the complete customisation of front end pages via the shop's
+theme, placing control of the appearance of your app's pages squarely under the
+control of the merchant. Your application can (in fact, it should) render some
+default snippets into the theme on installation to give merchants something that
+works out of the box.
+
+To make the process of providing model data to Liquid templates, the DiscoApp
+Engine provides the `DiscoApp::Concerns::CanBeLiquified` concern. It will use
+the model's `as_json` method to get a list of serialised attributes for your
+model and returns the necessary Liquid `{% assigns %}` tags to provide that data
+inside a template.
+
+As an example, if you had a model `MyModel` that you wanted to render via an
+application proxy, you would have the following in your application's
+`app/models/my_model.rb`:
+
+```
+class MyModel < ActiveRecord::Base
+  include DiscoApp::Concerns::CanBeLiquified
+  
+  ... rest of model definition ...  
+end
+```
+
+with this in your application's `app/views/my_model/show.html.erb`:
+
+```
+<%= raw @my_model.to_liquid %>
+{% include 'my_model-show' %}
+```
+
+and finally something like this in your theme's `snippets/my_model-show.liquid`:
+
+```
+{% layout 'theme' %}
+<h1>{{ my_model_name }}</h1>
+<p>
+  {{ my_model_description }}
+</p>
+```
+
 ### Administration
 There is a standard administration site for the app, located at `/admin`. It
 provides a filtered list of shops that have installed the app, a way to manage
@@ -636,14 +684,38 @@ your migrations, rather than `integer`. If you do for some reason need to
 manually create columns storing references to other models, make sure you use
 `limit: 8` in the column definition.
 
-### Email Support
+### Model Metafields
+If you're writing resource metafields for your models via the Shopify API, you
+can include `DiscoApp::Concerns::HasMetafields` to gain access to a convenient
+`write_metafields` method. Just make sure that `SHOPIFY_API_CLASS` is defined
+on your class and away you go:
 
+```
+class Product < ActiveRecord::Base  
+  include DiscoApp::Concerns::HasMetafields
+  
+  SHOPIFY_API_CLASS = ShopifyAPI::Product
+
+end
+
+@product = Product.find(12345678)
+@product.write_metafields(
+  namespace1: {
+    key1: 'value1',
+    key2: 'value2
+  },
+  namespace2: {
+    key3: 'value3'
+  }
+)
+```
+
+### Email Support
 DiscoApp has support for the Mailgun and configures Active Mailer to use the 
 Mailgun API in production for sending email. Adds the `MAILGUN_API_KEY` and 
 `MAILGUN_API_DOMAIN` environment variables.
 
 ### Monitoring
-
 DiscoApp has support for both exception reporting and application performance 
 monitoring to the application.
 
@@ -656,6 +728,9 @@ ask Gavin for one.
 activated when a `NEW_RELIC_LICENSE_KEY` environment variable is present. There
 is a single New Relic license key across all Disco apps - contact Gavin if you
 need it to deploy a new application.
+
+[Rollbar]: https://www.rollbar.com
+[New Relic]: https://www.newrelic.com
 
 
 ## Upgrading

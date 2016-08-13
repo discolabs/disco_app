@@ -2,7 +2,9 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
-No unreleased changes.
+### Added
+- DiscoApp::Concerns::CanBeLiquified
+- DiscoApp::Concerns::HasMetafields
 
 ## 0.9.9 - 2016-07-26
 ### Changed
