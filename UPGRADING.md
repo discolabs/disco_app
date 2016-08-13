@@ -3,6 +3,12 @@ This file contains more detailed instructions on what's required when updating
 an application between one release version of the gem to the next. It's intended
 as more in-depth accompaniment to the notes in `CHANGELOG.md` for each version.
 
+## Upgrading from 0.9.9 to Unreleased
+
+### DiscoApp::Concerns::CanBeLiquified
+If you're outputting a model for use in a Liquid template, you can now include
+the DiscoApp::Concerns::CanBeLiquified concern in your class.
+
 ## Upgrading from 0.9.8 to 0.9.9
 No changes required - only additional features.
 
