@@ -1,0 +1,31 @@
+{
+  "product": {
+    "id": 632910393,
+    "metafields": [
+      {
+        "namespace": "namespace1",
+        "key": "n1key1",
+        "value": "value1",
+        "value_type": "string"
+      },
+      {
+        "namespace": "namespace1",
+        "key": "n1key2",
+        "value": 2,
+        "value_type": "integer"
+      },
+      {
+        "namespace": "namespace2",
+        "key": "n2key3",
+        "value": "value3",
+        "value_type": "string"
+      },
+      {
+        "namespace": "namespace2",
+        "key": "n2key4",
+        "value": 2,
+        "value_type": "integer"
+      }
+    ]
+  }
+}
