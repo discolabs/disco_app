@@ -24,17 +24,23 @@ module DiscoApp::Concerns::HasMetafields
     def write_metafields(metafields)
       self.class::SHOPIFY_API_CLASS.new(
         id: id,
-        metafields: metafields.map do |namespace, keys|
-          keys.map do |key, value|
-            ShopifyAPI::Metafield.new(
-              namespace: namespace,
-              key: key,
-              value: value,
-              value_type: value.is_a?(Integer) ? :integer : :string
-            )
-          end
-        end.flatten
+        metafields: build_metafields(metafields)
       ).save
+    end
+
+    # Give a nested hash of metafields in the format described above, return
+    # an array of corresponding ShopifyAPI::Metafield instances.
+    def build_metafields(metafields)
+      metafields.map do |namespace, keys|
+        keys.map do |key, value|
+          ShopifyAPI::Metafield.new(
+            namespace: namespace,
+            key: key,
+            value: value,
+            value_type: value.is_a?(Integer) ? :integer : :string
+          )
+        end
+      end.flatten
     end
 
   end
