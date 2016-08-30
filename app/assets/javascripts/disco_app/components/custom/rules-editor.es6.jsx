@@ -270,14 +270,29 @@ RulesEditor.EQUALS_STRING = {
   relation: 'is_equal_to',
   type: 'text'
 };
+RulesEditor.NOT_EQUALS_STRING = {
+  label: 'is not equal to',
+  relation: 'is_not_equal_to',
+  type: 'text'
+};
 RulesEditor.EQUALS_COUNTRY_CODE = {
   label: 'is equal to',
   relation: 'is_equal_to',
   type: 'country_code'
 };
+RulesEditor.NOT_EQUALS_COUNTRY_CODE = {
+  label: 'is not equal to',
+  relation: 'is_not_equal_to',
+  type: 'country_code'
+};
 RulesEditor.CONTAINS_STRING = {
   label: 'contains',
   relation: 'contains_string',
+  type: 'text'
+};
+RulesEditor.DOES_NOT_CONTAIN_STRING = {
+  label: 'does not contain',
+  relation: 'does_not_contain_string',
   type: 'text'
 };
 RulesEditor.EQUALS_TAG = {
