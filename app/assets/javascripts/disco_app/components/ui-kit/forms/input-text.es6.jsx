@@ -14,7 +14,7 @@ class InputText extends BaseInput {
     });
 
     const handleChange = (e) => {
-      onChange(e.target.value);
+      onChange && onChange(e.target.value);
     };
 
     let helpElement = null;
