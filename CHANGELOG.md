@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+No unreleased changes.
+
+## 0.9.11 - 2016-09-07
 ### Added
 - Support for "not"-type conditions in Rule Editors
 - InputCheckbox React component
