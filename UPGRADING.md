@@ -8,6 +8,9 @@ as more in-depth accompaniment to the notes in `CHANGELOG.md` for each version.
 ### Upgrade session store gem
 Upgrade `activerecord-session_store` to version 1.0.0 in your Gemfile.
 
+### Explicitly set time zone
+Add `config.time_zone = 'UTC'` to your `application.rb`.
+
 ## Upgrading from 0.9.9 to 0.9.10
 
 ### Rendering models as Liquid variables

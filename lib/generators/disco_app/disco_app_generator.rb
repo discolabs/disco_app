@@ -80,6 +80,10 @@ class DiscoAppGenerator < Rails::Generators::Base
     # Uncomment to ensure config.force_ssl = true in production.
     uncomment_lines 'config/environments/production.rb', /force_ssl/
 
+    # Set time zone to UTC
+    application "config.time_zone = 'UTC'"
+    application "# Ensure UTC is the default timezone"
+
     # Set server side rendereing for components.js
     application "config.react.server_renderer_options = {\nfiles: ['components.js'], # files to load for prerendering\n}"
     application "# Enable server side react rendering"

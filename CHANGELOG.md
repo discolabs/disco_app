@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 - Minor improvements to some React components
+- Set `config.time_zone = 'UTC'` in `application.rb` on install
 
 ## 0.9.10 - 2016-08-13
 ### Added
