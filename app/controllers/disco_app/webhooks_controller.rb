@@ -6,10 +6,10 @@ module DiscoApp
     def process_webhook
       # Get the topic and domain for this webhook.
       topic = request.headers['HTTP_X_SHOPIFY_TOPIC']
-      domain = request.headers['HTTP_X_SHOPIFY_SHOP_DOMAIN']
+      shopify_domain = request.headers['HTTP_X_SHOPIFY_SHOP_DOMAIN']
 
       # Ensure a domain was provided in the headers.
-      unless domain
+      unless shopify_domain
         head :bad_request
       end
 
@@ -23,7 +23,7 @@ module DiscoApp
 
       # Decode the body data and enqueue the appropriate job.
       data = ActiveSupport::JSON::decode(request.body.read).with_indifferent_access
-      job_class.perform_later(domain, data)
+      job_class.perform_later(shopify_domain, data)
 
       render nothing: true
     end

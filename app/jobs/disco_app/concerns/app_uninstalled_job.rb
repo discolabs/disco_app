@@ -12,7 +12,7 @@ module DiscoApp::Concerns::AppUninstalledJob
   # - Mark any recurring application charges as cancelled.
   # - Remove any stored sessions for the shop.
   #
-  def perform(domain, shop_data)
+  def perform(shop, shop_data)
     DiscoApp::ChargesService.cancel_recurring_charges(@shop)
     @shop.sessions.delete_all
   end
