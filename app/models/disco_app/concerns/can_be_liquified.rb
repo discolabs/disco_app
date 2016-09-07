@@ -29,15 +29,15 @@ module DiscoApp::Concerns::CanBeLiquified
           return value.to_s
         end
         if value.nil?
-          return "nil"
+          return 'nil'
         end
         if value.is_a? Array
-          return "\"#{value.map { |e| (e.is_a? String) ? CGI::escapeHTML(e) : e }.join(SPLIT_ARRAY_SEPARATOR)}\" | split: \"#{SPLIT_ARRAY_SEPARATOR}\""
+          return "'#{value.map { |e| (e.is_a? String) ? CGI::escapeHTML(e) : e }.join(SPLIT_ARRAY_SEPARATOR)}' | split: '#{SPLIT_ARRAY_SEPARATOR}'"
         end
         if value.is_a? String and key.end_with? '_html'
-          return "\"#{value.to_s}\""
+          return "'#{value.to_s.gsub("'", "&#39;")}'"
         end
-        "\"#{CGI::escapeHTML(value.to_s)}\""
+        "'#{CGI::escapeHTML(value.to_s)}'"
       end
 
   end

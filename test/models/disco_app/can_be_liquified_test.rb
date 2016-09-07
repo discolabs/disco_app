@@ -24,8 +24,8 @@ class DiscoApp::CanBeLiquifiedTest < ActiveSupport::TestCase
       numeric: 42,
       boolean: true,
       empty: nil,
-      contains_html: '<b>This one</b>is righ<p>here</p>',
       string: "The cat's pyjamas are \"great\".",
+      string_html: "The cat's pyjamas are <strong style=\"color: red;\">great</strong>.",
       array_of_numerics: [1, 2, 3],
       array_of_strings: ['A', 'B', 'C'],
       hash: {}
