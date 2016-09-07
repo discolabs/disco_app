@@ -25,6 +25,7 @@ class DiscoApp::CanBeLiquifiedTest < ActiveSupport::TestCase
       boolean: true,
       empty: nil,
       string: "The cat's pyjamas are \"great\".",
+      string_html: "The cat's pyjamas are <strong style=\"color: red;\">great</strong>.",
       array_of_numerics: [1, 2, 3],
       array_of_strings: ['A', 'B', 'C'],
       hash: {}
@@ -48,7 +49,7 @@ class DiscoApp::CanBeLiquifiedTest < ActiveSupport::TestCase
     # Return an asset fixture as a string.
     def liquid_fixture(path)
       filename = File.join(File.dirname(File.dirname(File.dirname(__FILE__))), 'fixtures', 'liquid', "#{path}")
-      File.read(filename)
+      File.read(filename).strip
     end
 
 end
