@@ -2,7 +2,13 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
-No unreleased changes.
+### Added
+- Support for "not"-type conditions in Rule Editors
+- InputCheckbox React component
+- Support for `_html` attributes in DiscoApp::Concerns::CanBeLiquified
+
+### Changed
+- Minor improvements to some React components
 
 ## 0.9.10 - 2016-08-13
 ### Added
