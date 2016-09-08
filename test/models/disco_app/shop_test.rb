@@ -24,4 +24,12 @@ class DiscoApp::ShopTest < ActiveSupport::TestCase
     assert_equal disco_app_subscriptions(:current_widget_store_subscription), @shop.current_subscription
   end
 
+  test 'time_zone helper returns correct time zone instance when known timezone defined' do
+    assert_equal 'Melbourne', @shop.time_zone.name
+  end
+
+  test 'time_zone helper returns default Rails timezone when no known timezone defined' do
+    assert_equal 'UTC', disco_app_shops(:widget_store_dev).time_zone.name
+  end
+
 end

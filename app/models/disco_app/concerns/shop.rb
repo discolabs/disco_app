@@ -63,6 +63,16 @@ module DiscoApp::Concerns::Shop
       distance_of_time_in_words_to_now(created_at.time)
     end
 
+    # Return the shop's configured timezone. If none can be parsed from the
+    # shop's "data" hash, return the default Rails zone (which should be UTC).
+    def time_zone
+      @time_zone ||= begin
+        Time.find_zone!(data['timezone'].to_s.gsub(/^\(.+\)\s/, ''))
+      rescue ArgumentError
+        Time.zone
+      end
+    end
+
   end
 
 end

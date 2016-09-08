@@ -1,7 +1,7 @@
 widget_store:
   shopify_domain: widgets.myshopify.com
   shopify_token: 00000000000000000000000000000000
-  data: '{ "country_name": "Australia" }'
+  data: '{ "country_name": "Australia", "timezone": "(GMT+10:00) Melbourne" }'
 
 widget_store_dev:
   shopify_domain: widgets-dev.myshopify.com
