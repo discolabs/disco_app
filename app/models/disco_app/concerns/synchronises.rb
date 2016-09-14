@@ -15,9 +15,13 @@ module DiscoApp::Concerns::Synchronises
 
       return unless should_synchronise?(shop, data)
 
-      instance = self.find_or_create_by!(id: data[:id]) do |instance|
-        instance.shop = shop
-        instance.data = data
+      begin
+        instance = self.find_or_create_by!(id: data[:id]) do |instance|
+          instance.shop = shop
+          instance.data = data
+        end
+      rescue ActiveRecord::RecordNotUnique
+        retry
       end
 
       instance.update(data: data)
