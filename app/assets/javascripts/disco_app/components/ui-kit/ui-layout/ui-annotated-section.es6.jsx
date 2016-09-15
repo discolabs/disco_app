@@ -9,7 +9,7 @@ const UIAnnotatedSection = ({ title, description, children }) => {
         </div>
 
         <div className="ui-annotated-section__description">
-          <p>{description}</p>
+          {typeof description == 'string' ? <p>{description}</p> : description}
         </div>
       </div>
 
@@ -24,6 +24,6 @@ const UIAnnotatedSection = ({ title, description, children }) => {
 
 UIAnnotatedSection.propTypes = {
   title: React.PropTypes.string.isRequired,
-  description: React.PropTypes.string,
+  description: React.PropTypes.node,
   children: React.PropTypes.node
 };
