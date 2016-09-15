@@ -1,4 +1,4 @@
-const InputCheckbox = ({ label, name, value, checked, inline, isLast, onChange }) => {
+const InputCheckbox = ({ label, name, value, checked, inline, isLast, onChange, disabled = false }) => {
 
   const id = `${name}[${value}]`;
 
@@ -22,7 +22,7 @@ const InputCheckbox = ({ label, name, value, checked, inline, isLast, onChange }
   return(
     <div className={wrapperClassName}>
       <label htmlFor={id} className={labelClassName}>{label}</label>
-      <input id={id} className="next-checkbox" type="checkbox" value={value} name={name} checked={checked} onChange={handleChange} />
+      <input id={id} className="next-checkbox" type="checkbox" value={value} name={name} checked={checked} onChange={handleChange} disabled={disabled} />
       <span className="next-checkbox--styled" />
     </div>
   )
