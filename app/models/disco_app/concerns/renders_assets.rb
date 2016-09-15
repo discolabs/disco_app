@@ -93,7 +93,7 @@ module DiscoApp::Concerns::RendersAssets
   # Render the specified asset group and upload the result to Shopify.
   def render_asset_group(asset_group)
     options = renderable_asset_groups[asset_group]
-    public_urls = {}
+    public_urls = {}.with_indifferent_access
 
     options[:assets].each do |asset|
       # Create/replace the asset via the Shopify API.
