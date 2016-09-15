@@ -16,7 +16,7 @@ const InputRadio = ({ label, name, value, checked, inline, isLast, onChange, dis
   });
 
   const handleChange = (e) => {
-    onChange(e.target.value);
+    onChange && onChange(e.target.value);
   };
 
   return(
