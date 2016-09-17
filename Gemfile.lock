@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    disco_app (0.10.0)
+    disco_app (0.10.1)
       active_utils (~> 3.2.0)
       activerecord-session_store (~> 1.0.0)
       classnames-rails (~> 2.1.5)
