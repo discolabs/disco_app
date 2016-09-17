@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 ### Added
 - New `time_zone` helper to DiscoApp::Shop model
 
+### Changed
+- Additional webhook topics are now specified in the `disco_app.rb` initializer
+  rather than by overridding the webhooks synchronisation job
+
 ## 0.9.11 - 2016-09-07
 ### Added
 - Support for "not"-type conditions in Rule Editors

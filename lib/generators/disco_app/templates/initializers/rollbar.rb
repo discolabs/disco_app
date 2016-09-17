@@ -9,4 +9,11 @@ Rollbar.configure do |config|
 
   # Enable delayed reporting (using Sidekiq)
   config.use_sidekiq
+
+  # Add custom handlers.
+  config.before_process << proc do |options|
+    if options[:exception].is_a?(ActiveResource::ClientError) and options[:exception].message.include?('Too Many Requests')
+      raise Rollbar::Ignore
+    end
+  end
 end

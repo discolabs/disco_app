@@ -9,6 +9,23 @@ as more in-depth accompaniment to the notes in `CHANGELOG.md` for each version.
 If you're calculating a shop's timezone anywhere in your app, you can now
 replace your existing code with the new `DiscoApp::Shop.time_zone` helper.
 
+### Specify additional webhooks in configuration
+Instead of having to override `DiscoApp::SynchroniseWebhooksJob`, you can now
+specify the list of additional webhook topics to register for via configuration
+in `config/initializers/disco_app.rb`. You should be able to add:
+
+```
+DiscoApp.configure do |config|
+  ...
+  
+  config.webhook_topics = [:'orders/create', :'orders/paid']
+  
+  ...
+end
+```
+
+and delete `app/jobs/disco_app/synchronise_webhooks_job.rb`.
+
 ## Upgrading from 0.9.10 to 0.9.11
 
 ### Upgrade session store gem
