@@ -1,26 +1,28 @@
-<% provide(:title, 'Install') %>
+<% provide(:title, "Install #{DiscoApp.configuration.app_name}") %>
 
 <%= form_tag shopify_app.login_path do %>
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-body">
-
-          <% flash.each do |message_type, message| %>
-              <div class="alert alert-<%= message_type %>"><%= message %></div>
-          <% end %>
-
-          <div class="form-group">
-            <div class="input-group">
-              <div class="input-group-addon">http://</div>
-              <input type="text" class="form-control" id="shop" name="shop" placeholder="your-store" autocomplete="off" autofocus="on" />
-              <div class="input-group-addon">.myshopify.com</div>
-            </div>
+  <div class="ui-empty-state">
+    <section class="ui-empty-state__section">
+      <div class="ui-empty-state__subsection">
+        <h1 class="ui-empty-state__title">Install <%= DiscoApp.configuration.app_name %></h1>
+        <h2 class="ui-empty-state__subtitle">Enter your Shopify store name below to get started.</h2>
+      </div>
+      <div class="ui-empty-state__subsection">
+        <div class="next-grid">
+          <div class="next-grid__cell" style="text-align: right;">
+            <label for="shop" class="next-input__help-text">https://</label>
           </div>
-
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Install</button>
+          <div class="next-grid__cell">
+            <input type="text" class="form-control" id="shop" name="shop" placeholder="your-store" autocomplete="off" autofocus="on" />
+          </div>
+          <div class="next-grid__cell" style="text-align: left;">
+            <label for="shop" class="next-input__help-text">.myshopify.com</label>
+          </div>
         </div>
       </div>
-    </div>
+      <div class="ui-empty-state__subsection">
+        <button type="submit" class="btn btn-large btn-primary">Install</button>
+      </div>
+    </section>
+  </div>
 <% end %>
