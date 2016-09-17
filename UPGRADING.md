@@ -26,6 +26,26 @@ end
 
 and delete `app/jobs/disco_app/synchronise_webhooks_job.rb`.
 
+### Specify carrier service callback URL in configuration
+As with the specification of webhook topics, you can now specify the callback
+URL for any carrier service inside `config/initializers/disco_app.rb`` rather
+than having to override the synchronisation job.
+
+Add something like this to your initializer (note the use of the lambda `->`
+syntax for lazy evaluation of URL helpers):
+
+```
+DiscoApp.configure do |config|
+  ...
+  
+  config.carrier_service_callback_url = -> { Rails.application.routes.url_helpers.carrier_service_callback_url }
+  
+  ...
+end
+```
+
+and delete `app/jobs/disco_app/synchronise_carrier_service_job.rb`.
+
 ## Upgrading from 0.9.10 to 0.9.11
 
 ### Upgrade session store gem

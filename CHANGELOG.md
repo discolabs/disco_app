@@ -7,7 +7,9 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 - Additional webhook topics are now specified in the `disco_app.rb` initializer
-  rather than by overridding the webhooks synchronisation job
+  instead of overriddng the webhooks synchronisation job
+- Carrier service callback URL is now specified in the `disco_app.rb`
+  initializer instead of overriding the carrier service synchronisation job  
 
 ## 0.9.11 - 2016-09-07
 ### Added
