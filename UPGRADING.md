@@ -46,6 +46,20 @@ end
 
 and delete `app/jobs/disco_app/synchronise_carrier_service_job.rb`.
 
+### Rollbar now ignores 429 - Too Many Request errors
+Add the following to the end of `config/initializers/rollbar.rb`:
+
+```
+...
+  # Add custom handlers.
+  config.before_process << proc do |options|
+    if options[:exception].is_a?(ActiveResource::ClientError) and options[:exception].message.include?('Too Many Requests')
+      raise Rollbar::Ignore
+    end
+  end
+end
+```
+
 ## Upgrading from 0.9.10 to 0.9.11
 
 ### Upgrade session store gem

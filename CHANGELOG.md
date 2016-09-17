@@ -9,7 +9,8 @@ All notable changes to this project will be documented in this file.
 - Additional webhook topics are now specified in the `disco_app.rb` initializer
   instead of overriddng the webhooks synchronisation job
 - Carrier service callback URL is now specified in the `disco_app.rb`
-  initializer instead of overriding the carrier service synchronisation job  
+  initializer instead of overriding the carrier service synchronisation job
+- Prevent Rollbar from reporting `429 Too Many Request` errors
 
 ## 0.9.11 - 2016-09-07
 ### Added
