@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    disco_app (0.9.11)
+    disco_app (0.10.0)
       active_utils (~> 3.2.0)
       activerecord-session_store (~> 1.0.0)
       classnames-rails (~> 2.1.5)
@@ -282,4 +282,4 @@ DEPENDENCIES
   webmock (~> 1.22.1)
 
 BUNDLED WITH
-   1.12.4
+   1.13.1

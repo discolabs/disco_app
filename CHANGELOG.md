@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+No unreleased changes.
+
+## 0.10.0 - 2016-09-17
 ### Added
 - New `time_zone` helper to DiscoApp::Shop model
 

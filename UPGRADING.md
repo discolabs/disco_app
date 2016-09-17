@@ -3,7 +3,7 @@ This file contains more detailed instructions on what's required when updating
 an application between one release version of the gem to the next. It's intended
 as more in-depth accompaniment to the notes in `CHANGELOG.md` for each version.
 
-## Upgrading from 0.9.11 to Unreleased
+## Upgrading from 0.9.11 to 0.10.0
 
 ### Use time zone helper
 If you're calculating a shop's timezone anywhere in your app, you can now
