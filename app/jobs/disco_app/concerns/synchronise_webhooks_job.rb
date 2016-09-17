@@ -5,7 +5,7 @@ module DiscoApp::Concerns::SynchroniseWebhooksJob
   # in our application configuration.
   def perform(shop)
     # Get the full list of expected webhook topics.
-    expected_topics = [:'app/uninstalled', :'shop/update'] + topics
+    expected_topics = [:'app/uninstalled', :'shop/update'] + (DiscoApp.configuration.webhook_topics || [])
 
     # Registered any webhooks that haven't been registered yet.
     (expected_topics - current_topics).each do |topic|
@@ -31,15 +31,6 @@ module DiscoApp::Concerns::SynchroniseWebhooksJob
       end
     end
   end
-
-  protected
-
-    # Return a list of additional webhook topics to listen for. This method
-    # can be overridden in the application to provide a list of app-specific
-    # webhooks that should be created during synchronisation.
-    def topics
-      []
-    end
 
   private
 

@@ -4,6 +4,10 @@ DiscoApp.configure do |config|
   # Required configuration.
   config.app_name = ENV['SHOPIFY_APP_NAME']
 
+  # Set a list of webhook topics to listen for.
+  # See https://help.shopify.com/api/reference/webhook.
+  config.webhook_topics = []
+
   # Set the below if using an application proxy.
   config.app_proxy_prefix = ENV['SHOPIFY_APP_PROXY_PREFIX']
 

@@ -5,6 +5,9 @@ module DiscoApp
     # Required configuration.
     attr_accessor :app_name
 
+    # Set the list of Shopify webhook topics to register.
+    attr_accessor :webhook_topics
+
     # Set the below if using an application proxy.
     attr_accessor :app_proxy_prefix
 
