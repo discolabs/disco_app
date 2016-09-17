@@ -1,0 +1,8 @@
+{
+  "carrier_service": {
+    "name":"Test Application",
+    "callback_url":"https://test.example.com/rates",
+    "service_discovery":true,
+    "format":"json"
+  }
+}

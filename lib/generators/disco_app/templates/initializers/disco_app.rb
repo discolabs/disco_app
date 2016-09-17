@@ -11,6 +11,11 @@ DiscoApp.configure do |config|
   # Set the below if using an application proxy.
   config.app_proxy_prefix = ENV['SHOPIFY_APP_PROXY_PREFIX']
 
+  # Set the below if providing a carrier service endpoint.
+  # Note that if using a URL helper to set the endpoint, we use a lambda
+  # function to ensure that the URL helper is only evaluated when we need it.
+  # config.carrier_service_callback_url = -> { Rails.application.routes.url_helpers.carrier_service_callback_url }
+
   # Set the below to create real Shopify charges.
   config.real_charges = ENV['SHOPIFY_REAL_CHARGES'] === 'true'
 

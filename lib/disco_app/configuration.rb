@@ -11,6 +11,9 @@ module DiscoApp
     # Set the below if using an application proxy.
     attr_accessor :app_proxy_prefix
 
+    # Set the below if providing a carrier service endpoint.
+    attr_accessor :carrier_service_callback_url
+
     # Set the below to create real Shopify charges.
     attr_accessor :real_charges
     alias_method  :real_charges?, :real_charges

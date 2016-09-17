@@ -34,7 +34,10 @@ module DiscoApp::Concerns::SynchroniseCarrierServiceJob
     end
 
     def callback_url
-      nil
+      @callback_url ||= begin
+        callback_url = DiscoApp.configuration.carrier_service_callback_url
+        callback_url.respond_to?('call') ? callback_url.call : callback_url
+      end
     end
 
   private
