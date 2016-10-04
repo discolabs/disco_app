@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 No unreleased changes.
 
+## 0.10.2 - 2016-10-04
+### Added
+- Sidekiq Web UI is now accessible in production at `/sidekiq`
+
 ## 0.10.1 - 2016-09-17
 ### Changed
 - Added `find_shop` and `validate_rate_params` methods to carrier request

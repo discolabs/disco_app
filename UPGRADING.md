@@ -3,6 +3,12 @@ This file contains more detailed instructions on what's required when updating
 an application between one release version of the gem to the next. It's intended
 as more in-depth accompaniment to the notes in `CHANGELOG.md` for each version.
 
+## Upgrading from 0.10.1 to 0.10.2
+
+### Sidekiq Web UI now available in production
+The Sidekiq Web UI can now be accessed on production stores at `/sidekiq` using
+the same authentication credentials as the admin pages. 
+
 ## Upgrading from 0.10.0 to 0.10.1
 
 ### Carrier request controller concern now has additional methods
