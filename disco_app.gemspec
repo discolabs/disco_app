@@ -34,6 +34,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'render_anywhere', '~> 0.0.12'
   s.add_dependency 'sass', '~> 3.4.22'
   s.add_dependency 'uglifier', '>= 1.3.0'
+  s.add_dependency 'sinatra', '>= 1.4.7'
 
   s.add_development_dependency 'sqlite3', '~> 1.3.11'
   s.add_development_dependency 'dotenv-rails', '~> 2.0.2'

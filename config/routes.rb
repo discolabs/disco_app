@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 DiscoApp::Engine.routes.draw do
 
   get 'ref', to: '/sessions#referral'
@@ -36,6 +38,19 @@ DiscoApp::Engine.routes.draw do
     namespace :resources do
       jsonapi_resources :shops
     end
+  end
+
+  # Make the Sidekiq Web UI accessible using the same credentials as the admin.
+  if Rails.env.production?
+    Sidekiq::Web.use Rack::Auth::Basic do |username, password|
+      [
+        ENV['ADMIN_APP_USERNAME'].present?,
+        username == ENV['ADMIN_APP_USERNAME'] == username,
+        ENV['ADMIN_APP_PASSWORD'].present?,
+        password == ENV['ADMIN_APP_PASSWORD'] == username,
+      ].all?
+    end
+    mount Sidekiq::Web, at: '/sidekiq'
   end
 
   # Make the embedded app frame emulator available in development.
