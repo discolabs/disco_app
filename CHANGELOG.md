@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 No unreleased changes.
 
+## 0.10.3 - 2016-10-04
+- Bugfix for Sidekiq Web UI authentication.
+
 ## 0.10.2 - 2016-10-04
 ### Added
 - Sidekiq Web UI is now accessible in production at `/sidekiq`
