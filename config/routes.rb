@@ -45,9 +45,9 @@ DiscoApp::Engine.routes.draw do
     Sidekiq::Web.use Rack::Auth::Basic do |username, password|
       [
         ENV['ADMIN_APP_USERNAME'].present?,
-        username == ENV['ADMIN_APP_USERNAME'] == username,
+        ENV['ADMIN_APP_USERNAME'] == username,
         ENV['ADMIN_APP_PASSWORD'].present?,
-        password == ENV['ADMIN_APP_PASSWORD'] == username,
+        ENV['ADMIN_APP_PASSWORD'] == password,
       ].all?
     end
     mount Sidekiq::Web, at: '/sidekiq'
