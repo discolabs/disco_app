@@ -20,7 +20,7 @@ module DiscoApp::Concerns::Synchronises
           instance.shop = shop
           instance.data = data
         end
-      rescue ActiveRecord::RecordNotUnique
+      rescue ActiveRecord::RecordNotUnique, PG::UniqueViolation
         retry
       end
 
