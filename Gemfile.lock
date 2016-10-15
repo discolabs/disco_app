@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    disco_app (0.10.3)
+    disco_app (0.10.4)
       active_utils (~> 3.2.0)
       activerecord-session_store (~> 1.0.0)
       classnames-rails (~> 2.1.5)
@@ -129,7 +129,7 @@ GEM
     json (1.8.3)
     jsonapi-resources (0.7.0)
       rails (>= 4.0)
-    jwt (1.5.5)
+    jwt (1.5.6)
     listen (3.1.1)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9.7)
