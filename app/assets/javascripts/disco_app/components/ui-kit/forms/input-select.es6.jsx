@@ -1,4 +1,4 @@
-const InputSelect = ({ id, label, labelHidden, name, options, value, onChange }) => {
+const InputSelect = ({ id, label, labelHidden, name, options, value, helpMessage, onChange }) => {
 
   const optionElements = options.map((option) => {
     return <option key={option.value} value={option.value}>{option.label}</option>;
@@ -13,6 +13,11 @@ const InputSelect = ({ id, label, labelHidden, name, options, value, onChange })
     onChange(e.target.value);
   };
 
+  let helpElement = null;
+  if(helpMessage) {
+    helpElement = <p className="next-input__help-text">{helpMessage}</p>;
+  }
+
   return(
     <div className="next-input-wrapper">
       <label className={labelClassName} htmlFor={id}>{label}</label>
@@ -22,6 +27,7 @@ const InputSelect = ({ id, label, labelHidden, name, options, value, onChange })
         </select>
         <NextIcon name="next-chevron-down" size={12} />
       </div>
+      {helpElement}
     </div>
   )
 
