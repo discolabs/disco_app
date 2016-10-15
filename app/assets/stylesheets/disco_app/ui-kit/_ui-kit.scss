@@ -5068,7 +5068,6 @@ td a.subdued:hover {
 }
 
 .ui-annotated-section__annotation {
-  color: rgba(0,0,0,0.56);
   -webkit-box-flex: 1;
   -webkit-flex: 1 0 240px;
   -ms-flex: 1 0 240px;
@@ -5080,6 +5079,7 @@ td a.subdued:hover {
 }
 
 .ui-annotated-section__description {
+  color: #707070;
   padding: 0 20px 20px 20px;
 }
 
