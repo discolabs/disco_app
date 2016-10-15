@@ -1,4 +1,4 @@
-const InputSelect = ({ id, label, labelHidden, name, options, value, helpMessage, onChange }) => {
+const InputSelect = ({ id, label, labelHidden, name, options, value, defaultValue, helpMessage, onChange }) => {
 
   const optionElements = options.map((option) => {
     return <option key={option.value} value={option.value}>{option.label}</option>;
@@ -22,7 +22,7 @@ const InputSelect = ({ id, label, labelHidden, name, options, value, helpMessage
     <div className="next-input-wrapper">
       <label className={labelClassName} htmlFor={id}>{label}</label>
       <div className="next-select__wrapper next-input--has-content">
-        <select className="next-select rule-field" id={id} name={name} value={value} onChange={handleChange}>
+        <select className="next-select rule-field" id={id} name={name} value={value} defaultValue={defaultValue} onChange={handleChange}>
           {optionElements}
         </select>
         <NextIcon name="next-chevron-down" size={12} />
