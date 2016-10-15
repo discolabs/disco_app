@@ -1,4 +1,4 @@
-const CardSection = ({ title, children, wrappable, borderless }) => {
+const CardSection = ({ title, title_small, children, wrappable, borderless }) => {
 
   const className = classNames({
     'next-card__section': true,
@@ -10,7 +10,7 @@ const CardSection = ({ title, children, wrappable, borderless }) => {
 
   const showTitle = () => {
     if (title) {
-      return <CardSectionTitle title={title}/>;
+      return <CardSectionTitle title={title} small={title_small} />;
     } else {
       return null;
     }

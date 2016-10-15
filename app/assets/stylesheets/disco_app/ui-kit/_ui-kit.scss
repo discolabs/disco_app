@@ -403,7 +403,7 @@ html {
 }
 
 body {
-  color: rgba(0,0,0,0.9);
+  color: #1a1a1a;
   font-size: 1.07143rem;
   line-height: 1.42857rem;
   font-weight: 400;
@@ -439,7 +439,6 @@ a.is-disabled {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: #212529;
   font-weight: 400;
   margin: 0;
 }
@@ -1228,7 +1227,7 @@ a.type--subdued:hover {
 
 .ui-layout {
   max-width: 1036px;
-  margin: 20px auto 0;
+  margin: 20px auto;
 }
 
 .ui-layout--full-width {
@@ -3664,27 +3663,24 @@ input[type=checkbox].next-checkbox {
   -webkit-appearance: none;
   -moz-appearance: none;
   width: 100%;
-  color: rgba(0,0,0,0.9);
   font-size: 1.14286rem;
   line-height: 1.71429rem;
   font-weight: 400;
   text-transform: initial;
   letter-spacing: initial;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   background: transparent;
   padding: 5px 10px;
   padding-right: 32px;
   border: 0;
   box-sizing: border-box;
-  height: auto;
+  height: 36px;
   max-width: none;
   display: block;
 }
 
 .next-select:focus {
   outline: none;
-  border: none;
+  border: 0;
 }
 
 .next-select option {
@@ -3795,7 +3791,6 @@ input[type=checkbox].next-checkbox {
 }
 
 .next-heading {
-  color: rgba(0,0,0,0.9);
   font-size: 1.21429rem;
   line-height: 1.71429rem;
   font-weight: 600;
@@ -3823,7 +3818,15 @@ input[type=checkbox].next-checkbox {
 }
 
 .next-heading--small {
-  font-size: 15px;
+  font-size: 0.92857rem;
+  line-height: 1.42857rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+
+  @media screen and (min-width: 640px) {
+    font-size: 0.85714rem;
+  }
 }
 
 .next-heading--large {
