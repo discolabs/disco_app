@@ -1,7 +1,7 @@
 class InputText extends BaseInput {
 
   render() {
-    const { errors, name, value, defaultValue, disabled, helpMessage, label, labelHidden, onChange, onKeyDown, onKeyUp, placeholder } = this.props;
+    const { errors, inputType, name, value, defaultValue, disabled, helpMessage, label, labelHidden, onChange, onKeyDown, onKeyUp, placeholder } = this.props;
 
     const wrapperClassName = classNames({
       'next-input-wrapper': true,
@@ -44,7 +44,7 @@ class InputText extends BaseInput {
           onKeyDown={handleKeyDown}
           onKeyUp={handleKeyUp}
           placeholder={placeholder}
-          type="text"
+          type={inputType || 'text'}
         />
         {helpElement}
       </div>
