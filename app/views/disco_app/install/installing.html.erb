@@ -2,6 +2,21 @@
   <meta http-equiv="refresh" content="5">
 <% end %>
 
-<p>
-  Installing, please wait...
-</p>
+<div class="ui-empty-state">
+  <section class="ui-empty-state__section">
+    <div class="ui-empty-state__subsection">
+      <h1 class="ui-empty-state__title">Installing <%= DiscoApp.configuration.app_name %></h1>
+      <h2 class="ui-empty-state__subtitle">Please wait...</h2>
+    </div>
+  </section>
+</div>
+
+<div class="ui-footer-help">
+  <div class="ui-footer-help__content">
+    <div>
+      <p>
+        Stuck on this page? <a href="mailto:help@discolabs.com?subject=<%= DiscoApp.configuration.app_name %> not installing for <%= @shop.shopify_domain %>!">Email us</a>.
+      </p>
+    </div>
+  </div>
+</div>
