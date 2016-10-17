@@ -7,4 +7,4 @@ widget_store_dev:
   shopify_domain: widgets-dev.myshopify.com
   shopify_token: 00000000000000000000000000000000
   status: 3
-  data: '{ "country_name": "Australia" }'
+  data: '{ "country_name": "Sweden", "primary_locale": "sv" }'

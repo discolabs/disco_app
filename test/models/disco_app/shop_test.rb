@@ -32,4 +32,12 @@ class DiscoApp::ShopTest < ActiveSupport::TestCase
     assert_equal 'UTC', disco_app_shops(:widget_store_dev).time_zone.name
   end
 
+  test 'locale helper returns correct locale when defined on shop model' do
+    assert_equal :sv, disco_app_shops(:widget_store_dev).locale
+  end
+
+  test 'locale helper returns correct en locale when no known locale defined' do
+    assert_equal :en, disco_app_shops(:widget_store).locale
+  end
+
 end

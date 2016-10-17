@@ -73,6 +73,12 @@ module DiscoApp::Concerns::Shop
       end
     end
 
+    # Return the shop's configured locale as a symbol. If none exists for some
+    # reason, 'en' is returned.
+    def locale
+      (data['primary_locale'] || 'en').to_sym
+    end
+
   end
 
 end

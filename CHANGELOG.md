@@ -2,7 +2,8 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
-No unreleased changes.
+### Added
+- New `locale` helper to DiscoApp::Shop model
 
 ## 0.10.4 - 2016-10-15
 ### Changed
