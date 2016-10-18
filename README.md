@@ -77,12 +77,6 @@ This seems to be a bug from spring. For more info please read:
 Once this is complete, you'll have a new Rails app created in `/example_app`,
 with the DiscoApp Engine configured and mounted.
 
-There are some additional "optional" generators that you can run to add
-additional functionality or features to the application. See the section
-[Optional Generators][] for more.
-
-[Optional Generators]: #optional-generators
-
 ### 3. Setting up the Shopify app
 In order to work on our app, we need to create a development application from
 the Shopify Partners dashboard. Once that's done, we can copy across the
