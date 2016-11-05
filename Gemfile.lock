@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    disco_app (0.10.4)
+    disco_app (0.10.5)
       active_utils (~> 3.2.0)
       activerecord-session_store (~> 1.0.0)
       classnames-rails (~> 2.1.5)
@@ -266,7 +266,7 @@ GEM
       coffee-rails
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    uglifier (3.0.2)
+    uglifier (3.0.3)
       execjs (>= 0.3.0, < 3)
     webmock (1.22.6)
       addressable (>= 2.3.6)

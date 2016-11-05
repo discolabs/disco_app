@@ -1,9 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## 0.10.5 - 2016-11-05
 ### Added
 - New `locale` helper to DiscoApp::Shop model
+- Added `sychronise_by` method to synchronises concern
 
 ## 0.10.4 - 2016-10-15
 ### Changed

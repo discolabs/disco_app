@@ -3,6 +3,12 @@ This file contains more detailed instructions on what's required when updating
 an application between one release version of the gem to the next. It's intended
 as more in-depth accompaniment to the notes in `CHANGELOG.md` for each version.
 
+## Upgrading from 0.10.4 to 0.10.5
+
+### Use locale helper
+If you're using a shop's local anywhere, you can now replace your existing code
+with the new `DiscoApp::Shop.locale` helper.
+
 ## Upgrading from 0.10.3 to 0.10.4
 There were some significant changes to the React component library and the
 styling of some of our components - you should visually inspect each page of
