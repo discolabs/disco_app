@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160530160739) do
+ActiveRecord::Schema.define(version: 20161105054746) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "carts", force: :cascade do |t|
+    t.integer  "shop_id",    limit: 8
+    t.string   "token"
+    t.jsonb    "data"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "carts", ["token"], name: "index_carts_on_token", unique: true, using: :btree
 
   create_table "disco_app_app_settings", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -128,6 +138,7 @@ ActiveRecord::Schema.define(version: 20160530160739) do
     t.string  "background_color",           default: "#FFFFFF"
   end
 
+  add_foreign_key "carts", "disco_app_shops", column: "shop_id"
   add_foreign_key "disco_app_application_charges", "disco_app_shops", column: "shop_id"
   add_foreign_key "disco_app_application_charges", "disco_app_subscriptions", column: "subscription_id"
   add_foreign_key "disco_app_plan_codes", "disco_app_plans", column: "plan_id"

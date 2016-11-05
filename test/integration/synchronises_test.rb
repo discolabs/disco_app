@@ -32,9 +32,16 @@ class SynchronisesTest < ActionDispatch::IntegrationTest
     assert_equal 'IPod Nano - 8GB', @product.data['title']
   end
 
-  test 'existing product is deleted when product deleted webhook is receieved' do
+  test 'existing product is deleted when product deleted webhook is received' do
     post_webhook('product_deleted', :'products/delete')
     assert_equal 0, Product.count
+  end
+
+  test 'cart with token for id is updated when cart updated webhook is received' do
+    post_webhook('cart_updated', :'carts/update')
+
+    # Assert the cart data was correctly updated
+    assert_equal 3200.0, carts(:cart).total_price
   end
 
   private

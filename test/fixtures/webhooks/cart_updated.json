@@ -1,0 +1,28 @@
+{
+  "created_at": "2016-11-05T04:34:40.353Z",
+  "updated_at": "2016-11-05T05:36:58.908Z",
+  "id": "efa1e7d02cfc60cf3ddadbed770ef1b6",
+  "token": "efa1e7d02cfc60cf3ddadbed770ef1b6",
+  "line_items": [
+    {
+      "id": 27132991496,
+      "properties": null,
+      "quantity": 2,
+      "variant_id": 27132991496,
+      "key": "27132991496:bf1f8c0342f4b55df844abfcc8536c49",
+      "title": "Douglas - Black/White - XS",
+      "price": "1600.00",
+      "original_price": "1600.00",
+      "discounted_price": "1600.00",
+      "line_price": "3200.00",
+      "original_line_price": "3200.00",
+      "total_discount": "0.00",
+      "discounts": [],
+      "sku": "300 60 041-XS",
+      "grams": 0,
+      "vendor": "Uniforms for the Dedicated",
+      "product_id": 8194697800,
+      "gift_card": false
+    }
+  ]
+}

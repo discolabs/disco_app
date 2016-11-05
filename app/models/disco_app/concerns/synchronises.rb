@@ -10,13 +10,17 @@ module DiscoApp::Concerns::Synchronises
       true
     end
 
+    def synchronise_by(shop, data)
+      { id: data[:id] }
+    end
+
     def synchronise(shop, data)
       data = data.with_indifferent_access
 
       return unless should_synchronise?(shop, data)
 
       begin
-        instance = self.find_or_create_by!(id: data[:id]) do |instance|
+        instance = self.find_or_create_by!(self.synchronise_by(shop, data)) do |instance|
           instance.shop = shop
           instance.data = data
         end

@@ -6,7 +6,7 @@ DiscoApp.configure do |config|
 
   # Set a list of webhook topics to listen for.
   # See https://help.shopify.com/api/reference/webhook.
-  config.webhook_topics = [:'orders/create', :'orders/paid']
+  config.webhook_topics = [:'orders/create', :'orders/paid', :'carts/create', :'carts/update']
 
   # Set the below if using an application proxy.
   config.app_proxy_prefix = ENV['SHOPIFY_APP_PROXY_PREFIX']
