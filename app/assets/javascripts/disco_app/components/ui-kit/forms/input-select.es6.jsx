@@ -1,7 +1,7 @@
 const InputSelect = ({ id, label, labelHidden, name, options, value, defaultValue, helpMessage, onChange }) => {
 
   const optionElements = options.map((option) => {
-    return <option key={option.value} value={option.value}>{option.label}</option>;
+    return <option key={option.value} value={option.value} disabled={option.disabled}>{option.label}</option>;
   });
 
   const labelClassName = classNames({
