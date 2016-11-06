@@ -42,9 +42,26 @@ module DiscoApp::ApplicationHelper
     link_to(name, '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", "")})
   end
 
+  # Return the props required to instantiate a React ModelForm component for the
+  # given model instance.
+  def model_form_props(model)
+    {
+      model: model,
+      modelName: model.model_name.singular,
+      modelUrl: model.persisted? ? send("#{model.model_name.singular}_path", model) : nil,
+      modelsUrl: send("#{model.model_name.plural}_path"),
+      authenticityToken: form_authenticity_token,
+      errors: errors_to_react(model)
+    }.as_json
+  end
+
   # Helper method that provides detailed error information from an active record as JSON
-  def errors_to_react(record)
-    {type: record.model_name.human.downcase, errors: record.errors.keys, messages: record.errors.full_messages}.as_json
+  def errors_to_react(model)
+    {
+      type: model.model_name.human.downcase,
+      errors: model.errors.keys,
+      messages: model.errors.full_messages
+    }.as_json
   end
 
 end
