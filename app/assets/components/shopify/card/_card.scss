@@ -1,0 +1,342 @@
+.next-card {
+  background-color: #ffffff;
+  border-radius: 3px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: #31373d;
+}
+
+.next-card ~ .next-card {
+  margin-top: 20px;
+}
+
+.next-card--aside {
+  background-color: #f5f6f7;
+}
+
+.next-card--aside-lighter {
+  background-color: #fafbfc;
+}
+
+.next-card--plain {
+  box-shadow: none;
+}
+
+.next-card--hide-overflow {
+  overflow: hidden;
+}
+
+.next-card--stacked {
+  margin: 0;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.next-card--stacked ~ .next-card--stacked {
+  margin-top: 0;
+}
+
+.next-card--preserve-first-and-last-section-spacing .next-card__section--half-spacing:first-of-type {
+  padding-top: 20px;
+}
+
+.next-card--preserve-first-and-last-section-spacing .next-card__section--half-spacing:last-of-type {
+  padding-bottom: 20px;
+}
+
+.next-card--sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 76px;
+}
+
+.next-card--js-sticky {
+  position: fixed;
+  top: 56px;
+  margin-top: 20px;
+}
+
+.next-card__header {
+  padding: 20px 20px 0;
+}
+
+.next-card__header .next-heading {
+  margin-bottom: 0;
+}
+
+.next-card__footer {
+  padding: 0 20px 20px;
+}
+
+.next-card__section {
+  padding: 20px;
+}
+
+.next-card__section ~ .next-card__section {
+  border-top: 1px solid #ebeef0;
+}
+
+.next-card__section ~ .next-card__section.next-card__section--no-border {
+  border-top: 0;
+}
+
+.next-card__section:first-child {
+  border-radius: 3px 3px 0 0;
+}
+
+.next-card__section:last-child {
+  border-radius: 0 0 3px 3px;
+}
+
+.next-card__section--no-vertical-spacing {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.next-card__section--no-vertical-spacing + .next-card__section {
+  border-top: none;
+}
+
+.next-card__section--no-horizontal-spacing {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.next-card__section--half-spacing {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.next-card__section--half-spacing.next-card__header {
+  padding-bottom: 0;
+}
+
+.next-card__section--half-spacing.next-card__footer {
+  padding-top: 0;
+}
+
+.next-card__section--three-quarter-spacing {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.next-card__section--double-spacing {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.next-card__section--no-padding {
+  padding: 0;
+}
+
+.next-card__section--subdued {
+  background-color: #f5f6f7;
+}
+
+.next-card__section--more-subdued {
+  background-color: #ebeef0;
+}
+
+.next-card__section--less-subdued {
+  background-color: #fafbfc;
+}
+
+.next-card__section--accentuated {
+  background-color: #0078bd;
+}
+
+.next-card__section--accentuated .next-heading {
+  color: #ffffff;
+}
+
+.next-card__section--bordered {
+  border-top: 1px solid #ebeef0;
+}
+
+.next-card__section--no-bottom-spacing {
+  padding-bottom: 0;
+}
+
+.next-card__section--no-bottom-spacing + .next-card__section {
+  border-top: 0;
+}
+
+.next-card__section--no-top-spacing {
+  padding-top: 0;
+}
+
+.next-card__section ~ .next-card__section--no-top-spacing {
+  border-top: 0;
+}
+
+.next-card__section--border-left {
+  border-left: 1px solid #ebeef0;
+}
+
+.next-card__section--border-bottom {
+  border-bottom: 1px solid #ebeef0;
+}
+
+.next-card__section--centered {
+  text-align: center;
+}
+
+.next-card__section--sello-only {
+  position: relative;
+}
+
+.next-card__section--sello-only::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 10px;
+  background-color: #2cc699;
+}
+
+.next-card__section--sello-only:last-child::after {
+  border-radius: 0 0 3px 0;
+}
+
+.next-card__section--sello-only:first-child::after {
+  border-radius: 0 3px 0 0;
+}
+
+.next-card--with-full-height-image {
+  position: relative;
+  padding-left: 250px;
+  max-width: calc(100% - 250px);
+}
+
+.next-card--with-full-height-image .next-card__image {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 250px;
+  background-size: cover;
+  background-position: center;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.page--condense-spacing .next-card--with-full-height-image {
+  padding-left: 0;
+  max-width: 100%;
+}
+
+.page--condense-spacing .next-card--with-full-height-image .next-card__image {
+  position: static;
+  display: block;
+  width: 100%;
+  height: 120px;
+  border-radius: 0;
+}
+
+.next-card__section__separator {
+  margin: 20px auto;
+  background-color: #ebeef0;
+}
+
+.next-card__section__separator--no-margin {
+  margin: 0;
+}
+
+.next-card__separator {
+  margin: 0;
+  height: 1px;
+  background: #ebeef0;
+}
+
+.next-card__separator--thick {
+  height: 5px;
+}
+
+.next-card__separator--inline {
+  margin: 10px 20px;
+}
+
+.next-card--top-rounded-corners {
+  border-radius: 3px 3px 0 0 !important;
+}
+
+.next-card--bottom-rounded-corners {
+  border-radius: 0 0 3px 3px !important;
+}
+
+.next-card--all-rounded-corners {
+  border-radius: 3px !important;
+}
+
+.next-card--left-rounded-corners {
+  border-radius: 3px 0 0 3px;
+}
+
+.next-card--right-rounded-corners {
+  border-radius: 0 3px 3px 0;
+}
+
+.next-card--top-right-rounded-corner {
+  border-top-right-radius: 3px;
+}
+
+.next-card--bottom-right-rounded-corner {
+  border-bottom-right-radius: 3px;
+}
+
+.next-card--top-left-rounded-corner {
+  border-top-left-radius: 3px;
+}
+
+.next-card--bottom-left-rounded-corner {
+  border-bottom-left-radius: 3px;
+}
+
+.next-card__ribbon {
+  background: #fafbfc;
+  border-right: solid 1px #ebeef0;
+  border-radius: 3px 0 0 3px;
+  padding: 20px;
+  display: block;
+}
+
+.next-card__ribbon--warning {
+  background: #ffd117;
+  border-right: solid 1px rgba(212, 160, 2, 0.25);
+}
+
+.next-card__ribbon--vertically-centered {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.next-ui .next-text-slate {
+  color: #31373d;
+}
+
+.next-card__header--fully-padded {
+  padding-bottom: 20px;
+}
+
+.next-card--semi-transparent {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.next-card__channel-image {
+  margin-right: 20px;
+}
+
+.next-grid--single-column .next-card__channel-image {
+  display: none;
+}

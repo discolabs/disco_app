@@ -14,8 +14,11 @@ $font-family: -apple-system, "BlinkMacSystemFont", "San Francisco", "Roboto", "S
 @import 'ui-kit/ui-icons';
 @import 'ui-kit/ui-layout';
 @import 'ui-kit/ui-forms';
-@import 'ui-kit/ui-stack';
-@import 'ui-kit/ui-empty-state';
-@import 'ui-kit/ui-footer-help';
-@import 'ui-kit/ui-page-actions';
 @import 'ui-kit/ui-tabs';
+
+// Components
+@import '../../components/shopify/ui-layout/ui-layout';
+@import '../../components/shopify/ui-stack/ui-stack';
+@import '../../components/shopify/typography/typography';
+@import '../../components/shopify/buttons/buttons';
+@import '../../components/shopify/card/card';

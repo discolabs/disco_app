@@ -15,8 +15,13 @@ const Table = ({ children, scrollable, sticky }) => {
   );
 };
 
-Card.PropTypes = {
+Table.PropTypes = {
   children: React.PropTypes.node.isRequired,
   scrollable: React.PropTypes.bool,
   sticky: React.PropTypes.bool
+};
+
+Table.defaultProps = {
+  scrollable: false,
+  sticky: false
 };
