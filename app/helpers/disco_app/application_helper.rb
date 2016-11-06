@@ -47,6 +47,7 @@ module DiscoApp::ApplicationHelper
   def model_form_props(model)
     {
       model: model,
+      modelTitle: model.persisted? ? model.to_s : "New #{model.model_name.human.downcase}",
       modelName: model.model_name.singular,
       modelUrl: model.persisted? ? send("#{model.model_name.singular}_path", model) : nil,
       modelsUrl: send("#{model.model_name.plural}_path"),

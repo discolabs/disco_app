@@ -1,7 +1,7 @@
 class ModelForm extends BaseForm {
 
   render() {
-    const { modelName, modelUrl, modelsUrl, children, authenticityToken } = this.props;
+    const { modelTitle, modelName, modelUrl, modelsUrl, children, authenticityToken } = this.props;
     const errors = this.renderErrors();
 
     return(
@@ -19,11 +19,29 @@ class ModelForm extends BaseForm {
 
         {children}
 
+        <ModelFormEmbeddedAppBar modelTitle={modelTitle} modelsUrl={modelsUrl} />
         <ModelFormPageActions modelName={modelName} modelUrl={modelUrl} modelsUrl={modelsUrl} />
       </form>
     )
   }
 }
+
+const ModelFormEmbeddedAppBar = ({ modelTitle, modelsUrl }) => {
+  const buttons = {
+    primary: {
+      label: "Save",
+      message: "ea.save"
+    },
+    secondary: [{
+      label: "Cancel",
+      href: modelsUrl
+    }]
+  };
+
+  return (
+    <EmbeddedAppBar title={modelTitle} buttons={buttons} />
+  );
+};
 
 const ModelFormPageActions = ({ modelName, modelUrl, modelsUrl }) => {
   const primary = [

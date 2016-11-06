@@ -21,11 +21,17 @@
 </head>
 <body>
   <script type="text/javascript">
+    window.DiscoApp = {
+      INITIAL_TITLE: "<%= yield(:title) %>",
+      INITIAL_ICON: "<%= image_url("disco_app/icon.svg") %>",
+      INITIAL_BUTTONS: <%= content_for?(:buttons) ? content_for(:buttons) : '{}' %>,
+      INITIAL_BREADCRUMB: <%= content_for?(:breadcrumb) ? content_for(:breadcrumb) : 'undefined' %>
+    };
     ShopifyApp.Bar.initialize({
-      title: "<%= yield(:title) %>",
-      icon: "<%= image_url("disco_app/icon.svg") %>",
-      buttons: <%= content_for?(:buttons) ? content_for(:buttons) : '{}' %>,
-      breadcrumb: <%= content_for?(:breadcrumb) ? content_for(:breadcrumb) : 'undefined' %>
+      title: DiscoApp.INITIAL_TITLE,
+      icon: DiscoApp.INITIAL_ICON,
+      buttons: DiscoApp.INITIAL_BUTTONS,
+      breadcrumb: DiscoApp.INITIAL_BREADCRUMB
     });
   </script>
 
