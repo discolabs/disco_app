@@ -175,6 +175,7 @@ class DiscoAppGenerator < Rails::Generators::Base
     copy_file 'initializers/disco_app.rb', 'config/initializers/disco_app.rb'
     copy_file 'initializers/shopify_session_repository.rb', 'config/initializers/shopify_session_repository.rb'
     copy_file 'initializers/session_store.rb', 'config/initializers/session_store.rb'
+    copy_file 'initializers/rollbar.rb', 'config/initializers/rollbar.rb'
 
     # Copy default home controller and view
     copy_file 'controllers/home_controller.rb', 'app/controllers/home_controller.rb'
