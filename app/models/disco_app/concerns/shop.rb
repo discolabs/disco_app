@@ -59,8 +59,8 @@ module DiscoApp::Concerns::Shop
       "https://#{shopify_domain}/admin"
     end
 
-    # Convenience method to get the email of this shop owner, to display in Rollbar.
-    def email_shop
+    # Convenience method to get the email of the shop's admin, to display in Rollbar.
+    def email
       self.data['email']
     end
 
