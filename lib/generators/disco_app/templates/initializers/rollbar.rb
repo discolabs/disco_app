@@ -12,8 +12,7 @@ Rollbar.configure do |config|
 
   # Enable "Person" feature of Rollbar in the context of a "Shop"
   config.person_method = 'current_shop'
-  config.person_username_method = 'domain'
-  config.person_email_method = 'email_shop'
+  config.person_username_method = 'shopify_domain'
 
   # Add custom handlers.
   config.before_process << proc do |options|
