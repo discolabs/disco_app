@@ -3,6 +3,11 @@ This file contains more detailed instructions on what's required when updating
 an application between one release version of the gem to the next. It's intended
 as more in-depth accompaniment to the notes in `CHANGELOG.md` for each version.
 
+## Upgrading from 0.10.5 to UNRELEASED
+
+### Updated ruby version
+Updated ruby to the latest version (2.3.3)
+
 ## Upgrading from 0.10.4 to 0.10.5
 
 ### Use locale helper

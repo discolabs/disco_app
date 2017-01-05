@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## Unreleased
+### Changed
+- Updated the version of `ruby` to 2.3.3
+
 ## 0.10.5 - 2016-11-05
 ### Added
 - New `locale` helper to DiscoApp::Shop model
