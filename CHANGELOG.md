@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 No unreleased changes.
 
+## 0.11.1 - 2017-01-11
+### Changed
+- Bugfix for `react-rails` gem version
+
 ## 0.11.0 - 2017-01-11
 ### Changed
 - Updated the version of `ruby` to 2.3.3

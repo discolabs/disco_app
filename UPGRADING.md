@@ -3,6 +3,9 @@ This file contains more detailed instructions on what's required when updating
 an application between one release version of the gem to the next. It's intended
 as more in-depth accompaniment to the notes in `CHANGELOG.md` for each version.
 
+## Upgrading from 0.11.0 to 0.11.1
+No changes required - only a bugfix release.
+
 ## Upgrading from 0.10.5 to 0.11.0
 
 ### Updated ruby version
