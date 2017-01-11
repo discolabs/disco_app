@@ -3,10 +3,12 @@ This file contains more detailed instructions on what's required when updating
 an application between one release version of the gem to the next. It's intended
 as more in-depth accompaniment to the notes in `CHANGELOG.md` for each version.
 
-## Upgrading from 0.10.5 to UNRELEASED
+## Upgrading from 0.10.5 to 0.11.0
 
 ### Updated ruby version
-Updated ruby to the latest version (2.3.3)
+The Ruby dependency for `disco_app` was upgraded to the latest stable release of
+Ruby (2.3.3). You should ensure the `.ruby-version` and your `Gemfile` is updated
+to specify Ruby 2.3.3.
 
 ## Upgrading from 0.10.4 to 0.10.5
 

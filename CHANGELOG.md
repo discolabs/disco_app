@@ -2,8 +2,12 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+No unreleased changes.
+
+## 0.11.0 - 2017-01-11
 ### Changed
 - Updated the version of `ruby` to 2.3.3
+- Improvements to React component library
 
 ## 0.10.5 - 2016-11-05
 ### Added
