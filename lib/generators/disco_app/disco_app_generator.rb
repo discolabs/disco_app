@@ -35,7 +35,7 @@ class DiscoAppGenerator < Rails::Generators::Base
     gem 'rails-bigint-pk', '~> 1.2.0'
     gem 'acts_as_singleton', '~> 0.0.8'
     gem 'pg', '~> 0.18.3'
-    gem 'react-rails', '~> 1.6.0'
+    gem 'react-rails', '~> 1.10'
     gem 'classnames-rails', '~> 2.1.5'
     gem 'active_link_to', '~> 1.0.2'
     gem 'premailer-rails', '~> 1.8.2'
