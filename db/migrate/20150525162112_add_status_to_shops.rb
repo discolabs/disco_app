@@ -1,5 +1,7 @@
 class AddStatusToShops < ActiveRecord::Migration
   def change
-    add_column :shops, :status, :integer, default: 0
+    if table_exists? :shops
+      add_column :shops, :status, :integer, default: 0
+    end
   end
 end
