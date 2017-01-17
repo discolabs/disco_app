@@ -1,8 +1,9 @@
-const NextIcon = ({ size, name }) => {
+const NextIcon = ({ size, name, additionalClassNames = '' }) => {
 
   const className = classNames({
     "next-icon": true,
-    ['next-icon--size-' + size]: true
+    ['next-icon--size-' + size]: true,
+    [additionalClassNames]: (additionalClassNames.length > 0)
   });
 
   return (
