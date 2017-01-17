@@ -1,5 +1,7 @@
 class AddChargeStatusToShop < ActiveRecord::Migration
   def change
-    add_column :shops, :charge_status, :integer, default: 6
+    if table_exists? :shops
+      add_column :shops, :charge_status, :integer, default: 6
+    end
   end
 end
