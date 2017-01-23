@@ -1,0 +1,18 @@
+.next-table--data, .next-table--line-items {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.next-table--line-items td {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.next-table--line-items td:first-of-type, .next-table--line-items th:first-of-type {
+  padding-left: 0;
+}
+
+.next-table--line-items .next-table__image-cell {
+  vertical-align: top;
+  min-width: 48px;
+}

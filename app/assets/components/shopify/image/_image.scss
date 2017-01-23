@@ -1,0 +1,82 @@
+.aspect-ratio {
+  position: relative;
+  display: block;
+  background: #fafbfc;
+  padding: 0;
+}
+
+.aspect-ratio__content {
+  position: absolute;
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+}
+
+.aspect-ratio::before {
+  z-index: 1;
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border: 1px solid rgba(195,207,216,0.3);
+}
+
+.aspect-ratio--square {
+  width: 100%;
+  padding-bottom: 100%;
+}
+
+.aspect-ratio--square--50 {
+  width: 50px;
+  padding-bottom: 50px;
+  -webkit-flex-grow: 0;
+  -ms-flex-positive: 0;
+  flex-grow: 0;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+.aspect-ratio--square {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+.next-icon.aspect-ratio__content, .aspect-ratio__content.next-icon__text {
+  position: absolute;
+}
+
+
+@keyframes next-spinner-rotate {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.next-spinner {
+  display: inline-block;
+  -webkit-animation: next-spinner-rotate 600ms linear infinite;
+  animation: next-spinner-rotate 600ms linear infinite;
+  position: relative;
+}
+
+.next-spinner>.next-icon, .next-spinner>.next-icon__text {
+  position: static;
+}
+
+.next-spinner__ring {
+  stroke: #0078bd;
+  stroke-dasharray: 100%;
+  stroke-width: 2px;
+  stroke-linecap: round;
+  fill: none;
+}

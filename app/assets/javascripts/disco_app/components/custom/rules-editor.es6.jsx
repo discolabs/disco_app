@@ -214,7 +214,7 @@ class RulesEditor extends React.Component {
 
     // Convert the current rules JSON into a format using the correct column
     // format used by our more advanced key checker.
-    const rulesJSON = JSON.stringify(this.state.rules.map((rule, i) => {
+    const rulesJSON = JSON.stringify(rules.map((rule, i) => {
       return Object.assign({}, rule, {
         column: this.props.columns[rule.column].column
       });
@@ -228,7 +228,7 @@ class RulesEditor extends React.Component {
           </div>
         </div>
         <Button onClick={this.onAddRule.bind(this)}>
-          Add another condition
+          {rules.length === 0 ? 'Add a condition' : 'Add another condition'}
         </Button>
         <input type="hidden" name={name} value={rulesJSON} />
       </CardSection>
