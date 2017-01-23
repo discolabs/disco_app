@@ -40,6 +40,7 @@ class DiscoAppGenerator < Rails::Generators::Base
     gem 'active_link_to', '~> 1.0.2'
     gem 'premailer-rails', '~> 1.8.2'
     gem 'nokogiri', '~> 1.6.8'
+    gem "attr_encrypted", "~> 3.0.0"
     gem 'render_anywhere', '~> 0.0.12', require: false
 
     # Add gems for development and testing only.

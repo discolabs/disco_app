@@ -23,6 +23,9 @@ module DiscoApp::Concerns::Shop
     # Alias 'with_shopify_session' as 'temp', as per our existing conventions.
     alias_method :temp, :with_shopify_session
 
+    # Encrypt Shopify Token in production
+    attr_encrypted :shopify_token, key: ENV["SECRET_KEY_BASE"], unless: Rails.env.development?
+
     # Return true if the shop is considered as in development mode.
     def development?
       ['staff', 'custom', 'affiliate'].include?(plan_name)
