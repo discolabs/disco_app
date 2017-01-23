@@ -47,6 +47,7 @@ $ mkdir example_app
 $ cd example_app
 $ echo "source 'https://rubygems.org'" > Gemfile
 $ echo "gem 'rails', '4.2.5.2'" >> Gemfile
+$ echo "2.3.3" > .ruby-version
 $ bundle install
 $ bundle exec rails new . --force --skip-bundle
 $ echo "gem 'disco_app', git: 'https://$DISCO_GEM_CREDENTIALS@github.com/discolabs/disco_app.git', tag: '0.11.1'" >> Gemfile
