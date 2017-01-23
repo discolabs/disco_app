@@ -43,8 +43,12 @@ Check that the rails version required in your Gemfile matches the one specified 
 
 ```
 $ export DISCO_GEM_CREDENTIALS=disco-gems:0dfbd458c126baa2744cef477b24c7cf7227fae5
-$ rails _4.2.5.2_ new example_app
+$ mkdir example_app
 $ cd example_app
+$ echo "source 'https://rubygems.org'" > Gemfile
+$ echo "gem 'rails', '4.2.5.2'" >> Gemfile
+$ bundle install
+$ bundle exec rails new . --force --skip-bundle
 $ echo "gem 'disco_app', git: 'https://$DISCO_GEM_CREDENTIALS@github.com/discolabs/disco_app.git', tag: '0.11.1'" >> Gemfile
 $ bundle update
 $ bundle exec rails generate disco_app --force
