@@ -26,7 +26,7 @@ class DiscoAppGenerator < Rails::Generators::Base
     # Remove sqlite.
     gsub_file 'Gemfile', /^# Use sqlite3 as the database for Active Record\ngem 'sqlite3'/m, ''
 
-    # Add gems that need to be in the Gemfile
+    # Add gem requirements.
     gem 'shopify_app'
     gem 'pg'
     gem 'sidekiq'
@@ -35,9 +35,15 @@ class DiscoAppGenerator < Rails::Generators::Base
     gem 'react-rails'
     gem 'classnames-rails'
     gem 'premailer-rails'
+    gem 'rails-bigint-pk'
+    gem 'acts_as_singleton'
+    gem 'active_link_to'
+    gem 'nokogiri'
+    gem 'oj'
+    gem 'render_anywhere'
 
     # Specify the threadsafe version of ActiveResource.
-    gem 'activeresource', github: 'shopify/activeresource', tag: '4.2-threadsafe'
+    gem 'activeresource', git: 'https://github.com/shopify/activeresource.git', tag: '4.2-threadsafe'
 
     # Indicate which gems should only be used in production.
     gem_group :production do
@@ -47,9 +53,9 @@ class DiscoAppGenerator < Rails::Generators::Base
 
     # Indicate which gems should only be used in development and test.
     gem_group :development, :test do
-      gem 'dotenv-rails', '~> 2.0.2'
-      gem 'minitest-reporters', '~> 1.0.19'
-      gem 'webmock', '~> 2.3.2'
+      gem 'dotenv-rails'
+      gem 'minitest-reporters'
+      gem 'webmock'
     end
   end
 
