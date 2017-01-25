@@ -3,7 +3,23 @@ This file contains more detailed instructions on what's required when updating
 an application between one release version of the gem to the next. It's intended
 as more in-depth accompaniment to the notes in `CHANGELOG.md` for each version.
 
-## Upgrading from 0.11.1 to Unreleased
+## Upgrading from 0.11.1 to 0.12.0
+
+### Changed dependencies
+The major difference for this upgrade is the change to the dependencies regime for
+the `disco_app` gem. The dependencies specified in the Gemspec are now much looser
+and should lead to fewer "inconsistent version" issues. The generator now no longer
+specifies gem versions when adding gems to the `Gemfile`. After upgrading, you may
+want to remove the specific version numbers from your app's `Gemfile` and run a
+`bundle update`.
+
+### Migration consolidation
+All migrations from the `disco_app` engine have been consolidated into a single 
+migration. You can either consolidate the migrations for your own app by copying
+your `schema.rb` file into a single migration file, or just delete all migrations
+added by the `disco_app` gem and ensure your app's existing migrations make sense.
+
+### New API context helper
 The Shopify API context helper `.temp {}` is now aliased as `.with_api_context {}`.
 You should replace any usages of `.temp` with the new method name.
 
