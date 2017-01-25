@@ -39,6 +39,8 @@ end
 # Set up the base test class.
 class ActiveSupport::TestCase
 
+  fixtures :all
+
   # Include helper modules common to all tests.
   include DiscoApp::Test::FileFixtures
 
