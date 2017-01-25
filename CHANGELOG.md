@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 0.12.1 - 2017-01-25
+### Changed
+- Updated `uglifier` gem to `~> 3.0`
+
 ## 0.12.0 - 2017-01-25
 ### Added
 - UI component style additions for tables and images with aspect ratios

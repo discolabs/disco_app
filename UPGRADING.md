@@ -3,6 +3,11 @@ This file contains more detailed instructions on what's required when updating
 an application between one release version of the gem to the next. It's intended
 as more in-depth accompaniment to the notes in `CHANGELOG.md` for each version.
 
+## Upgrading from 0.12.0 to 0.12.1
+
+### Updated uglifier gem
+Ensure that your `uglifier` gem dependency in your `Gemfile` depends on `~> 3.0`.
+
 ## Upgrading from 0.11.1 to 0.12.0
 
 ### Changed dependencies
