@@ -22,44 +22,41 @@ class DiscoAppGenerator < Rails::Generators::Base
   end
 
   # Configure the application's Gemfile.
-  def configure_gems
-    # Remove sqlite from the general Gemfile.
+  def configure_gemfile
+    # Remove sqlite.
     gsub_file 'Gemfile', /^# Use sqlite3 as the database for Active Record\ngem 'sqlite3'/m, ''
 
-    # Add gems common to all environments.
-    gem 'shopify_app', '~> 6.4.1'
-    gem 'sidekiq', '~> 4.0.2'
-    gem 'puma', '~> 2.14.0'
-    gem 'activerecord-session_store', '~> 1.0.0'
-    gem 'activeresource', github: 'shopify/activeresource', tag: '4.2-threadsafe'
-    gem 'rails-bigint-pk', '~> 1.2.0'
-    gem 'acts_as_singleton', '~> 0.0.8'
-    gem 'pg', '~> 0.18.3'
-    gem 'react-rails', '~> 1.10'
-    gem 'classnames-rails', '~> 2.1.5'
-    gem 'active_link_to', '~> 1.0.2'
-    gem 'premailer-rails', '~> 1.8.2'
-    gem 'nokogiri', '~> 1.6.8'
-    gem 'render_anywhere', '~> 0.0.12', require: false
+    # Add gem requirements.
+    gem 'shopify_app'
+    gem 'pg'
+    gem 'sidekiq'
+    gem 'rollbar'
+    gem 'newrelic_rpm'
+    gem 'react-rails'
+    gem 'classnames-rails'
+    gem 'premailer-rails'
+    gem 'rails-bigint-pk'
+    gem 'acts_as_singleton'
+    gem 'active_link_to'
+    gem 'nokogiri'
+    gem 'oj'
+    gem 'render_anywhere'
 
-    # Add gems for development and testing only.
-    gem_group :development, :test do
-      gem 'dotenv-rails', '~> 2.0.2'
-      gem 'minitest-reporters', '~> 1.0.19'
-      gem 'guard', '~> 2.13.0'
-      gem 'guard-minitest', '~> 2.4.4'
-    end
+    # Specify the threadsafe version of ActiveResource.
+    gem 'activeresource', git: 'https://github.com/shopify/activeresource.git', tag: '4.2-threadsafe'
 
-    # Add gems for production only.
+    # Indicate which gems should only be used in production.
     gem_group :production do
-      gem 'rails_12factor', '~> 0.0.3'
-      gem 'mailgun_rails', '~> 0.7.0'
+      gem 'rails_12factor'
+      gem 'mailgun_rails'
     end
 
-    # Add monitoring gems to Gemfile
-    gem 'rollbar', '~> 2.8.0'
-    gem 'oj', '~> 2.14.5'
-    gem 'newrelic_rpm', '~> 3.15.2.317'
+    # Indicate which gems should only be used in development and test.
+    gem_group :development, :test do
+      gem 'dotenv-rails'
+      gem 'minitest-reporters'
+      gem 'webmock'
+    end
   end
 
   # copy template for pg configuration

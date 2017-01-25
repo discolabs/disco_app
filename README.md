@@ -46,7 +46,7 @@ $ export DISCO_GEM_CREDENTIALS=disco-gems:0dfbd458c126baa2744cef477b24c7cf7227fa
 $ mkdir example_app
 $ cd example_app
 $ echo "source 'https://rubygems.org'" > Gemfile
-$ echo "gem 'rails', '4.2.5.2'" >> Gemfile
+$ echo "gem 'rails', '~> 4.2'" >> Gemfile
 $ echo "2.3.3" > .ruby-version
 $ bundle install
 $ bundle exec rails new . --force --skip-bundle
