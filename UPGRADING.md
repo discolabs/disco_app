@@ -3,6 +3,10 @@ This file contains more detailed instructions on what's required when updating
 an application between one release version of the gem to the next. It's intended
 as more in-depth accompaniment to the notes in `CHANGELOG.md` for each version.
 
+## Upgrading from 0.11.1 to Unreleased
+The Shopify API context helper `.temp {}` is now aliased as `.with_api_context {}`.
+You should replace any usages of `.temp` with the new method name.
+
 ## Upgrading from 0.11.0 to 0.11.1
 No changes required - only a bugfix release.
 
