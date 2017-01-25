@@ -37,8 +37,8 @@ class DiscoApp::SubscriptionServiceTest < ActiveSupport::TestCase
   test 'new subscription for a plan without a trial period created correctly' do
     new_subscription = DiscoApp::SubscriptionService.subscribe(@shop, disco_app_plans(:comped))
     assert new_subscription.active?
-    assert_equal nil, new_subscription.trial_start_at
-    assert_equal nil, new_subscription.trial_end_at
+    assert_nil new_subscription.trial_start_at
+    assert_nil new_subscription.trial_end_at
   end
 
   test 'new subscription for a plan with a trial period created correctly' do
