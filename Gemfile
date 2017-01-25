@@ -12,9 +12,3 @@ gemspec
 
 # To use a debugger
 gem 'byebug', group: [:development, :test]
-
-# Use Timecop for tests
-gem 'timecop', '~> 0.8.0', group: [:development, :test]
-
-# Allow testing after_commit callbacks
-gem 'test_after_commit', '~> 0.4.2', group: [:development, :test]
