@@ -18,6 +18,11 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
 
   s.add_runtime_dependency 'rails', '~> 4.2'
+  s.add_runtime_dependency 'sass-rails', '~> 5.0'
+  s.add_runtime_dependency 'uglifier', '~> 1.3'
+  s.add_runtime_dependency 'coffee-rails', '~> 4.1'
+  s.add_runtime_dependency 'jquery-rails', '~> 4.2'
+  s.add_runtime_dependency 'turbolinks', '~> 5.0'
   s.add_runtime_dependency 'shopify_app', '~> 6.4'
   s.add_runtime_dependency 'puma', '~> 2.14'
   s.add_runtime_dependency 'sidekiq', '~> 4.2'
