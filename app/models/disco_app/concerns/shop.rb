@@ -20,7 +20,9 @@ module DiscoApp::Concerns::Shop
     scope :installed, -> { where status: statuses[:installed] }
     scope :has_active_shopify_plan, -> { where.not(plan_name: [:cancelled, :frozen, :fraudulent]) }
 
-    # Alias 'with_shopify_session' as 'temp', as per our existing conventions.
+    # Alias 'with_shopify_session' as 'with_api_context' for better readability, but also as 'temp' for
+    # backward compatibility.
+    alias_method :with_api_context, :with_shopify_session
     alias_method :temp, :with_shopify_session
 
     # Return true if the shop is considered as in development mode.

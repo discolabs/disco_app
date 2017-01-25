@@ -2,7 +2,8 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
-No unreleased changes.
+### Changed
+- `shop.temp` now aliased as `shop.with_api_context` for better readability
 
 ## 0.11.1 - 2017-01-11
 ### Changed

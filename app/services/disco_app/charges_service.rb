@@ -10,7 +10,7 @@ class DiscoApp::ChargesService
     )
 
     # Create the charge object on Shopify.
-    shopify_charge = shop.temp {
+    shopify_charge = shop.with_api_context {
       subscription.shopify_charge_class.create(
         name: subscription.plan.name,
         price: '%.2f' % (subscription.amount.to_f / 100.0),
@@ -39,7 +39,7 @@ class DiscoApp::ChargesService
   def self.activate(shop, charge)
     begin
       # Start by fetching the Shopify charge to check that it was accepted.
-      shopify_charge = shop.temp {
+      shopify_charge = shop.with_api_context {
         charge.subscription.shopify_charge_class.find(charge.shopify_id)
       }
 
@@ -50,7 +50,7 @@ class DiscoApp::ChargesService
       return false unless charge.accepted?
 
       # If the charge was indeed accepted, activate it via Shopify.
-      charge.shop.temp {
+      charge.shop.with_api_context {
         shopify_charge.activate
       }
 

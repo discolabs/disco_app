@@ -14,7 +14,7 @@ module DiscoApp::Concerns::HasMetafields
     #   })
     #
     # This method assumes that it is being called within a valid Shopify API
-    # session context, eg @shop.temp { ... }.
+    # session context, eg @shop.with_api_context { ... }.
     #
     # It also assumes that the including class has defined the appropriate value
     # for SHOPIFY_API_CLASS and that calling the `id` method on the instance
