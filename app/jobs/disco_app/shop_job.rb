@@ -19,7 +19,7 @@ class DiscoApp::ShopJob < ActiveJob::Base
     end
 
     def shop_context(job, block)
-      @shop.temp {
+      @shop.with_api_context {
         block.call(job.arguments)
       }
     end

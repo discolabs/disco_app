@@ -97,7 +97,7 @@ module DiscoApp::Concerns::RendersAssets
 
     options[:assets].each do |asset|
       # Create/replace the asset via the Shopify API.
-      shopify_asset = shop.temp {
+      shopify_asset = shop.with_api_context {
         ShopifyAPI::Asset.create(
           key: asset,
           value: render_asset_group_asset(asset, public_urls, options)
@@ -152,14 +152,14 @@ module DiscoApp::Concerns::RendersAssets
     # a public URL for.
     def render_asset_script_tags(options, public_urls)
       # Fetch the current set of script tags for the store.
-      current_script_tags = shop.temp { ShopifyAPI::ScriptTag.find(:all) }
+      current_script_tags = shop.with_api_context { ShopifyAPI::ScriptTag.find(:all) }
 
       # Iterate each script tag for which we have a known public URL and create
       # or update the corresponding script tag resource.
       public_urls.slice(*options[:script_tags]).each do |asset, public_url|
         script_tag = current_script_tags.find(lambda { ShopifyAPI::ScriptTag.new(event: 'onload') }) { |script_tag| script_tag.src.include?("#{asset}?") }
         script_tag.src = public_url
-        shop.temp { script_tag.save }
+        shop.with_api_context { script_tag.save }
       end
     end
 
