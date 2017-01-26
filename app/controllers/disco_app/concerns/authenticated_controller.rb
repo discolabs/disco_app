@@ -1,7 +1,7 @@
 module DiscoApp::Concerns::AuthenticatedController
   extend ActiveSupport::Concern
+  include ShopifyApp::LoginProtection
 
-  included do
     before_action :login_again_if_different_shop
     before_action :shopify_shop
     before_action :check_installed
@@ -9,7 +9,6 @@ module DiscoApp::Concerns::AuthenticatedController
     before_action :check_active_charge
     around_filter :shopify_session
     layout 'embedded_app'
-  end
 
   private
 
