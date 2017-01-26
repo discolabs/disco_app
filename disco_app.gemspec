@@ -49,7 +49,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'minitest-reporters', '~> 1.0'
   s.add_development_dependency 'webmock', '~> 2.3'
   s.add_development_dependency 'vcr', '~> 3.0'
-  s.add_development_dependency 'timecop', '~> 0.8.0'
-  s.add_development_dependency 'test_after_commit', '~> 0.4.2'
 end
 
