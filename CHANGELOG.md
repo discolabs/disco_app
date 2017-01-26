@@ -1,9 +1,19 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## 0.12.1 - 2017-01-25
 ### Changed
+- Updated `uglifier` gem to `~> 3.0`
+
+## 0.12.0 - 2017-01-25
+### Added
+- UI component style additions for tables and images with aspect ratios
+
+### Changed
+- Major refactor of dependencies; `disco_app` is now much looser in its requirements
+- Consolidated all `disco_app` migrations to a single file to avoid common issues
 - `shop.temp` now aliased as `shop.with_api_context` for better readability
+- Minor tweaks to Rules Editor component
 
 ## 0.11.1 - 2017-01-11
 ### Changed
