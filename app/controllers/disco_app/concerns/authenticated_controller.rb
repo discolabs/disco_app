@@ -1,5 +1,6 @@
 module DiscoApp::Concerns::AuthenticatedController
   extend ActiveSupport::Concern
+  include ShopifyApp::LoginProtection
 
   included do
     before_action :login_again_if_different_shop
