@@ -1,6 +1,15 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 0.12.2 - 2017-01-27
+### Removed
+- `SHOPIFY_APP_REDIRECT_URI` from `shopify_app` and `omniauth` initializers, `.env` and `.env.local`
+as the login redirection is handled from shopify omniauth
+
+### Changed
+- Changed `ShopifyApp::Controller` to `ShopifyApp::LoginProtection`
+- include `ShopifyApp::LoginProtection` to `DiscoApp::Concerns::AuthenticatedController`
+
 ## 0.12.1 - 2017-01-25
 ### Changed
 - Updated `uglifier` gem to `~> 3.0`
