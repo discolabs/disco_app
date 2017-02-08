@@ -3,12 +3,16 @@ This file contains more detailed instructions on what's required when updating
 an application between one release version of the gem to the next. It's intended
 as more in-depth accompaniment to the notes in `CHANGELOG.md` for each version.
 
+## Upgrading from 0.12.2 to 0.12.3
+No changes required - only a bugfix release.
+
 ## Upgrading from 0.12.1 to 0.12.2
 
 ## Update shopify_app gem
-Ensure that your `shopify_app` gem dependency in your `Gemfile` depends on `~> 7.2.3`.
-You will also need to rename the `ShopifyApp::Controller` statement in the ApplicationController
-to `ShopifyApp::LoginProtection`, and remove `redirect_uri` variables in : 
+Remove the version specification for `shopify_app` in your `Gemfile`. Rename any
+occurences of `ShopifyApp::Controller` to `ShopifyApp::LoginProtection`.
+
+Remove `redirect_uri` variables in: 
 - `.env` and `.env.local` files
 - `shopify_app` and `omniauth` initializers
 

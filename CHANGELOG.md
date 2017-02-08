@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 0.12.3 - 2017-02-08
+### Changed
+- Fix bug caused by trying to include a class rather than module from `shopify_app`
+
 ## 0.12.2 - 2017-01-27
 ### Removed
 - `SHOPIFY_APP_REDIRECT_URI` from `shopify_app` and `omniauth` initializers, `.env` and `.env.local`
