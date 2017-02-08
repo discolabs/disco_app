@@ -3,6 +3,9 @@ This file contains more detailed instructions on what's required when updating
 an application between one release version of the gem to the next. It's intended
 as more in-depth accompaniment to the notes in `CHANGELOG.md` for each version.
 
+## Upgrading from 0.12.3 to 0.12.4
+No changes required - only a bugfix release.
+
 ## Upgrading from 0.12.2 to 0.12.3
 No changes required - only a bugfix release.
 

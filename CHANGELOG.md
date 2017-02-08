@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 0.12.4 - 2017-02-08
+### Changed
+- Fixed bug caused by moved template file in `shopify_app`
+
 ## 0.12.3 - 2017-02-08
 ### Changed
 - Fix bug caused by trying to include a class rather than module from `shopify_app`
