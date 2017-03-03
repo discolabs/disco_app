@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 
 ## 0.12.4 - 2017-02-08
+### Added 
+- Tie errors reported to Rollbar to it concerned Shop 
+
 ### Changed
 - Fixed bug caused by moved template file in `shopify_app`
 
