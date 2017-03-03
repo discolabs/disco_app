@@ -7,6 +7,11 @@ class SessionsController < ApplicationController
     redirect_to root_path
   end
 
+  def failure
+    flash[:notice] = 'There was an issue while trying to authenticate, please retry'
+    redirect_to root_path
+  end
+
   protected
 
     # Override the authenticate method to allow skipping OAuth in development

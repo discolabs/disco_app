@@ -3,6 +3,7 @@ require 'sidekiq/web'
 DiscoApp::Engine.routes.draw do
 
   get 'ref', to: '/sessions#referral'
+  get '/auth/failure', to: '/sessions#failure'
 
   controller :webhooks do
     post 'webhooks' => :process_webhook, as: :webhooks
