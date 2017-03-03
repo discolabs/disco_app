@@ -3,6 +3,7 @@ module DiscoApp::Concerns::AuthenticatedController
   include ShopifyApp::LoginProtection
 
   included do
+    before_action :auto_login
     before_action :login_again_if_different_shop
     before_action :shopify_shop
     before_action :check_installed
@@ -13,6 +14,12 @@ module DiscoApp::Concerns::AuthenticatedController
   end
 
   private
+
+    def auto_login
+      if shop_session.nil? and hmac_valid?(request.query_string, ShopifyApp.configuration.secret)
+        session[:shopify] = DiscoApp::Shop.find_by!(shopify_domain: request.params[:shop]).id
+      end
+    end
 
     def shopify_shop
       if shop_session
@@ -54,4 +61,7 @@ module DiscoApp::Concerns::AuthenticatedController
       end
     end
 
+    def hmac_valid?(params, secret)
+      DiscoApp::RequestValidationService.hmac_valid?(params, secret)
+    end
 end
