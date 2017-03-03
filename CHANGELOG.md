@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## Unreleased changes 
+### Added
+- Tie errors reported to Rollbar to it concerned Shop 
+
 ## 0.12.4 - 2017-02-08
 ### Added 
 - Tie errors reported to Rollbar to it concerned Shop 
