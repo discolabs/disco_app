@@ -6,7 +6,7 @@ class DiscoApp::RequestValidationService
     ActiveSupport::SecurityUtils.variable_size_secure_compare(self.calculated_hmac(query_hash, secret), hmac)
   end
 
-  # Return the calculated signature for the given query hash and secret.
+  # Return the calculated hmac for the given query hash and secret.
   def self.calculated_hmac(query_hash, secret)
     sorted_params = query_hash.collect{ |k, v| "#{k}=#{Array(v).join(',')}" }.sort.join('&')
     OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('sha256'), secret, sorted_params)
