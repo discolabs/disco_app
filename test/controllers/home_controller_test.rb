@@ -7,13 +7,11 @@ class HomeControllerTest < ActionController::TestCase
     @current_subscription = disco_app_subscriptions(:current_widget_store_subscription)
     @current_recurring_charge = disco_app_recurring_application_charges(:current_widget_store_subscription_recurring_charge)
     log_in_as(@shop)
-    Timecop.freeze
   end
 
   def teardown
     @shop = nil
     @current_subscription = nil
-    Timecop.return
   end
 
   test 'non-logged in user is redirected to the login page if no hmac and shop domain present' do
@@ -93,13 +91,12 @@ class HomeControllerTest < ActionController::TestCase
 
   test 'non-logged in user is logged in if valid hmac and shop domain is present in url' do
     log_out
-    timestamp = Time.now.to_i
-    # The below sorted params result from this hash {shop: 'widgets-dev.myshopify.com', timestamp: timestamp}
-    sorted_params = "shop=widgets-dev.myshopify.com&timestamp=" + timestamp.to_s
-    hmac = OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('sha256'), ShopifyApp.configuration.secret, sorted_params)
-
-    get(:index, {hmac: hmac, shop: 'widgets-dev.myshopify.com', timestamp: timestamp})
-    assert_response  :success
+    timestamp = '1990-01-01 00:00:00 +1100'
+    Timecop.freeze(timestamp) do
+      hmac = "a85aa7b205aa71b3b33d138510bd5a160f666d36f2a410b6953204497c915e5f"
+      get(:index, {hmac: hmac, shop: 'widgets-dev.myshopify.com', timestamp: timestamp})
+      assert_response  :success
+    end
   end
 
 end

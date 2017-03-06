@@ -16,8 +16,10 @@ module DiscoApp::Concerns::AuthenticatedController
   private
 
     def auto_login
-      if shop_session.nil? and hmac_valid?(request.query_string, ShopifyApp.configuration.secret)
-        session[:shopify] = DiscoApp::Shop.find_by!(shopify_domain: request.params[:shop]).id
+      if shop_session.nil? and request_hmac_valid?
+        shop =  DiscoApp::Shop.find_by_shopify_domain!(sanitized_shop_name)
+        session[:shopify] = shop.id
+        session[:shopify_domain] = sanitized_shop_name
       end
     end
 
@@ -61,7 +63,7 @@ module DiscoApp::Concerns::AuthenticatedController
       end
     end
 
-    def hmac_valid?(params, secret)
-      DiscoApp::RequestValidationService.hmac_valid?(params, secret)
+    def request_hmac_valid?
+      DiscoApp::RequestValidationService.hmac_valid?(request.query_string, ShopifyApp.configuration.secret)
     end
 end
