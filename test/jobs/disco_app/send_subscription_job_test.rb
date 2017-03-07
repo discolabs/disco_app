@@ -5,8 +5,7 @@ class DiscoApp::SendSubscriptionJobTest < ActionController::TestCase
 
   def setup
     @shop = disco_app_shops(:widget_store)
-    stub_request(:post, "https://api.discolabs.com/v1/app_subscriptions.json").
-        to_return(status: 200, body: api_fixture('widget_store/carrier_services').to_json)
+    stub_request(:post, "https://api.discolabs.com/v1/app_subscriptions.json").to_return(status: 200)
   end
 
   def teardown
