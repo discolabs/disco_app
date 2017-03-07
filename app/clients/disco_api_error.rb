@@ -1,0 +1,2 @@
+class DiscoApiError < StandardError
+end

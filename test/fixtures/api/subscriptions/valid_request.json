@@ -1,0 +1,30 @@
+{
+  "shop": {
+    "id": 605094243,
+    "shopify_domain": "widgets.myshopify.com",
+    "shopify_token": "0",
+    "created_at": "2017-03-07T06:06:25.000Z",
+    "updated_at": "2017-03-07T06:06:25.000Z",
+    "status": "never_installed",
+    "domain": null,
+    "plan_name": null,
+    "name": null,
+    "data": {"timezone": "(GMT+10:00) Melbourne", "country_name": "Australia"}
+  },
+  "subscription": {
+    "id": 304261385,
+    "shop_id": 605094243,
+    "plan_id": 276395349,
+    "status": "active",
+    "subscription_type": "recurring",
+    "created_at": "2017-03-07T06:06:25.000Z",
+    "updated_at": "2017-03-07T06:06:25.000Z",
+    "trial_start_at": null,
+    "trial_end_at": null,
+    "cancelled_at": null,
+    "amount": 999,
+    "plan_code_id": null,
+    "source": null,
+    "trial_period_days": 14
+  }
+}

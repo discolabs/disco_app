@@ -13,6 +13,7 @@ module DiscoApp::Concerns::AppUninstalledJob
   # - Remove any stored sessions for the shop.
   #
   def perform(shop, shop_data)
+    DiscoApp::SendSubscriptionJob.perform_later(@shop)
     DiscoApp::ChargesService.cancel_recurring_charges(@shop)
     @shop.sessions.delete_all
   end

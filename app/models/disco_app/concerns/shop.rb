@@ -86,6 +86,10 @@ module DiscoApp::Concerns::Shop
       (data['primary_locale'] || 'en').to_sym
     end
 
+    def disco_api_client
+      @api_client ||= ApiClient.new(shop: self, url: ENV['DISCO_API_URL'])
+    end
+
   end
 
 end

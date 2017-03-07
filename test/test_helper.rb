@@ -10,6 +10,7 @@ ENV['SHOPIFY_APP_SECRET'] = 'b607d1f8b992dccb017f9315f07af9c4'
 ENV['SHOPIFY_APP_REDIRECT_URI'] = 'https://test.example.com/shopify/auth/callback'
 ENV['SHOPIFY_APP_SCOPE'] = 'read_products'
 ENV['SHOPIFY_CHARGES_REAL'] = 'false'
+ENV['DISCO_API_URL'] = 'https://api.discolabs.com/v1/'
 
 require File.expand_path("../../test/dummy/config/environment.rb",  __FILE__)
 ActiveRecord::Migrator.migrations_paths = [File.expand_path("../../test/dummy/db/migrate", __FILE__)]

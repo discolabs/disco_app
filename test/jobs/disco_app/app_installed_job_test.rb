@@ -11,11 +11,12 @@ class DiscoApp::AppInstalledJobTest < ActionController::TestCase
     stub_request(:get, "#{@shop.admin_url}/shop.json").to_return(status: 200, body: api_fixture('widget_store/shop').to_json)
     stub_request(:get, "#{@shop.admin_url}/carrier_services.json").to_return(status: 200, body: api_fixture('widget_store/carrier_services').to_json)
     stub_request(:post, "#{@shop.admin_url}/carrier_services.json").to_return(status: 200)
+    stub_request(:post, "https://api.discolabs.com/v1/app_subscriptions.json").
+        to_return(status: 200, body: api_fixture('subscriptions/valid_request').to_json)
   end
 
   def teardown
     @shop = nil
-
     WebMock.reset!
   end
 

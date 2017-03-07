@@ -149,6 +149,7 @@ class DiscoAppGenerator < Rails::Generators::Base
 
       MAILGUN_API_KEY=
       MAILGUN_API_DOMAIN=
+      DISCO_API_URL=
     CONFIG
     append_to_file '.env', configuration
     append_to_file '.env.local', configuration
