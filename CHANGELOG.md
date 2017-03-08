@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 ## Unreleased changes 
 ### Added
 - Tie errors reported to Rollbar to it concerned Shop 
+- Auto-login shop if url has valid hmac and shop domain 
 
 ## 0.12.4 - 2017-02-08
 ### Added 
