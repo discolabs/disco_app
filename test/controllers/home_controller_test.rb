@@ -91,10 +91,9 @@ class HomeControllerTest < ActionController::TestCase
 
   test 'non-logged in user is logged in if valid hmac and shop domain is present in url' do
     log_out
-    timestamp = '1990-01-01 00:00:00 +1100'
-    Timecop.freeze(timestamp) do
-      hmac = "a85aa7b205aa71b3b33d138510bd5a160f666d36f2a410b6953204497c915e5f"
-      get(:index, {hmac: hmac, shop: 'widgets-dev.myshopify.com', timestamp: timestamp})
+    Timecop.freeze('2017-03-08 12:44:58 +1100') do
+      hmac = 'eb49ba93a8daf8a11a04c66129faf98de1cd40f082b0ae78e79a2dfbbefb438d'
+      get(:index, { hmac: hmac, shop: 'widgets-dev.myshopify.com', timestamp: Time.now.to_i })
       assert_response  :success
     end
   end
