@@ -4,7 +4,7 @@ class ApiClient
 
   SUBSCRIPTION_ENDPOINT = 'app_subscriptions.json'
 
-  def initialize(shop:, url:)
+  def initialize(shop, url)
     @shop = shop
     @url = url
   end
