@@ -10,6 +10,7 @@ class DiscoApp::ApiClient
   end
 
   def create_app_subscription
+    return unless @url.present?
     url = @url + SUBSCRIPTION_ENDPOINT
     begin
       response = RestClient::Request.execute(
