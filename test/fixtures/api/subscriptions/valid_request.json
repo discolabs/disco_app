@@ -25,6 +25,16 @@
     "amount": 999,
     "plan_code_id": null,
     "source": null,
-    "trial_period_days": 14
+    "trial_period_days": 14,
+    "active_charge": {
+      "id":332186283,
+      "shop_id":605094243,
+      "subscription_id":304261385,
+      "status":"active",
+      "created_at":"2017-03-07T06:06:25.000Z",
+      "updated_at":"2017-03-07T06:06:25.000Z",
+      "shopify_id":null,
+      "confirmation_url":null
+    }
   }
 }
