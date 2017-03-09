@@ -770,13 +770,12 @@ To create a new release of the application:
    an application to the latest version of the gem.
 3. Ensure the README is accurate and up to date by reviewing all commits since
    the last release;
-4. Update `lib/disco_app/version.rb` with the new version number;
-5. Run `bundle install` to update `Gemfile.lock` with the new version number; 
-6. Update references to the latest version number in the README;
-7. Create a new commit with a commit message `vX.Y.Z`, where `X.Y.Z` is the
+4. Update `lib/disco_app/version.rb` with the new version number; 
+5. Update references to the latest version number in the README;
+6. Create a new commit with a commit message `vX.Y.Z`, where `X.Y.Z` is the
    version number;
-8. Tag the new commit with a tag `X.Y.Z`;
-9. `git push && git push --tags` to push the new release.
+7. Tag the new commit with a tag `X.Y.Z`;
+8. `git push && git push --tags` to push the new release.
       
 See [an example release commit][].
 
