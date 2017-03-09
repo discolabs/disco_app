@@ -27,11 +27,4 @@ class DiscoApp::AppUninstalledJobTest < ActionController::TestCase
     @shop.reload
     assert_equal 'Nowhere', @shop.data['country_name'] # Assert extended method called.
   end
-
-  test 'app uninstalled job enqueue subscription job to send data to disco API' do
-    assert_performed_jobs 1 do
-      DiscoApp::SendSubscriptionJob.perform_later(@shop)
-    end
-  end
-
 end

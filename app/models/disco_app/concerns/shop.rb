@@ -87,7 +87,7 @@ module DiscoApp::Concerns::Shop
     end
 
     def disco_api_client
-      @api_client ||= ApiClient.new(self, ENV['DISCO_API_URL'])
+      @api_client ||= DiscoApp::ApiClient.new(self, ENV['DISCO_API_URL'])
     end
 
   end

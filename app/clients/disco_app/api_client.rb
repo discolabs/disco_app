@@ -1,6 +1,6 @@
 require 'rest-client'
 
-class ApiClient
+class DiscoApp::ApiClient
 
   SUBSCRIPTION_ENDPOINT = 'app_subscriptions.json'
 
@@ -16,7 +16,7 @@ class ApiClient
         method: :post,
         headers: { content_type: :json },
         url: url,
-        payload: { shop: @shop, subscription: @shop.subscriptions.current.first }.to_json
+        payload: { shop: @shop, subscription: @shop.current_subscription }.to_json
       )
     rescue RestClient::BadRequest, RestClient::ResourceNotFound => e
       raise DiscoApiError.new(e.message)
