@@ -47,6 +47,12 @@ module DiscoApp::Concerns::Subscription
     recurring? ? ShopifyAPI::RecurringApplicationCharge : ShopifyAPI::ApplicationCharge
   end
 
+  def as_json(options = {})
+    super.merge(
+      'active_charge' => active_charge
+    )
+  end
+
   private
 
     # If the amount or trial period for this subscription changes, clear any

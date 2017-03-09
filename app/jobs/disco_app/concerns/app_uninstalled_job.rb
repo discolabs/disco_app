@@ -14,6 +14,7 @@ module DiscoApp::Concerns::AppUninstalledJob
   #
   def perform(shop, shop_data)
     DiscoApp::ChargesService.cancel_recurring_charges(@shop)
+    DiscoApp::SendSubscriptionJob.perform_later(@shop)
     @shop.sessions.delete_all
   end
 

@@ -86,6 +86,11 @@ module DiscoApp::Concerns::Shop
       (data['primary_locale'] || 'en').to_sym
     end
 
+    # Return an instance of the Disco API client.
+    def disco_api_client
+      @api_client ||= DiscoApp::ApiClient.new(self, ENV['DISCO_API_URL'])
+    end
+
   end
 
 end

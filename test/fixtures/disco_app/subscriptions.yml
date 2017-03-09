@@ -13,6 +13,9 @@ current_widget_store_subscription:
   trial_period_days: 14
   status: <%= DiscoApp::Subscription.statuses[:active] %>
   subscription_type: 0
+  created_at: "2017-03-07T06:06:25.000Z"
+  updated_at: "2017-03-07T06:06:25.000Z"
+
 
 current_widget_store_dev_subscription:
   shop: widget_store_dev
