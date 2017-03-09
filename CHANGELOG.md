@@ -1,15 +1,16 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## Unreleased changes 
+## Unreleased changes
+No unreleased changes.
+ 
+## 0.12.5 - 2017-03-09
 ### Added
 - Tie errors reported to Rollbar to it concerned Shop 
-- Auto-login shop if url has valid hmac and shop domain 
+- Auto-login shop if url has valid hmac and shop domain
+- Report subscription information to Disco API if ENV var set 
 
-## 0.12.4 - 2017-02-08
-### Added 
-- Tie errors reported to Rollbar to it concerned Shop 
-
+## 0.12.4 - 2017-02-08 
 ### Changed
 - Fixed bug caused by moved template file in `shopify_app`
 

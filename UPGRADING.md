@@ -3,6 +3,20 @@ This file contains more detailed instructions on what's required when updating
 an application between one release version of the gem to the next. It's intended
 as more in-depth accompaniment to the notes in `CHANGELOG.md` for each version.
 
+## Upgrading from 0.12.4 to 0.12.5
+### Subscription reporting
+Set `DISCO_API_URL` in production if your app should report subscriptions to the
+Disco API.
+
+### Rollbar person reporting
+Add the following to `initializer/rollbar.rb`:
+
+```
+config.person_method = 'current_shop'
+config.person_username_method = 'domain'
+config.person_email_method = 'email_shop'
+```
+
 ## Upgrading from 0.12.3 to 0.12.4
 No changes required - only a bugfix release.
 
@@ -11,7 +25,7 @@ No changes required - only a bugfix release.
 
 ## Upgrading from 0.12.1 to 0.12.2
 
-## Update shopify_app gem
+### Update shopify_app gem
 Remove the version specification for `shopify_app` in your `Gemfile`. Rename any
 occurences of `ShopifyApp::Controller` to `ShopifyApp::LoginProtection`.
 
