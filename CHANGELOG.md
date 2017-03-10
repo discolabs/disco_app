@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased changes
 No unreleased changes.
+
+## 0.12.6 - 2017-03-10
+### Changed
+- Better support for Turbolinks with embedded apps
  
 ## 0.12.5 - 2017-03-09
 ### Added
