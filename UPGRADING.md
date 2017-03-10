@@ -13,8 +13,7 @@ Add the following to `initializer/rollbar.rb`:
 
 ```
 config.person_method = 'current_shop'
-config.person_username_method = 'domain'
-config.person_email_method = 'email_shop'
+config.person_username_method = 'shopify_domain'
 ```
 
 ## Upgrading from 0.12.3 to 0.12.4
