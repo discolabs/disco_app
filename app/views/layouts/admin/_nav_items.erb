@@ -13,6 +13,13 @@
 </li>
 
 <li class="next-nav__item">
+  <a href="<%= admin_sources_path %>" class="next-nav__link <%= active_link_to_class(admin_sources_path, class_active: 'next-nav__link--is-selected', active: :inclusive) %>">
+    <svg class="next-icon next-icon--size-16 next-icon--no-nudge" role="img" aria-labelledby="next-dashboard-16-17dbedf316126bf9bd81f6c6b7626199-title"><title id="next-dashboard-16-17dbedf316126bf9bd81f6c6b7626199-title">Home</title><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-dashboard-16"></use></svg>
+    <span class="next-nav__text">Sources</span>
+  </a>
+</li>
+
+<li class="next-nav__item">
   <a href="<%= edit_admin_app_settings_path %>" class="next-nav__link <%= active_link_to_class(edit_admin_app_settings_path, class_active: 'next-nav__link--is-selected', active: :inclusive) %>">
     <svg class="next-icon next-icon--size-16 next-icon--no-nudge" role="img" aria-labelledby="next-dashboard-16-17dbedf316126bf9bd81f6c6b7626199-title"><title id="next-dashboard-16-17dbedf316126bf9bd81f6c6b7626199-title">Home</title><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-dashboard-16"></use></svg>
     <span class="next-nav__text">Settings</span>

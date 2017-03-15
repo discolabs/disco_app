@@ -1,0 +1,34 @@
+<section class="section">
+  <div class="layout-content">
+    <section class="layout-content__main">
+      <div class="next-grid">
+        <div class="next-grid__cell">
+          <div class="next-card">
+
+            <header class="next-card__header">
+              <h1>Source</h1>
+            </header>
+
+            <section class="next-card__section">
+              <div class="form-group">
+                <%= f.label(:source, 'Source code') %>
+                <%= f.text_field(:source, placeholder: "Enter the source name in its acronyme form (eg: Bob Dylan => bd") %>
+              </div>
+
+              <div class="form-group">
+                <%= f.label(:status, 'Full source name') %>
+                <%= f.text_field(:name, placeholder: "Enter the full source name") %>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-md-12">
+          <%= f.submit 'Save', { class: 'btn btn-primary' } %>
+        </div>
+      </div>
+    </section>
+  </div>
+</section>

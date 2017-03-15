@@ -6,7 +6,7 @@ module DiscoApp::Concerns::Subscription
     belongs_to :shop
     belongs_to :plan
     belongs_to :plan_code
-
+    belongs_to :source
     has_many :one_time_charges, class_name: 'DiscoApp::ApplicationCharge', dependent: :destroy
     has_many :recurring_charges, class_name: 'DiscoApp::RecurringApplicationCharge', dependent: :destroy
 
