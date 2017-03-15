@@ -52,6 +52,21 @@
                 <%= link_to_add_fields('Add New Plan Code', f, :plan_codes) %>
           </div>
         </div>
+        <div class="next-grid__cell">
+          <div class="next-card  next-card--aside">
+            <header class="next-card__header">
+              <h1>Sources</h1>
+            </header>
+
+              <%= f.fields_for :sources do |source| %>
+                  <%= render 'source_fields', f: source %>
+              <% end %>
+
+            <br>
+
+              <%= link_to_add_fields('Add New Source', f, :sources) %>
+          </div>
+        </div>
       </div>
       <hr />
       <div class="row">

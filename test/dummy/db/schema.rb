@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161105054746) do
+ActiveRecord::Schema.define(version: 20170315023724) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,22 +99,30 @@ ActiveRecord::Schema.define(version: 20161105054746) do
 
   add_index "disco_app_shops", ["shopify_domain"], name: "index_disco_app_shops_on_shopify_domain", unique: true, using: :btree
 
+  create_table "disco_app_sources", force: :cascade do |t|
+    t.string   "source"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "disco_app_subscriptions", force: :cascade do |t|
     t.integer  "shop_id"
     t.integer  "plan_id"
     t.integer  "status"
     t.integer  "subscription_type"
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
     t.datetime "trial_start_at"
     t.datetime "trial_end_at"
     t.datetime "cancelled_at"
-    t.integer  "amount",                      default: 0
-    t.integer  "plan_code_id",      limit: 8
-    t.string   "source"
+    t.integer  "amount",                        default: 0
+    t.integer  "plan_code_id",        limit: 8
     t.integer  "trial_period_days"
+    t.integer  "disco_app_source_id"
   end
 
+  add_index "disco_app_subscriptions", ["disco_app_source_id"], name: "index_disco_app_subscriptions_on_disco_app_source_id", using: :btree
   add_index "disco_app_subscriptions", ["plan_id"], name: "index_disco_app_subscriptions_on_plan_id", using: :btree
   add_index "disco_app_subscriptions", ["shop_id"], name: "index_disco_app_subscriptions_on_shop_id", using: :btree
 
@@ -146,6 +154,7 @@ ActiveRecord::Schema.define(version: 20161105054746) do
   add_foreign_key "disco_app_recurring_application_charges", "disco_app_subscriptions", column: "subscription_id"
   add_foreign_key "disco_app_sessions", "disco_app_shops", column: "shop_id", on_delete: :cascade
   add_foreign_key "disco_app_subscriptions", "disco_app_plan_codes", column: "plan_code_id"
+  add_foreign_key "disco_app_subscriptions", "disco_app_sources"
   add_foreign_key "js_configurations", "disco_app_shops", column: "shop_id"
   add_foreign_key "products", "disco_app_shops", column: "shop_id"
   add_foreign_key "widget_configurations", "disco_app_shops", column: "shop_id"
