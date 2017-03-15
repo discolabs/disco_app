@@ -33,6 +33,7 @@ DiscoApp::Engine.routes.draw do
       resources :subscriptions, only: [:edit, :update]
     end
     resources :plans
+    resources :sources
     resource :app_settings, only: [:edit, :update]
 
     # JSON-API resources for admins.
