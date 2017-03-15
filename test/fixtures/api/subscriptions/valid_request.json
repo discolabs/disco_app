@@ -24,8 +24,8 @@
     "cancelled_at": null,
     "amount": 999,
     "plan_code_id": null,
-    "source": null,
     "trial_period_days": 14,
+    "source_id": null,
     "active_charge": {
       "id":332186283,
       "shop_id":605094243,

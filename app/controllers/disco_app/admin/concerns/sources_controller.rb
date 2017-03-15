@@ -40,12 +40,12 @@ module DiscoApp::Admin::Concerns::SourcesController
 
   private
 
-  def find_source
-    @source = DiscoApp::Source.find(params[:id])
-  end
+    def find_source
+      @source = DiscoApp::Source.find(params[:id])
+    end
 
-  def source_params
-    params.require(:source).permit(:source, :name)
-  end
+    def source_params
+      params.require(:source).permit(:source, :name)
+    end
 
 end

@@ -2,12 +2,17 @@ class DiscoApp::SubscriptionService
 
   # Subscribe the given shop to the given plan, optionally using the given plan
   # code and optionally tracking the subscription source.
-  def self.subscribe(shop, plan, plan_code = nil, source = nil)
+  def self.subscribe(shop, plan, plan_code = nil, source_name = nil)
 
     # If a plan code was provided, fetch it for the given plan.
     plan_code_instance = nil
     if plan_code.present?
       plan_code_instance = DiscoApp::PlanCode.available.find_by(plan: plan, code: plan_code)
+    end
+
+    # If a source name has been provided, fetch or create it
+    if source_name.present?
+      source = DiscoApp::Source.find_or_create_by(name: source_name)
     end
 
     # Cancel any existing current subscriptions.
