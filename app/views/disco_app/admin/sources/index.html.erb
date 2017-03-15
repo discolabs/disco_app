@@ -1,0 +1,32 @@
+<% provide(:title, 'Sources') %>
+
+<div class="next-grid">
+  <div class="next-grid__cell">
+    <div class="next-card">
+      <% unless @sources.empty? %>
+          <table class="table">
+            <thead>
+            <tr>
+              <th>Source</th>
+              <th>Source (Full name)</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @sources.each do |source| %>
+                <tr>
+                  <td><%= link_to(source.name, edit_admin_source_path(source)) %></td>
+                  <td><%= source.source %></td>
+                  <td><%= source.name %></td>
+                  <td><%= link_to 'Delete', admin_source_path(source), action: 'destroy', method: :delete,  data: {confirm: "About to delete the source: #{source.source}. Are you sure?"} %></td>
+                </tr>
+            <% end %>
+            </tbody>
+          </table>
+      <% end %>
+    </div>
+    <hr/>
+    <%= link_to 'Create new source', new_admin_source_path, { class: 'btn btn-primary' } %>
+  </div>
+</div>
+

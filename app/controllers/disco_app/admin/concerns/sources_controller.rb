@@ -6,16 +6,16 @@ module DiscoApp::Admin::Concerns::SourcesController
   end
 
   def index
-    @plans = DiscoApp::Source.all
+    @sources = DiscoApp::Source.all
   end
 
   def new
-    @plan = DiscoApp::Source.new
+    @source = DiscoApp::Source.new
   end
 
   def create
-    @plan = DiscoApp::Source.new(source_params)
-    if @plan.save
+    @source = DiscoApp::Source.new(source_params)
+    if @source.save
       redirect_to admin_sources_path
     else
       render 'new'
@@ -26,8 +26,8 @@ module DiscoApp::Admin::Concerns::SourcesController
   end
 
   def update
-    if @plan.update_attributes(plan_params)
-      redirect_to edit_admin_plan_path(@plan)
+    if @source.update_attributes(source_params)
+      redirect_to edit_admin_plan_path(@source)
     else
       render 'edit'
     end
@@ -41,7 +41,7 @@ module DiscoApp::Admin::Concerns::SourcesController
   private
 
   def find_source
-    @plan = DiscoApp::Source.find(params[:id])
+    @source = DiscoApp::Source.find(params[:id])
   end
 
   def source_params
