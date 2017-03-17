@@ -44,6 +44,18 @@ class SynchronisesTest < ActionDispatch::IntegrationTest
     assert_equal 3200.0, carts(:cart).total_price
   end
 
+  test 'shopify api model still allows synchronisation' do
+    assert_equal({}, @product.data)
+
+    shopify_product = ShopifyAPI::Product.new(ActiveSupport::JSON.decode(webhook_fixture('product_updated')))
+    Product.synchronise(@shop, shopify_product)
+
+    # Assert the product was updated locally, with the correct attributes.
+    @product.reload
+    assert_equal 632910393, @product.id
+    assert_equal 'IPod Nano - 8GB', @product.data['title']
+  end
+
   private
 
     def webhooks_url
