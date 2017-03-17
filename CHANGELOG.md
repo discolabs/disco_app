@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 ## Unreleased changes
 No unreleased changes.
 
+## 0.12.7 - 2017-03-17
+### Changed
+- Allow synchronising models directly from Shopify API resources
+
 ## 0.12.6 - 2017-03-10
 ### Changed
 - Better support for Turbolinks with embedded apps
