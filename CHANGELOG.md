@@ -2,7 +2,8 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased changes
-No unreleased changes.
+### Changed
+- Improved the `InputCheckbox` React form component
 
 ## 0.12.7 - 2017-03-17
 ### Changed

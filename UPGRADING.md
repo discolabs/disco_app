@@ -3,6 +3,11 @@ This file contains more detailed instructions on what's required when updating
 an application between one release version of the gem to the next. It's intended
 as more in-depth accompaniment to the notes in `CHANGELOG.md` for each version.
 
+## Upgrading from 0.12.7 to Unreleased
+### Updated checkbox component
+Check that your usage of `InputCheckbox`, if used, matches the updated component.
+The previous component didn't work very well so it's unlikely you're using it.
+
 ## Upgrading from 0.12.6 to 0.12.7
 No changes required.
 
