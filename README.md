@@ -328,6 +328,15 @@ Concerns in a similar way to the models that come with the engine. See
 
 [Extending Models]: #extending-models
 
+Additionally, the gem includes `DiscoApp::SynchroniseResourcesJob`. It takes a 
+synchronisable class name (like Product) and a params hash, which it then uses 
+to fetch a list of resources via the API. So if we wanted to synchronise 
+products with the ids 123, 456 and 789, we could do: 
+
+```
+DiscoApp::SynchroniseResourcesJob.perform_later(shop, 'Product', ids: '123,456,789')
+```
+
 ### Webhooks
 As you may have noticed from the preceding section, webhooks and background
 tasks are closely linked. The DiscoApp Engine routes requests to `/webhooks`
