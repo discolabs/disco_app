@@ -11,8 +11,9 @@ class DiscoApp::SubscriptionService
     end
 
     # If a source name has been provided, fetch or create it
+    source_instance = nil
     if source_name.present?
-      source = DiscoApp::Source.find_or_create_by(name: source_name)
+      source_instance = DiscoApp::Source.find_or_create_by(source: source_name)
     end
 
     # Cancel any existing current subscriptions.
@@ -38,7 +39,7 @@ class DiscoApp::SubscriptionService
       trial_period_days: plan.has_trial? ? subscription_trial_period_days : nil,
       trial_start_at: plan.has_trial? ? Time.now : nil,
       trial_end_at: plan.has_trial? ? subscription_trial_period_days.days.from_now : nil,
-      source: source
+      source: source_instance
     )
 
     # Enqueue the subscription changed background job.

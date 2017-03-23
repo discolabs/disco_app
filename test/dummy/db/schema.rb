@@ -106,6 +106,8 @@ ActiveRecord::Schema.define(version: 20170327214540) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "disco_app_sources", ["source"], name: "index_disco_app_sources_on_source", using: :btree
+
   create_table "disco_app_subscriptions", force: :cascade do |t|
     t.integer  "shop_id"
     t.integer  "plan_id"
