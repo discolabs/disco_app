@@ -2,12 +2,18 @@ class DiscoApp::SubscriptionService
 
   # Subscribe the given shop to the given plan, optionally using the given plan
   # code and optionally tracking the subscription source.
-  def self.subscribe(shop, plan, plan_code = nil, source = nil)
+  def self.subscribe(shop, plan, plan_code = nil, source_name = nil)
 
     # If a plan code was provided, fetch it for the given plan.
     plan_code_instance = nil
     if plan_code.present?
       plan_code_instance = DiscoApp::PlanCode.available.find_by(plan: plan, code: plan_code)
+    end
+
+    # If a source name has been provided, fetch or create it
+    source_instance = nil
+    if source_name.present?
+      source_instance = DiscoApp::Source.find_or_create_by(source: source_name)
     end
 
     # Cancel any existing current subscriptions.
@@ -33,7 +39,7 @@ class DiscoApp::SubscriptionService
       trial_period_days: plan.has_trial? ? subscription_trial_period_days : nil,
       trial_start_at: plan.has_trial? ? Time.now : nil,
       trial_end_at: plan.has_trial? ? subscription_trial_period_days.days.from_now : nil,
-      source: source
+      source: source_instance
     )
 
     # Enqueue the subscription changed background job.
