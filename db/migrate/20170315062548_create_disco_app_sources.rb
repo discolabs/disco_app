@@ -5,5 +5,6 @@ class CreateDiscoAppSources < ActiveRecord::Migration
       t.string :name, null: true
       t.timestamps null: false
     end
+    add_index :disco_app_sources, :source
   end
 end
