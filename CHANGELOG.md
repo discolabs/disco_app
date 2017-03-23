@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 - Allow Shopify User Authentication
 - Added `DiscoApp::UserSessionsController` and `DiscoApp::Concerns::UserAuthenticatedController`
 - Added `DiscoApp::User` model
+- Add ability to manage `sources` of Shop subscriptions from within the Admin UI
 
 ## 0.12.7 - 2017-03-17
 ### Changed
