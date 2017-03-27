@@ -9,6 +9,9 @@ module DiscoApp::Concerns::Shop
     has_many :subscriptions
     has_many :plans, through: :subscriptions
 
+    # Define relationship to users.
+    has_many :users
+
     # Define relationship to sessions.
     has_many :sessions, class_name: 'DiscoApp::Session', dependent: :destroy
 
