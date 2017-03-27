@@ -28,6 +28,10 @@ DiscoApp::Engine.routes.draw do
     get 'admin/shops' => 'admin/shops#index'
   end
 
+  controller 'user_session' do
+    get 'auth/shopify_user/callback' => :callback
+  end
+
   namespace :admin do
     resources :shops, only: [:index, :edit, :update] do
       resources :subscriptions, only: [:edit, :update]

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161105054746) do
+ActiveRecord::Schema.define(version: 20170327034347) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,6 +117,17 @@ ActiveRecord::Schema.define(version: 20161105054746) do
 
   add_index "disco_app_subscriptions", ["plan_id"], name: "index_disco_app_subscriptions_on_plan_id", using: :btree
   add_index "disco_app_subscriptions", ["shop_id"], name: "index_disco_app_subscriptions_on_shop_id", using: :btree
+
+  create_table "disco_app_users", force: :cascade do |t|
+    t.integer  "shop_id",    limit: 8
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "disco_app_users", ["shop_id"], name: "index_disco_app_users_on_shop_id", unique: true, using: :btree
 
   create_table "js_configurations", force: :cascade do |t|
     t.integer "shop_id", limit: 8

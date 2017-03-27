@@ -10,6 +10,7 @@ module DiscoApp::Concerns::AuthenticatedController
     before_action :check_current_subscription
     before_action :check_active_charge
     around_filter :shopify_session
+    before_action :authenticate_user
     layout 'embedded_app'
   end
 
@@ -55,6 +56,12 @@ module DiscoApp::Concerns::AuthenticatedController
     def check_active_charge
       if @shop.current_subscription? and @shop.current_subscription.requires_active_charge? and not @shop.development? and not @shop.current_subscription.active_charge?
         redirect_if_not_current_path disco_app.new_subscription_charge_path(@shop.current_subscription)
+      end
+    end
+
+    def authenticate_user
+      unless session[:shopify_user].present?
+        redirect_to "https://#{@shop.shopify_domain}/admin/oauth/authorize?client_id=#{ENV['SHOPIFY_APP_API_KEY']}&scope=#{ENV['SHOPIFY_APP_SCOPE']}&redirect_uri=#{ENV['DEFAULT_HOST']}/auth/shopify_user/callback&grant_options[]=per-user"
       end
     end
 
