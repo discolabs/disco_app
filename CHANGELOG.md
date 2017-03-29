@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased changes
+No unreleased changes.
+
+## 0.13.0 - 2017-03-29
 ### Changed
 - Improved the `InputCheckbox` React form component
 - Allow Shopify User Authentication
