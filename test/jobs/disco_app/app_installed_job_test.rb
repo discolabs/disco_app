@@ -45,13 +45,13 @@ class DiscoApp::AppInstalledJobTest < ActionController::TestCase
     @shop.current_subscription.destroy
 
     perform_enqueued_jobs do
-      DiscoApp::AppInstalledJob.perform_later(@shop, 'PODCAST', 'smpodcast')
+      DiscoApp::AppInstalledJob.perform_later(@shop, 'PODCAST', 'smp')
     end
 
     # Assert the shop was subscribed to the development plan.
     assert_equal disco_app_plans(:development), @shop.current_subscription.plan
     assert_equal disco_app_plan_codes(:podcast_dev), @shop.current_subscription.plan_code
-    assert_equal 'smpodcast', @shop.current_subscription.source
+    assert_equal 'smpodcast', @shop.current_subscription.source.name
   end
 
 end
