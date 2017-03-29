@@ -1,7 +1,5 @@
 class DiscoApp::UserSessionsController < ApplicationController
-  include DiscoApp::Concerns::UserAuthenticatedController
-
-  skip_before_action :shopify_user
+  include DiscoApp::Concerns::AuthenticatedController
 
   def new
   end
@@ -26,34 +24,26 @@ class DiscoApp::UserSessionsController < ApplicationController
 
   protected
 
-  def auth_hash
-    request.env['omniauth.auth']
-  end
-
-  def associated_user(auth_hash)
-    auth_hash['extra']['associated_user']
-  end
-
-  def authenticate
-    if sanitized_shop_name.present?
-      fullpage_redirect_to "#{main_app.root_path}auth/shopify_user?shop=#{sanitized_shop_name}"
-    else
-      redirect_to return_address
+    def associated_user(auth_hash)
+      auth_hash['extra']['associated_user']
     end
-  end
 
-  def login_user
-    @user = DiscoApp::User.create_from_auth(associated_user(auth_hash), session[:shopify])
-    session[:shopify_user] = @user.id
-  end
+    def authenticate
+      if sanitized_shop_name.present?
+        fullpage_redirect_to "#{main_app.root_path}auth/shopify_user?shop=#{@shop.shopify_domain}"
+      else
+        redirect_to return_address
+      end
+    end
 
-  def sanitized_shop_name
-    @sanitized_shop_name ||= session[:shopify_domain]
-  end
+    def login_user
+      @user = DiscoApp::User.create_from_auth(associated_user(auth_hash), @shop)
+      session[:shopify_user] = @user.id
+    end
 
-  def return_address
-    session.delete(:return_to) || main_app.root_url
-  end
+    def return_address
+      session.delete(:return_to) || main_app.root_url
+    end
 
 end
 
