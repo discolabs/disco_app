@@ -27,7 +27,7 @@ module DiscoApp::Concerns::Shop
 
     # Return true if the shop is considered as in development mode.
     def development?
-      ['staff', 'custom', 'affiliate'].include?(plan_name)
+      ['staff', 'affiliate'].include?(plan_name)
     end
 
     # Convenience method to check if this shop has a current subscription.
