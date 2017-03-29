@@ -9,6 +9,9 @@ DiscoApp::Engine.routes.draw do
     post 'webhooks' => :process_webhook, as: :webhooks
   end
 
+  resources :user_sessions, only: [:new, :create, :destroy]
+  get 'auth/shopify_user/callback' => 'user_sessions#callback'
+
   resources :subscriptions, only: [:new, :create] do
     resources :charges, only: [:new, :create] do
       member do

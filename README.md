@@ -220,6 +220,46 @@ the domain name and API token for a shop that installs the app, along with a
 number of other attributes such as email address, country, Shopify plan type,
 et cetera.
 
+### User Authentication
+In addition to providing built-in OAuth authentication at the Shop level by
+default, the gem allows you to enforce authentication at the user level.
+
+To use this functionality, you will need to include the 
+`DiscoApp::Concerns::UserAuthenticatedController` concern on any controller
+that requires an authenticated user. Once authenticated, this concern will
+ensure a `@user` instance variable is present on the controller.
+
+You will also need to replace the contents of `config/initializer/omniauth.rb`
+with the below code:
+
+```
+module OmniAuth::Strategies
+  class ShopifyUser < Shopify
+    def name
+      :shopify_user
+    end	
+  end
+end
+
+SETUP_PROC = lambda do |env| 
+  env['omniauth.strategy'].options[:per_user_permissions] = true
+  params = Rack::Utils.parse_query(env['QUERY_STRING'])
+  env['omniauth.strategy'].options[:client_options][:site] = "https://#{params['shop']}"
+end
+
+Rails.application.config.middleware.use OmniAuth::Builder do
+  provider :shopify,
+    ShopifyApp.configuration.api_key,
+    ShopifyApp.configuration.secret,
+    scope: ShopifyApp.configuration.scope
+  provider :shopify_user,
+  	ShopifyApp.configuration.api_key,
+    ShopifyApp.configuration.secret,
+    scope: ShopifyApp.configuration.scope,
+    setup: SETUP_PROC
+end
+```
+
 ### Plans, Subscriptions, and Charges
 The gem provides a framework for billing merchants for the use of applications.
 This framework consists of plans, subscriptions, plan codes, and charges.

@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 ## Unreleased changes
 ### Changed
 - Improved the `InputCheckbox` React form component
+- Allow Shopify User Authentication
+- Added `DiscoApp::UserSessionsController` and `DiscoApp::Concerns::UserAuthenticatedController`
+- Added `DiscoApp::User` model
 
 ## 0.12.7 - 2017-03-17
 ### Changed

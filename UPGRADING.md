@@ -8,6 +8,13 @@ as more in-depth accompaniment to the notes in `CHANGELOG.md` for each version.
 Check that your usage of `InputCheckbox`, if used, matches the updated component.
 The previous component didn't work very well so it's unlikely you're using it.
 
+### User authentication
+Ensure you copy migrations from  from `disco_app` using
+`rake disco_app:install:migrations`, then `rake db:migrate`.
+
+To use the new Shopify user authentication functionality, refer to the 
+User Authentication section in the [README](./README.md#user-authentication). 
+
 ## Upgrading from 0.12.6 to 0.12.7
 No changes required.
 
