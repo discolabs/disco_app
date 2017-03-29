@@ -24,12 +24,16 @@ class DiscoApp::UserSessionsController < ApplicationController
 
   protected
 
+    def auth_hash
+      request.env['omniauth.auth']
+    end
+
     def associated_user(auth_hash)
       auth_hash['extra']['associated_user']
     end
 
     def authenticate
-      if sanitized_shop_name.present?
+      if @shop.shopify_domain.present?
         fullpage_redirect_to "#{main_app.root_path}auth/shopify_user?shop=#{@shop.shopify_domain}"
       else
         redirect_to return_address
