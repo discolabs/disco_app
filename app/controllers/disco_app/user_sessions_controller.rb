@@ -34,7 +34,7 @@ class DiscoApp::UserSessionsController < ApplicationController
 
     def authenticate
       if @shop.shopify_domain.present?
-        fullpage_redirect_to "#{main_app.root_path}auth/shopify_user?shop=#{@shop.shopify_domain}"
+        redirect_to "#{main_app.root_path}auth/shopify_user?shop=#{@shop.shopify_domain}"
       else
         redirect_to return_address
       end
