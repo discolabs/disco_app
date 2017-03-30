@@ -33,8 +33,8 @@ class DiscoApp::UserSessionsController < ApplicationController
     end
 
     def authenticate
-      if @shop.shopify_domain.present?
-        redirect_to "#{main_app.root_path}auth/shopify_user?shop=#{@shop.shopify_domain}"
+      if sanitized_shop_name.present?
+        fullpage_redirect_to "#{main_app.root_path}auth/shopify_user?shop=#{sanitized_shop_name}"
       else
         redirect_to return_address
       end
@@ -47,6 +47,10 @@ class DiscoApp::UserSessionsController < ApplicationController
 
     def return_address
       session.delete(:return_to) || main_app.root_url
+    end
+
+    def sanitized_shop_name
+      @shop.shopify_domain
     end
 
 end
