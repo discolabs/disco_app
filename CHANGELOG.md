@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 ## Unreleased changes
 No unreleased changes.
 
+## 0.13.1 - 2017-03-29
+### Changed
+- Fixed bug caused by method in `DiscoApp::User` model
+
 ## 0.13.0 - 2017-03-29
 ### Changed
 - Improved the `InputCheckbox` React form component
