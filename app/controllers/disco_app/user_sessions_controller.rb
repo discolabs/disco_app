@@ -2,6 +2,7 @@ class DiscoApp::UserSessionsController < ApplicationController
   include DiscoApp::Concerns::AuthenticatedController
 
   def new
+    authenticate if sanitized_shop_name.present?
   end
 
   def create
