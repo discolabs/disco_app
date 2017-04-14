@@ -5,6 +5,7 @@ class DiscoApp::Admin::ApplicationController < ActionController::Base
 
     helper_method :current_shop
     def current_shop
-      @current_shop ||= @shop
+      @shop
     end
+
 end
