@@ -50,7 +50,7 @@ $ echo "gem 'rails', '~> 4.2'" >> Gemfile
 $ echo "2.3.3" > .ruby-version
 $ bundle install
 $ bundle exec rails new . --force --skip-bundle
-$ echo "gem 'disco_app', git: 'https://$DISCO_GEM_CREDENTIALS@github.com/discolabs/disco_app.git', tag: '0.13.1'" >> Gemfile
+$ echo "gem 'disco_app', git: 'https://$DISCO_GEM_CREDENTIALS@github.com/discolabs/disco_app.git', tag: 'v0.13.1'" >> Gemfile
 $ bundle update
 $ bundle exec rails generate disco_app --force
 $ bundle install
