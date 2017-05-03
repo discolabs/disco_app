@@ -7,6 +7,7 @@ well as providing common functionality in a single codebase.
 
 - [Getting Started](#getting-started)
 - [Engine Overview](#engine-overview)
+- [Troubleshooting](#troubleshooting)
 - [Contributing](#contributing)
 
 
@@ -60,24 +61,6 @@ Note the `tag` option being added to the Gemfile - this pins the version of
 DiscoApp you'll be using and avoid accidentally pulling incompatible changes
 into your project when you run a `bundle update`. Double check that the tag
 number you're using is the latest version available.
-
-Mac OS X users often have problems installing nokogiri, with issues with libxml2 
-reported missing. Try the following:
-```
-xcode-select --install
-gem install nokogiri -- --use-system-libraries --with-xml2-include=/usr/include/libxml2 --with-xml2-lib=/usr/lib/
-```
-
-Note if you face any issue running this command `bundle exec rails generate disco_app --force`
-try stopping `spring` and restarting again using this commands:
-```
-$ spring stop
-$ bin/spring
-```
-This seems to be a bug from spring. For more info please read:
-[Spring hangs when it can't connect to the server][]
-
-[Spring hangs when it can't connect to the server]: https://github.com/rails/spring/issues/265
 
 Once this is complete, you'll have a new Rails app created in `/example_app`,
 with the DiscoApp Engine configured and mounted.
@@ -799,6 +782,32 @@ steps you should take:
 
 [release list]: https://github.com/discolabs/disco_app/releases
 
+## Troubleshooting
+A list of common problems folks encounter when setting up or building apps with
+DiscoApp.
+
+### During install: Nokogiri / libxml2 reported missing
+Try the following:
+
+```
+$ xcode-select --install
+$ gem install nokogiri -- --use-system-libraries --with-xml2-include=/usr/include/libxml2 --with-xml2-lib=/usr/lib/
+```
+
+### During install: General
+Try the following to restart Spring:
+
+```
+$ spring stop
+$ bin/spring
+```
+
+### During Oauth: Redirect URI is missing or not listed
+Check that:
+
+- You're accessing the application via HTTPS, not HTTP;
+- You've correctly set `DEFAULT_HOST` in your local `ENV`;
+- You've correctly listed the redirect URI in the app on the partner dashboard.
 
 ## Contributing
 While developing Shopify applications using the DiscoApp Engine, you may see
