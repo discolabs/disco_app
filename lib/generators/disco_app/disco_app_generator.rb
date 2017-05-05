@@ -9,7 +9,7 @@ class DiscoAppGenerator < Rails::Generators::Base
   #  - Default simple Procfile for Heroku.
   #
   def copy_root_files
-    %w(.env .env.local .gitignore Procfile CHECKS).each do |file|
+    %w(.env .env.local .gitignore .rubocop.yml Procfile CHECKS).each do |file|
       copy_file "root/#{file}", file
     end
   end
@@ -56,6 +56,7 @@ class DiscoAppGenerator < Rails::Generators::Base
       gem 'dotenv-rails'
       gem 'minitest-reporters'
       gem 'webmock'
+      gem 'rubocop', '~> 0.48.1', require: false
     end
   end
 
@@ -222,6 +223,14 @@ class DiscoAppGenerator < Rails::Generators::Base
   def set_ruby_version
     copy_file 'root/.ruby-version', '.ruby-version'
     prepend_to_file 'Gemfile', "ruby '2.3.3'\n"
+  end
+
+  def generate_rubocop_config
+    run 'rubocop --auto-gen-config'
+  end
+
+  def add_standard_rubocop_config
+    inject_into_file '.rubocop.yml', "inherit_from: .rubocop_todo.yml"
   end
 
   private
