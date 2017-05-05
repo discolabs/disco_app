@@ -160,11 +160,6 @@ class DiscoAppGenerator < Rails::Generators::Base
     route "mount DiscoApp::Engine, at: '/'"
   end
 
-  # This fix an issue with some dependencies of Rubocop gem failing to build native extensions
-  def update_rubygems
-    run 'gem update --system'
-  end
-
   # Run generators.
   def run_generators
     generate 'shopify_app:install'
