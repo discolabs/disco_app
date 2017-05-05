@@ -230,14 +230,6 @@ class DiscoAppGenerator < Rails::Generators::Base
     prepend_to_file 'Gemfile', "ruby '2.3.3'\n"
   end
 
-  def generate_rubocop_config
-    run 'rubocop --auto-gen-config'
-  end
-
-  def add_standard_rubocop_config
-    inject_into_file '.rubocop.yml', "inherit_from: .rubocop_todo.yml"
-  end
-
   private
 
     # This method of finding the component.js manifest taken from the
