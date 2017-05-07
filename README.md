@@ -40,13 +40,6 @@ to note are:
 Running the following commands from your terminal to create a new Rails app,
 add the DiscoApp Rails Engine to your Gemfile, and set up the Engine:
 
-Check that the rails version required in your Gemfile matches the one specified in the Disco gemspec and
-update your version of `rubygems` if you have not yet 
-```
-gem update --system
-
-```
-
 ```
 $ export DISCO_GEM_CREDENTIALS=disco-gems:0dfbd458c126baa2744cef477b24c7cf7227fae5
 $ mkdir example_app
