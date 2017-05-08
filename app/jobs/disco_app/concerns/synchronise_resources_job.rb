@@ -1,7 +1,7 @@
 module DiscoApp::Concerns::SynchroniseResourcesJob
   extend ActiveSupport::Concern
 
-  def perform(shop, class_name, params)
+  def perform(_shop, class_name, params)
     klass = class_name.constantize
 
     klass::SHOPIFY_API_CLASS.find(:all, params: params).map do |shopify_resource|

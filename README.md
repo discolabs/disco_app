@@ -309,7 +309,7 @@ automatically be made on behalf of the shop, like so:
 
 ```
 class FindAllProductsJob < DiscoApp::ShopJob
-  def perform(shop)
+  def perform(_shop)
     ShopifyAPI::Product.find(:all)
   end
 end
@@ -662,7 +662,7 @@ implementation of this inside the dummy app used for testing Disco App in
    
    ```ruby
    class ProductsCreateJob < DiscoApp::ShopJob   
-     def perform(shop, product_data)
+     def perform(_shop, product_data)
        Product.synchronise(@shop, product_data)
      end
    end
