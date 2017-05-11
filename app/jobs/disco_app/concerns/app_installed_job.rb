@@ -14,7 +14,7 @@ module DiscoApp::Concerns::AppInstalledJob
   # - Perform initial update of shop information.
   # - Subscribe to default plan, if any exists.
   #
-  def perform(shop, plan_code = nil, source = nil)
+  def perform(_shop, plan_code = nil, source = nil)
     DiscoApp::SynchroniseWebhooksJob.perform_now(@shop)
     DiscoApp::SynchroniseCarrierServiceJob.perform_now(@shop)
     DiscoApp::ShopUpdateJob.perform_now(@shop)

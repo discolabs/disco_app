@@ -1,6 +1,6 @@
 class ProductsCreateJob < DiscoApp::ShopJob
 
-  def perform(shop, product_data)
+  def perform(_shop, product_data)
     Product.synchronise(@shop, product_data)
   end
 

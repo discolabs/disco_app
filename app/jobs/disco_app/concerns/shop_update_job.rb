@@ -2,7 +2,7 @@ module DiscoApp::Concerns::ShopUpdateJob
   extend ActiveSupport::Concern
 
   # Perform an update of the current shop's information.
-  def perform(shop, shop_data = nil)
+  def perform(_shop, shop_data = nil)
     # If we weren't provided with shop data (eg from a webhook), fetch it.
     shop_data ||= ActiveSupport::JSON::decode(ShopifyAPI::Shop.current.to_json)
 
