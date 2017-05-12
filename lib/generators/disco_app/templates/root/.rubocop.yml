@@ -82,6 +82,11 @@ Style/ColonMethodCall:
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#double-colons'
   Enabled: true
 
+Style/MutableConstant:
+  Description: 'Avoids assignment of mutable literals to constants..'
+  StyleGuide: 'http://www.rubydoc.info/github/bbatsov/RuboCop/RuboCop/Cop/Style/MutableConstant'
+  Enabled: false
+
 Style/CommentAnnotation:
   Description: >-
                  Checks formatting of special comments
