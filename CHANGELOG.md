@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 ## Unreleased changes
 No unreleased changes.
 
+## 0.13.3 - 2017-05-12
+### Changed
+- Added codeclimate and rubocop to disco_app generator
+- Added custom configuration for rubocop
+
 ## 0.13.2 - 2017-04-14
 ### Changed
 - Support automatic login on user-authenticated controllers

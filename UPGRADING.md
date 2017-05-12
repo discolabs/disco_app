@@ -3,6 +3,11 @@ This file contains more detailed instructions on what's required when updating
 an application between one release version of the gem to the next. It's intended
 as more in-depth accompaniment to the notes in `CHANGELOG.md` for each version.
 
+## Upgrading from 0.13.2 to 0.13.3
+Add .codeclimate.yml and .rubocop.yml from the root directory of `disco_app`
+to the root directory of your app, refer to the Rubocop section in the [README](./README.md#rubocop),
+if you wish to change the rubocop configuration
+
 ## Upgrading from 0.13.1 to 0.13.2
 No changes required.
 

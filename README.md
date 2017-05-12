@@ -49,7 +49,7 @@ $ echo "gem 'rails', '~> 4.2'" >> Gemfile
 $ echo "2.3.3" > .ruby-version
 $ bundle install
 $ bundle exec rails new . --force --skip-bundle
-$ echo "gem 'disco_app', git: 'https://$DISCO_GEM_CREDENTIALS@github.com/discolabs/disco_app.git', tag: '0.13.2'" >> Gemfile
+$ echo "gem 'disco_app', git: 'https://$DISCO_GEM_CREDENTIALS@github.com/discolabs/disco_app.git', tag: '0.13.3'" >> Gemfile
 $ bundle update
 $ bundle exec rails generate disco_app --force
 $ bundle install
@@ -738,6 +738,11 @@ end
   }
 )
 ```
+
+### Rubocop
+DiscoApp adds support for Rubocop and Codeclimate. the .rubocop.yml contains the 
+configuration you can tweak to suits your coding style, by enabling/disabling 
+"Cops" accordingly.
 
 ### Email Support
 DiscoApp has support for the Mailgun and configures Active Mailer to use the 
