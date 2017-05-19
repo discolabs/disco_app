@@ -16,7 +16,7 @@ module DiscoApp::Concerns::CarrierRequestController
     end
 
     def carrier_request_signature_is_valid?
-      return true if Rails.env.development? and DiscoApp.configuration.skip_carrier_request_verification?
+      return true if (Rails.env.development? or Rails.env.test?) and DiscoApp.configuration.skip_carrier_request_verification?
       DiscoApp::CarrierRequestService.is_valid_hmac?(request.body.read.to_s, ShopifyApp.configuration.secret, request.headers['HTTP_X_SHOPIFY_HMAC_SHA256'])
     end
 
