@@ -2,7 +2,8 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased changes
-No unreleased changes.
+### Added
+- Added `*.pgdump` to the default git ignore file
 
 ## 0.13.4 - 2017-05-21
 ### Changed

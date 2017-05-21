@@ -3,6 +3,10 @@ This file contains more detailed instructions on what's required when updating
 an application between one release version of the gem to the next. It's intended
 as more in-depth accompaniment to the notes in `CHANGELOG.md` for each version.
 
+## Upgrading from 0.13.4 to Unreleased
+A rule to ignore `*.pgdump` has been added to the default `.gitignore` template.
+You may want to add this to the app's current `.gitignore` now.
+
 ## Upgrading from 0.13.3 to 0.13.4
 The `renderErrors()` method in the React `BaseForm` component was renamed to
 `getErrorsElement()`. If you were calling `renderErrors()` directly in your
