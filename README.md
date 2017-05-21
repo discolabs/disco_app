@@ -835,7 +835,7 @@ To create a new release of the application:
 5. Update references to the latest version number in the README;
 6. Create a new commit with a commit message `vX.Y.Z`, where `X.Y.Z` is the
    version number;
-7. Tag the new commit with a tag `X.Y.Z`;
+7. Tag the new commit with a tag `X.Y.Z` (`git tag -a "X.Y.Z"`);
 8. `git push && git push --tags` to push the new release.
       
 See [an example release commit][].
