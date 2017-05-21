@@ -2,7 +2,7 @@ class ModelForm extends BaseForm {
 
   render() {
     const { modelTitle, modelName, modelUrl, modelsUrl, children, authenticityToken } = this.props;
-    const errors = this.renderErrors();
+    const errorsElement = this.getErrorsElement();
 
     return(
       <form action={modelUrl ? modelUrl : modelsUrl} acceptCharset="UTF-8" method="POST" data-shopify-app-submit="ea.save">
@@ -10,12 +10,7 @@ class ModelForm extends BaseForm {
         <input type="hidden" name="_method" value={modelUrl ? 'patch' : 'post'} />
         <input type="hidden" name="authenticity_token" value={authenticityToken}/>
 
-        {(() => {
-          if (!errors) return false;
-          return (
-            {errors}
-          );
-        })()}
+        {errorsElement}
 
         {children}
 
