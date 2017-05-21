@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 ## Unreleased changes
 No unreleased changes.
 
+## 0.13.4 - 2017-05-21
+### Changed
+- Refactored errors in `BaseForm` component
+
 ## 0.13.3 - 2017-05-12
 ### Changed
 - Added codeclimate and rubocop to disco_app generator
