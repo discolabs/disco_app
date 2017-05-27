@@ -5,6 +5,9 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Added `*.pgdump` to the default git ignore file
 
+### Changed
+- Turn prepared statements off by default in config/database.yml template
+
 ## 0.13.4 - 2017-05-21
 ### Changed
 - Refactored errors in `BaseForm` component

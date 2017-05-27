@@ -166,7 +166,8 @@ The following configuration changes are made:
 
 - Force SSL in production;
 - Use Sidekiq as the `ActiveJob` queue adapter in production;
-- Set the default host in the router to allow absolute URL reversal.
+- Set the default host in the router to allow absolute URL reversal;
+- Turn off prepared statements for Postgres databases.
 
 Finally, the following environment changes are made:
 

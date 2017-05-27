@@ -4,8 +4,17 @@ an application between one release version of the gem to the next. It's intended
 as more in-depth accompaniment to the notes in `CHANGELOG.md` for each version.
 
 ## Upgrading from 0.13.4 to Unreleased
+### New git ignore rule
 A rule to ignore `*.pgdump` has been added to the default `.gitignore` template.
 You may want to add this to the app's current `.gitignore` now.
+
+### Prepared statements off by default
+We've made a change to turn off prepared statements in Postgres by default, as
+they can chew up a *lot* of memory without necessarily providing much in the
+way of speed increase (see https://github.com/rails/rails/issues/21992).
+
+You should follow suit and add `prepared_statements: false` to the `database.yml`
+in your application.
 
 ## Upgrading from 0.13.3 to 0.13.4
 The `renderErrors()` method in the React `BaseForm` component was renamed to
