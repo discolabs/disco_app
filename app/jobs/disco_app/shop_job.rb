@@ -2,6 +2,9 @@
 # particular Shop's API session. The first argument to any job inheriting from
 # this class must be the domain of the relevant store, so that the appropriate
 # Shop model can be fetched and the temporary API session created.
+
+require 'rollbar'
+
 class DiscoApp::ShopJob < ActiveJob::Base
 
   queue_as :default
