@@ -13,4 +13,8 @@ module DiscoApp::Concerns::Taggable
     data['tags'] = (tags - [tag]).uniq.join(',')
   end
 
+  def has_tag?(tag_to_check)
+    tags.any? { |tag| tag.casecmp(tag_to_check) }
+  end
+
 end
