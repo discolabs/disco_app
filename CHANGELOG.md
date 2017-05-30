@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 ## Unreleased changes
 ### Added
 - Added `*.pgdump` to the default git ignore file
+- Added `has_tag?` helper method to `Taggable` concern
 
 ### Changed
 - Turn prepared statements off by default in config/database.yml template
@@ -40,14 +41,14 @@ All notable changes to this project will be documented in this file.
 ## 0.12.6 - 2017-03-10
 ### Changed
 - Better support for Turbolinks with embedded apps
- 
+
 ## 0.12.5 - 2017-03-09
 ### Added
-- Tie errors reported to Rollbar to it concerned Shop 
+- Tie errors reported to Rollbar to it concerned Shop
 - Auto-login shop if url has valid hmac and shop domain
-- Report subscription information to Disco API if ENV var set 
+- Report subscription information to Disco API if ENV var set
 
-## 0.12.4 - 2017-02-08 
+## 0.12.4 - 2017-02-08
 ### Changed
 - Fixed bug caused by moved template file in `shopify_app`
 
@@ -179,7 +180,7 @@ as the login redirection is handled from shopify omniauth
   Shopify in a `jsonb` field
 - Explicit dependency on `nokogiri` gem version 1.6.7.2.
 - New rake task: `shops:sync`, for updating shop data information.
-  
+
 ### Removed
 - A large number of attributes on the `Shop` model were removed, as they are now
   accessible from within the `data` attribute
@@ -335,7 +336,7 @@ as the login redirection is handled from shopify omniauth
 ## 0.6.3 - 2015-11-05
 ### Added
 - React component library
-- More admin styles for tables and grids 
+- More admin styles for tables and grids
 
 ### Changed
 - Upgraded to React v0.14
@@ -347,7 +348,7 @@ as the login redirection is handled from shopify omniauth
 - Better support for Turbolinks and URL state changes
 
 ### Changed
-- Card content is no longer wrapped in card sections by default 
+- Card content is no longer wrapped in card sections by default
 
 ## 0.6.1 - 2015-10-20
 ### Changed
@@ -358,7 +359,7 @@ as the login redirection is handled from shopify omniauth
 - Moved `Shop` model inside engine
 - Made models and jobs extensible via Concerns pattern
 - Moved layouts and views inside engine where possible
-- Revamped styling to be in line with Shopify Embedded Apps 
+- Revamped styling to be in line with Shopify Embedded Apps
 
 ## 0.5.6 - 2015-10-16
 ### Added
