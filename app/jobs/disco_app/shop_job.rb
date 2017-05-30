@@ -9,6 +9,8 @@ class DiscoApp::ShopJob < ActiveJob::Base
   before_perform { |job| find_shop(job) }
   before_enqueue { |job| find_shop(job) }
 
+  before_perform :rollbar_scope
+
   around_enqueue { |job, block| shop_context(job, block) }
   around_perform { |job, block| shop_context(job, block) }
 
@@ -18,10 +20,14 @@ class DiscoApp::ShopJob < ActiveJob::Base
       @shop ||= job.arguments.first.is_a?(DiscoApp::Shop) ? job.arguments.first : DiscoApp::Shop.find_by!(shopify_domain: job.arguments.first)
     end
 
+    def rollbar_scope
+      @scope = { person: { id: @shop.id, username: @shop.shopify_domain } }
+    end
+
     def shop_context(job, block)
-      @shop.with_api_context {
-        block.call(job.arguments)
-      }
+      Rollbar.scoped(@scope) do
+        @shop.with_api_context { block.call(job.arguments) }
+      end
     end
 
 end
