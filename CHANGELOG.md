@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Added `*.pgdump` to the default git ignore file
 - Added `has_tag?` helper method to `Taggable` concern
+- Added Rollbar "Person tracking" for `ShopJob`
 
 ### Changed
 - Turn prepared statements off by default in config/database.yml template
