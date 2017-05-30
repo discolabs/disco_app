@@ -2,6 +2,9 @@
 # particular Shop's API session. The first argument to any job inheriting from
 # this class must be the domain of the relevant store, so that the appropriate
 # Shop model can be fetched and the temporary API session created.
+
+require 'rollbar'
+
 class DiscoApp::ShopJob < ActiveJob::Base
 
   queue_as :default
@@ -19,9 +22,13 @@ class DiscoApp::ShopJob < ActiveJob::Base
     end
 
     def shop_context(job, block)
-      @shop.with_api_context {
-        block.call(job.arguments)
-      }
+      Rollbar.scoped(rollbar_scope) do
+        @shop.with_api_context { block.call(job.arguments) }
+      end
+    end
+
+    def rollbar_scope
+      { person: { id: @shop.id, username: @shop.shopify_domain } }
     end
 
 end
