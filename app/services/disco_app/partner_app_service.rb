@@ -1,21 +1,22 @@
 require 'mechanize'
 require 'byebug'
 
-class DiscoApp::PartnerAppService
+module DiscoApp
+  class PartnerAppService
 
-  def initialize(email, password, organization, app_name, app_url, embedded_app)
-    @email = email
-    @password = password
-    @app_name = app_name
-    @app_url = app_url
-    @organization = organization
-    @embedded_app = embedded_app
+  def initialize(params)
+    @email = params[:email]
+    @password = params[:password]
+    @app_name = params[:app_name]
+    @app_url = params[:app_url]
+    @organization = params[:organization]
+    @embedded_app = params[:embedded_app]
 
     @agent = Mechanize.new do |a|
       a.user_agent_alias = 'Mac Safari'
       a.follow_meta_refresh = true
       a.keep_alive = false
-      a.pre_connect_hooks << lambda do |agent, request|
+      a.pre_connect_hooks << lambda do |_agent, request|
         request['Accept'] = 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
       end
     end
@@ -40,15 +41,15 @@ class DiscoApp::PartnerAppService
     append_credentials(api_key, secret)
 
     puts '#' * 80
-    puts "New Partner App successfully created !"
-    puts "API Credentials has been pasted to your .env.local file"
+    puts 'New Partner App successfully created !'
+    puts 'API Credentials has been pasted to your .env.local file'
     puts '#' * 80
   end
 
   private
 
     def login
-      @agent.get("https://accounts.shopify.com/login") do |page|
+      @agent.get('https://accounts.shopify.com/login') do |page|
         page.form do |form|
           form.email = @email
           form.password = @password
@@ -57,12 +58,12 @@ class DiscoApp::PartnerAppService
     end
 
     def organizations
-      organizations = @agent.get("https://partners.shopify.com/organizations/")
-      organizations.links.select{|link| link.text[/#{@organization}/]}.first.href
+      organizations = @agent.get('https://partners.shopify.com/organizations/')
+      organizations.links.select{ |link| link.text[/#{@organization}/] }.first.href
     end
 
     def dashboard_page(org_link)
-      @agent.get("https://partners.shopify.com" + org_link)
+      @agent.get('https://partners.shopify.com' + org_link)
     end
 
     def create_partner_app(apps_page)
@@ -115,7 +116,8 @@ class DiscoApp::PartnerAppService
     # Access the "Apps" section of the dashboard, also used to reload the dashboard
     # When an action has been taken
     def refresh_page(dashboard)
-      dashboard.link_with(text: "  Apps").click
+      dashboard.link_with(text: '  Apps').click
     end
 
+  end
 end
