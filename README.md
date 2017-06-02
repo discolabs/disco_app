@@ -68,22 +68,23 @@ In order to work on our app, we need to create a development application from
 the Shopify Partners dashboard. Once that's done, we can copy across the
 generated API credentials to our development app and perform a test install.
 
-To do this, open your Shopify Partner dashboard and create a new application
-from the "Apps" tab. Make sure the "Embedded App" option is selected. When
-prompted for the **Application URL**, enter the endpoint provided by your
-tunneling software - for example, `https://example.ngrok.io`. You can ignore the
-fields for **Preferences URL** and **Support URL** for now. The
-**Redirection URL** should be set to something like
-`https://example.ngrok.io/auth/shopify/callback`.
+To automatically generate a new Shopify App from the partner dashboard, go to your `.env.local`
+file in your root directory and add in values for `DEFAULT_HOST` (this should be
+the tunnel endpoint), `SHOPIFY_APP_NAME`(Name of the App) and `PARTNER_EMAIL`,`PARTNER_PASSWORD`,
+`PARTNER_ORGANIZATION` (Your Shopify Partner credentials)
 
-Once the application has been created on Shopify, copy over the API credentials
-to the `SHOPIFY_APP_API_KEY` and `SHOPIFY_APP_SECRET` values in the `.env.local` file
-located in the root directory of the Rails app (this file was created by the
-DiscoApp generator during step 2).
+You can then run the following task
 
-While the `.env.local` file is open, add in values for `DEFAULT_HOST` (this should be
-the tunnel endpoint), `SHOPIFY_APP_NAME`, `SHOPIFY_APP_REDIRECT_URI`,
-`SHOPIFY_APP_PROXY_PREFIX`, and `SHOPIFY_APP_SCOPE` (view a [list of scopes][]).
+```
+New embedded app :
+bundle exec rake generate:partner_app EMBEDDED_APP=true
+```
+
+The `.env.local` will be automatically populated with values for
+`SHOPIFY_APP_API_KEY` and `SHOPIFY_APP_SECRET`
+
+While the `.env.local` file is open, add in values for`SHOPIFY_APP_PROXY_PREFIX`
+and `SHOPIFY_APP_SCOPE` (view a [list of scopes][]).
 The `SHOPIFY_CHARGES_REAL`, `SECRET_KEY_BASE` and `REDIS_PROVIDER` values can be
 left blank in development.
 
@@ -91,6 +92,10 @@ When you're done, your `.env.local` file should look something like this:
 
 ```
 DEFAULT_HOST=https://example.ngrok.io
+
+PARTNER_EMAIL=hey@example.com
+PARTNER_PASSWORD=secret-password
+PARTNER_ORGANIZATION=Disco
 
 SHOPIFY_APP_NAME=Example App
 SHOPIFY_APP_API_KEY=ebef81bcfe2174ff2c6e65f5c0a0ba50

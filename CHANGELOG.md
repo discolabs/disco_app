@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file.
 - Added Rollbar "Person tracking" for `ShopJob`
 - Added overrides to the `data` attribute for `Synchronises` models to allow
   accessing the `data` hash with indifferent access.
+- Added Partner app generator via a new PartnerAppService and rake task
 
 ### Changed
 - Turn prepared statements off by default in config/database.yml template
