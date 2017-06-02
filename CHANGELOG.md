@@ -14,8 +14,12 @@ All notable changes to this project will be documented in this file.
 - Added `*.pgdump` to the default git ignore file
 - Added `has_tag?` helper method to `Taggable` concern
 - Added Rollbar "Person tracking" for `ShopJob`
+<<<<<<< HEAD
 - Added overrides to the `data` attribute for `Synchronises` models to allow
   accessing the `data` hash with indifferent access.
+=======
+- Added `Default plan` option to `disco_app` generator
+>>>>>>> Add documentation on README.md and CHANGELOG.md
 
 ### Changed
 - Turn prepared statements off by default in config/database.yml template

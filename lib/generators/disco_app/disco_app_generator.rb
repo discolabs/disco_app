@@ -1,7 +1,7 @@
 class DiscoAppGenerator < Rails::Generators::Base
 
   source_root File.expand_path('../templates', __FILE__)
-  class_option :default_plan, aliases: '-d', type: :boolean, default: false, description: 'Automatically subscribe app to free default plan'
+  class_option :default_plan, aliases: '--d', type: :boolean, default: false, description: 'Automatically subscribe app to free default plan'
 
   # Copy a number of template files to the top-level directory of our application:
   #
