@@ -11,7 +11,7 @@ class DiscoApp::Shop < ActiveRecord::Base
   # Extend the Shop model to return the Shop's country as an ActiveUtils country.
   def country
     begin
-      ActiveUtils::Country.find(data['country_name'])
+      ActiveUtils::Country.find(data[:country_name])
     rescue ActiveUtils::InvalidCountryCodeError
       nil
     end

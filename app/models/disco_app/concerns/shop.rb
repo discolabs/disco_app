@@ -66,7 +66,7 @@ module DiscoApp::Concerns::Shop
 
     # Convenience method to get the email of the shop's admin, to display in Rollbar.
     def email
-      self.data['email']
+      data[:email]
     end
 
     def installed_duration
@@ -77,7 +77,7 @@ module DiscoApp::Concerns::Shop
     # shop's "data" hash, return the default Rails zone (which should be UTC).
     def time_zone
       @time_zone ||= begin
-        Time.find_zone!(data['timezone'].to_s.gsub(/^\(.+\)\s/, ''))
+        Time.find_zone!(data[:timezone].to_s.gsub(/^\(.+\)\s/, ''))
       rescue ArgumentError
         Time.zone
       end
@@ -86,12 +86,17 @@ module DiscoApp::Concerns::Shop
     # Return the shop's configured locale as a symbol. If none exists for some
     # reason, 'en' is returned.
     def locale
-      (data['primary_locale'] || 'en').to_sym
+      (data[:primary_locale] || 'en').to_sym
     end
 
     # Return an instance of the Disco API client.
     def disco_api_client
       @api_client ||= DiscoApp::ApiClient.new(self, ENV['DISCO_API_URL'])
+    end
+
+    # Override the "read" data attribute to allow indifferent access.
+    def data
+      read_attribute(:data).with_indifferent_access
     end
 
   end

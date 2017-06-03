@@ -27,7 +27,7 @@ class DiscoApp::AppInstalledJobTest < ActionController::TestCase
 
     # Assert the update shop job was performed.
     @shop.reload
-    assert_equal 'United States', @shop.data['country_name']
+    assert_equal 'United States', @shop.data[:country_name]
   end
 
   test 'app installed job automatically subscribes stores to the correct default plan' do

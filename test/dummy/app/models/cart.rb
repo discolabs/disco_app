@@ -8,17 +8,17 @@ class Cart < ActiveRecord::Base
   before_save :set_token
 
   def self.synchronise_by(shop, data)
-    { token: data['token'] }
+    { token: data[:token] }
   end
 
   def total_price
-    data['line_items'].map { |line_item| line_item['line_price'].to_f }.sum
+    data[:line_items].map { |line_item| line_item[:line_price].to_f }.sum
   end
 
   private
 
     def set_token
-      self.token = data['token']
+      self.token = data[:token]
     end
 
 end

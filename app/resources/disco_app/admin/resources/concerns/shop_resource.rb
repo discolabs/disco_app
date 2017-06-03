@@ -46,19 +46,19 @@ module DiscoApp::Admin::Resources::Concerns::ShopResource
     end
 
     def email
-      @model.data['email']
+      @model.data[:email]
     end
 
     def country_name
-      @model.data['country_name']
+      @model.data[:country_name]
     end
 
     def currency
-      @model.data['currency']
+      @model.data[:currency]
     end
 
     def plan_display_name
-      @model.data['plan_display_name']
+      @model.data[:plan_display_name]
     end
 
     def current_subscription_id

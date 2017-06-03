@@ -18,7 +18,7 @@ class SynchronisesTest < ActionDispatch::IntegrationTest
 
     # Assert the product was created locally, with the correct attributes.
     product = Product.find(632910392)
-    assert_equal 'IPod Nano - 8GB', product.data['title']
+    assert_equal 'IPod Nano - 8GB', product.data[:title]
   end
 
   test 'existing product is updated when product updated webhook is received' do
@@ -29,7 +29,7 @@ class SynchronisesTest < ActionDispatch::IntegrationTest
     # Assert the product was updated locally, with the correct attributes.
     @product.reload
     assert_equal 632910393, @product.id
-    assert_equal 'IPod Nano - 8GB', @product.data['title']
+    assert_equal 'IPod Nano - 8GB', @product.data[:title]
   end
 
   test 'existing product is deleted when product deleted webhook is received' do
@@ -53,7 +53,7 @@ class SynchronisesTest < ActionDispatch::IntegrationTest
     # Assert the product was updated locally, with the correct attributes.
     @product.reload
     assert_equal 632910393, @product.id
-    assert_equal 'IPod Nano - 8GB', @product.data['title']
+    assert_equal 'IPod Nano - 8GB', @product.data[:title]
   end
 
   private

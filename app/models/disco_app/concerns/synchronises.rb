@@ -58,4 +58,13 @@ module DiscoApp::Concerns::Synchronises
 
   end
 
+  included do
+
+    # Override the "read" data attribute to allow indifferent access.
+    def data
+      read_attribute(:data).with_indifferent_access
+    end
+
+  end
+
 end
