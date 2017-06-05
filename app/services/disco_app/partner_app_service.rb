@@ -19,23 +19,28 @@ module DiscoApp
     end
 
     def generate_partner_app
-      # Login to Shopify Partners
-      login
-      # Access Partner dashboard
-      org_link = organizations
-      dashboard = dashboard_page(org_link)
-      # Create App
-      apps_page = refresh_page(dashboard)
-      create_partner_app(apps_page)
-      # Configure newly created app with embedded app use if needed
-      apps_page = refresh_page(dashboard)
-      embedded_admin_app(apps_page) if @embedded_app
-      # Fetch API credentials
-      apps_page = refresh_page(dashboard)
-      api_key, secret = api_crendetials(apps_page)
+      begin
+        # Login to Shopify Partners
+        login
+        # Access Partner dashboard
+        org_link = organizations
+        dashboard = dashboard_page(org_link)
+        # Create App
+        apps_page = refresh_page(dashboard)
+        create_partner_app(apps_page)
+        # Configure newly created app with embedded app use if needed
+        apps_page = refresh_page(dashboard)
+        embedded_admin_app(apps_page) if @embedded_app
+        # Fetch API credentials
+        apps_page = refresh_page(dashboard)
+        api_key, secret = api_crendetials(apps_page)
+      rescue Mechanize::Error => e
+        puts 'Error while trying to create partner app'
+        puts "Error #{e}, message : #{e.message}"
+        return
+      end
       # Add them to .env.local file
       append_credentials(api_key, secret)
-
       puts '#' * 80
       puts 'New Partner App successfully created !'
       puts 'API Credentials has been pasted to your .env.local file'
