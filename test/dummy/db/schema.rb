@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170327214540) do
+ActiveRecord::Schema.define(version: 20170606160751) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -136,7 +136,7 @@ ActiveRecord::Schema.define(version: 20170327214540) do
     t.datetime "updated_at",           null: false
   end
 
-  add_index "disco_app_users", ["shop_id"], name: "index_disco_app_users_on_shop_id", unique: true, using: :btree
+  add_index "disco_app_users", ["id", "shop_id"], name: "index_disco_app_users_on_id_and_shop_id", unique: true, using: :btree
 
   create_table "js_configurations", force: :cascade do |t|
     t.integer "shop_id", limit: 8
