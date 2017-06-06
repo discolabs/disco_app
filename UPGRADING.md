@@ -3,7 +3,7 @@ This file contains more detailed instructions on what's required when updating
 an application between one release version of the gem to the next. It's intended
 as more in-depth accompaniment to the notes in `CHANGELOG.md` for each version.
 
-## Upgrading from 0.13.4 to Unreleased
+## Upgrading from 0.13.4 to 0.13.5
 ### New git ignore rule
 A rule to ignore `*.pgdump` has been added to the default `.gitignore` template.
 You may want to add this to the app's current `.gitignore` now.
@@ -15,6 +15,11 @@ way of speed increase (see https://github.com/rails/rails/issues/21992).
 
 You should follow suit and add `prepared_statements: false` to the `database.yml`
 in your application.
+
+### Run bugfix migration
+This release includes a migration that fixes a bug with a unique index on the
+`disco_app_users` table. Make sure you copy across the latest version of the
+migration and run on your app.
 
 ## Upgrading from 0.13.3 to 0.13.4
 The `renderErrors()` method in the React `BaseForm` component was renamed to

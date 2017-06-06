@@ -1,14 +1,17 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## Unreleased changes
+## 0.13.5 - 2017-06-06
 ### Added
 - Added `*.pgdump` to the default git ignore file
 - Added `has_tag?` helper method to `Taggable` concern
 - Added Rollbar "Person tracking" for `ShopJob`
+- Added overrides to the `data` attribute for `Synchronises` models to allow
+  accessing the `data` hash with indifferent access.
 
 ### Changed
 - Turn prepared statements off by default in config/database.yml template
+- Bugfix for indexes on `disco_app_users` table
 
 ## 0.13.4 - 2017-05-21
 ### Changed
