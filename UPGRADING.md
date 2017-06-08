@@ -19,7 +19,12 @@ in your application.
 ### Run bugfix migration
 This release includes a migration that fixes a bug with a unique index on the
 `disco_app_users` table. Make sure you copy across the latest version of the
-migration and run on your app.
+migration and run on your app with:
+
+```
+bundle exec rake disco_app:install:migrations`
+bundle exec rake db:migrate
+```
 
 ## Upgrading from 0.13.3 to 0.13.4
 The `renderErrors()` method in the React `BaseForm` component was renamed to
