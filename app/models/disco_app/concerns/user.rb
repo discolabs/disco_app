@@ -5,7 +5,6 @@ module DiscoApp::Concerns::User
     belongs_to :shop
 
     def self.create_user(shopify_user, shop)
-      byebug
       user = self.find_or_create_by!(id: shopify_user.id, shop: shop)
       user.update(
         first_name: shopify_user.first_name || '',

@@ -6,7 +6,7 @@ module DiscoApp::Concerns::SynchroniseUsersJob
       ShopifyAPI::User.all
     }
     return unless users.present?
-    users.each { |user| DiscoApp::User.create_from_auth(user, @shop) }
+    users.each { |user| DiscoApp::User.create_user(user, @shop) }
   end
 
 end
