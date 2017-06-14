@@ -18,9 +18,9 @@ class DiscoApp::SynchroniseUsersJobTest < ActionController::TestCase
       DiscoApp::SynchroniseUsersJob.perform_later(@shop)
     end
     user = DiscoApp::User.first
-    assert_equal "Steve", user.first_name
-    assert_equal "Jobs", user.last_name
-    assert_equal "steve@apple.com", user.email
+    assert_equal 'Steve', user.first_name
+    assert_equal 'Jobs', user.last_name
+    assert_equal 'steve@apple.com', user.email
   end
 
 end
