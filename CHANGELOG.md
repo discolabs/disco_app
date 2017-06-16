@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## Unreleased
+### Changed
+- Add rake task to synchronize `DiscoApp::User` locally
+
 ## 0.13.5 - 2017-06-06
 ### Added
 - Added `*.pgdump` to the default git ignore file
