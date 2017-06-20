@@ -29,7 +29,8 @@ var ShopRow = (props) => {
     return (
         <tr>
             <td>
-              <a href={editShopUrl}>{domainName}</a><br />
+              {domainName}
+              <br />
               <a href={'mailto:' + shop.attributes.email}>{shop.attributes.email}</a>
             </td>
             <td>{shop.attributes.status}</td>
