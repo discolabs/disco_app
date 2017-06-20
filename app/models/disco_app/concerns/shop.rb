@@ -22,6 +22,7 @@ module DiscoApp::Concerns::Shop
     scope :status, -> (status) { where status: status }
     scope :installed, -> { where status: statuses[:installed] }
     scope :has_active_shopify_plan, -> { where.not(plan_name: [:cancelled, :frozen, :fraudulent]) }
+    scope :shopify_plus, -> { where(plan_name: :shopify_plus) }
 
     # Alias 'with_shopify_session' as 'with_api_context' for better readability, but also as 'temp' for
     # backward compatibility.

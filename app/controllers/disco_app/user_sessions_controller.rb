@@ -42,7 +42,7 @@ class DiscoApp::UserSessionsController < ApplicationController
     end
 
     def login_user
-      @user = DiscoApp::User.create_from_auth(associated_user(auth_hash), @shop)
+      @user = DiscoApp::User.create_user(associated_user(auth_hash), @shop)
       session[:shopify_user] = @user.id
     end
 
@@ -55,4 +55,3 @@ class DiscoApp::UserSessionsController < ApplicationController
     end
 
 end
-

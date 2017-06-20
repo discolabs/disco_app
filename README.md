@@ -206,7 +206,7 @@ et cetera.
 In addition to providing built-in OAuth authentication at the Shop level by
 default, the gem allows you to enforce authentication at the user level.
 
-To use this functionality, you will need to include the 
+To use this functionality, you will need to include the
 `DiscoApp::Concerns::UserAuthenticatedController` concern on any controller
 that requires an authenticated user. Once authenticated, this concern will
 ensure a `@user` instance variable is present on the controller.
@@ -219,11 +219,11 @@ module OmniAuth::Strategies
   class ShopifyUser < Shopify
     def name
       :shopify_user
-    end	
+    end
   end
 end
 
-SETUP_PROC = lambda do |env| 
+SETUP_PROC = lambda do |env|
   env['omniauth.strategy'].options[:per_user_permissions] = true
   params = Rack::Utils.parse_query(env['QUERY_STRING'])
   env['omniauth.strategy'].options[:client_options][:site] = "https://#{params['shop']}"
@@ -245,7 +245,7 @@ end
 ### Plans, Subscriptions, and Charges
 The gem provides a framework for billing merchants for the use of applications.
 This framework consists of plans, subscriptions, plan codes, and charges.
- 
+
 **Plans** represent the different pricing levels you can offer your merchants.
 They are configurable from the application admin pages (if enabled for the app
 in question), allowing application owners to set different prices, trial
@@ -279,7 +279,7 @@ page. It:
   the currently active subscription doesn't require a charge, as may happen when
   the amount to be charged is zero). If not, redirects to begin the charge
   approval process for the current subscription.
-  
+
 If you're building an app that doesn't need to worry about charging store
 owners, you should ensure it creates a Plan with an `amount` value of zero, and
 that all stores are subscribed to that plan during `DiscoApp::AppInstalledJob`.
@@ -298,9 +298,10 @@ There's a number of useful Rake tasks that are baked into the app. They are:
   local IP.
 - `rake webhooks:sync`: Trigger a re-synchronisation of webhooks for all
   shops on active Shopify plans and with the application currently installed.
-- `rake database:update_sequences`: Update postgres sequence numbers in case 
+- `rake database:update_sequences`: Update postgres sequence numbers in case
   the database has been imported or migrated.
 - `rake shops:sync`: Synchronises shop data across all installed shops.
+- `rake users:sync`: Synchronises user data across all installed shops.
 
 ### Background Tasks
 The `DiscoApp::ShopJob` class inherits from `ActiveJob::Base`, and can be used
@@ -350,10 +351,10 @@ Concerns in a similar way to the models that come with the engine. See
 
 [Extending Models]: #extending-models
 
-Additionally, the gem includes `DiscoApp::SynchroniseResourcesJob`. It takes a 
-synchronisable class name (like Product) and a params hash, which it then uses 
-to fetch a list of resources via the API. So if we wanted to synchronise 
-products with the ids 123, 456 and 789, we could do: 
+Additionally, the gem includes `DiscoApp::SynchroniseResourcesJob`. It takes a
+synchronisable class name (like Product) and a params hash, which it then uses
+to fetch a list of resources via the API. So if we wanted to synchronise
+products with the ids 123, 456 and 789, we could do:
 
 ```
 DiscoApp::SynchroniseResourcesJob.perform_later(shop, 'Product', ids: '123,456,789')
@@ -514,7 +515,7 @@ application proxy, you would have the following in your application's
 ```
 class MyModel < ActiveRecord::Base
   include DiscoApp::Concerns::CanBeLiquified
-  
+
   ... rest of model definition ...  
 end
 ```
@@ -564,7 +565,7 @@ class DiscoApp::Admin::AppSettingsController < DiscoApp::Admin::ApplicationContr
     def app_settings_params
       params.require(:app_settings).permit(:default_recurring_price, :trial_days, :test_charges, :mailchimp_api_key, :mailchimp_list_id, :sidebar_message_enabled, :sidebar_message)
     end
-    
+
 end
 ```
 
@@ -596,7 +597,7 @@ model.
 Renders a react component with inner HTML content.
 
 #### errors_to_react
-Provides detailed information from an ActiveRecord to JSON object. Useful for 
+Provides detailed information from an ActiveRecord to JSON object. Useful for
 passing the information into React components.
 
 ```erb
@@ -639,7 +640,7 @@ of keeping this local version in sync with the version on Shopify with a concern
 (`DiscoApp::Concerns::Synchronises`).
 
 The steps below walk you through what you need to do for the implementation of
-synchronisation of product resources as an example. You can also refer to the 
+synchronisation of product resources as an example. You can also refer to the
 implementation of this inside the dummy app used for testing Disco App in
 `test/dummy/app/models/product.rb` and `test/dummy/app/jobs/products_*.rb`.
 
@@ -648,7 +649,7 @@ implementation of this inside the dummy app used for testing Disco App in
    `DiscoApp::Shop` and a `data` attribute with a JSONB datatype.
 2. Include the `Synchronises` concern to the model class, along with the
    `belongs_to` association:
-      
+
    ```ruby
    class Product < ActiveRecord::Base
      include DiscoApp::Concerns::Synchronises  
@@ -660,7 +661,7 @@ implementation of this inside the dummy app used for testing Disco App in
    `products/delete`) and ensure these webhooks are registered on application
    installation. Implement these jobs to simply call the `synchronise` or
    `synchronise_deletion` method as appropriate, eg:
-   
+
    ```ruby
    class ProductsCreateJob < DiscoApp::ShopJob   
      def perform(_shop, product_data)
@@ -672,7 +673,7 @@ implementation of this inside the dummy app used for testing Disco App in
    the `Synchronises` concern provides a `synchronise_all` method. For this to
    work, you must define a `SHOPIFY_API_CLASS` constant on your model class, for
    example:
-   
+
    ```
    class Product < ActiveRecord::Base
       include DiscoApp::Concerns::Synchronises  
@@ -680,7 +681,7 @@ implementation of this inside the dummy app used for testing Disco App in
       SHOPIFY_API_CLASS = ShopifyAPI::Product
    end
    ```
-   
+
    You can then call the synchronisation with `Product.synchronise_all(shop)`.
 
 This should be all you need to do to have your local models stay up to date with
@@ -693,7 +694,7 @@ wanted to synchronise products of a particular type, you could implement:
 class Product < ActiveRecord::Base
   include DiscoApp::Concerns::Synchronises  
   belongs_to :shop, class_name: 'DiscoApp::Shop'
-     
+
   def should_synchronise?(shop, data)
     data[:product_type] == 'Shoes'
   end
@@ -723,7 +724,7 @@ on your class and away you go:
 ```
 class Product < ActiveRecord::Base  
   include DiscoApp::Concerns::HasMetafields
-  
+
   SHOPIFY_API_CLASS = ShopifyAPI::Product
 
 end
@@ -741,17 +742,17 @@ end
 ```
 
 ### Rubocop
-DiscoApp adds support for Rubocop and Codeclimate. the .rubocop.yml contains the 
-configuration you can tweak to suits your coding style, by enabling/disabling 
+DiscoApp adds support for Rubocop and Codeclimate. the .rubocop.yml contains the
+configuration you can tweak to suits your coding style, by enabling/disabling
 "Cops" accordingly.
 
 ### Email Support
-DiscoApp has support for the Mailgun and configures Active Mailer to use the 
-Mailgun API in production for sending email. Adds the `MAILGUN_API_KEY` and 
+DiscoApp has support for the Mailgun and configures Active Mailer to use the
+Mailgun API in production for sending email. Adds the `MAILGUN_API_KEY` and
 `MAILGUN_API_DOMAIN` environment variables.
 
 ### Monitoring
-DiscoApp has support for both exception reporting and application performance 
+DiscoApp has support for both exception reporting and application performance
 monitoring to the application.
 
 [Rollbar][] is used for exception tracking, and will be activated when a
@@ -832,13 +833,13 @@ To create a new release of the application:
    an application to the latest version of the gem.
 3. Ensure the README is accurate and up to date by reviewing all commits since
    the last release;
-4. Update `lib/disco_app/version.rb` with the new version number; 
+4. Update `lib/disco_app/version.rb` with the new version number;
 5. Update references to the latest version number in the README;
 6. Create a new commit with a commit message `vX.Y.Z`, where `X.Y.Z` is the
    version number;
 7. Tag the new commit with a tag `X.Y.Z` (`git tag -a "X.Y.Z"`);
 8. `git push && git push --tags` to push the new release.
-      
+
 See [an example release commit][].
 
 [an example release commit]: https://github.com/discolabs/disco_app/commit/0cb60a1c212f480af85ebb7c42188befb932a818
