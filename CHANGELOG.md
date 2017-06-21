@@ -1,8 +1,8 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## Unreleased
-### Changed
+## 0.13.6 - 2017-06-21
+### Added
 - Add rake task to synchronize `DiscoApp::User` locally
 
 ## 0.13.5 - 2017-06-06

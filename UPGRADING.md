@@ -4,6 +4,9 @@ an application between one release version of the gem to the next. It's intended
 as more in-depth accompaniment to the notes in `CHANGELOG.md` for each version.
 
 ## Upgrading from 0.13.4 to 0.13.5
+No changes required.
+
+## Upgrading from 0.13.4 to 0.13.5
 ### New git ignore rule
 A rule to ignore `*.pgdump` has been added to the default `.gitignore` template.
 You may want to add this to the app's current `.gitignore` now.
@@ -48,8 +51,8 @@ The previous component didn't work very well so it's unlikely you're using it.
 Ensure you copy migrations from  from `disco_app` using
 `rake disco_app:install:migrations`, then `rake db:migrate`.
 
-To use the new Shopify user authentication functionality, refer to the 
-User Authentication section in the [README](./README.md#user-authentication). 
+To use the new Shopify user authentication functionality, refer to the
+User Authentication section in the [README](./README.md#user-authentication).
 
 ## Upgrading from 0.12.6 to 0.12.7
 No changes required.
@@ -82,7 +85,7 @@ No changes required - only a bugfix release.
 Remove the version specification for `shopify_app` in your `Gemfile`. Rename any
 occurences of `ShopifyApp::Controller` to `ShopifyApp::LoginProtection`.
 
-Remove `redirect_uri` variables in: 
+Remove `redirect_uri` variables in:
 - `.env` and `.env.local` files
 - `shopify_app` and `omniauth` initializers
 
@@ -102,7 +105,7 @@ want to remove the specific version numbers from your app's `Gemfile` and run a
 `bundle update`.
 
 ### Migration consolidation
-All migrations from the `disco_app` engine have been consolidated into a single 
+All migrations from the `disco_app` engine have been consolidated into a single
 migration. You can either consolidate the migrations for your own app by copying
 your `schema.rb` file into a single migration file, or just delete all migrations
 added by the `disco_app` gem and ensure your app's existing migrations make sense.
@@ -139,7 +142,7 @@ Bugfix release - no changes required.
 
 ### Sidekiq Web UI now available in production
 The Sidekiq Web UI can now be accessed on production stores at `/sidekiq` using
-the same authentication credentials as the admin pages. 
+the same authentication credentials as the admin pages.
 
 ## Upgrading from 0.10.0 to 0.10.1
 
@@ -162,9 +165,9 @@ in `config/initializers/disco_app.rb`. You should be able to add:
 ```
 DiscoApp.configure do |config|
   ...
-  
+
   config.webhook_topics = [:'orders/create', :'orders/paid']
-  
+
   ...
 end
 ```
@@ -182,9 +185,9 @@ syntax for lazy evaluation of URL helpers):
 ```
 DiscoApp.configure do |config|
   ...
-  
+
   config.carrier_service_callback_url = -> { Rails.application.routes.url_helpers.carrier_service_callback_url }
-  
+
   ...
 end
 ```
@@ -255,7 +258,7 @@ you had to provide the Shopify domain of the shop as the first argument to
 `perform` in order to indicate the shop context the job should execute in. This
 argument is still required, but we now support passing a `DiscoApp::Shop`
 instance directly as a (now preferred) alternative to using the Shopify domain.
- 
+
 This change is backwards-compatible, so you don't *have* to update you code, but
 it does offer a slightly nicer syntax and you avoid additional Shop lookups.
 
