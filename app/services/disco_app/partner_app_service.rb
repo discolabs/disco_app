@@ -74,8 +74,10 @@ module DiscoApp
           # App url
           form.fields_with(name: 'create_form[application_url]').first.value = @app_url
           # Accept TOS
-          form.fields_with(name: 'create_form[accepted]').first.value = '1'
-          form.hiddens.last.value = 1
+          unless form.fields_with(name: 'create_form[accepted]').empty?
+            form.fields_with(name: 'create_form[accepted]').first.value = '1'
+            form.hiddens.last.value = 1
+          end
         end.submit
       end
 
