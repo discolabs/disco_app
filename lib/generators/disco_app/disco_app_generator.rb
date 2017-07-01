@@ -27,28 +27,28 @@ class DiscoAppGenerator < Rails::Generators::Base
     gsub_file 'Gemfile', /^# Use sqlite3 as the database for Active Record\ngem 'sqlite3'/m, ''
 
     # Add gem requirements.
-    gem 'shopify_app'
-    gem 'pg'
-    gem 'sidekiq'
-    gem 'rollbar'
-    gem 'newrelic_rpm'
-    gem 'react-rails'
-    gem 'classnames-rails'
-    gem 'premailer-rails'
-    gem 'rails-bigint-pk'
-    gem 'acts_as_singleton'
     gem 'active_link_to'
+    gem 'acts_as_singleton'
+    gem 'classnames-rails'
+    gem 'newrelic_rpm'
     gem 'nokogiri'
     gem 'oj'
+    gem 'pg'
+    gem 'premailer-rails'
+    gem 'rails-bigint-pk'
+    gem 'react-rails'
     gem 'render_anywhere'
+    gem 'rollbar'
+    gem 'shopify_app'
+    gem 'sidekiq'
 
     # Specify the threadsafe version of ActiveResource.
     gem 'activeresource', git: 'https://github.com/shopify/activeresource.git', tag: '4.2-threadsafe'
 
     # Indicate which gems should only be used in production.
     gem_group :production do
-      gem 'rails_12factor'
       gem 'mailgun_rails'
+      gem 'rails_12factor'
     end
 
     # Indicate which gems should only be used in development and test.
