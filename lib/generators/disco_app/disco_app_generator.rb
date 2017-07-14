@@ -6,10 +6,11 @@ class DiscoAppGenerator < Rails::Generators::Base
   #
   #  - .env and .env.local for settings environment variables in development with dotenv-rails;
   #  - Slightly customised version of the default Rails .gitignore;
-  #  - Default simple Procfile for Heroku.
+  #  - Default simple Procfile for Heroku;
+  #  - .editorconfig to help enforce 2-space tabs, newlines and truncated whitespace for editors that support it.
   #
   def copy_root_files
-    %w(.env .env.local .gitignore .rubocop.yml .codeclimate.yml Procfile CHECKS).each do |file|
+    %w(.editorconfig .env .env.local .gitignore .rubocop.yml .codeclimate.yml Procfile CHECKS).each do |file|
       copy_file "root/#{file}", file
     end
   end

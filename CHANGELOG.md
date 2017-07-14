@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## Unreleased
+### Added
+- Add a default `.editorconfig` to help enforce coding conventions
+
 ## 0.13.6 - 2017-06-21
 ### Added
 - Add rake task to synchronize `DiscoApp::User` locally
