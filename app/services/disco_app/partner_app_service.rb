@@ -33,7 +33,7 @@ module DiscoApp
         embedded_admin_app(apps_page) if @embedded_app
         # Fetch API credentials
         apps_page = refresh_page(dashboard)
-        api_key, secret = api_crendetials(apps_page)
+        api_key, secret = api_credentials(apps_page)
       rescue Mechanize::Error => e
         puts 'Error while trying to create partner app'
         puts "Error #{e}, message : #{e.message}"
@@ -81,7 +81,7 @@ module DiscoApp
         end.submit
       end
 
-      def api_crendetials(apps_page)
+      def api_credentials(apps_page)
         app = apps_page.link_with(text: @app_name).click
         app_info = app.link_with(text: 'App info').click
         api_key = app_info.search('#api_key').first.values[3]
