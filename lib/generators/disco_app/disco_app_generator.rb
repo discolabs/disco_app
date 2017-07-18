@@ -42,7 +42,6 @@ class DiscoAppGenerator < Rails::Generators::Base
     gem 'rollbar'
     gem 'shopify_app'
     gem 'sidekiq'
-    gem 'mechanize'
 
     # Specify the threadsafe version of ActiveResource.
     gem 'activeresource', git: 'https://github.com/shopify/activeresource.git', tag: '4.2-threadsafe'
@@ -58,6 +57,7 @@ class DiscoAppGenerator < Rails::Generators::Base
       gem 'dotenv-rails'
       gem 'minitest-reporters'
       gem 'webmock'
+      gem 'mechanize'
     end
   end
 

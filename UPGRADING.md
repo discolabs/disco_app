@@ -14,7 +14,7 @@ application directory.
 A Shopify Partner app generator has been added, which allows you to create a new app
 for a given project via a task (refer to the [README](./README.md) for setup).
 For running this task on a pre-existing project, you will need to add the `mechanize`
-gem into the project gemfile and `bundle install`
+gem into `:development` group in the project's `Gemfile` and `bundle install`
 
 ## Upgrading from 0.13.5 to 0.13.6
 No changes required.
