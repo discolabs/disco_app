@@ -14,7 +14,7 @@ namespace :generate do
         app_url: ENV['DEFAULT_HOST'],
         embedded_app: ENV['EMBEDDED_APP'] || false,
       }
-
+      byebug
       service = DiscoApp::PartnerAppService.new(params)
       service.generate_partner_app
     end
