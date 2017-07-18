@@ -70,8 +70,16 @@ generated API credentials to our development app and perform a test install.
 
 To automatically generate a new Shopify App from the partner dashboard, go to your `.env.local`
 file in your root directory and add in values for `DEFAULT_HOST` (this should be
-the tunnel endpoint), `SHOPIFY_APP_NAME`(Name of the App) and `PARTNER_EMAIL`,`PARTNER_PASSWORD`,
-`PARTNER_ORGANIZATION` (Your Shopify Partner credentials)
+the tunnel endpoint), `SHOPIFY_APP_NAME`(Name of the App)
+
+You will also need to create a file at the root of your project called `.disco_app` with your
+Shopify Partner credentials (`PARTNER_EMAIL`,`PARTNER_PASSWORD`,`PARTNER_ORGANIZATION`)
+
+```
+PARTNER_EMAIL="hello@discolabs.com"
+PARTNER_PASSWORD="*****************"
+PARTNER_ORGANIZATION="Disco"
+```
 
 You can then run the following task
 
