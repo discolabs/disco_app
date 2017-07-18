@@ -3,7 +3,7 @@ require 'yaml'
 namespace :generate do
   desc 'Generate new Shopify app from partner dashboard'
   task partner_app: :environment do
-    partner_params = YAML.load_file(File.join(ENV['HOME'], '/.disco_app.yaml'))
+    partner_params = YAML.load_file(File.join(ENV['HOME'], '/.disco_app.yml'))
 
     if partner_params
       params = {

@@ -68,37 +68,46 @@ In order to work on our app, we need to create a development application from
 the Shopify Partners dashboard. Once that's done, we can copy across the
 generated API credentials to our development app and perform a test install.
 
-To automatically generate a new Shopify App from the partner dashboard, go to your `.env.local`
-file in your root directory and add in values for `DEFAULT_HOST` (this should be
-the tunnel endpoint), `SHOPIFY_APP_NAME`(Name of the App)
+DiscoApp provides a command line utility to quickly generate a new Shopify
+app via the partner dashboard. Before you can do this, you need to configure
+a couple of things.
 
-You will also need to create a file at the root of your local machine called `.disco_app.yaml` with your
-Shopify Partner credentials (`PARTNER_EMAIL`,`PARTNER_PASSWORD`,`PARTNER_ORGANIZATION`)
-
-```
-vim .disco_app.yaml
-```
-From the editor :
+#### Create a DiscoApp configuration file in your home directory
+First, you'll need to add your partner dashboard credentials to a DiscoApp
+configuration file in your home directory, `~/.disco_app.yml`:
 
 ```
 params:
- PARTNER_EMAIL: "hello@discolabs.com"
- PARTNER_PASSWORD: "***********"
- PARTNER_ORGANISATION: "Disco"
+  PARTNER_EMAIL: "hello@discolabs.com"
+  PARTNER_PASSWORD: "***********"
+  PARTNER_ORGANISATION: "Disco"
 ```
 
-You can then run the following task
+You'll only need to set this up the one time on your local machine.
+
+#### Configure initial values in local ENV file
+Next, you'll need to set a few of the basic configuration parameters for your
+app in `.env.local` in the application directory. The command line utility
+will use these to configure your app.
+
+You'll need to set values for `DEFAULT_HOST` (the base URL for your application,
+for example `https://example-app.ngrok.io`) and for `SHOPIFY_APP_NAME` (the name
+of the application).
+
+#### Creating and configuring your app
+With the above set up, you can now run the following from the command line to
+create a new Embedded App:
 
 ```
-New embedded app :
 bundle exec rake generate:partner_app EMBEDDED_APP=true
 ```
 
 The `.env.local` will be automatically populated with values for
-`SHOPIFY_APP_API_KEY` and `SHOPIFY_APP_SECRET`
+`SHOPIFY_APP_API_KEY` and `SHOPIFY_APP_SECRET`.
 
 While the `.env.local` file is open, add in values for`SHOPIFY_APP_PROXY_PREFIX`
 and `SHOPIFY_APP_SCOPE` (view a [list of scopes][]).
+
 The `SHOPIFY_CHARGES_REAL`, `SECRET_KEY_BASE` and `REDIS_PROVIDER` values can be
 left blank in development.
 
