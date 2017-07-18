@@ -1,5 +1,6 @@
 module DiscoApp
   class PartnerAppService
+
     def initialize(params)
       @email = params[:email]
       @password = params[:password]
@@ -41,8 +42,8 @@ module DiscoApp
       # Add them to .env.local file
       append_credentials(api_key, secret)
       puts '#' * 80
-      puts 'New Partner App successfully created !'
-      puts 'API Credentials has been pasted to your .env.local file'
+      puts 'New Partner App successfully created!'
+      puts 'API Credentials have been pasted to your .env.local file'
       puts '#' * 80
     end
 
@@ -69,12 +70,14 @@ module DiscoApp
       def create_partner_app(apps_page)
         apps_page.form do |form|
           # App name
-          form.fields_with(name: 'create_form[title]').first.value = @app_name
-          # App url
-          form.fields_with(name: 'create_form[application_url]').first.value = @app_url
+          form['create_form[title]'] = @app_name
+
+          # App URL
+          form['create_form[application_url]'] = @app_url
+
           # Accept TOS
-          unless form.fields_with(name: 'create_form[accepted]').empty?
-            form.fields_with(name: 'create_form[accepted]').first.value = '1'
+          unless form['create_form[accepted]'].blank?
+            form['create_form[accepted]'] = '1'
             form.hiddens.last.value = 1
           end
         end.submit
@@ -92,7 +95,7 @@ module DiscoApp
         app = apps_page.link_with(text: @app_name).click
         extensions = app.link_with(text: 'Extensions').click
         extensions.form do |form|
-          form.fields_with(name: 'extensions_form[embedded]').first.value = '1'
+          form['extensions_form[embedded]'] = '1'
         end.submit
       end
 
@@ -120,5 +123,6 @@ module DiscoApp
       def refresh_page(dashboard)
         dashboard.link_with(text: '  Apps').click
       end
+
   end
 end
