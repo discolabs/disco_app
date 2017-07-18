@@ -96,10 +96,10 @@ of the application).
 
 #### Creating and configuring your app
 With the above set up, you can now run the following from the command line to
-create a new Embedded App:
+create a new app:
 
 ```
-bundle exec rake generate:partner_app EMBEDDED_APP=true
+bundle exec rake generate:partner_app
 ```
 
 The `.env.local` will be automatically populated with values for

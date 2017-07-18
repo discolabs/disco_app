@@ -6,7 +6,6 @@ module DiscoApp
       @app_name = params[:app_name]
       @app_url = params[:app_url]
       @organization = params[:organization]
-      @embedded_app = params[:embedded_app]
 
       @agent = Mechanize.new do |a|
         a.user_agent_alias = 'Mac Safari'
@@ -28,9 +27,9 @@ module DiscoApp
         # Create App
         apps_page = refresh_page(dashboard)
         create_partner_app(apps_page)
-        # Configure newly created app with embedded app use if needed
+        # Configure newly created app with embedded app use
         apps_page = refresh_page(dashboard)
-        embedded_admin_app(apps_page) if @embedded_app
+        embedded_admin_app(apps_page)
         # Fetch API credentials
         apps_page = refresh_page(dashboard)
         api_key, secret = api_credentials(apps_page)

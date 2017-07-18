@@ -16,8 +16,7 @@ namespace :generate do
         password: config['params']['PARTNER_PASSWORD'].to_s,
         organization: config['params']['PARTNER_ORGANIZATION'].to_s,
         app_name: ENV['SHOPIFY_APP_NAME'],
-        app_url: ENV['DEFAULT_HOST'],
-        embedded_app: ENV['EMBEDDED_APP'] || false,
+        app_url: ENV['DEFAULT_HOST']
       }
 
       service = DiscoApp::PartnerAppService.new(params)
