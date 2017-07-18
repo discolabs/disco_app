@@ -7,9 +7,9 @@ namespace :generate do
 
     if partner_params
       params = {
-        email: partner_params["params"]["PARTNER_EMAIL"].to_s,
-        password: partner_params["params"]["PARTNER_PASSWORD"].to_s,
-        organization: partner_params["params"]["PARTNER_ORGANIZATION"].to_s,
+        email: partner_params['params']['PARTNER_EMAIL'].to_s,
+        password: partner_params['params']['PARTNER_PASSWORD'].to_s,
+        organization: partner_params['params']['PARTNER_ORGANIZATION'].to_s,
         app_name: ENV['SHOPIFY_APP_NAME'],
         app_url: ENV['DEFAULT_HOST'],
         embedded_app: ENV['EMBEDDED_APP'] || false,
