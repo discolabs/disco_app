@@ -116,10 +116,6 @@ When you're done, your `.env.local` file should look something like this:
 ```
 DEFAULT_HOST=https://example.ngrok.io
 
-PARTNER_EMAIL=hey@example.com
-PARTNER_PASSWORD=secret-password
-PARTNER_ORGANIZATION=Disco
-
 SHOPIFY_APP_NAME=Example App
 SHOPIFY_APP_API_KEY=ebef81bcfe2174ff2c6e65f5c0a0ba50
 SHOPIFY_APP_SECRET=d5e1347de6352cb778413654e1296dde
