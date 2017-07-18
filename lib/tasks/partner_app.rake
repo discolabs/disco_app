@@ -1,7 +1,7 @@
 namespace :generate do
   desc 'Generate new Shopify app from partner dashboard'
   task partner_app: :environment do
-    load_partner_params = load('~/.disco_app')
+    load_partner_params = load('.disco_app')
 
     if load_partner_params
       params = {
