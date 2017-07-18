@@ -72,13 +72,19 @@ To automatically generate a new Shopify App from the partner dashboard, go to yo
 file in your root directory and add in values for `DEFAULT_HOST` (this should be
 the tunnel endpoint), `SHOPIFY_APP_NAME`(Name of the App)
 
-You will also need to create a file at the root of your project called `.disco_app` with your
+You will also need to create a file at the root of your local machine called `.disco_app.yaml` with your
 Shopify Partner credentials (`PARTNER_EMAIL`,`PARTNER_PASSWORD`,`PARTNER_ORGANIZATION`)
 
 ```
-PARTNER_EMAIL="hello@discolabs.com"
-PARTNER_PASSWORD="*****************"
-PARTNER_ORGANIZATION="Disco"
+vim .disco_app.yaml
+```
+From the editor :
+
+```
+params:
+ PARTNER_EMAIL: "hello@discolabs.com"
+ PARTNER_PASSWORD: "***********"
+ PARTNER_ORGANISATION: "Disco"
 ```
 
 You can then run the following task
