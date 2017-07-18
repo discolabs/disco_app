@@ -51,8 +51,8 @@ module DiscoApp
       def login
         @agent.get('https://accounts.shopify.com/login') do |page|
           page.form do |form|
-            form.email = @email
-            form.password = @password
+            form['account[email]'] = @email
+            form['account[password]'] = @password
           end.submit
         end
       end
