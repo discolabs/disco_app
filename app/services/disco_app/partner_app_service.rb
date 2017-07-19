@@ -86,6 +86,7 @@ module DiscoApp
       def api_credentials(apps_page)
         app = apps_page.link_with(text: @app_name).click
         app_info = app.link_with(text: 'App info').click
+        add_whitelist_url(app_info)
         api_key = app_info.search('#api_key').first.values[3]
         secret = app_info.search('#settings_form_secrets').first.values[3]
         [api_key, secret]
@@ -118,10 +119,20 @@ module DiscoApp
         File.rename(new_file, original_file)
       end
 
+      def add_whitelist_url(app_info)
+        app_info.form do |form|
+          form['info_form[redirect_url_whitelist]'] = callback_url
+        end.submit
+      end
+
       # Access the "Apps" section of the dashboard, also used to reload the dashboard
       # When an action has been taken
       def refresh_page(dashboard)
         dashboard.link_with(text: '  Apps').click
+      end
+
+      def callback_url
+        @app_url + '/auth/shopify/callback'
       end
 
   end
