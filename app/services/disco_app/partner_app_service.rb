@@ -132,7 +132,7 @@ module DiscoApp
       end
 
       def callback_url
-        @app_url + '/auth/shopify/callback'
+        [@app_url + '/auth/shopify/callback', @app_url + '/auth/shopify_user/callback'].join("\n")
       end
 
   end
