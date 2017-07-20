@@ -6,7 +6,7 @@ namespace :generate do
     begin
       config_path = File.join(ENV['HOME'], '.disco_app.yml')
       config = YAML.load_file(config_path)
-    rescue StandardError => e
+    rescue StandardError
       abort("Could not load configuration file from #{config_path}, aborting.")
     end
 
