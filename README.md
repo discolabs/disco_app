@@ -68,22 +68,46 @@ In order to work on our app, we need to create a development application from
 the Shopify Partners dashboard. Once that's done, we can copy across the
 generated API credentials to our development app and perform a test install.
 
-To do this, open your Shopify Partner dashboard and create a new application
-from the "Apps" tab. Make sure the "Embedded App" option is selected. When
-prompted for the **Application URL**, enter the endpoint provided by your
-tunneling software - for example, `https://example.ngrok.io`. You can ignore the
-fields for **Preferences URL** and **Support URL** for now. The
-**Redirection URL** should be set to something like
-`https://example.ngrok.io/auth/shopify/callback`.
+DiscoApp provides a command line utility to quickly generate a new Shopify
+app via the partner dashboard. Before you can do this, you need to configure
+a couple of things.
 
-Once the application has been created on Shopify, copy over the API credentials
-to the `SHOPIFY_APP_API_KEY` and `SHOPIFY_APP_SECRET` values in the `.env.local` file
-located in the root directory of the Rails app (this file was created by the
-DiscoApp generator during step 2).
+#### Create a DiscoApp configuration file in your home directory
+First, you'll need to add your partner dashboard credentials to a DiscoApp
+configuration file in your home directory, `~/.disco_app.yml`:
 
-While the `.env.local` file is open, add in values for `DEFAULT_HOST` (this should be
-the tunnel endpoint), `SHOPIFY_APP_NAME`, `SHOPIFY_APP_REDIRECT_URI`,
-`SHOPIFY_APP_PROXY_PREFIX`, and `SHOPIFY_APP_SCOPE` (view a [list of scopes][]).
+```
+params:
+  PARTNER_EMAIL: "hello@discolabs.com"
+  PARTNER_PASSWORD: "***********"
+  PARTNER_ORGANISATION: "Disco"
+```
+
+You'll only need to set this up the one time on your local machine.
+
+#### Configure initial values in local ENV file
+Next, you'll need to set a few of the basic configuration parameters for your
+app in `.env.local` in the application directory. The command line utility
+will use these to configure your app.
+
+You'll need to set values for `DEFAULT_HOST` (the base URL for your application,
+for example `https://example-app.ngrok.io`) and for `SHOPIFY_APP_NAME` (the name
+of the application).
+
+#### Creating and configuring your app
+With the above set up, you can now run the following from the command line to
+create a new app:
+
+```
+bundle exec rake generate:partner_app
+```
+
+The `.env.local` will be automatically populated with values for
+`SHOPIFY_APP_API_KEY` and `SHOPIFY_APP_SECRET`.
+
+While the `.env.local` file is open, add in values for`SHOPIFY_APP_PROXY_PREFIX`
+and `SHOPIFY_APP_SCOPE` (view a [list of scopes][]).
+
 The `SHOPIFY_CHARGES_REAL`, `SECRET_KEY_BASE` and `REDIS_PROVIDER` values can be
 left blank in development.
 

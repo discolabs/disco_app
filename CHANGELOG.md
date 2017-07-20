@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 ### Added
 - Add a default `.editorconfig` to help enforce coding conventions
+- Added Partner app generator via a new PartnerAppService and rake task
 
 ## 0.13.6 - 2017-06-21
 ### Added

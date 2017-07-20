@@ -57,6 +57,7 @@ class DiscoAppGenerator < Rails::Generators::Base
       gem 'dotenv-rails'
       gem 'minitest-reporters'
       gem 'webmock'
+      gem 'mechanize'
     end
   end
 
