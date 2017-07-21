@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## 0.13.7 - 2017-07-22
 ### Added
 - Add a default `.editorconfig` to help enforce coding conventions
 - Added Partner app generator via a new PartnerAppService and rake task
