@@ -529,8 +529,8 @@ works out of the box.
 To make the process of providing model data to Liquid templates, the DiscoApp
 Engine provides the `DiscoApp::Concerns::CanBeLiquified` concern. It will use
 the model's `as_json` method to get a list of serialised attributes for your
-model and returns the necessary Liquid `{% assigns %}` tags to provide that data
-inside a template.
+model and returns the necessary Liquid `{%- assign -%}` tags to provide that
+data inside a template.
 
 As an example, if you had a model `MyModel` that you wanted to render via an
 application proxy, you would have the following in your application's

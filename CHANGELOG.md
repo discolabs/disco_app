@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Add a default `.editorconfig` to help enforce coding conventions
 - Added Partner app generator via a new PartnerAppService and rake task
+- Tweaked behaviour of `as_liquid` to allow overrides
 
 ## 0.13.6 - 2017-06-21
 ### Added

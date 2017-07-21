@@ -5,14 +5,15 @@ module DiscoApp::Concerns::CanBeLiquified
 
   included do
 
-    # Return this model as an array of Liquid {% assign %} statements.
+    # Return this model as a hash for use with `to_liquid`. Returns `as_json` by default but is provided here as a hook
+    # for potential overrides.
     def as_liquid
-      as_json.map { |k, v| "{% assign #{liquid_model_name}_#{k} = #{as_liquid_value(k, v)} %}" }
+      as_json
     end
 
-    # Render this model as a series of concatenated Liquid {% assign %} statements.
+    # Render this model as a series of concatenated Liquid {%- assign -%} statements.
     def to_liquid
-      as_liquid.join("\n")
+      as_liquid.map { |k, v| "{%- assign #{liquid_model_name}_#{k} = #{as_liquid_value(k, v)} -%}" }.join("\n")
     end
 
     # Method to allow override of the model name in Liquid. Useful for models

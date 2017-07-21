@@ -16,6 +16,10 @@ for a given project via a task (refer to the [README](./README.md) for setup).
 For running this task on a pre-existing project, you will need to add the `mechanize`
 gem into `:development` group in the project's `Gemfile` and `bundle install`
 
+### Change to implementation of `as_liquid` in `CanBeLiquified` concern
+The implementation of `as_liquid` has changed (`to_liquid` remainins unchanged).
+Please check to see if your app calls `as_liquid` directly and update as required.
+
 ## Upgrading from 0.13.5 to 0.13.6
 No changes required.
 
