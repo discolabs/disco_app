@@ -80,7 +80,7 @@ configuration file in your home directory, `~/.disco_app.yml`:
 params:
   PARTNER_EMAIL: "hello@discolabs.com"
   PARTNER_PASSWORD: "***********"
-  PARTNER_ORGANISATION: "Disco"
+  PARTNER_ORGANIZATION: "Disco"
 ```
 
 You'll only need to set this up the one time on your local machine.
