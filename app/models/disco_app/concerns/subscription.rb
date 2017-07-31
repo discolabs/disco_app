@@ -10,8 +10,15 @@ module DiscoApp::Concerns::Subscription
     has_many :one_time_charges, class_name: 'DiscoApp::ApplicationCharge', dependent: :destroy
     has_many :recurring_charges, class_name: 'DiscoApp::RecurringApplicationCharge', dependent: :destroy
 
-    enum status: [:trial, :active, :cancelled]
-    enum subscription_type: [:recurring, :one_time]
+    enum status: {
+      trial: 0,
+      active: 1,
+      cancelled: 2
+    }
+    enum subscription_type: {
+      recurring: 0,
+      one_time: 1
+    }
 
     scope :current, -> { where status: [statuses[:trial], statuses[:active]] }
 

@@ -16,7 +16,15 @@ module DiscoApp::Concerns::Shop
     has_many :sessions, class_name: 'DiscoApp::Session', dependent: :destroy
 
     # Define possible installation statuses as an enum.
-    enum status: [:never_installed, :awaiting_install, :installing, :installed, :awaiting_uninstall, :uninstalling, :uninstalled]
+    enum status: {
+      never_installed: 0,
+      awaiting_install: 1,
+      installing: 2,
+      installed: 3,
+      awaiting_uninstall: 4,
+      uninstalling: 5,
+      uninstalled: 6
+    }
 
     # Define some useful scopes.
     scope :status, -> (status) { where status: status }
