@@ -9,9 +9,18 @@ module DiscoApp::Concerns::Plan
 
     accepts_nested_attributes_for :plan_codes, allow_destroy: true
 
-    enum status: [:available, :unavailable]
-    enum plan_type: [:recurring, :one_time]
-    enum interval: [:month, :year]
+    enum status: {
+      available: 0,
+      unavailable: 1
+    }
+    enum plan_type: {
+      recurring: 0,
+      one_time: 1
+    }
+    enum interval: {
+      month: 0,
+      year: 1
+    }
 
     scope :available, -> { where status: statuses[:available] }
 
