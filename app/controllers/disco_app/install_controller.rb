@@ -4,6 +4,8 @@ class DiscoApp::InstallController < ApplicationController
   skip_before_action :check_current_subscription
   skip_before_action :check_active_charge
 
+  before_action :check_whitelisted
+
   # Start the installation process for the current shop, then redirect to the installing screen.
   def install
     DiscoApp::AppInstalledJob.perform_later(@shop, cookies[DiscoApp::CODE_COOKIE_KEY], cookies[DiscoApp::SOURCE_COOKIE_KEY])
@@ -23,5 +25,13 @@ class DiscoApp::InstallController < ApplicationController
       redirect_to main_app.root_path
     end
   end
+
+  private
+
+    def check_whitelisted
+      if ENV['WHITELISTED_DOMAINS'].present? and not ENV['WHITELISTED_DOMAINS'].include?(@shop.shopify_domain)
+        redirect_to_login
+      end
+    end
 
 end
