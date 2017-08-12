@@ -4,6 +4,7 @@ module DiscoApp::Concerns::AuthenticatedController
 
   included do
     before_action :auto_login
+    before_action :check_shop_whitelist
     before_action :login_again_if_different_shop
     before_action :shopify_shop
     before_action :check_installed
@@ -68,4 +69,11 @@ module DiscoApp::Concerns::AuthenticatedController
       DiscoApp::RequestValidationService.hmac_valid?(request.query_string, ShopifyApp.configuration.secret)
     end
 
+    def check_shop_whitelist
+      if shop_session
+        if ENV['WHITELISTED_DOMAINS'].present? && !ENV['WHITELISTED_DOMAINS'].include?(shop_session.url)
+          redirect_to_login
+        end
+      end
+    end
 end
