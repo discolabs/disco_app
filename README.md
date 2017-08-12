@@ -52,7 +52,6 @@ $ bundle exec rails new . --force --skip-bundle
 $ echo "gem 'disco_app', git: 'https://$DISCO_GEM_CREDENTIALS@github.com/discolabs/disco_app.git', tag: '0.13.7'" >> Gemfile
 $ bundle update
 $ bundle exec rails generate disco_app --force
-$ bundle install
 ```
 
 Note the `tag` option being added to the Gemfile - this pins the version of
