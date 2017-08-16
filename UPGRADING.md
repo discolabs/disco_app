@@ -3,6 +3,9 @@ This file contains more detailed instructions on what's required when updating
 an application between one release version of the gem to the next. It's intended
 as more in-depth accompaniment to the notes in `CHANGELOG.md` for each version.
 
+## Upgrading from 0.13.7 to 0.13.8
+No changes required.
+
 ## Upgrading from 0.13.6 to 0.13.7
 ### New editor config file
 A new default `.editorconfig` configuration file has been added to the list of

@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 0.13.8 - 2017-08-16
+### Added
+- Add ability to enforce a whitelist of stores that are allowed to install the app
+
 ## 0.13.7 - 2017-07-22
 ### Added
 - Add a default `.editorconfig` to help enforce coding conventions
