@@ -11,11 +11,6 @@ Style/Alias:
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#alias-method'
   Enabled: true
 
-Style/AlignParameters:
-  Description: 'Here we check if the parameters on a multi-line method call or definition are aligned.'
-  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-double-indent'
-  Enabled: true
-
 Style/ArrayJoin:
   Description: 'Use Array#join instead of Array#*.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#array-join'
@@ -119,11 +114,6 @@ Style/Documentation:
   Description: 'Document classes and non-namespace modules.'
   Enabled: false
 
-Style/DotPosition:
-  Description: 'Checks the position of the dot in multi-line method calls.'
-  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#consistent-multi-line-chains'
-  EnforcedStyle: leading
-
 Style/DoubleNegation:
   Description: 'Checks for uses of double negation (!!).'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-bang-bang'
@@ -150,10 +140,6 @@ Style/Encoding:
 Style/EvenOdd:
   Description: 'Favor the use of Fixnum#even? && Fixnum#odd?'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#predicate-methods'
-  Enabled: true
-
-Style/ExtraSpacing:
-  Description: 'Do not use unnecessary spacing.'
   Enabled: true
 
 Style/FileName:
@@ -200,10 +186,6 @@ Style/IfWithSemicolon:
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-semicolon-ifs'
   Enabled: true
 
-Style/IndentationConsistency:
-  EnforcedStyle: rails
-  Enabled: true
-
 Style/InlineComment:
   Description: 'Avoid inline comments.'
   Enabled: true
@@ -240,24 +222,10 @@ Style/ModuleFunction:
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#module-function'
   Enabled: false
 
-Style/MultilineOperationIndentation:
-  Description: >-
-                 Checks indentation of binary operations that span more than
-                 one line.
-  Enabled: true
-  EnforcedStyle: indented
-
 Style/MultilineBlockChain:
   Description: 'Avoid multi-line chains of blocks.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#single-line-blocks'
   Enabled: false
-
-Style/MultilineMethodCallIndentation:
-  Description: >-
-                 Checks indentation of method calls with the dot operator
-                 that span more than one line.
-  Enabled: true
-  EnforcedStyle: indented
 
 Style/NegatedIf:
   Description: >-
@@ -380,20 +348,12 @@ Style/TrailingCommaInArguments:
   Description: 'Checks for trailing comma in argument lists.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-trailing-array-commas'
   EnforcedStyleForMultiline: comma
-  SupportedStyles:
-    - comma
-    - consistent_comma
-    - no_comma
   Enabled: true
 
 Style/TrailingCommaInLiteral:
   Description: 'Checks for trailing comma in array and hash literals.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-trailing-array-commas'
   EnforcedStyleForMultiline: comma
-  SupportedStyles:
-    - comma
-    - consistent_comma
-    - no_comma
   Enabled: false
 
 Style/TrivialAccessors:
@@ -424,6 +384,9 @@ Style/WordArray:
   Description: 'Use %w or %W for arrays of words.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#percent-w'
   Enabled: true
+
+Style/SymbolArray:
+  MinSize: 3
 
 # Lint
 
@@ -485,11 +448,6 @@ Lint/InvalidCharacterLiteral:
   Description: >-
                  Checks for invalid character literals with a non-escaped
                  whitespace character.
-  Enabled: false
-
-Style/InitialIndentation:
-  Description: >-
-    Checks the indentation of the first non-blank non-comment line in a file.
   Enabled: false
 
 Lint/LiteralInCondition:
@@ -647,4 +605,59 @@ Rails/TimeZone:
 
 Rails/Validation:
   Description: 'Use validates :attribute, hash of validations.'
+  Enabled: false
+
+# Layout
+
+Layout/EmptyLinesAroundClassBody:
+  Enabled: true
+  EnforcedStyle: empty_lines
+
+Layout/AlignParameters:
+  Description: 'Here we check if the parameters on a multi-line method call or definition are aligned.'
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-double-indent'
+  Enabled: true
+
+Layout/DotPosition:
+  Description: 'Checks the position of the dot in multi-line method calls.'
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#consistent-multi-line-chains'
+  EnforcedStyle: leading
+
+Layout/ExtraSpacing:
+  Description: 'Do not use unnecessary spacing.'
+  Enabled: true
+
+Layout/MultilineOperationIndentation:
+  Description: >-
+                 Checks indentation of binary operations that span more than
+                 one line.
+  Enabled: true
+  EnforcedStyle: indented
+
+Layout/MultilineMethodCallIndentation:
+  Description: >-
+                 Checks indentation of method calls with the dot operator
+                 that span more than one line.
+  Enabled: true
+  EnforcedStyle: indented
+
+Layout/InitialIndentation:
+  Description: >-
+    Checks the indentation of the first non-blank non-comment line in a file.
+  Enabled: false
+
+Layout/IndentHash:
+  Enabled: true
+  EnforcedStyle: consistent
+
+Layout/AccessModifierIndentation:
+  Enabled: true
+
+Layout/IndentationConsistency:
+  EnforcedStyle: rails
+  Enabled: true
+
+#  Bundler
+
+Bundler/OrderedGems:
   Enabled: false
