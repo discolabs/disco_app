@@ -4,7 +4,14 @@ an application between one release version of the gem to the next. It's intended
 as more in-depth accompaniment to the notes in `CHANGELOG.md` for each version.
 
 ## Upgrading from 0.13.7 to 0.13.8
-No changes required.
+Update your app's `.ruby-version` to 2.4.1.
+Also, upgrade your local Ruby version to 2.4.1
+```
+# when using homebrew and rbenv:
+brew update
+brew upgrade rbenv
+rbenv install 2.4.1
+```
 
 ## Upgrading from 0.13.6 to 0.13.7
 ### New editor config file
