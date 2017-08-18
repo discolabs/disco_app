@@ -5,7 +5,10 @@ as more in-depth accompaniment to the notes in `CHANGELOG.md` for each version.
 
 ## Upgrading from 0.13.7 to 0.13.8
 Update your app's `.ruby-version` to 2.4.1.
-Also, upgrade your local Ruby version to 2.4.1
+
+Upgrade your app to Rails version 4.2.8. 
+
+Upgrade your local Ruby version to 2.4.1.
 ```
 # when using homebrew and rbenv:
 brew update
