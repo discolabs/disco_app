@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
-  s.add_runtime_dependency 'rails', '5.0.5'
+  s.add_runtime_dependency 'rails', '~> 5.1'
   s.add_runtime_dependency 'sass-rails', '~> 5.0'
   s.add_runtime_dependency 'uglifier', '~> 3.2'
   s.add_runtime_dependency 'coffee-rails', '~> 4.2'
@@ -43,7 +43,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'oj', '~> 2.14'
   s.add_runtime_dependency 'newrelic_rpm', '~> 3.15'
   s.add_runtime_dependency 'mailgun_rails', '~> 0.8'
-  s.add_runtime_dependency 'activemodel-serializers-xml'
+  s.add_runtime_dependency 'activemodel-serializers-xml', '~> 1.0'
 
   s.add_development_dependency 'dotenv-rails', '~> 2.0'
   s.add_development_dependency 'minitest-reporters', '1.1.9'
