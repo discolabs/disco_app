@@ -10,7 +10,7 @@ module DiscoApp::Concerns::AuthenticatedController
     before_action :check_installed
     before_action :check_current_subscription
     before_action :check_active_charge
-    around_filter :shopify_session
+    around_action :shopify_session
     layout 'embedded_app'
   end
 

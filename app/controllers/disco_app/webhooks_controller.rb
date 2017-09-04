@@ -25,7 +25,7 @@ module DiscoApp
       data = ActiveSupport::JSON::decode(request.body.read).with_indifferent_access
       job_class.perform_later(shopify_domain, data)
 
-      render nothing: true
+      render body: nil
     end
 
     private
