@@ -1,3 +1,3 @@
-class DiscoApp::PlanCode < ActiveRecord::Base
+class DiscoApp::PlanCode < ApplicationRecord
   include DiscoApp::Concerns::PlanCode
 end

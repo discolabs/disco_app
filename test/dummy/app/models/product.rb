@@ -1,4 +1,4 @@
-class Product < ActiveRecord::Base
+class Product < ApplicationRecord
   include DiscoApp::Concerns::Synchronises
   include DiscoApp::Concerns::HasMetafields
 

@@ -1,4 +1,4 @@
-class DiscoApp::ApplicationCharge < ActiveRecord::Base
+class DiscoApp::ApplicationCharge < ApplicationRecord
 
   belongs_to :shop
   belongs_to :subscription

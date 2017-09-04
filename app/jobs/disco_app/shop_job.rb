@@ -5,7 +5,7 @@
 
 require 'rollbar'
 
-class DiscoApp::ShopJob < ActiveJob::Base
+class DiscoApp::ShopJob < ApplicationJob
 
   queue_as :default
 
