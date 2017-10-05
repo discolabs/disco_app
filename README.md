@@ -135,6 +135,19 @@ all the environment variables that are kept equal across the different environme
 
 [list of scopes]: https://docs.shopify.com/api/authentication/oauth#scopes
 
+Finally, you'll want to add a subscription. Subscriptions are covered in more detail in the [Plans, Subscriptions, and Charges](#plans-subscriptions-and-charges) section. For now, we just want our stores to subscribe to a free plan. To do this, we need to add something like the following snippet to the `db/seeds.rb` file.
+
+```
+DiscoApp::Plan.find_or_create_by(
+  name: 'put app name here',
+  amount: 0,
+  trial_period_days: 0
+)
+```
+
+Run `bundle exec rake db:seed` and you're done!
+
+
 ### 4. Putting it all together
 Finally, we're ready to test the installation of the development app. First,
 fire up your tunneling software to proxy requests to port 3000 on your local
