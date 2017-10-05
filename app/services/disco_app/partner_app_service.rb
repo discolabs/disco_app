@@ -31,6 +31,9 @@ module DiscoApp
         # Configure newly created app with embedded app use
         apps_page = refresh_page(dashboard)
         embedded_admin_app(apps_page)
+        # Add Disco App icon
+        apps_page = refresh_page(dashboard)
+        add_disco_icon(apps_page)
         # Fetch API credentials
         apps_page = refresh_page(dashboard)
         api_key, secret = api_credentials(apps_page)
@@ -97,6 +100,15 @@ module DiscoApp
         extensions = app.link_with(text: 'Extensions').click
         extensions.form do |form|
           form['extensions_form[embedded]'] = '1'
+        end.submit
+      end
+
+      def add_disco_icon(apps_page)
+        app = apps_page.link_with(text: @app_name).click
+        app_info = app.link_with(text: 'App info').click
+        logo = DiscoApp::Engine.root.join('app', 'assets', 'images', 'disco_app', 'logo.png').to_s
+        app_info.form do |form|
+          form.file_uploads.first.file_name = logo
         end.submit
       end
 
