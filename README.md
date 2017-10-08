@@ -139,7 +139,7 @@ Finally, you'll want to add a subscription. Subscriptions are covered in more de
 
 ```
 DiscoApp::Plan.find_or_create_by(
-  name: 'put app name here',
+  name: 'My Free App',
   amount: 0,
   trial_period_days: 0
 )
