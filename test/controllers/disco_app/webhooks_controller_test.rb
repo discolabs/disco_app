@@ -14,7 +14,7 @@ class DiscoApp::WebhooksControllerTest < ActionController::TestCase
 
   test 'webhook request without authentication information returns unauthorized' do
     body = webhook_fixture('app_uninstalled')
-    post(:process_webhook, body)
+    post :process_webhook, body: body
     assert_response :unauthorized
   end
 
@@ -22,7 +22,7 @@ class DiscoApp::WebhooksControllerTest < ActionController::TestCase
     body = webhook_fixture('app_uninstalled')
     @request.headers['HTTP_X_SHOPIFY_TOPIC'] = :'app/uninstalled'
     @request.headers['HTTP_X_SHOPIFY_SHOP_DOMAIN'] = @shop.shopify_domain
-    post(:process_webhook, body)
+    post :process_webhook, body: body
     assert_response :unauthorized
   end
 
@@ -31,7 +31,7 @@ class DiscoApp::WebhooksControllerTest < ActionController::TestCase
     @request.headers['HTTP_X_SHOPIFY_TOPIC'] = :'app/uninstalled'
     @request.headers['HTTP_X_SHOPIFY_SHOP_DOMAIN'] = @shop.shopify_domain
     @request.headers['HTTP_X_SHOPIFY_HMAC_SHA256'] = '0000'
-    post(:process_webhook, body)
+    post :process_webhook, body: body
     assert_response :unauthorized
   end
 
@@ -40,7 +40,7 @@ class DiscoApp::WebhooksControllerTest < ActionController::TestCase
     @request.headers['HTTP_X_SHOPIFY_TOPIC'] = :'app/uninstalled'
     @request.headers['HTTP_X_SHOPIFY_SHOP_DOMAIN'] = @shop.shopify_domain
     @request.headers['HTTP_X_SHOPIFY_HMAC_SHA256'] = DiscoApp::WebhookService.calculated_hmac(body, ShopifyApp.configuration.secret)
-    post(:process_webhook, body)
+    post :process_webhook, body: body
     assert_response :ok
   end
 
@@ -51,7 +51,7 @@ class DiscoApp::WebhooksControllerTest < ActionController::TestCase
     @request.headers['HTTP_X_SHOPIFY_HMAC_SHA256'] = DiscoApp::WebhookService.calculated_hmac(body, ShopifyApp.configuration.secret)
 
     assert_enqueued_with(job: DiscoApp::AppUninstalledJob) do
-      post(:process_webhook, body)
+      post :process_webhook, body: body
     end
   end
 

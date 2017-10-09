@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class SynchronisesTest < ActionDispatch::IntegrationTest
+  include ActiveJob::TestHelper
   fixtures :all
 
   def setup
@@ -14,7 +15,9 @@ class SynchronisesTest < ActionDispatch::IntegrationTest
   end
 
   test 'new product is created when product created webhook is received' do
-    post_webhook('product_created', :'products/create')
+    perform_enqueued_jobs do
+      post_webhook('product_created', :'products/create')
+    end
 
     # Assert the product was created locally, with the correct attributes.
     product = Product.find(632910392)
@@ -24,7 +27,9 @@ class SynchronisesTest < ActionDispatch::IntegrationTest
   test 'existing product is updated when product updated webhook is received' do
     assert_equal({}, @product.data)
 
-    post_webhook('product_updated', :'products/update')
+    perform_enqueued_jobs do
+      post_webhook('product_updated', :'products/update')
+    end
 
     # Assert the product was updated locally, with the correct attributes.
     @product.reload
@@ -33,12 +38,17 @@ class SynchronisesTest < ActionDispatch::IntegrationTest
   end
 
   test 'existing product is deleted when product deleted webhook is received' do
-    post_webhook('product_deleted', :'products/delete')
+    perform_enqueued_jobs do
+      post_webhook('product_deleted', :'products/delete')
+    end
+
     assert_equal 0, Product.count
   end
 
   test 'cart with token for id is updated when cart updated webhook is received' do
-    post_webhook('cart_updated', :'carts/update')
+    perform_enqueued_jobs do
+      post_webhook('cart_updated', :'carts/update')
+    end
 
     # Assert the cart data was correctly updated
     assert_equal 3200.0, carts(:cart).total_price
@@ -64,11 +74,7 @@ class SynchronisesTest < ActionDispatch::IntegrationTest
 
     def post_webhook(fixture_name, webhook_topic)
       body = webhook_fixture(fixture_name)
-      post(webhooks_url, body, {
-        HTTP_X_SHOPIFY_TOPIC: webhook_topic,
-        HTTP_X_SHOPIFY_SHOP_DOMAIN: @shop.shopify_domain,
-        HTTP_X_SHOPIFY_HMAC_SHA256: DiscoApp::WebhookService.calculated_hmac(body, ShopifyApp.configuration.secret)
-      })
+      post webhooks_url, params: body, headers: { HTTP_X_SHOPIFY_TOPIC: webhook_topic, HTTP_X_SHOPIFY_SHOP_DOMAIN: @shop.shopify_domain, HTTP_X_SHOPIFY_HMAC_SHA256: DiscoApp::WebhookService.calculated_hmac(body, ShopifyApp.configuration.secret) }
     end
 
 end

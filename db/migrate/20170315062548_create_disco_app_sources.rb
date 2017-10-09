@@ -1,4 +1,4 @@
-class CreateDiscoAppSources < ActiveRecord::Migration
+class CreateDiscoAppSources < ActiveRecord::Migration[5.1]
   def change
     create_table :disco_app_sources do |t|
       t.string :source, null: true

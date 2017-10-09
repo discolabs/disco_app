@@ -36,15 +36,12 @@ class DiscoAppGenerator < Rails::Generators::Base
     gem 'oj'
     gem 'pg'
     gem 'premailer-rails'
-    gem 'rails-bigint-pk'
     gem 'react-rails'
     gem 'render_anywhere'
     gem 'rollbar'
     gem 'shopify_app'
     gem 'sidekiq'
-
-    # Specify the threadsafe version of ActiveResource.
-    gem 'activeresource', git: 'https://github.com/shopify/activeresource.git', tag: '4.2-threadsafe'
+    gem 'activeresource'
 
     # Indicate which gems should only be used in production.
     gem_group :production do
@@ -165,7 +162,6 @@ class DiscoAppGenerator < Rails::Generators::Base
   def run_generators
     generate 'shopify_app:install'
     generate 'shopify_app:home_controller'
-    generate 'bigint_pk:install'
     generate 'react:install'
   end
 

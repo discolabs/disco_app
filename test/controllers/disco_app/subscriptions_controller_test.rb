@@ -39,27 +39,27 @@ class DiscoApp::SubscriptionsControllerTest < ActionController::TestCase
   end
 
   test 'logged-in, installed user with current subscription can create new subscription' do
-    post(:create, subscription: { plan: disco_app_plans(:premium) })
+    post :create, params: { subscription: { plan: disco_app_plans(:premium) } }
     assert_redirected_to Rails.application.routes.url_helpers.root_path
     assert_equal disco_app_plans(:premium), @shop.current_plan
   end
 
   test 'logged-in, installed user with no subscription can create new subscription for available plan' do
     @current_subscription.destroy
-    post(:create, subscription: { plan: disco_app_plans(:premium) })
+    post :create, params: { subscription: { plan: disco_app_plans(:premium) } }
     assert_redirected_to Rails.application.routes.url_helpers.root_path
     assert_equal disco_app_plans(:premium), @shop.current_plan
   end
 
   test 'logged-in, installed user with current subscription can not create new subscription for unavailable plan' do
-    post(:create, subscription: { plan: disco_app_plans(:cheapo) })
+    post :create, params: { subscription: { plan: disco_app_plans(:cheapo) } }
     assert_redirected_to DiscoApp::Engine.routes.url_helpers.new_subscription_path
     assert_equal @current_subscription, @shop.current_subscription
   end
 
   test 'logged-in, installed user with current subscription can create new subscription with valid cookied plan code' do
     @request.cookies[DiscoApp::CODE_COOKIE_KEY] = 'PODCAST'
-    post(:create, subscription: { plan: disco_app_plans(:premium) })
+    post :create, params: { subscription: { plan: disco_app_plans(:premium) } }
     assert_redirected_to Rails.application.routes.url_helpers.root_path
     assert_equal disco_app_plans(:premium), @shop.current_plan
     assert_equal 8999, @shop.current_subscription.amount

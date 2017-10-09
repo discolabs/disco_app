@@ -1,4 +1,4 @@
-class Cart < ActiveRecord::Base
+class Cart < ApplicationRecord
   include DiscoApp::Concerns::Synchronises
 
   belongs_to :shop, class_name: 'DiscoApp::Shop'

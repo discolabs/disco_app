@@ -1,3 +1,3 @@
-class DiscoApp::User < ActiveRecord::Base
+class DiscoApp::User < ApplicationRecord
   include DiscoApp::Concerns::User
 end
