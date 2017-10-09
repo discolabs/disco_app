@@ -1,0 +1,2 @@
+class RollbarClientError < StandardError
+end
