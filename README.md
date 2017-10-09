@@ -195,12 +195,12 @@ The following gems are added during setup:
 - [pg][] for Postgres use in all environments: development, test and production;
 - [dotenv-rails][] for reading environment variables from `.env` files in
   development;
-- [rails_12factor][] for use with Heroku/Dokku in production.
-- [activeresource][]for Shopify to communicate with REST web service
-- [mailgun_rails][] for sending email programatically via the Mailgun service.
-- [premailer_rails][] support for styling HTML emails with CSS
-- [rollbar][] Exception tracking and logging
-- [newrelic_rpm][] New Relic RPM Ruby Agent
+- [rails_12factor][] for use with Heroku/Dokku in production;
+- [activeresource][] for Shopify to communicate with REST web service;
+- [mailgun_rails][] for sending email programatically via the Mailgun service;
+- [premailer_rails][] support for styling HTML emails with CSS;
+- [rollbar][] Exception tracking and logging;
+- [newrelic_rpm][] New Relic RPM Ruby Agent.
 
 The following configuration changes are made:
 
@@ -742,22 +742,6 @@ class Product < ActiveRecord::Base
   end
 end
 ```
-
-### Model Primary Keys
-~We use the `rails-bigint-pk` gem in order to default to 64-bit integer IDs in
-our models (the Rails default is 32-bit). This allows us to have a 1:1 mapping
-on the `id` column between our application and Shopify, which uses 64-bit
-integers for their IDs.
-
-On installation, the `rails-bigint-pk` gem migrates all existing models to use
-the `bigint` type for the `id` field, and adds a `bigint_pk.rb` initializer
-which ensures `bigint` is used in all future migrations automatically. To make
-sure that this all works okay, make sure you use the `references` keyword in
-your migrations, rather than `integer`. If you do for some reason need to
-manually create columns storing references to other models, make sure you use
-`limit: 8` in the column definition.~
-
-Outdated as of Rails 5, from Rails 5.1 onwards primary keys are now BIGINT by default.
 
 ### Model Metafields
 If you're writing resource metafields for your models via the Shopify API, you
