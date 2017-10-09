@@ -7,19 +7,13 @@ class DiscoApp::RollbarClient
   ACCESS_TOKEN_ENDPOINT = '/project'
   ACCESS_TOKEN_SCOPE = 'post_server_item'
 
-  def initialize(write_account_access_token, read_account_access_token)
-    @url = API_URL
-    @write_access_token = write_account_access_token
-    @read_access_token = read_account_access_token
-  end
-
-  def self.instance
-    @instance ||= DiscoApp::RollbarClient.new(ENV['ROLLBAR_ACCOUNT_ACCESS_TOKEN_WRITE'], ENV['ROLLBAR_ACCOUNT_ACCESS_TOKEN_READ'])
+  def initialize(params)
+    @write_access_token = params[:write_account_access_token]
+    @read_access_token = params[:read_account_access_token]
   end
 
   # Create project on Rollbar, returns it new post server side access token
-  def create_project(name = nil)
-    name = name ? name : ENV['SHOPIFY_APP_NAME']
+  def create_project(name)
     begin
       response = RestClient::Request.execute(
         method: :post,
@@ -46,14 +40,14 @@ class DiscoApp::RollbarClient
     end
 
     def create_api_url
-      @url + CREATE_PROJECT_ENDPOINT + "?access_token=#{@write_access_token}"
+      API_URL + CREATE_PROJECT_ENDPOINT + "?access_token=#{@write_access_token}"
     end
 
     def access_tokens_api_url(project_id)
-      @url + ACCESS_TOKEN_ENDPOINT + "/#{project_id}/access_tokens?access_token=#{@read_access_token}"
+      API_URL + ACCESS_TOKEN_ENDPOINT + "/#{project_id}/access_tokens?access_token=#{@read_access_token}"
     end
 
     def post_server_access_token(results)
-      results.select { |x| x['name'] == ACCESS_TOKEN_SCOPE }['access_token']
+      results.select { |x| x['name'] == ACCESS_TOKEN_SCOPE }.first['access_token']
     end
 end
