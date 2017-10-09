@@ -72,7 +72,7 @@ app via the partner dashboard. Before you can do this, you need to configure
 a couple of things.
 
 #### Create a DiscoApp configuration file in your home directory
-First, you'll need to add your partner dashboard credentials to a DiscoApp
+First, you'll need to add your partner dashboard and Rollbar credentials to a DiscoApp
 configuration file in your home directory, `~/.disco_app.yml`:
 
 ```
@@ -80,8 +80,12 @@ params:
   PARTNER_EMAIL: "hello@discolabs.com"
   PARTNER_PASSWORD: "***********"
   PARTNER_ORGANIZATION: "Disco"
+  ROLLBAR_ACCOUNT_ACCESS_TOKEN_WRITE: "******************************"
+  ROLLBAR_ACCOUNT_ACCESS_TOKEN_READ: "******************************"
 ```
 
+You can find your tokens in the Rollbar settings under 'Project Access Tokens'.
+If you don't yet have a Rollbar account you can leave out the bottom two lines for now.
 You'll only need to set this up the one time on your local machine.
 
 #### Configure initial values in local ENV file
@@ -338,6 +342,8 @@ There's a number of useful Rake tasks that are baked into the app. They are:
   the database has been imported or migrated.
 - `rake shops:sync`: Synchronises shop data across all installed shops.
 - `rake users:sync`: Synchronises user data across all installed shops.
+- `rake generate:partner_app`: Generates an app on the Disco Partner Dashboard
+- `rake generate:rollbar_project` APP_NAME='Example App Name': Generates a Rollbar Project
 
 ### Background Tasks
 The `DiscoApp::ShopJob` class inherits from `ActiveJob::Base`, and can be used
@@ -793,8 +799,12 @@ monitoring to the application.
 
 [Rollbar][] is used for exception tracking, and will be activated when a
 `ROLLBAR_ACCESS_TOKEN` environment variable is present. Rollbar access tokens
-are unique to each app - if you're deploying a new app and don't have a token,
-ask Gavin for one.
+are unique to each app. In order to generate a new token run
+`rake generate:rollbar_project`.
+Make sure you have configured your `~/.disco_app.yml` as per
+[the setup guide](#create-a-discoapp-configuration-file-in-your-home-directory)
+and that you have the necessary Rollbar permissions to create a project. You can
+specify an app name by adding APP_NAME='App Name'.
 
 [New Relic][] is used for application performance monitoring, and will be
 activated when a `NEW_RELIC_LICENSE_KEY` environment variable is present. There
