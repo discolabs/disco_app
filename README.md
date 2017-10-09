@@ -343,7 +343,7 @@ There's a number of useful Rake tasks that are baked into the app. They are:
 - `rake shops:sync`: Synchronises shop data across all installed shops.
 - `rake users:sync`: Synchronises user data across all installed shops.
 - `rake generate:partner_app`: Generates an app on the Disco Partner Dashboard
-- `rake generate:rollbar_project` APP_NAME='Example App Name': Generates a Rollbar Project
+- `rake generate:rollbar_project`: Generates a Rollbar Project
 
 ### Background Tasks
 The `DiscoApp::ShopJob` class inherits from `ActiveJob::Base`, and can be used
