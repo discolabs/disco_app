@@ -45,7 +45,7 @@ $ export DISCO_GEM_CREDENTIALS=disco-gems:0dfbd458c126baa2744cef477b24c7cf7227fa
 $ mkdir example_app
 $ cd example_app
 $ echo "source 'https://rubygems.org'" > Gemfile
-$ echo "gem 'rails', '~> 4.2'" >> Gemfile
+$ echo "gem 'rails', '~> 5.1'" >> Gemfile
 $ echo "2.4.1" > .ruby-version
 $ bundle install
 $ bundle exec rails new . --force --skip-bundle
@@ -196,7 +196,7 @@ The following gems are added during setup:
 - [dotenv-rails][] for reading environment variables from `.env` files in
   development;
 - [rails_12factor][] for use with Heroku/Dokku in production.
-- [activeresource][] , the threadsafe branch, which is used by the Shopify API gem.
+- [activeresource][]for Shopify to communicate with REST web service
 - [mailgun_rails][] for sending email programatically via the Mailgun service.
 - [premailer_rails][] support for styling HTML emails with CSS
 - [rollbar][] Exception tracking and logging
@@ -225,7 +225,7 @@ Finally, the following environment changes are made:
 [pg]: https://bitbucket.org/ged/ruby-pg
 [dotenv-rails]: https://github.com/bkeepers/dotenv
 [rails_12factor]: https://github.com/heroku/rails_12factor
-[activeresource]: https://github.com/Shopify/activeresource/tree/4.2-threadsafe
+[activeresource]: https://github.com/rails/activeresource
 [mailgun_rails]: https://github.com/jorgemanrubia/mailgun_rails
 [premailer_rails]: https://github.com/fphilipe/premailer-rails
 [rollbar]: https://github.com/rollbar/rollbar-gem
@@ -744,7 +744,7 @@ end
 ```
 
 ### Model Primary Keys
-We use the `rails-bigint-pk` gem in order to default to 64-bit integer IDs in
+~We use the `rails-bigint-pk` gem in order to default to 64-bit integer IDs in
 our models (the Rails default is 32-bit). This allows us to have a 1:1 mapping
 on the `id` column between our application and Shopify, which uses 64-bit
 integers for their IDs.
@@ -755,7 +755,9 @@ which ensures `bigint` is used in all future migrations automatically. To make
 sure that this all works okay, make sure you use the `references` keyword in
 your migrations, rather than `integer`. If you do for some reason need to
 manually create columns storing references to other models, make sure you use
-`limit: 8` in the column definition.
+`limit: 8` in the column definition.~
+
+Outdated as of Rails 5, from Rails 5.1 onwards primary keys are now BIGINT by default.
 
 ### Model Metafields
 If you're writing resource metafields for your models via the Shopify API, you

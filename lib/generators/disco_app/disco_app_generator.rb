@@ -41,8 +41,6 @@ class DiscoAppGenerator < Rails::Generators::Base
     gem 'rollbar'
     gem 'shopify_app'
     gem 'sidekiq'
-
-    # Specify the threadsafe version of ActiveResource.
     gem 'activeresource'
 
     # Indicate which gems should only be used in production.
