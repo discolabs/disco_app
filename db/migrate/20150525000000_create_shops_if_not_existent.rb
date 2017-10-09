@@ -1,7 +1,7 @@
 ##
 # While this migration file is called "create shops if not existent", it's actually a reset of all `disco_app`
 # migrations up until 23 January 2017. It's kept its name like this to ensure compatibility across upgraded apps.
-class CreateShopsIfNotExistent < ActiveRecord::Migration
+class CreateShopsIfNotExistent < ActiveRecord::Migration[5.1]
 
   def change
     return if table_exists? :disco_app_shops
