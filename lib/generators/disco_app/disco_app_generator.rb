@@ -193,7 +193,16 @@ class DiscoAppGenerator < Rails::Generators::Base
 
   # Add the Disco App test helper to test/test_helper.rb
   def add_test_helper
-    inject_into_file 'test/test_helper.rb', "require 'disco_app/test_help'\n", { after: "require 'rails/test_help'\n" }
+    requirements = <<-TEST_HELPER.strip_heredoc
+                     require 'disco_app/test_help'
+                     require 'minitest/reporters'
+                     require 'minitest/autorun'
+
+                     MiniTest::Reporters.use!
+                     Minitest::Test.make_my_diffs_pretty!
+                   TEST_HELPER
+
+    inject_into_file 'test/test_helper.rb', requirements, after: "require 'rails/test_help'\n"
   end
 
   # Copy engine migrations over.
