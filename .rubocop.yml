@@ -67,7 +67,7 @@ Style/ClassVars:
 Style/CollectionMethods:
   Enabled: true
   PreferredMethods:
-    find: find
+    detect: find
     inject: reduce
     collect: map
     find_all: select
