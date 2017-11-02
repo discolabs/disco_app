@@ -846,6 +846,24 @@ Check that:
 - You've correctly set `DEFAULT_HOST` in your local `ENV`;
 - You've correctly listed the redirect URI in the app on the partner dashboard.
 
+### Scheduled tasks aren't running
+Check that you've added the tasks to the server. This will look something like: 
+
+```  
+  dokku_apps:
+     - name: app-name
+       plugins: ['redis']
+       tasks:
+         - name: run scheduled imports (every 30 minutes)
+           job: rake run_scheduled_imports
+           minute: "0,30"
+         - name: run scheduled fetches (every 5 minutes)
+           job: rake run_scheduled_fetches
+           minute: "*/5"
+```
+
+Don't forget to provision the server after making changes: `./provision.sh server-name`. 
+
 ## Contributing
 While developing Shopify applications using the DiscoApp Engine, you may see
 something that could be improved, or perhaps notice a pattern that's becoming
