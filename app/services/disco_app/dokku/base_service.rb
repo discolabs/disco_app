@@ -5,7 +5,7 @@ module DiscoApp
       private
 
         def dokkuish_message(message)
-          puts "-----> #{message}"
+          puts "------------> #{message}"
         end
 
     end
