@@ -14,7 +14,7 @@ module DiscoApp
         end
 
         if scopes.present?
-          ShopifyApp::Configuration.scope = scopes
+          ShopifyApp.configure { |config| config.scope = scopes }
           dokkuish_message('Scopes updated from .env file')
         end
       end
