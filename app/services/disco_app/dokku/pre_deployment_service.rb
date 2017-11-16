@@ -9,7 +9,7 @@ module DiscoApp
         scopes = nil
         File.foreach(ENV_FILE) do |line|
           if line.include?('SHOPIFY_APP_SCOPE')
-            scopes = line.split('=').last
+            scopes = line.split('=').second
           end
         end
 
