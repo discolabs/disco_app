@@ -422,6 +422,8 @@ Webhooks should generally be created inside the `perform` method of the
 `DiscoApp::AppInstalledJob` background task. By default, webhooks are set up to
 listen for the `app/uninstalled` and `shop/update` webhook topics.
 
+To check which webhooks are registered by your app run `shop.with_api_context{ShopifyAPI::Webhook.find(:all)}` from your console, where `shop = DiscoApp::Shop.find(your_shop_id)`. 
+
 ### Asset Rendering
 It's a pretty common pattern for apps to want to render and update Shopify
 assets (Javascript, stylesheets, Liquid snippets etc) whenever a store owner
@@ -863,6 +865,16 @@ Check that you've added the tasks to the server. This will look something like:
 ```
 
 Don't forget to provision the server after making changes: `./provision.sh server-name`. 
+
+### Webhooks aren't firing
+This is a pretty common problem and can be cause by a number of things. You can check if your webhook has registered by running `shop.with_api_context{ShopifyAPI::Webhook.find(:all)}` in a Rails console, where `shop = DiscoApp::Shop.find(your_shop_id)`. If it isn't registered, check the following things:
+
+1. Check you've run the `rake webhooks:sync` task 
+2. Check you've added the webhook topic to `config/initializers/disco_app.rb` and it's spelled correctly 
+3. Ensure you have a background job set up and named correctly with a `perform` method 
+4. Run `DiscoApp::Shop.installed.has_active_shopify_plan` from a console. If this doesn't return an active plan make sure `shop.status` is set to `'installed'`. 
+
+If you encounter other speedbumps with webhooks please add then to this list. 
 
 ## Contributing
 While developing Shopify applications using the DiscoApp Engine, you may see
