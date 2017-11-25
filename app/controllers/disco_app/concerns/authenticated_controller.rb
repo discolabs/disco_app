@@ -76,4 +76,5 @@ module DiscoApp::Concerns::AuthenticatedController
         end
       end
     end
+
 end
