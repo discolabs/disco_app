@@ -26,4 +26,17 @@ class DiscoApp::SynchroniseWebhooksJobTest < ActionController::TestCase
     end
   end
 
+  test 'returns error messages for webhooks that cannot be registered' do
+    VCR.use_cassette('webhook_failure') do
+      output = capture_io do
+        perform_enqueued_jobs do
+          DiscoApp::SynchroniseWebhooksJob.perform_later(@shop)
+        end
+      end
+
+      assert output.first.include?('Invalid topic specified.')
+      assert output.first.include?('orders/create - not registered')
+    end
+  end
+
 end
