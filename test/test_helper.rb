@@ -44,6 +44,12 @@ VCR.configure do |config|
   config.hook_into :webmock
   config.default_cassette_options = { match_requests_on: [:method, :uri, :body], decode_compressed_response: true }
 end
+
+# Minitest helpers to give a better formatted and more helpful output in Rubymine
+require 'minitest/reporters'
+require 'minitest/autorun'
+MiniTest::Reporters.use!
+
 # Set up the base test class.
 class ActiveSupport::TestCase
 
