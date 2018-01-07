@@ -6,14 +6,15 @@ module DiscoApp::Concerns::SynchroniseWebhooksJob
   # Ensure the webhooks registered with our shop are the same as those listed
   # in our application configuration.
   def perform(_shop)
-
-    # Registered any webhooks that haven't been registered yet.
+    # Register any webhooks that haven't been registered yet.
     (expected_topics - current_topics).each do |topic|
-      ShopifyAPI::Webhook.create(
-        topic: topic,
-        address: webhooks_url,
-        format: 'json'
-      )
+      with_verbose_output(topic) do
+        ShopifyAPI::Webhook.create(
+          topic: topic,
+          address: webhooks_url,
+          format: 'json',
+        )
+      end
     end
 
     # Remove any extraneous topics.
@@ -52,6 +53,17 @@ module DiscoApp::Concerns::SynchroniseWebhooksJob
     # Return the absolute URL to the webhooks endpoint.
     def webhooks_url
       DiscoApp::Engine.routes.url_helpers.webhooks_url
+    end
+
+    def with_verbose_output(topic)
+      print "\n#{topic}"
+      shopify_response = yield
+      if shopify_response.errors.blank?
+        print " - registered successfully\n"
+      else
+        print " - not registered\n"
+        puts shopify_response.errors.messages
+      end
     end
 
 end
