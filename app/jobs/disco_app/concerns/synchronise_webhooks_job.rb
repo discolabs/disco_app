@@ -1,11 +1,11 @@
 module DiscoApp::Concerns::SynchroniseWebhooksJob
   extend ActiveSupport::Concern
 
+  DEFAULT_WEBHOOKS = [:'app/uninstalled', :'shop/update']
+
   # Ensure the webhooks registered with our shop are the same as those listed
   # in our application configuration.
   def perform(_shop)
-    # Get the full list of expected webhook topics.
-    expected_topics = [:'app/uninstalled', :'shop/update'] + (DiscoApp.configuration.webhook_topics || [])
 
     # Registered any webhooks that haven't been registered yet.
     (expected_topics - current_topics).each do |topic|
@@ -33,6 +33,11 @@ module DiscoApp::Concerns::SynchroniseWebhooksJob
   end
 
   private
+
+    # Get the full list of expected webhook topics.
+    def expected_topics
+      DEFAULT_WEBHOOKS + (DiscoApp.configuration.webhook_topics || [])
+    end
 
     # Return a list of currently registered topics.
     def current_topics
