@@ -5,18 +5,17 @@ class DiscoApp::SynchroniseWebhooksJobTest < ActionController::TestCase
 
   def setup
     @shop = disco_app_shops(:widget_store)
-
-    stub_request(:get, "#{@shop.admin_url}/webhooks.json").to_return(status: 200, body: api_fixture('widget_store/webhooks').to_json)
-    stub_request(:post, "#{@shop.admin_url}/webhooks.json").to_return(status: 200)
   end
 
   def teardown
     @shop = nil
-
     WebMock.reset!
   end
 
   test 'webhook synchronisation job creates webhooks for all expected topics' do
+    stub_request(:get, "#{@shop.admin_url}/webhooks.json").to_return(status: 200, body: api_fixture('widget_store/webhooks').to_json)
+    stub_request(:post, "#{@shop.admin_url}/webhooks.json").to_return(status: 200)
+
     perform_enqueued_jobs do
       DiscoApp::SynchroniseWebhooksJob.perform_later(@shop)
     end
