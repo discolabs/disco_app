@@ -37,7 +37,7 @@ module DiscoApp::Concerns::SynchroniseWebhooksJob
 
     # Get the full list of expected webhook topics.
     def expected_topics
-      DEFAULT_WEBHOOKS + (DiscoApp.configuration.webhook_topics || [])
+      COMMON_WEBHOOKS + (DiscoApp.configuration.webhook_topics || [])
     end
 
     # Return a list of currently registered topics.
