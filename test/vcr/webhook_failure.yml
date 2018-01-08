@@ -1,0 +1,640 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://widgets.myshopify.com/admin/webhooks.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      User-Agent:
+      - ShopifyAPI/4.9.0 ActiveResource/5.0.0 Ruby/2.4.1
+      X-Shopify-Access-Token:
+      - 9e4b82b20f617258b9c87a9186c355da
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sun, 07 Jan 2018 22:02:25 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Sorting-Hat-Podid:
+      - '28'
+      X-Sorting-Hat-Podid-Cached:
+      - '0'
+      X-Sorting-Hat-Shopid:
+      - '23632129'
+      X-Sorting-Hat-Section:
+      - pod
+      X-Sorting-Hat-Shopid-Cached:
+      - '0'
+      Vary:
+      - Accept-Encoding
+      Referrer-Policy:
+      - origin-when-cross-origin
+      X-Frame-Options:
+      - DENY
+      X-Shopid:
+      - '23632129'
+      X-Shardid:
+      - '28'
+      X-Stats-Userid:
+      - '0'
+      X-Stats-Apiclientid:
+      - '1933946'
+      X-Stats-Apipermissionid:
+      - '9409036317'
+      Http-X-Shopify-Shop-Api-Call-Limit:
+      - 1/40
+      X-Shopify-Shop-Api-Call-Limit:
+      - 1/40
+      Strict-Transport-Security:
+      - max-age=7889238
+      Content-Security-Policy:
+      - 'default-src ''self'' data: blob: ''unsafe-inline'' ''unsafe-eval'' https://*
+        shopify-pos://*; block-all-mixed-content; child-src ''self'' https://* shopify-pos://*;
+        connect-src ''self'' wss://* https://*; script-src https://cdn.shopify.com
+        https://checkout.shopifycs.com https://js-agent.newrelic.com https://bam.nr-data.net
+        https://dme0ih8comzn4.cloudfront.net https://api.stripe.com https://mpsnare.iesnare.com
+        https://appcenter.intuit.com https://www.paypal.com https://maps.googleapis.com
+        https://stats.g.doubleclick.net https://www.google-analytics.com https://visitors.shopify.com
+        https://v.shopify.com https://widget.intercom.io https://js.intercomcdn.com
+        ''self'' ''unsafe-inline'' ''unsafe-eval''; upgrade-insecure-requests; report-uri
+        /csp-report?source%5Baction%5D=index&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fwebhooks&source%5Bsection%5D=admin_api&source%5Buuid%5D=35ad9b8c-5606-4980-8cbb-992608f364e0'
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Xss-Protection:
+      - 1; mode=block; report=/xss-report?source%5Baction%5D=index&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fwebhooks&source%5Bsection%5D=admin_api&source%5Buuid%5D=35ad9b8c-5606-4980-8cbb-992608f364e0
+      P3p:
+      - CP="NOI DSP COR NID ADMa OPTa OUR NOR"
+      X-Dc:
+      - chi2,ash
+      X-Request-Id:
+      - 35ad9b8c-5606-4980-8cbb-992608f364e0
+    body:
+      encoding: ASCII-8BIT
+      string: '{"webhooks":[]}'
+    http_version:
+  recorded_at: Sun, 07 Jan 2018 22:02:25 GMT
+- request:
+    method: post
+    uri: https://widgets.myshopify.com/admin/webhooks.json
+    body:
+      encoding: UTF-8
+      string: '{"webhook":{"topic":"app/uninstalled","address":"https://test.example.com/webhooks","format":"json"}}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - ShopifyAPI/4.9.0 ActiveResource/5.0.0 Ruby/2.4.1
+      X-Shopify-Access-Token:
+      - 9e4b82b20f617258b9c87a9186c355da
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 422
+      message: Unprocessable Entity
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sun, 07 Jan 2018 22:02:26 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Sorting-Hat-Podid:
+      - '28'
+      X-Sorting-Hat-Podid-Cached:
+      - '1'
+      X-Sorting-Hat-Shopid:
+      - '23632129'
+      X-Sorting-Hat-Section:
+      - pod
+      X-Sorting-Hat-Shopid-Cached:
+      - '1'
+      Referrer-Policy:
+      - origin-when-cross-origin
+      X-Frame-Options:
+      - DENY
+      X-Shopid:
+      - '23632129'
+      X-Shardid:
+      - '28'
+      X-Stats-Userid:
+      - '0'
+      X-Stats-Apiclientid:
+      - '1933946'
+      X-Stats-Apipermissionid:
+      - '9409036317'
+      Http-X-Shopify-Shop-Api-Call-Limit:
+      - 1/40
+      X-Shopify-Shop-Api-Call-Limit:
+      - 1/40
+      Strict-Transport-Security:
+      - max-age=7889238
+      Content-Security-Policy:
+      - 'default-src ''self'' data: blob: ''unsafe-inline'' ''unsafe-eval'' https://*
+        shopify-pos://*; block-all-mixed-content; child-src ''self'' https://* shopify-pos://*;
+        connect-src ''self'' wss://* https://*; script-src https://cdn.shopify.com
+        https://checkout.shopifycs.com https://js-agent.newrelic.com https://bam.nr-data.net
+        https://dme0ih8comzn4.cloudfront.net https://api.stripe.com https://mpsnare.iesnare.com
+        https://appcenter.intuit.com https://www.paypal.com https://maps.googleapis.com
+        https://stats.g.doubleclick.net https://www.google-analytics.com https://visitors.shopify.com
+        https://v.shopify.com https://widget.intercom.io https://js.intercomcdn.com
+        ''self'' ''unsafe-inline'' ''unsafe-eval''; upgrade-insecure-requests; report-uri
+        /csp-report?source%5Baction%5D=create&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fwebhooks&source%5Bsection%5D=admin_api&source%5Buuid%5D=a7b430fa-2d1b-457d-9aa4-85638efd87ef'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Xss-Protection:
+      - 1; mode=block; report=/xss-report?source%5Baction%5D=create&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fwebhooks&source%5Bsection%5D=admin_api&source%5Buuid%5D=a7b430fa-2d1b-457d-9aa4-85638efd87ef
+      X-Dc:
+      - chi2,ash
+      X-Request-Id:
+      - a7b430fa-2d1b-457d-9aa4-85638efd87ef
+    body:
+      encoding: UTF-8
+      string: '{}'
+    http_version:
+  recorded_at: Sun, 07 Jan 2018 22:02:26 GMT
+- request:
+    method: post
+    uri: https://widgets.myshopify.com/admin/webhooks.json
+    body:
+      encoding: UTF-8
+      string: '{"webhook":{"topic":"shop/update","address":"https://test.example.com/webhooks","format":"json"}}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - ShopifyAPI/4.9.0 ActiveResource/5.0.0 Ruby/2.4.1
+      X-Shopify-Access-Token:
+      - 9e4b82b20f617258b9c87a9186c355da
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 422
+      message: Unprocessable Entity
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sun, 07 Jan 2018 22:02:27 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Sorting-Hat-Podid:
+      - '28'
+      X-Sorting-Hat-Podid-Cached:
+      - '1'
+      X-Sorting-Hat-Shopid:
+      - '23632129'
+      X-Sorting-Hat-Section:
+      - pod
+      X-Sorting-Hat-Shopid-Cached:
+      - '1'
+      Referrer-Policy:
+      - origin-when-cross-origin
+      X-Frame-Options:
+      - DENY
+      X-Shopid:
+      - '23632129'
+      X-Shardid:
+      - '28'
+      X-Stats-Userid:
+      - '0'
+      X-Stats-Apiclientid:
+      - '1933946'
+      X-Stats-Apipermissionid:
+      - '9409036317'
+      Http-X-Shopify-Shop-Api-Call-Limit:
+      - 1/40
+      X-Shopify-Shop-Api-Call-Limit:
+      - 1/40
+      Strict-Transport-Security:
+      - max-age=7889238
+      Content-Security-Policy:
+      - 'default-src ''self'' data: blob: ''unsafe-inline'' ''unsafe-eval'' https://*
+        shopify-pos://*; block-all-mixed-content; child-src ''self'' https://* shopify-pos://*;
+        connect-src ''self'' wss://* https://*; script-src https://cdn.shopify.com
+        https://checkout.shopifycs.com https://js-agent.newrelic.com https://bam.nr-data.net
+        https://dme0ih8comzn4.cloudfront.net https://api.stripe.com https://mpsnare.iesnare.com
+        https://appcenter.intuit.com https://www.paypal.com https://maps.googleapis.com
+        https://stats.g.doubleclick.net https://www.google-analytics.com https://visitors.shopify.com
+        https://v.shopify.com https://widget.intercom.io https://js.intercomcdn.com
+        ''self'' ''unsafe-inline'' ''unsafe-eval''; upgrade-insecure-requests; report-uri
+        /csp-report?source%5Baction%5D=create&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fwebhooks&source%5Bsection%5D=admin_api&source%5Buuid%5D=9d5fb3e7-f766-4fab-a939-393013241d8a'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Xss-Protection:
+      - 1; mode=block; report=/xss-report?source%5Baction%5D=create&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fwebhooks&source%5Bsection%5D=admin_api&source%5Buuid%5D=9d5fb3e7-f766-4fab-a939-393013241d8a
+      X-Dc:
+      - chi2,ash
+      X-Request-Id:
+      - 9d5fb3e7-f766-4fab-a939-393013241d8a
+    body:
+      encoding: UTF-8
+      string: '{}'
+    http_version:
+  recorded_at: Sun, 07 Jan 2018 22:02:28 GMT
+- request:
+    method: post
+    uri: https://widgets.myshopify.com/admin/webhooks.json
+    body:
+      encoding: UTF-8
+      string: '{"webhook":{"topic":"orders/create","address":"https://test.example.com/webhooks","format":"json"}}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - ShopifyAPI/4.9.0 ActiveResource/5.0.0 Ruby/2.4.1
+      X-Shopify-Access-Token:
+      - 9e4b82b20f617258b9c87a9186c355da
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 422
+      message: Unprocessable Entity
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sun, 07 Jan 2018 22:02:29 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Sorting-Hat-Podid:
+      - '28'
+      X-Sorting-Hat-Podid-Cached:
+      - '0'
+      X-Sorting-Hat-Shopid:
+      - '23632129'
+      X-Sorting-Hat-Section:
+      - pod
+      X-Sorting-Hat-Shopid-Cached:
+      - '0'
+      Referrer-Policy:
+      - origin-when-cross-origin
+      X-Frame-Options:
+      - DENY
+      X-Shopid:
+      - '23632129'
+      X-Shardid:
+      - '28'
+      X-Stats-Userid:
+      - '0'
+      X-Stats-Apiclientid:
+      - '1933946'
+      X-Stats-Apipermissionid:
+      - '9409036317'
+      Http-X-Shopify-Shop-Api-Call-Limit:
+      - 1/40
+      X-Shopify-Shop-Api-Call-Limit:
+      - 1/40
+      Strict-Transport-Security:
+      - max-age=7889238
+      Content-Security-Policy:
+      - 'default-src ''self'' data: blob: ''unsafe-inline'' ''unsafe-eval'' https://*
+        shopify-pos://*; block-all-mixed-content; child-src ''self'' https://* shopify-pos://*;
+        connect-src ''self'' wss://* https://*; script-src https://cdn.shopify.com
+        https://checkout.shopifycs.com https://js-agent.newrelic.com https://bam.nr-data.net
+        https://dme0ih8comzn4.cloudfront.net https://api.stripe.com https://mpsnare.iesnare.com
+        https://appcenter.intuit.com https://www.paypal.com https://maps.googleapis.com
+        https://stats.g.doubleclick.net https://www.google-analytics.com https://visitors.shopify.com
+        https://v.shopify.com https://widget.intercom.io https://js.intercomcdn.com
+        ''self'' ''unsafe-inline'' ''unsafe-eval''; upgrade-insecure-requests; report-uri
+        /csp-report?source%5Baction%5D=create&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fwebhooks&source%5Bsection%5D=admin_api&source%5Buuid%5D=e797d63c-1dc8-43bd-9c9f-9a3e791d8db7'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Xss-Protection:
+      - 1; mode=block; report=/xss-report?source%5Baction%5D=create&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fwebhooks&source%5Bsection%5D=admin_api&source%5Buuid%5D=e797d63c-1dc8-43bd-9c9f-9a3e791d8db7
+      X-Dc:
+      - chi2,ash
+      X-Request-Id:
+      - e797d63c-1dc8-43bd-9c9f-9a3e791d8db7
+    body:
+      encoding: UTF-8
+      string: '{"errors":{"topic":["Invalid topic specified.
+        Topics allowed: app\/uninstalled, shop\/update"]}}'
+    http_version:
+  recorded_at: Sun, 07 Jan 2018 22:02:29 GMT
+- request:
+    method: post
+    uri: https://widgets.myshopify.com/admin/webhooks.json
+    body:
+      encoding: UTF-8
+      string: '{"webhook":{"topic":"orders/paid","address":"https://test.example.com/webhooks","format":"json"}}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - ShopifyAPI/4.9.0 ActiveResource/5.0.0 Ruby/2.4.1
+      X-Shopify-Access-Token:
+      - 9e4b82b20f617258b9c87a9186c355da
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 422
+      message: Unprocessable Entity
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sun, 07 Jan 2018 22:02:30 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Sorting-Hat-Podid:
+      - '28'
+      X-Sorting-Hat-Podid-Cached:
+      - '1'
+      X-Sorting-Hat-Shopid:
+      - '23632129'
+      X-Sorting-Hat-Section:
+      - pod
+      X-Sorting-Hat-Shopid-Cached:
+      - '1'
+      Referrer-Policy:
+      - origin-when-cross-origin
+      X-Frame-Options:
+      - DENY
+      X-Shopid:
+      - '23632129'
+      X-Shardid:
+      - '28'
+      X-Stats-Userid:
+      - '0'
+      X-Stats-Apiclientid:
+      - '1933946'
+      X-Stats-Apipermissionid:
+      - '9409036317'
+      Http-X-Shopify-Shop-Api-Call-Limit:
+      - 1/40
+      X-Shopify-Shop-Api-Call-Limit:
+      - 1/40
+      Strict-Transport-Security:
+      - max-age=7889238
+      Content-Security-Policy:
+      - 'default-src ''self'' data: blob: ''unsafe-inline'' ''unsafe-eval'' https://*
+        shopify-pos://*; block-all-mixed-content; child-src ''self'' https://* shopify-pos://*;
+        connect-src ''self'' wss://* https://*; script-src https://cdn.shopify.com
+        https://checkout.shopifycs.com https://js-agent.newrelic.com https://bam.nr-data.net
+        https://dme0ih8comzn4.cloudfront.net https://api.stripe.com https://mpsnare.iesnare.com
+        https://appcenter.intuit.com https://www.paypal.com https://maps.googleapis.com
+        https://stats.g.doubleclick.net https://www.google-analytics.com https://visitors.shopify.com
+        https://v.shopify.com https://widget.intercom.io https://js.intercomcdn.com
+        ''self'' ''unsafe-inline'' ''unsafe-eval''; upgrade-insecure-requests; report-uri
+        /csp-report?source%5Baction%5D=create&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fwebhooks&source%5Bsection%5D=admin_api&source%5Buuid%5D=5b35e1db-45bf-4f7b-ae48-353c164b13e1'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Xss-Protection:
+      - 1; mode=block; report=/xss-report?source%5Baction%5D=create&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fwebhooks&source%5Bsection%5D=admin_api&source%5Buuid%5D=5b35e1db-45bf-4f7b-ae48-353c164b13e1
+      X-Dc:
+      - chi2,ash
+      X-Request-Id:
+      - 5b35e1db-45bf-4f7b-ae48-353c164b13e1
+    body:
+      encoding: UTF-8
+      string: '{"errors":{"topic":["Invalid topic specified.
+        Topics allowed: app\/uninstalled, shop\/update"]}}'
+    http_version:
+  recorded_at: Sun, 07 Jan 2018 22:02:30 GMT
+- request:
+    method: post
+    uri: https://widgets.myshopify.com/admin/webhooks.json
+    body:
+      encoding: UTF-8
+      string: '{"webhook":{"topic":"carts/create","address":"https://test.example.com/webhooks","format":"json"}}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - ShopifyAPI/4.9.0 ActiveResource/5.0.0 Ruby/2.4.1
+      X-Shopify-Access-Token:
+      - 9e4b82b20f617258b9c87a9186c355da
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 422
+      message: Unprocessable Entity
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sun, 07 Jan 2018 22:02:31 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Sorting-Hat-Podid:
+      - '28'
+      X-Sorting-Hat-Podid-Cached:
+      - '0'
+      X-Sorting-Hat-Shopid:
+      - '23632129'
+      X-Sorting-Hat-Section:
+      - pod
+      X-Sorting-Hat-Shopid-Cached:
+      - '0'
+      Referrer-Policy:
+      - origin-when-cross-origin
+      X-Frame-Options:
+      - DENY
+      X-Shopid:
+      - '23632129'
+      X-Shardid:
+      - '28'
+      X-Stats-Userid:
+      - '0'
+      X-Stats-Apiclientid:
+      - '1933946'
+      X-Stats-Apipermissionid:
+      - '9409036317'
+      Http-X-Shopify-Shop-Api-Call-Limit:
+      - 1/40
+      X-Shopify-Shop-Api-Call-Limit:
+      - 1/40
+      Strict-Transport-Security:
+      - max-age=7889238
+      Content-Security-Policy:
+      - 'default-src ''self'' data: blob: ''unsafe-inline'' ''unsafe-eval'' https://*
+        shopify-pos://*; block-all-mixed-content; child-src ''self'' https://* shopify-pos://*;
+        connect-src ''self'' wss://* https://*; script-src https://cdn.shopify.com
+        https://checkout.shopifycs.com https://js-agent.newrelic.com https://bam.nr-data.net
+        https://dme0ih8comzn4.cloudfront.net https://api.stripe.com https://mpsnare.iesnare.com
+        https://appcenter.intuit.com https://www.paypal.com https://maps.googleapis.com
+        https://stats.g.doubleclick.net https://www.google-analytics.com https://visitors.shopify.com
+        https://v.shopify.com https://widget.intercom.io https://js.intercomcdn.com
+        ''self'' ''unsafe-inline'' ''unsafe-eval''; upgrade-insecure-requests; report-uri
+        /csp-report?source%5Baction%5D=create&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fwebhooks&source%5Bsection%5D=admin_api&source%5Buuid%5D=0aeeb8f9-107e-444a-b03f-c98d7946924d'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Xss-Protection:
+      - 1; mode=block; report=/xss-report?source%5Baction%5D=create&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fwebhooks&source%5Bsection%5D=admin_api&source%5Buuid%5D=0aeeb8f9-107e-444a-b03f-c98d7946924d
+      X-Dc:
+      - chi2,ash
+      X-Request-Id:
+      - 0aeeb8f9-107e-444a-b03f-c98d7946924d
+    body:
+      encoding: UTF-8
+      string: '{"errors":{"topic":["Invalid topic specified.
+        Topics allowed: app\/uninstalled, shop\/update"]}}'
+    http_version:
+  recorded_at: Sun, 07 Jan 2018 22:02:31 GMT
+- request:
+    method: post
+    uri: https://widgets.myshopify.com/admin/webhooks.json
+    body:
+      encoding: UTF-8
+      string: '{"webhook":{"topic":"carts/update","address":"https://test.example.com/webhooks","format":"json"}}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - ShopifyAPI/4.9.0 ActiveResource/5.0.0 Ruby/2.4.1
+      X-Shopify-Access-Token:
+      - 9e4b82b20f617258b9c87a9186c355da
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 422
+      message: Unprocessable Entity
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sun, 07 Jan 2018 22:02:32 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Sorting-Hat-Podid:
+      - '28'
+      X-Sorting-Hat-Podid-Cached:
+      - '0'
+      X-Sorting-Hat-Shopid:
+      - '23632129'
+      X-Sorting-Hat-Section:
+      - pod
+      X-Sorting-Hat-Shopid-Cached:
+      - '0'
+      Referrer-Policy:
+      - origin-when-cross-origin
+      X-Frame-Options:
+      - DENY
+      X-Shopid:
+      - '23632129'
+      X-Shardid:
+      - '28'
+      X-Stats-Userid:
+      - '0'
+      X-Stats-Apiclientid:
+      - '1933946'
+      X-Stats-Apipermissionid:
+      - '9409036317'
+      Http-X-Shopify-Shop-Api-Call-Limit:
+      - 1/40
+      X-Shopify-Shop-Api-Call-Limit:
+      - 1/40
+      Strict-Transport-Security:
+      - max-age=7889238
+      Content-Security-Policy:
+      - 'default-src ''self'' data: blob: ''unsafe-inline'' ''unsafe-eval'' https://*
+        shopify-pos://*; block-all-mixed-content; child-src ''self'' https://* shopify-pos://*;
+        connect-src ''self'' wss://* https://*; script-src https://cdn.shopify.com
+        https://checkout.shopifycs.com https://js-agent.newrelic.com https://bam.nr-data.net
+        https://dme0ih8comzn4.cloudfront.net https://api.stripe.com https://mpsnare.iesnare.com
+        https://appcenter.intuit.com https://www.paypal.com https://maps.googleapis.com
+        https://stats.g.doubleclick.net https://www.google-analytics.com https://visitors.shopify.com
+        https://v.shopify.com https://widget.intercom.io https://js.intercomcdn.com
+        ''self'' ''unsafe-inline'' ''unsafe-eval''; upgrade-insecure-requests; report-uri
+        /csp-report?source%5Baction%5D=create&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fwebhooks&source%5Bsection%5D=admin_api&source%5Buuid%5D=3615dc37-4f2f-4c4f-b815-2f2e4e60165b'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Xss-Protection:
+      - 1; mode=block; report=/xss-report?source%5Baction%5D=create&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fwebhooks&source%5Bsection%5D=admin_api&source%5Buuid%5D=3615dc37-4f2f-4c4f-b815-2f2e4e60165b
+      X-Dc:
+      - chi2,ash
+      X-Request-Id:
+      - 3615dc37-4f2f-4c4f-b815-2f2e4e60165b
+    body:
+      encoding: UTF-8
+      string: '{"errors":{"topic":["Invalid topic specified.
+        Topics allowed: app\/uninstalled, shop\/update"]}}'
+    http_version:
+  recorded_at: Sun, 07 Jan 2018 22:02:32 GMT
+recorded_with: VCR 3.0.3
