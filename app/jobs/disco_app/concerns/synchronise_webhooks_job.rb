@@ -1,7 +1,7 @@
 module DiscoApp::Concerns::SynchroniseWebhooksJob
   extend ActiveSupport::Concern
 
-  DEFAULT_WEBHOOKS = [:'app/uninstalled', :'shop/update']
+  COMMON_WEBHOOKS = [:'app/uninstalled', :'shop/update']
 
   # Ensure the webhooks registered with our shop are the same as those listed
   # in our application configuration.
