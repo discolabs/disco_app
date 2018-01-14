@@ -8,9 +8,10 @@ class DiscoAppGenerator < Rails::Generators::Base
   #  - Slightly customised version of the default Rails .gitignore;
   #  - Default simple Procfile for Heroku;
   #  - .editorconfig to help enforce 2-space tabs, newlines and truncated whitespace for editors that support it.
+  #  - README template
   #
   def copy_root_files
-    %w(.editorconfig .env .env.local .gitignore .rubocop.yml .codeclimate.yml Procfile CHECKS).each do |file|
+    %w(.editorconfig .env .env.local .gitignore .rubocop.yml .codeclimate.yml Procfile CHECKS README.md).each do |file|
       copy_file "root/#{file}", file
     end
   end
