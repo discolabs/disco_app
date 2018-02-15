@@ -1,5 +1,5 @@
-class CreateAssetModels < ActiveRecord::Migration
-  def change
+class CreateAssetModels < ActiveRecord::Migration[4.2]
+def change
     create_table :js_configurations do |t|
       t.integer :shop_id, limit: 8
       t.string :label, default: 'Default'

@@ -1,5 +1,6 @@
-class CreateCarts < ActiveRecord::Migration
-  def change
+class CreateCarts < ActiveRecord::Migration[4.2]
+
+def change
     create_table :carts do |t|
       t.integer :shop_id, limit: 8
       t.string :token

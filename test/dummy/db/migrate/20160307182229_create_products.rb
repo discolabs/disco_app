@@ -1,5 +1,5 @@
-class CreateProducts < ActiveRecord::Migration
-  def change
+class CreateProducts < ActiveRecord::Migration[4.2]
+def change
     create_table :products do |t|
       t.integer :shop_id, limit: 8
       t.jsonb :data
