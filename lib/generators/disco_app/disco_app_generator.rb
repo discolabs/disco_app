@@ -220,7 +220,7 @@ class DiscoAppGenerator < Rails::Generators::Base
   # This should be the last operation, to allow all other operations to run in the initial Ruby version.
   def set_ruby_version
     copy_file 'root/.ruby-version', '.ruby-version'
-    prepend_to_file 'Gemfile', "ruby '2.4.1'\n"
+    prepend_to_file 'Gemfile', "ruby '2.5.0'\n"
   end
 
   private

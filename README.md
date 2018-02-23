@@ -25,7 +25,7 @@ to note are:
 - You should have set up a Shopify Partner account to allow you to create
   development stores and applications;
 - [rbenv][] is recommended for Ruby version management;
-- You should have the latest version of Ruby 2.4.1 installed locally, along with
+- You should have the latest version of Ruby 2.5 installed locally, along with
   the `rails` and `bundler` gems;
 - You should have some form of HTTP tunnelling software like [ngrok][] or
   [localtunnel][] installed.
@@ -46,7 +46,7 @@ $ mkdir example_app
 $ cd example_app
 $ echo "source 'https://rubygems.org'" > Gemfile
 $ echo "gem 'rails', '~> 5.1'" >> Gemfile
-$ echo "2.4.1" > .ruby-version
+$ echo "2.5.0" > .ruby-version
 $ bundle install
 $ bundle exec rails new . --force --skip-bundle
 $ echo "gem 'disco_app', git: 'https://$DISCO_GEM_CREDENTIALS@github.com/discolabs/disco_app.git', tag: '0.13.8'" >> Gemfile
