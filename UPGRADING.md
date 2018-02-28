@@ -3,9 +3,11 @@ This file contains more detailed instructions on what's required when updating
 an application between one release version of the gem to the next. It's intended
 as more in-depth accompaniment to the notes in `CHANGELOG.md` for each version.
 
-## Upgrading from 0.13.8 to UNRELEASED
+## Upgrading from 0.13.8 to 0.14.0
 Update your app's `.ruby-version` to 2.5.0.
-Upgrade your app to Rails version 5.1.
+
+Upgrade your app to Rails version 5.1. See [the wiki](https://github.com/discolabs/disco_app/wiki/Upgrade-to-Rails-5.1) 
+for detailed instructions on this upgrade.
 
 ## Upgrading from 0.13.7 to 0.13.8
 Update your app's `.ruby-version` to 2.4.1.
