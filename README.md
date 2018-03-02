@@ -50,7 +50,7 @@ $ echo "gem 'rails', '~> 5.1'" >> Gemfile
 $ echo "2.5.0" > .ruby-version
 $ bundle install
 $ bundle exec rails new . --force --skip-bundle
-$ echo "gem 'disco_app', source: \"https://#{ENV['FURY_AUTH']}@gem.fury.io/discolabs/\", tag: '0.14.0'" >> Gemfile
+$ echo "gem 'disco_app', source: \"https://gem.fury.io/discolabs/\", tag: '0.14.0'" >> Gemfile
 $ bundle update
 $ bundle exec rails generate disco_app --force
 ```
