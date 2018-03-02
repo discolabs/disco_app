@@ -14,11 +14,11 @@ No unreleased changes.
 - Update to Rails 5.1
 - Improve webhooks sync output
 - Rubocop updates
+- Change source of `disco_app` gem to Gemfury
 
 ## 0.13.8 - 2017-08-16
 ### Added
 - Add ability to enforce a whitelist of stores that are allowed to install the app
-
 
 ### Changed
 - Update to Ruby 2.4.1
