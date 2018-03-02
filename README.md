@@ -18,23 +18,23 @@ detailed below.
 
 ### 1. Setting up
 First make sure you've got all of the tools you need for Shopify and Rails
-development. You should read through the [General Development][] and
-[Rails Development][] sections on the Disco documentation site. The key things
-to note are:
+development. You should read through the [Getting Started] board in Guru and
+make sure you've followed all setup instructions there, specifically the cards
+on [Development Setup] and [Development Configuration]. The key things to note
+are:
 
 - You should have set up a Shopify Partner account to allow you to create
   development stores and applications;
 - [rbenv][] is recommended for Ruby version management;
 - You should have the latest version of Ruby 2.5 installed locally, along with
   the `rails` and `bundler` gems;
-- You should have some form of HTTP tunnelling software like [ngrok][] or
-  [localtunnel][] installed.
-
-[General Development]: https://github.com/discolabs/docs/blob/master/sections/development.md#general-development
-[Rails Development]: https://github.com/discolabs/docs/blob/master/sections/development.md#rails-development
+- You should have [ngrok] installed for HTTP tunnelling;  
+ 
+[Getting Started]: https://app.getguru.com/#/boards/30ff224a-3c2c-4d46-a6f0-f4dc3ced8fe1
+[Development Setup]: https://app.getguru.com/#/facts/b3677c35-6e1f-4b7b-954b-4f9f990adeff
+[Development Configuration]: https://app.getguru.com/#/facts/63da8b91-ec7f-4b75-ba19-8aa3e30ce777
 [rbenv]: https://github.com/sstephenson/rbenv
 [ngrok]: https://ngrok.com
-[localtunnel]: http://localtunnel.me
 
 ### 2. Creating the Rails app
 Running the following commands from your terminal to create a new Rails app,
