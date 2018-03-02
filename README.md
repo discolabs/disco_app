@@ -18,30 +18,31 @@ detailed below.
 
 ### 1. Setting up
 First make sure you've got all of the tools you need for Shopify and Rails
-development. You should read through the [General Development][] and
-[Rails Development][] sections on the Disco documentation site. The key things
-to note are:
+development. You should read through the [Getting Started] board in Guru and
+make sure you've followed all setup instructions there, specifically the cards
+on [Development Setup] and [Development Configuration]. The key things to note
+are:
 
 - You should have set up a Shopify Partner account to allow you to create
   development stores and applications;
 - [rbenv][] is recommended for Ruby version management;
 - You should have the latest version of Ruby 2.5 installed locally, along with
   the `rails` and `bundler` gems;
-- You should have some form of HTTP tunnelling software like [ngrok][] or
-  [localtunnel][] installed.
-
-[General Development]: https://github.com/discolabs/docs/blob/master/sections/development.md#general-development
-[Rails Development]: https://github.com/discolabs/docs/blob/master/sections/development.md#rails-development
+- You should have [ngrok] installed for HTTP tunnelling;  
+- You should have followed the instructions for configuring Bundler with
+  credentials to access Disco's private Gemfury server.
+ 
+[Getting Started]: https://app.getguru.com/#/boards/30ff224a-3c2c-4d46-a6f0-f4dc3ced8fe1
+[Development Setup]: https://app.getguru.com/#/facts/b3677c35-6e1f-4b7b-954b-4f9f990adeff
+[Development Configuration]: https://app.getguru.com/#/facts/63da8b91-ec7f-4b75-ba19-8aa3e30ce777
 [rbenv]: https://github.com/sstephenson/rbenv
 [ngrok]: https://ngrok.com
-[localtunnel]: http://localtunnel.me
 
 ### 2. Creating the Rails app
 Running the following commands from your terminal to create a new Rails app,
 add the DiscoApp Rails Engine to your Gemfile, and set up the Engine:
 
 ```
-$ export DISCO_GEM_CREDENTIALS=disco-gems:0dfbd458c126baa2744cef477b24c7cf7227fae5
 $ mkdir example_app
 $ cd example_app
 $ echo "source 'https://rubygems.org'" > Gemfile
@@ -49,7 +50,7 @@ $ echo "gem 'rails', '~> 5.1'" >> Gemfile
 $ echo "2.5.0" > .ruby-version
 $ bundle install
 $ bundle exec rails new . --force --skip-bundle
-$ echo "gem 'disco_app', git: 'https://$DISCO_GEM_CREDENTIALS@github.com/discolabs/disco_app.git', tag: '0.13.8'" >> Gemfile
+$ echo "gem 'disco_app', source: \"https://gem.fury.io/discolabs/\", tag: '0.14.0'" >> Gemfile
 $ bundle update
 $ bundle exec rails generate disco_app --force
 ```

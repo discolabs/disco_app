@@ -2,13 +2,23 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+No unreleased changes.
+
+## 0.14.0 - 2018-02-28
+### Added
+- Add README template
+- Add Rollbar Rake task 
+
+### Changed
 - Update to Ruby 2.5.0
 - Update to Rails 5.1
+- Improve webhooks sync output
+- Rubocop updates
+- Change source of `disco_app` gem to Gemfury
 
 ## 0.13.8 - 2017-08-16
 ### Added
 - Add ability to enforce a whitelist of stores that are allowed to install the app
-
 
 ### Changed
 - Update to Ruby 2.4.1
