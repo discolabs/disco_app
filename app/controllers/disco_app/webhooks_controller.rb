@@ -2,6 +2,7 @@ module DiscoApp
   class WebhooksController < ActionController::Base
 
     before_action :verify_webhook
+    protect_from_forgery with: :null_session
 
     def process_webhook
       # Get the topic and domain for this webhook.
