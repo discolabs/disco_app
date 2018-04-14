@@ -2,7 +2,8 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
-No unreleased changes.
+### Added
+- New initialise.sh script to make starting applications a single command.
 
 ## 0.14.1 - 2018-04-14
 ### Changed
