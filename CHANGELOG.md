@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 No unreleased changes.
 
+## 0.14.1 - 2018-04-14
+### Changed
+- Bugfix for webhook controller authenticity token issue
+- Bugfix for proxy and webhook signature verification issue
+
 ## 0.14.0 - 2018-02-28
 ### Added
 - Add README template
