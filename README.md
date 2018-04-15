@@ -29,8 +29,11 @@ are:
 - You should have the latest version of Ruby 2.5 installed locally, along with
   the `rails` and `bundler` gems;
 - You should have [ngrok] installed for HTTP tunnelling;  
-- You should have followed the instructions for configuring Bundler with
-  credentials to access Disco's private Gemfury server.
+- You should have followed the instructions in the Development Configuration Guru
+  card for configuring Bundler with credentials to access Disco's private Gemfury server.
+- You should have followed the instructions in the Development Configuration
+  Guru card to have generated a personal access token on Github and added it to
+  your development configuration.
  
 [Getting Started]: https://app.getguru.com/#/boards/30ff224a-3c2c-4d46-a6f0-f4dc3ced8fe1
 [Development Setup]: https://app.getguru.com/#/facts/b3677c35-6e1f-4b7b-954b-4f9f990adeff
@@ -39,26 +42,27 @@ are:
 [ngrok]: https://ngrok.com
 
 ### 2. Creating the Rails app
-Running the following commands from your terminal to create a new Rails app,
+Running the following command from your terminal to create a new Rails app,
 add the DiscoApp Rails Engine to your Gemfile, and set up the Engine:
 
 ```
-$ mkdir example_app
-$ cd example_app
-$ echo "source 'https://rubygems.org'" > Gemfile
-$ echo "gem 'rails', '5.1'" >> Gemfile
-$ echo "2.5.0" > .ruby-version
-$ bundle install
-$ bundle exec rails new . --force --skip-bundle
-$ echo "gem 'disco_app', source: \"https://gem.fury.io/discolabs/\", tag: '0.14.1'" >> Gemfile
-$ bundle update
-$ bundle exec rails generate disco_app --force
+curl -H "Authorization: token $GITHUB_PERSONAL_ACCESS_TOKEN" \
+     -H "Accept: application/vnd.github.v4.raw" \
+     -L "https://raw.githubusercontent.com/discolabs/disco_app/master/initialise.sh" \
+     | bash -s example_app
 ```
 
-Note the `tag` option being added to the Gemfile - this pins the version of
-DiscoApp you'll be using and avoid accidentally pulling incompatible changes
-into your project when you run a `bundle update`. Double check that the tag
-number you're using is the latest version available.
+Be sure to change `example_app` to the desired name of your actual application.
+
+By default, the `initialise.sh` script uses the latest version of Ruby, Rails
+and the DiscoApp framework. If for any reason you need to specify which version
+of each of these to use, you can provide them as arguments on the last line. For
+example, to use Rails 4.2 with Ruby 2.4.1 and DiscoApp version 0.13.8, the last
+line of the command above should read:
+
+```
+    | bash -s example_app 4.2 2.4.1 0.13.8  
+```
 
 Once this is complete, you'll have a new Rails app created in `/example_app`,
 with the DiscoApp Engine configured and mounted.
@@ -898,10 +902,12 @@ To create a new release of the application:
    the last release;
 4. Update `lib/disco_app/version.rb` with the new version number;
 5. Update references to the latest version number in the README;
-6. Create a new commit with a commit message `vX.Y.Z`, where `X.Y.Z` is the
+6. Update references to the latest version number in the `initialise.sh`
+   script;
+7. Create a new commit with a commit message `vX.Y.Z`, where `X.Y.Z` is the
    version number;
-7. Tag the new commit with a tag `X.Y.Z` (`git tag -a "X.Y.Z"`);
-8. `git push && git push --tags` to push the new release.
+8. Tag the new commit with a tag `X.Y.Z` (`git tag -a "X.Y.Z"`);
+9. `git push && git push --tags` to push the new release.
 
 See [an example release commit][].
 
