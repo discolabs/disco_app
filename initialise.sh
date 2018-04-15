@@ -15,7 +15,7 @@ fi
 mkdir $APP_NAME
 cd $APP_NAME
 echo "source 'https://rubygems.org'" > Gemfile
-echo "gem 'rails', '~> $RAILS_VERSION'" >> Gemfile
+echo "gem 'rails', '$RAILS_VERSION'" >> Gemfile
 echo "$RUBY_VERSION" > .ruby-version
 bundle install
 bundle exec rails new . --force --skip-bundle
