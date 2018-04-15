@@ -29,9 +29,10 @@ are:
 - You should have the latest version of Ruby 2.5 installed locally, along with
   the `rails` and `bundler` gems;
 - You should have [ngrok] installed for HTTP tunnelling;  
-- You should have followed the instructions for configuring Bundler with
-  credentials to access Disco's private Gemfury server.
-- You should have generated a personal access token on Github and added it to
+- You should have followed the instructions in the Development Configuration Guru
+  card for configuring Bundler with credentials to access Disco's private Gemfury server.
+- You should have followed the instructions in the Development Configuration
+  Guru card to have generated a personal access token on Github and added it to
   your development configuration.
  
 [Getting Started]: https://app.getguru.com/#/boards/30ff224a-3c2c-4d46-a6f0-f4dc3ced8fe1
