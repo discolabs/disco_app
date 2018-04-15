@@ -46,7 +46,7 @@ add the DiscoApp Rails Engine to your Gemfile, and set up the Engine:
 $ mkdir example_app
 $ cd example_app
 $ echo "source 'https://rubygems.org'" > Gemfile
-$ echo "gem 'rails', '~> 5.1'" >> Gemfile
+$ echo "gem 'rails', '5.1'" >> Gemfile
 $ echo "2.5.0" > .ruby-version
 $ bundle install
 $ bundle exec rails new . --force --skip-bundle
