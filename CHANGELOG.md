@@ -2,8 +2,15 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+No unreleased changes.
+
+## 0.14.2 - 2018-04-16
 ### Added
 - New initialise.sh script to make starting applications a single command.
+
+### Changed
+- Fix for dotfiles not being included on Gemfury
+- Explicitly specify Rails '5.1', not '~> 5.1'
 
 ## 0.14.1 - 2018-04-14
 ### Changed
