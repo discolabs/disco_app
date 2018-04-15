@@ -18,7 +18,7 @@ echo "source 'https://rubygems.org'" > Gemfile
 echo "gem 'rails', '~> $RAILS_VERSION'" >> Gemfile
 echo "$RUBY_VERSION" > .ruby-version
 bundle install
-bundle exec rails new . --force --skip-bundle
+bundle exec rails _$RAILS_VERSION_ new . --force --skip-bundle
 echo "gem 'disco_app', '$DISCO_APP_VERSION', source: \"https://gem.fury.io/discolabs/\"" >> Gemfile
 bundle update
 bundle exec rails generate disco_app --force

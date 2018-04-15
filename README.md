@@ -27,7 +27,8 @@ are:
   development stores and applications;
 - [rbenv][] is recommended for Ruby version management;
 - You should have the latest version of Ruby 2.5 installed locally, along with
-  the `rails` and `bundler` gems;
+  the `rails` and `bundler` gems (make sure you have the version of Rails you'd
+  like to use installed - use `gem install rails -v VERSION` for this);
 - You should have [ngrok] installed for HTTP tunnelling;  
 - You should have followed the instructions in the Development Configuration Guru
   card for configuring Bundler with credentials to access Disco's private Gemfury server.
