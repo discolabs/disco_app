@@ -61,7 +61,7 @@ example, to use Rails 4.2 with Ruby 2.4.1 and DiscoApp version 0.13.8, the last
 line of the command above should read:
 
 ```
-    | bash -s example_app 4.2 2.4.1 0.13.8  
+    | bash -s example_app 4.2.0 2.4.1 0.13.8  
 ```
 
 Once this is complete, you'll have a new Rails app created in `/example_app`,
