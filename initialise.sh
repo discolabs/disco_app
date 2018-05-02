@@ -2,7 +2,7 @@
 # Usage: initialise.sh example_app
 
 APP_NAME="$1"
-RAILS_VERSION="${2:-5.1}"
+RAILS_VERSION="${2:-5.1.0}"
 RUBY_VERSION="${2:-2.5.0}"
 DISCO_APP_VERSION="${3:-0.14.2}"
 
@@ -15,7 +15,7 @@ fi
 mkdir $APP_NAME
 cd $APP_NAME
 echo "source 'https://rubygems.org'" > Gemfile
-echo "gem 'rails', '$RAILS_VERSION'" >> Gemfile
+echo "gem 'rails', '~> $RAILS_VERSION'" >> Gemfile
 echo "$RUBY_VERSION" > .ruby-version
 bundle install
 bundle exec rails new . --force --skip-bundle
