@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 No unreleased changes.
 
+## 0.14.3 - 2018-05-02
+### Changed
+- Loosely set the Rails version to '~> 5.1.0' to allow minor patches
+
 ## 0.14.2 - 2018-04-16
 ### Added
 - New initialise.sh script to make starting applications a single command.
