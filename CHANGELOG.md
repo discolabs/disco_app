@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 No unreleased changes.
 
+## 0.14.4 - 2018-05-18
+### Changed
+- Bugfix for case-insensitive comparison in `has_tag?` taggable method 
+
 ## 0.14.3 - 2018-05-02
 ### Changed
 - Loosely set the Rails version to '~> 5.1.0' to allow minor patches

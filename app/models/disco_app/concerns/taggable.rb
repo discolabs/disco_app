@@ -14,7 +14,7 @@ module DiscoApp::Concerns::Taggable
   end
 
   def has_tag?(tag_to_check)
-    tags.any? { |tag| tag.casecmp(tag_to_check) }
+    tags.any? { |tag| tag.casecmp?(tag_to_check) }
   end
 
 end
