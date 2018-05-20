@@ -103,6 +103,11 @@ module DiscoApp::Concerns::Shop
       @api_client ||= DiscoApp::ApiClient.new(self, ENV['DISCO_API_URL'])
     end
 
+    # Return an instance of the ShopifyGraph API client.
+    def shopify_graph_client
+      @shopify_graph_client ||= ShopifyGraph::ApiClient.new(self)
+    end
+
     # Override the "read" data attribute to allow indifferent access.
     def data
       read_attribute(:data).with_indifferent_access

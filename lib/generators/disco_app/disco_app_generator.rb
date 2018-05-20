@@ -44,6 +44,7 @@ class DiscoAppGenerator < Rails::Generators::Base
     gem 'shopify_app'
     gem 'sidekiq'
     gem 'activeresource'
+    gem 'graphlient'
 
     # Indicate which gems should only be used in production.
     gem_group :production do
