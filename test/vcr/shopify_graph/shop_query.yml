@@ -1,0 +1,99 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://widgets.myshopify.com/admin/api/graphql.json
+    body:
+      encoding: UTF-8
+      string: '{"query":"query GraphQL__Client__OperationDefinition_70333855372940
+        {\n  shop {\n    name\n  }\n}","operationName":"GraphQL__Client__OperationDefinition_70333855372940","variables":{}}'
+    headers:
+      User-Agent:
+      - GraphQL/1.0
+      X-Shopify-Access-Token:
+      - 00000000000000000000000000000000
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sat, 19 May 2018 20:28:46 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Sorting-Hat-Podid:
+      - '56'
+      X-Sorting-Hat-Podid-Cached:
+      - '0'
+      X-Sorting-Hat-Shopid:
+      - '20237963'
+      X-Sorting-Hat-Privacylevel:
+      - default
+      X-Sorting-Hat-Section:
+      - pod
+      X-Sorting-Hat-Shopid-Cached:
+      - '0'
+      Vary:
+      - Accept-Encoding
+      Referrer-Policy:
+      - origin-when-cross-origin
+      X-Frame-Options:
+      - DENY
+      X-Shopid:
+      - '20237963'
+      X-Shardid:
+      - '56'
+      X-Stats-Userid:
+      - '0'
+      X-Stats-Apiclientid:
+      - '1910898'
+      X-Stats-Apipermissionid:
+      - '30002348089'
+      Strict-Transport-Security:
+      - max-age=7889238
+      X-Request-Id:
+      - aa61ed6c-7ae1-4bcd-8ccb-df974f2e2152
+      Content-Security-Policy:
+      - 'default-src ''self'' data: blob: ''unsafe-inline'' ''unsafe-eval'' https://*
+        shopify-pos://*; block-all-mixed-content; child-src ''self'' https://* shopify-pos://*;
+        connect-src ''self'' wss://* https://*; script-src https://cdn.shopify.com
+        https://checkout.shopifycs.com https://js-agent.newrelic.com https://bam.nr-data.net
+        https://dme0ih8comzn4.cloudfront.net https://api.stripe.com https://mpsnare.iesnare.com
+        https://appcenter.intuit.com https://www.paypal.com https://maps.googleapis.com
+        https://stats.g.doubleclick.net https://www.google-analytics.com https://visitors.shopify.com
+        https://v.shopify.com https://widget.intercom.io https://js.intercomcdn.com
+        ''self'' ''unsafe-inline'' ''unsafe-eval''; upgrade-insecure-requests; report-uri
+        /csp-report?source%5Baction%5D=query&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fgraphql&source%5Bsection%5D=admin_api&source%5Buuid%5D=aa61ed6c-7ae1-4bcd-8ccb-df974f2e2152'
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Xss-Protection:
+      - 1; mode=block; report=/xss-report?source%5Baction%5D=query&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fgraphql&source%5Bsection%5D=admin_api&source%5Buuid%5D=aa61ed6c-7ae1-4bcd-8ccb-df974f2e2152
+      X-Dc:
+      - chi2,gcp-us-east1
+      Via:
+      - 1.1 google
+      Alt-Svc:
+      - clear
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"shop":{"name":"widgets"}},"extensions":{"cost":{"requestedQueryCost":1,"actualQueryCost":1,"throttleStatus":{"maximumAvailable":1000.0,"currentlyAvailable":999,"restoreRate":50.0}}}}'
+    http_version:
+  recorded_at: Sat, 19 May 2018 20:28:47 GMT
+recorded_with: VCR 3.0.3
