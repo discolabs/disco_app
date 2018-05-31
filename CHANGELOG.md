@@ -2,7 +2,8 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
-No unreleased changes.
+### Added
+- Ability to define a list of metafield namespaces that should be sent in webhook payloads
 
 ## 0.14.4 - 2018-05-18
 ### Changed
