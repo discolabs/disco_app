@@ -8,6 +8,9 @@ module DiscoApp
     # Set the list of Shopify webhook topics to register.
     attr_accessor :webhook_topics
 
+    # Set the list of metafield namespaces to request in webhook payloads.
+    attr_accessor :webhook_metafield_namespaces
+
     # Set the below if using an application proxy.
     attr_accessor :app_proxy_prefix
 

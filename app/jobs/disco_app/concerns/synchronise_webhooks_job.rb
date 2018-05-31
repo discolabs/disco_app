@@ -13,6 +13,7 @@ module DiscoApp::Concerns::SynchroniseWebhooksJob
           topic: topic,
           address: webhooks_url,
           format: 'json',
+          metafield_namespaces: metafield_namespaces(topic)
         )
       end
     end
@@ -32,6 +33,12 @@ module DiscoApp::Concerns::SynchroniseWebhooksJob
       end
     end
   end
+
+  protected
+
+    def metafield_namespaces(topic)
+      (DiscoApp.configuration.webhook_metafield_namespaces || [])
+    end
 
   private
 

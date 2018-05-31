@@ -8,6 +8,9 @@ DiscoApp.configure do |config|
   # See https://help.shopify.com/api/reference/webhook.
   config.webhook_topics = []
 
+  # Set a list of metafield namespaces to request in webhook payloads.
+  config.webhook_metafield_namespaces = []
+
   # Set the below if using an application proxy.
   config.app_proxy_prefix = ENV['SHOPIFY_APP_PROXY_PREFIX']
 

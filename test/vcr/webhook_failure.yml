@@ -98,7 +98,7 @@ http_interactions:
     uri: https://widgets.myshopify.com/admin/webhooks.json
     body:
       encoding: UTF-8
-      string: '{"webhook":{"topic":"app/uninstalled","address":"https://test.example.com/webhooks","format":"json"}}'
+      string: '{"webhook":{"topic":"app/uninstalled","address":"https://test.example.com/webhooks","format":"json","metafield_namespaces":["global"]}}'
     headers:
       Content-Type:
       - application/json
@@ -188,7 +188,7 @@ http_interactions:
     uri: https://widgets.myshopify.com/admin/webhooks.json
     body:
       encoding: UTF-8
-      string: '{"webhook":{"topic":"shop/update","address":"https://test.example.com/webhooks","format":"json"}}'
+      string: '{"webhook":{"topic":"shop/update","address":"https://test.example.com/webhooks","format":"json","metafield_namespaces":["global"]}}'
     headers:
       Content-Type:
       - application/json
@@ -278,7 +278,7 @@ http_interactions:
     uri: https://widgets.myshopify.com/admin/webhooks.json
     body:
       encoding: UTF-8
-      string: '{"webhook":{"topic":"orders/create","address":"https://test.example.com/webhooks","format":"json"}}'
+      string: '{"webhook":{"topic":"orders/create","address":"https://test.example.com/webhooks","format":"json","metafield_namespaces":["global"]}}'
     headers:
       Content-Type:
       - application/json
@@ -369,7 +369,7 @@ http_interactions:
     uri: https://widgets.myshopify.com/admin/webhooks.json
     body:
       encoding: UTF-8
-      string: '{"webhook":{"topic":"orders/paid","address":"https://test.example.com/webhooks","format":"json"}}'
+      string: '{"webhook":{"topic":"orders/paid","address":"https://test.example.com/webhooks","format":"json","metafield_namespaces":["global"]}}'
     headers:
       Content-Type:
       - application/json
@@ -460,7 +460,7 @@ http_interactions:
     uri: https://widgets.myshopify.com/admin/webhooks.json
     body:
       encoding: UTF-8
-      string: '{"webhook":{"topic":"carts/create","address":"https://test.example.com/webhooks","format":"json"}}'
+      string: '{"webhook":{"topic":"carts/create","address":"https://test.example.com/webhooks","format":"json","metafield_namespaces":["global"]}}'
     headers:
       Content-Type:
       - application/json
@@ -551,7 +551,7 @@ http_interactions:
     uri: https://widgets.myshopify.com/admin/webhooks.json
     body:
       encoding: UTF-8
-      string: '{"webhook":{"topic":"carts/update","address":"https://test.example.com/webhooks","format":"json"}}'
+      string: '{"webhook":{"topic":"carts/update","address":"https://test.example.com/webhooks","format":"json","metafield_namespaces":["global"]}}'
     headers:
       Content-Type:
       - application/json
