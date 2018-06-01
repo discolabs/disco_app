@@ -37,11 +37,7 @@
 
   <%= yield %>
 
-  <% flash.each do |key, message| %>
-  <script type="text/javascript">
-    ShopifyApp.flash<%= (key == 'error') ? 'Error' : 'Notice' %>('<%= message %>');
-  </script>
-  <% end %>
+  <%= render 'flash_errors' %>
 
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true, 'data-turbolinks-eval' => false %>
 

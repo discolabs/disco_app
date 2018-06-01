@@ -1,0 +1,5 @@
+<% flash.each do |key, message| %>
+<script type="text/javascript">
+  ShopifyApp.flash<%= (key == 'error') ? 'Error' : 'Notice' %>('<%= message %>');
+</script>
+<% end %>
