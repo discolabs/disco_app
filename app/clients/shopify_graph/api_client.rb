@@ -1,6 +1,9 @@
+# frozen_string_literal: true
 require 'graphlient'
-# TODO: Add frozen strings literal comment
+
 # TODO: Add error rescuing from Graphlient::Client errors
+# TODO: Implement Rate limiting based on extensions cost
+
 module ShopifyGraph
   class ApiClient < ::Graphlient::Client
 
@@ -20,7 +23,7 @@ module ShopifyGraph
     end
 
     ##
-    # Replace schema in disk by newer one if it changed
+    # Replace schema in disk by newer one if it changes
     def refresh_schema!
       schema.dump!
     end
