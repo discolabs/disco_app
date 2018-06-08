@@ -1,8 +1,10 @@
 require 'graphlient'
-
+# TODO: Add frozen strings literal comment
+# TODO: Add error rescuing from Graphlient::Client errors
 module ShopifyGraph
   class ApiClient < ::Graphlient::Client
 
+    GRAPHQL_VERSION = 'GraphQL/1.0'
     # Load schema from disk to avoid extra heavy query at client init
     SHOPIFY_GRAPH_SCHEMA_PATH = 'lib/shopify_graph/api_schema.json'
 
@@ -27,7 +29,7 @@ module ShopifyGraph
 
       def shop_headers
         {
-          "User-Agent": 'GraphQL/1.0',
+          "User-Agent": GRAPHQL_VERSION,
           "X-Shopify-Access-Token": shop.shopify_token
         }
       end

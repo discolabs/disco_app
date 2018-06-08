@@ -16,7 +16,7 @@ module ShopifyGraph
 
     test 'query will trigger error at parsing time before request is made' do
       error = assert_raises(Graphlient::Errors::ClientError) do
-        parsed_invalid_test_query
+        @graph_client.execute(parsed_invalid_test_query)
       end
       assert_equal "Field 'potatoe' doesn't exist on type 'Shop'", error.message
     end
