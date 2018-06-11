@@ -9,7 +9,7 @@ module ShopifyGraph
 
     GRAPHQL_VERSION = 'GraphQL/1.0'
     # Load schema from disk to avoid extra heavy query at client init
-    SHOPIFY_GRAPH_SCHEMA_PATH = 'lib/shopify_graph/api_schema.json'
+    SHOPIFY_GRAPH_SCHEMA_PATH = 'lib/shopify/api_schema.json'
 
     attr_reader :shop
 

@@ -1,7 +1,5 @@
-require 'graphlient'
-
-module ShopifyGraph
-  class QueryBase
+module DiscoApp
+  class GraphQueryBase
 
     include Graphlient::Extensions::Query
 
@@ -18,7 +16,7 @@ module ShopifyGraph
     # Parse and execute query defined in the query_definition of
     # a given child class
     def execute!(variables = {})
-      graph_client.execute(query_definition.to_s, variables)
+      shopify_graph_client.execute(query_definition.to_s, variables)
     end
 
     ##
@@ -29,15 +27,14 @@ module ShopifyGraph
     #          name
     #        }
     #      }
-    # TODO: Implement support for HEREDOC
     def query_definition
       raise NotImplementedError
     end
 
     private
 
-      def graph_client
-        @graph_client ||= shop.shopify_graph_client
+      def shopify_graph_client
+        @shopify_graph_client ||= shop.shopify_graph_client
       end
 
   end

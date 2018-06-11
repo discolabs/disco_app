@@ -1,8 +1,4 @@
-require 'test_helper'
-require 'graphlient'
-require 'shopify_graph/query_base'
-
-module ShopifyGraph
+module DiscoApp
   class QueryTest < ActiveSupport::TestCase
 
     def setup
@@ -13,8 +9,9 @@ module ShopifyGraph
       @shop = nil
     end
 
-    test 'execute query from Query' do
-      class ShopQuery < QueryBase
+    test 'execute query from GraphiQL Query' do
+
+      class ShopQuery < GraphQueryBase
         def query_definition
           query do
             shop do
@@ -29,7 +26,6 @@ module ShopifyGraph
         assert_equal 'widgets', response.data.shop.name
       end
     end
-
 
   end
 end
