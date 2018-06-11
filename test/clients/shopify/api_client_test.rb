@@ -22,7 +22,7 @@ module ShopifyGraph
     end
 
     test 'query with shop context is successful' do
-      VCR.use_cassette('shopify_graph/shop_query', match_requests_on: [:method, :uri]) do
+      VCR.use_cassette('shopify_graph/valid_shop_query', match_requests_on: [:method, :uri]) do
         response = @graph_client.execute(parsed_valid_test_query)
         assert_equal 'widgets', response.data.shop.name
       end
