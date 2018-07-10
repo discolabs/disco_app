@@ -17,5 +17,8 @@ test:
   port: 5432
   database: <%= Rails.application.class.parent_name.downcase %>_test
  
+staging:
+  <<: *default
+
 production:
   <<: *default

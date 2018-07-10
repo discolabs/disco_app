@@ -45,8 +45,8 @@ class DiscoAppGenerator < Rails::Generators::Base
     gem 'sidekiq'
     gem 'activeresource'
 
-    # Indicate which gems should only be used in production.
-    gem_group :production do
+    # Indicate which gems should only be used in staging and production.
+    gem_group staging, :production do
       gem 'mailgun_rails'
       gem 'rails_12factor'
     end
@@ -77,6 +77,10 @@ class DiscoAppGenerator < Rails::Generators::Base
     # The force_ssl flag is commented by default for production.
     # Uncomment to ensure config.force_ssl = true in production.
     uncomment_lines 'config/environments/production.rb', /force_ssl/
+
+    # The force_ssl flag is commented by default for production.
+    # Uncomment to ensure config.force_ssl = true in production.
+    uncomment_lines 'config/environments/staging.rb', /force_ssl/
 
     # Set time zone to UTC
     application "config.time_zone = 'UTC'"
@@ -109,15 +113,23 @@ class DiscoAppGenerator < Rails::Generators::Base
     application "config.active_job.queue_adapter = :sidekiq\n", env: :production
     application "# Use Sidekiq as the active job backend", env: :production
 
+    # Set Sidekiq as the queue adapter in staging.
+    application "config.active_job.queue_adapter = :sidekiq\n", env: :staging
+    application "# Use Sidekiq as the active job backend", env: :staging
+
     # Ensure the application configuration uses the DEFAULT_HOST environment
     # variable to set up support for reverse routing absolute URLS (needed when
     # generating Webhook URLs for example).
     application "routes.default_url_options[:host] = ENV['DEFAULT_HOST']\n"
     application "# Set the default host for absolute URL routing purposes"
 
-    # Configure React in development and production.
+    # Configure React in development, staging, and production.
     application "config.react.variant = :development", env: :development
     application "# Use development variant of React in development.", env: :development
+    
+    application "config.react.variant = :production", env: :staging
+    application "# Use production variant of React in staging.", env: :staging
+    
     application "config.react.variant = :production", env: :production
     application "# Use production variant of React in production.", env: :production
 
@@ -137,6 +149,7 @@ class DiscoAppGenerator < Rails::Generators::Base
         end
     CONFIG
     application configuration, env: :production
+    application configuration, env: :staging
 
     # Monitoring configuration
     copy_file 'initializers/rollbar.rb', 'config/initializers/rollbar.rb'
