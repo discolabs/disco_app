@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 No unreleased changes.
 
+## 0.15.0 - 2018-08-05
+### Changed
+- Webhook controller now a concern for extensibility
+
 ## 0.14.5 - 2018-08-04
 ### Added
 - VS code support
