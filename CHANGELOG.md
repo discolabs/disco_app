@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 No unreleased changes.
 
+## 0.14.5 - 2018-08-04
+### Added
+- VS code support
+
+### Changed
+- Init script fix
+- Github dotfile fix
+
 ## 0.14.4 - 2018-05-18
 ### Changed
 - Bugfix for case-insensitive comparison in `has_tag?` taggable method 
