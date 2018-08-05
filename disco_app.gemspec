@@ -14,7 +14,11 @@ Gem::Specification.new do |s|
   s.description = "Rails engine for Shopify applications."
   s.license     = "None"
 
-  s.files = Dir["{app,config,db,lib,.github}/**/{*,.*}", "MIT-LICENSE", "Rakefile", "README.rdoc"]
+  # To build up the list of files, we need to deviate from the standard .gemspec approach to ensure that
+  # a number of "dotfiles"/"dotfolders" that we use as templates files are included in our gem package.
+  s.files = Dir.glob("{app,config,db,lib}/**/{*,.*}", File::FNM_DOTMATCH).reject { |d| d.end_with?('.') }
+  s.files += ["MIT-LICENSE", "Rakefile", "README.rdoc"]
+
   s.test_files = Dir["test/**/*"]
 
   s.add_runtime_dependency 'rails', '~> 5.1.0'
