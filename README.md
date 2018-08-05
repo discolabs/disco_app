@@ -895,21 +895,10 @@ to update the relevant section of this README as well.
 ## Releasing
 To create a new release of the application:
 
-1. Ensure the CHANGELOG is up to date by reviewing all commits since the last
-   release;
-2. Ensure the UPGRADING file contains all necessary instructions for upgrading
-   an application to the latest version of the gem.
-3. Ensure the README is accurate and up to date by reviewing all commits since
-   the last release;
-4. Update `lib/disco_app/version.rb` with the new version number;
-5. Update references to the latest version number in the README;
-6. Update references to the latest version number in the `initialise.sh`
-   script;
-7. Create a new commit with a commit message `vX.Y.Z`, where `X.Y.Z` is the
-   version number;
-8. Tag the new commit with a tag `X.Y.Z` (`git tag -a "X.Y.Z"`);
-9. `git push && git push --tags` to push the new release.
-
-See [an example release commit][].
-
-[an example release commit]: https://github.com/discolabs/disco_app/commit/0cb60a1c212f480af85ebb7c42188befb932a818
+1. In general, follow the instructions for [releasing an app to production with git flow](https://app.getguru.com/card/7idyndGi/Releasing-an-app-to-production-with-git-flow).
+2. During **Step 3** of the release process, in addition to bumping the version number in the `VERSION` file, you should:
+    1. Also update the version number in `version.rb` to match `VERSION`;
+    2. Ensure the `CHANGELOG` is up to date by reviewing all commits since the last release;
+    3. Ensure the `UPGRADING` file contains all necessary instructions for upgrading an application to the latest version of the gem;
+    4. Update `initialise.sh` to point to the latest version number of the gem.
+3. Once the git flow release steps have been completed, ensure you have the latest version of the `master` branch and push to Gemfury. See [uploading packages to Gemfury](https://gemfury.com/help/upload-packages) for instructions on this step if you haven't done it before.
