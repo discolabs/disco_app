@@ -3,26 +3,8 @@ This file contains more detailed instructions on what's required when updating
 an application between one release version of the gem to the next. It's intended
 as more in-depth accompaniment to the notes in `CHANGELOG.md` for each version.
 
-## Upgrading from 0.15.0 to 0.15.1
+## Upgrading from 0.14.0 to 0.15.2 (inclusive)
 No changes required.
-
-## Upgrading from 0.14.5 to 0.15.0
-No changes required.
-
-## Upgrading from 0.14.4 to 0.14.5
-No changes required.
-
-## Upgrading from 0.14.3 to 0.14.4
-No changes required.
-
-## Upgrading from 0.14.2 to 0.14.3
-No changes required.
-
-## Upgrading from 0.14.1 to 0.14.2
-No changes required.
-
-## Upgrading from 0.14.0 to 0.14.1
-No changes required - bugfix release.
 
 ## Upgrading from 0.13.8 to 0.14.0
 Update your app's `.ruby-version` to 2.5.0.
