@@ -3,6 +3,9 @@ This file contains more detailed instructions on what's required when updating
 an application between one release version of the gem to the next. It's intended
 as more in-depth accompaniment to the notes in `CHANGELOG.md` for each version.
 
+## Upgrading from 0.15.0 to 0.15.1
+No changes required.
+
 ## Upgrading from 0.14.5 to 0.15.0
 No changes required.
 
