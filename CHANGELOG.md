@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 No unreleased changes.
 
+## 0.15.2 - 2018-08-05
+### Changed
+- Final (hopefully) bugfix for dotfolder problem
+
 ## 0.15.1 - 2018-08-05
 ### Changed
 - Actual fix for Github dotfolder problem
