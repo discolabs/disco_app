@@ -4,6 +4,27 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 No unreleased changes.
 
+## 0.15.2 - 2018-08-05
+### Changed
+- Final (hopefully) bugfix for dotfolder problem
+
+## 0.15.1 - 2018-08-05
+### Changed
+- Actual fix for Github dotfolder problem
+- Updated release instructions for Gemfury
+
+## 0.15.0 - 2018-08-05
+### Changed
+- Webhook controller now a concern for extensibility
+
+## 0.14.5 - 2018-08-04
+### Added
+- VS code support
+
+### Changed
+- Init script fix
+- Github dotfile fix
+
 ## 0.14.4 - 2018-05-18
 ### Changed
 - Bugfix for case-insensitive comparison in `has_tag?` taggable method 
