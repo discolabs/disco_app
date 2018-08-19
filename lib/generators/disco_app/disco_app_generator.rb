@@ -46,7 +46,7 @@ class DiscoAppGenerator < Rails::Generators::Base
     gem 'activeresource'
 
     # Indicate which gems should only be used in staging and production.
-    gem_group staging, :production do
+    gem_group :staging, :production do
       gem 'mailgun_rails'
       gem 'rails_12factor'
     end
@@ -65,6 +65,21 @@ class DiscoAppGenerator < Rails::Generators::Base
     template 'config/database.yml.tt'
   end
 
+  def update_cable_config
+    template 'config/cable.yml.tt'
+  end
+
+  def update_secrets_config
+    configuration = <<-CONFIG.strip_heredoc
+
+      staging:
+        secret_key_base: <%= ENV["SECRET_KEY_BASE"] %>
+    CONFIG
+
+    append_to_file 'config/secrets.yml', configuration
+  end
+
+
   # Run bundle install to add our new gems before running tasks.
   def bundle_install
     Bundler.with_clean_env do
@@ -72,15 +87,16 @@ class DiscoAppGenerator < Rails::Generators::Base
     end
   end
 
+  def support_staging_environment
+    # Copy staging configuration
+    copy_file 'config/environments/staging.rb', 'config/environments/staging.rb'
+  end
+
   # Make any required adjustments to the application configuration.
   def configure_application
     # The force_ssl flag is commented by default for production.
     # Uncomment to ensure config.force_ssl = true in production.
     uncomment_lines 'config/environments/production.rb', /force_ssl/
-
-    # The force_ssl flag is commented by default for production.
-    # Uncomment to ensure config.force_ssl = true in production.
-    uncomment_lines 'config/environments/staging.rb', /force_ssl/
 
     # Set time zone to UTC
     application "config.time_zone = 'UTC'"
@@ -126,10 +142,10 @@ class DiscoAppGenerator < Rails::Generators::Base
     # Configure React in development, staging, and production.
     application "config.react.variant = :development", env: :development
     application "# Use development variant of React in development.", env: :development
-    
+
     application "config.react.variant = :production", env: :staging
     application "# Use production variant of React in staging.", env: :staging
-    
+
     application "config.react.variant = :production", env: :production
     application "# Use production variant of React in production.", env: :production
 

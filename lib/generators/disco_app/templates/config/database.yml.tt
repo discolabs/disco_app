@@ -4,19 +4,19 @@ default: &default
   pool: 5
   timeout: 5000
   prepared_statements: false
- 
+
 development:
   <<: *default
   host: localhost
   port: 5432
   database: <%= Rails.application.class.parent_name.downcase %>
- 
+
 test:
   <<: *default
   host: localhost
   port: 5432
   database: <%= Rails.application.class.parent_name.downcase %>_test
- 
+
 staging:
   <<: *default
 
