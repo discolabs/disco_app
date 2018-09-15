@@ -1,0 +1,40 @@
+{
+  "name": "<%= Rails.application.class.parent_name.underscore.dasherize %>",
+  "private": true,
+  "dependencies": {
+    "@rails/webpacker": "3.5",
+    "@shopify/polaris": "2.1.2",
+    "axios": "^0.18.0",
+    "babel-preset-react": "^6.24.1",
+    "bugsnag-js": "^4.7.2",
+    "bugsnag-react": "^1.1.1",
+    "dateformat": "^3.0.3",
+    "kitsu-core": "^5.1.1",
+    "lodash": "^4.17.10",
+    "moment": "^2.22.2",
+    "numeral": "^2.0.6",
+    "pluralize": "^7.0.0",
+    "prop-types": "^15.6.1",
+    "qs": "^6.5.2",
+    "query-string": "^6.1.0",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
+    "react-router-dom": "^4.2.2",
+    "react-router-prop-types": "^1.0.3",
+    "regenerator": "^0.13.2",
+    "url-parse": "^1.4.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "8.2.3",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "eslint": "4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-react": "^7.9.1",
+    "prettier": "^1.13.4",
+    "webpack-dev-server": "2.11.2"
+  }
+}
