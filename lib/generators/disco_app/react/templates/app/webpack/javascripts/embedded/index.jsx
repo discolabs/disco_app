@@ -25,8 +25,9 @@ ReactDOM.render(
     <Router>
       <AppProvider
         apiKey={app.dataset.apiKey}
-        shopOrigin={app.dataset.shopOrigin}
         debug={app.dataset.debug}
+        forceRedirect={app.dataset.forceRedirect}
+        shopOrigin={app.dataset.shopOrigin}
       >
         <ScrollToTop>
           <AppWithApi bugsnagClient={bugsnagClient} />

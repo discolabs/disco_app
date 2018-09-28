@@ -23,7 +23,7 @@ const HomePage = props => (
         </Link>
         &apos;s{' '}
         <Link url="https://www.discolabs.com/" external>
-          Printed Mint app
+          [Disco app]
         </Link>
         .
       </FooterHelp>
