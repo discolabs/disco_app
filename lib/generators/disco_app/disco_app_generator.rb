@@ -31,6 +31,7 @@ class DiscoAppGenerator < Rails::Generators::Base
 
     # Add gem requirements.
     gem 'active_link_to'
+    gem 'activeresource'
     gem 'acts_as_singleton'
     gem 'classnames-rails'
     gem 'newrelic_rpm'
@@ -43,7 +44,6 @@ class DiscoAppGenerator < Rails::Generators::Base
     gem 'rollbar'
     gem 'shopify_app'
     gem 'sidekiq'
-    gem 'activeresource'
 
     # Indicate which gems should only be used in staging and production.
     gem_group :staging, :production do
@@ -54,9 +54,9 @@ class DiscoAppGenerator < Rails::Generators::Base
     # Indicate which gems should only be used in development and test.
     gem_group :development, :test do
       gem 'dotenv-rails'
+      gem 'mechanize'
       gem 'minitest-reporters'
       gem 'webmock'
-      gem 'mechanize'
     end
   end
 
@@ -69,17 +69,6 @@ class DiscoAppGenerator < Rails::Generators::Base
     template 'config/cable.yml.tt'
   end
 
-  def update_secrets_config
-    configuration = <<-CONFIG.strip_heredoc
-
-      staging:
-        secret_key_base: <%= ENV["SECRET_KEY_BASE"] %>
-    CONFIG
-
-    append_to_file 'config/secrets.yml', configuration
-  end
-
-
   # Run bundle install to add our new gems before running tasks.
   def bundle_install
     Bundler.with_clean_env do
@@ -88,7 +77,6 @@ class DiscoAppGenerator < Rails::Generators::Base
   end
 
   def support_staging_environment
-    # Copy staging configuration
     copy_file 'config/environments/staging.rb', 'config/environments/staging.rb'
   end
 
@@ -171,7 +159,6 @@ class DiscoAppGenerator < Rails::Generators::Base
     copy_file 'initializers/rollbar.rb', 'config/initializers/rollbar.rb'
     copy_file 'config/newrelic.yml', 'config/newrelic.yml'
   end
-
 
   # Add entries to .env and .env.local
   def add_env_variables
