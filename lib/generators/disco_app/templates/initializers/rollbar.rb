@@ -3,9 +3,7 @@ Rollbar.configure do |config|
   config.access_token = ENV['ROLLBAR_ACCESS_TOKEN']
 
   # Only use Rollbar in production when there's a token configured.
-  unless config.access_token and Rails.env.production?
-    config.enabled = false
-  end
+  config.enabled = false unless config.access_token && Rails.env.production?
 
   # Enable delayed reporting (using Sidekiq)
   config.use_sidekiq
@@ -16,7 +14,7 @@ Rollbar.configure do |config|
 
   # Add custom handlers.
   config.before_process << proc do |options|
-    if options[:exception].is_a?(ActiveResource::ClientError) and options[:exception].message.include?('Too Many Requests')
+    if options[:exception].is_a?(ActiveResource::ClientError) && options[:exception].message.include?('Too Many Requests')
       raise Rollbar::Ignore
     end
   end
