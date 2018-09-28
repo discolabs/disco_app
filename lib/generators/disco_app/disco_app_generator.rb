@@ -31,6 +31,7 @@ class DiscoAppGenerator < Rails::Generators::Base
 
     # Add gem requirements.
     gem 'active_link_to'
+    gem 'activeresource'
     gem 'acts_as_singleton'
     gem 'classnames-rails'
     gem 'newrelic_rpm'
@@ -43,10 +44,9 @@ class DiscoAppGenerator < Rails::Generators::Base
     gem 'rollbar'
     gem 'shopify_app'
     gem 'sidekiq'
-    gem 'activeresource'
 
-    # Indicate which gems should only be used in production.
-    gem_group :production do
+    # Indicate which gems should only be used in staging and production.
+    gem_group :staging, :production do
       gem 'mailgun_rails'
       gem 'rails_12factor'
     end
@@ -54,9 +54,9 @@ class DiscoAppGenerator < Rails::Generators::Base
     # Indicate which gems should only be used in development and test.
     gem_group :development, :test do
       gem 'dotenv-rails'
+      gem 'mechanize'
       gem 'minitest-reporters'
       gem 'webmock'
-      gem 'mechanize'
     end
   end
 
@@ -65,11 +65,19 @@ class DiscoAppGenerator < Rails::Generators::Base
     template 'config/database.yml.tt'
   end
 
+  def update_cable_config
+    template 'config/cable.yml.tt'
+  end
+
   # Run bundle install to add our new gems before running tasks.
   def bundle_install
     Bundler.with_clean_env do
       run 'bundle install'
     end
+  end
+
+  def support_staging_environment
+    copy_file 'config/environments/staging.rb', 'config/environments/staging.rb'
   end
 
   # Make any required adjustments to the application configuration.
@@ -109,15 +117,23 @@ class DiscoAppGenerator < Rails::Generators::Base
     application "config.active_job.queue_adapter = :sidekiq\n", env: :production
     application "# Use Sidekiq as the active job backend", env: :production
 
+    # Set Sidekiq as the queue adapter in staging.
+    application "config.active_job.queue_adapter = :sidekiq\n", env: :staging
+    application "# Use Sidekiq as the active job backend", env: :staging
+
     # Ensure the application configuration uses the DEFAULT_HOST environment
     # variable to set up support for reverse routing absolute URLS (needed when
     # generating Webhook URLs for example).
     application "routes.default_url_options[:host] = ENV['DEFAULT_HOST']\n"
     application "# Set the default host for absolute URL routing purposes"
 
-    # Configure React in development and production.
+    # Configure React in development, staging, and production.
     application "config.react.variant = :development", env: :development
     application "# Use development variant of React in development.", env: :development
+
+    application "config.react.variant = :production", env: :staging
+    application "# Use production variant of React in staging.", env: :staging
+
     application "config.react.variant = :production", env: :production
     application "# Use production variant of React in production.", env: :production
 
@@ -137,12 +153,12 @@ class DiscoAppGenerator < Rails::Generators::Base
         end
     CONFIG
     application configuration, env: :production
+    application configuration, env: :staging
 
     # Monitoring configuration
     copy_file 'initializers/rollbar.rb', 'config/initializers/rollbar.rb'
     copy_file 'config/newrelic.yml', 'config/newrelic.yml'
   end
-
 
   # Add entries to .env and .env.local
   def add_env_variables

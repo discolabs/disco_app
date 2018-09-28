@@ -2,7 +2,8 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
-No unreleased changes.
+### Changed
+- Support for multiple environments
 
 ## 0.15.2 - 2018-08-05
 ### Changed
@@ -27,7 +28,7 @@ No unreleased changes.
 
 ## 0.14.4 - 2018-05-18
 ### Changed
-- Bugfix for case-insensitive comparison in `has_tag?` taggable method 
+- Bugfix for case-insensitive comparison in `has_tag?` taggable method
 
 ## 0.14.3 - 2018-05-02
 ### Changed
@@ -49,7 +50,7 @@ No unreleased changes.
 ## 0.14.0 - 2018-02-28
 ### Added
 - Add README template
-- Add Rollbar Rake task 
+- Add Rollbar Rake task
 
 ### Changed
 - Update to Ruby 2.5.0
@@ -230,7 +231,7 @@ as the login redirection is handled from shopify omniauth
 ### Added
 - `Taggable` concern for models representing synchronised Shopify resources that
   can have tags applied.
-- `synchronise_all` class method for models with the `Synchronises` concern.  
+- `synchronise_all` class method for models with the `Synchronises` concern.
 
 ## 0.9.6 - 2016-06-08
 ### Added
@@ -338,7 +339,7 @@ as the login redirection is handled from shopify omniauth
 - Move `Rails.configuration.x.shopify_app_name` to `DiscoApp.configuration`
 - Move `Rails.configuration.x.shopify_app_proxy_prefix` to
   `DiscoApp.configuration.app_proxy_prefix`
-- Update to latest versions of monitoring gems   
+- Update to latest versions of monitoring gems
 
 ## 0.8.3 - 2016-02-04
 ### Changed
