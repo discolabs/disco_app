@@ -1,9 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## 0.16.0 - 2018-10-01
 ### Changed
-- Support for multiple environments
+- Update to Rails 5.2
+- Add support for staging environment
+- Update Rubocop config and make sure generated files comply
 
 ## 0.15.2 - 2018-08-05
 ### Changed
