@@ -67,7 +67,7 @@ module DiscoApp::Concerns::RendersAssets
         assets: nil,
         triggered_by: nil,
         script_tags: nil,
-        minify: Rails.env.production?
+        minify: Rails.env.production? || Rails.env.staging?
       }
     end
 

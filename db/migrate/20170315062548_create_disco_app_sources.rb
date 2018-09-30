@@ -1,4 +1,5 @@
 class CreateDiscoAppSources < ActiveRecord::Migration[5.1]
+
   def change
     create_table :disco_app_sources do |t|
       t.string :source, null: true
@@ -7,4 +8,5 @@ class CreateDiscoAppSources < ActiveRecord::Migration[5.1]
     end
     add_index :disco_app_sources, :source
   end
+
 end
