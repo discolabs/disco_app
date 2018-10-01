@@ -46,7 +46,7 @@ DiscoApp::Engine.routes.draw do
   end
 
   # Make the Sidekiq Web UI accessible using the same credentials as the admin.
-  if Rails.env.production?
+  if Rails.env.production? || Rails.env.staging? 
     Sidekiq::Web.use Rack::Auth::Basic do |username, password|
       [
         ENV['ADMIN_APP_USERNAME'].present?,
