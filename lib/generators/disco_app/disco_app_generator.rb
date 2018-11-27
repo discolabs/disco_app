@@ -41,7 +41,7 @@ class DiscoAppGenerator < Rails::Generators::Base
     gem 'premailer-rails'
     gem 'react-rails'
     gem 'render_anywhere'
-    gem 'rollbar'
+    gem 'appsignal'
     gem 'shopify_app'
     gem 'sidekiq'
 
@@ -156,7 +156,7 @@ class DiscoAppGenerator < Rails::Generators::Base
     application configuration, env: :staging
 
     # Monitoring configuration
-    copy_file 'initializers/rollbar.rb', 'config/initializers/rollbar.rb'
+    copy_file 'config/appsignal.yml', 'config/appsignal.yml'
     copy_file 'config/newrelic.yml', 'config/newrelic.yml'
   end
 

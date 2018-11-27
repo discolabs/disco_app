@@ -72,12 +72,7 @@ module DiscoApp::Concerns::Shop
     def admin_url
       "https://#{shopify_domain}/admin"
     end
-
-    # Convenience method to get the email of the shop's admin, to display in Rollbar.
-    def email
-      data[:email]
-    end
-
+    
     def installed_duration
       distance_of_time_in_words_to_now(created_at.time)
     end
