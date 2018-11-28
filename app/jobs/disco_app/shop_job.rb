@@ -1,4 +1,4 @@
-require 'Appsignal'
+require 'appsignal'
 
 # The base class for all jobs that should be performed in the context of a
 # particular Shop's API session. The first argument to any job inheriting from
