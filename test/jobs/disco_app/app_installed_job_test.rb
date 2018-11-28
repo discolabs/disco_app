@@ -20,9 +20,11 @@ class DiscoApp::AppInstalledJobTest < ActionController::TestCase
   end
 
   test 'app installed job performs shop update job' do
-    # Assert the main install job can be enqueued and performed.
-    perform_enqueued_jobs do
-      DiscoApp::AppInstalledJob.perform_later(@shop)
+    with_suppressed_output do
+      # Assert the main install job can be enqueued and performed.
+      perform_enqueued_jobs do
+        DiscoApp::AppInstalledJob.perform_later(@shop)
+      end
     end
 
     # Assert the update shop job was performed.
@@ -33,8 +35,10 @@ class DiscoApp::AppInstalledJobTest < ActionController::TestCase
   test 'app installed job automatically subscribes stores to the correct default plan' do
     @shop.current_subscription.destroy
 
-    perform_enqueued_jobs do
-      DiscoApp::AppInstalledJob.perform_later(@shop)
+    with_suppressed_output do
+      perform_enqueued_jobs do
+        DiscoApp::AppInstalledJob.perform_later(@shop)
+      end
     end
 
     # Assert the shop was subscribed to the development plan.
@@ -44,8 +48,10 @@ class DiscoApp::AppInstalledJobTest < ActionController::TestCase
   test 'app installed job automatically subscribes stores to the correct default plan with a plan code and a source' do
     @shop.current_subscription.destroy
 
-    perform_enqueued_jobs do
-      DiscoApp::AppInstalledJob.perform_later(@shop, 'PODCAST', 'smp')
+    with_suppressed_output do
+      perform_enqueued_jobs do
+        DiscoApp::AppInstalledJob.perform_later(@shop, 'PODCAST', 'smp')
+      end
     end
 
     # Assert the shop was subscribed to the development plan.
@@ -54,4 +60,14 @@ class DiscoApp::AppInstalledJobTest < ActionController::TestCase
     assert_equal 'smpodcast', @shop.current_subscription.source.name
   end
 
+  private
+    # Prevents the output from the webhook synchronisation from 
+    # printing to STDOUT and messing up the test output
+    def with_suppressed_output
+      original_stdout = $stdout.clone
+      $stdout.reopen(File.new('/dev/null', 'w'))
+      yield
+    ensure
+      $stdout.reopen(original_stdout)
+    end
 end
