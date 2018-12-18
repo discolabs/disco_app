@@ -17,5 +17,8 @@ test:
   port: 5432
   database: disco_app_test
 
+staging:
+  <<: *default
+
 production:
   <<: *default
