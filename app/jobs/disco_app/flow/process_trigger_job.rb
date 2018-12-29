@@ -2,8 +2,8 @@ module DiscoApp
   module Flow
     class ProcessTriggerJob < DiscoApp::ShopJob
 
-      def perform(shop, trigger)
-        ProcessTrigger.call(shop: shop, trigger: trigger)
+      def perform(_shop, trigger)
+        ProcessTrigger.call(trigger: trigger)
       end
 
     end
