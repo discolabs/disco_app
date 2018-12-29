@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 2018_12_29_100327) do
 
   create_table "disco_app_flow_actions", force: :cascade do |t|
     t.bigint "shop_id"
+    t.string "action_id"
     t.string "action_run_id"
     t.jsonb "properties", default: {}
     t.integer "status", default: 0

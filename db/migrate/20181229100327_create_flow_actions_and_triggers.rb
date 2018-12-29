@@ -3,6 +3,7 @@ class CreateFlowActionsAndTriggers < ActiveRecord::Migration[5.2]
   def change
     create_table :disco_app_flow_actions do |t|
       t.integer :shop_id, limit: 8
+      t.string :action_id
       t.string :action_run_id
       t.jsonb :properties, default: {}
       t.integer :status, default: 0
