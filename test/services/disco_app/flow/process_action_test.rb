@@ -1,4 +1,15 @@
 require 'test_helper'
+require 'interactor'
+
+class TestActionId
+
+  include Interactor
+
+  def call
+    # noop
+  end
+
+end
 
 module DiscoApp
   module Flow
@@ -34,6 +45,22 @@ module DiscoApp
         @action.failed!
         result = ProcessAction.call(action: @action)
         assert_not result.success?
+      end
+
+      test 'processing pending action with existing service class succeeds' do
+        result = ProcessAction.call(action: @action)
+        assert result.success?
+        assert @action.succeeded?
+        assert_equal @now, @action.processed_at
+      end
+
+      test 'processing pending action with non-existent service class does not succeed' do
+        @action.update!(action_id: 'unknown_test_action_id')
+        result = ProcessAction.call(action: @action)
+        assert_not result.success?
+        assert @action.failed?
+        assert_equal @now, @action.processed_at
+        assert_equal ['Could not find service class for unknown_test_action_id'], @action.processing_errors
       end
 
     end
