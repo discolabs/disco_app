@@ -6,7 +6,7 @@ module DiscoApp
 
       include Interactor
 
-      delegate :shop, :title, :resource, :properties, :trigger, to: :context
+      delegate :shop, :title, :resource_name, :resource_url, :properties, :trigger, to: :context
 
       def call
         create_trigger
@@ -18,8 +18,8 @@ module DiscoApp
         def create_trigger
           context.trigger = shop.flow_triggers.create!(
             title: title,
-            resource_name: resource.flow_name,
-            resource_url: resource.flow_url,
+            resource_name: resource_name,
+            resource_url: resource_url,
             properties: properties
           )
         end

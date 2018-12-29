@@ -15,19 +15,19 @@ module DiscoApp
       end
 
       test 'call to create flow trigger creates model' do
-        result = CreateTrigger.call(shop: @shop, title: title, resource: resource, properties: properties)
+        result = CreateTrigger.call(shop: @shop, title: title, resource_name: resource_name, resource_url: resource_url, properties: properties)
         assert result.success?
         assert result.trigger.persisted?
         assert result.trigger.pending?
         assert_equal title, result.trigger.title
-        assert_equal resource.flow_name, result.trigger.resource_name
-        assert_equal resource.flow_url, result.trigger.resource_url
+        assert_equal resource_name, result.trigger.resource_name
+        assert_equal resource_url, result.trigger.resource_url
         assert_equal properties, result.trigger.properties
       end
 
       test 'call to create flow trigger enqueues processing job' do
         assert_enqueued_with(job: ProcessTriggerJob) do
-          CreateTrigger.call(shop: @shop, title: title, resource: resource, properties: properties)
+          CreateTrigger.call(shop: @shop, title: title, resource_name: resource_name, resource_url: resource_url, properties: properties)
         end
       end
 
@@ -37,11 +37,12 @@ module DiscoApp
           'Test trigger'
         end
 
-        def resource
-          OpenStruct.new(
-            flow_name: 'test_resource_name',
-            flow_url: 'https://example.com/test-resource-url'
-          )
+        def resource_name
+          'test_resource_name'
+        end
+
+        def resource_url
+          'https://example.com/test-resource-url'
         end
 
         def properties
