@@ -1,5 +1,24 @@
 require 'rest-client'
 
+##
+# This file defines a very simple GraphQL API client to support a single type
+# of GraphQL API call for a Shopify store - sending a Shopify Flow trigger.
+#
+# We use this simple approach rather than using an existing GraphQL client
+# library such as https://github.com/github/graphql-client (either standalone
+# or as bundled with the Shopify API gem) for a couple of reasons:
+#
+#   - These libraries tend to presume that a single client instance is
+#     instantiated once and then reused across the application, which isn't the
+#     case when we're making API calls once per trigger for each background
+#     job.
+#   - These libraries make an API call to fetch the Shopify GraphQL schema on
+#     initialisation. The schema is very large, so the API call takes a number
+#     of seconds to complete and when parsed consumes a large amount of memory.
+#   - These libraries do not natively work well with the idea of a dynamic API
+#     endpoint (ie, changing the request URL frequently), which is required
+#     when making many requests to different Shopify stores.
+#
 module DiscoApp
   class GraphqlClient
 
@@ -8,8 +27,8 @@ module DiscoApp
     end
 
     ##
-    # Trigger a Shopify Flow trigger.
-    # Returns a tuple {Boolean, Array}
+    # Fire a Shopify Flow Trigger.
+    # Returns a tuple {Boolean, Array} representing {success, errors}.
     def create_flow_trigger(title, resource_name, resource_url, properties)
       body = {
         trigger_title: title,
