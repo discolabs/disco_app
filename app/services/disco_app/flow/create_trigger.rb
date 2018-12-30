@@ -6,7 +6,8 @@ module DiscoApp
 
       include Interactor
 
-      delegate :shop, :title, :resource_name, :resource_url, :properties, :trigger, to: :context
+      delegate :shop, :title, :resource_name, :resource_url, :properties, to: :context
+      delegate :trigger, to: :context
 
       def call
         create_trigger

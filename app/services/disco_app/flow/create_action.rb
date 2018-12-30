@@ -6,7 +6,8 @@ module DiscoApp
 
       include Interactor
 
-      delegate :shop, :action_id, :action_run_id, :properties, :action, to: :context
+      delegate :shop, :action_id, :action_run_id, :properties, to: :context
+      delegate :action, to: :context
 
       def call
         create_action

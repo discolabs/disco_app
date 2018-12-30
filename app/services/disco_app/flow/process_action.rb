@@ -6,7 +6,8 @@ module DiscoApp
 
       include Interactor
 
-      delegate :action, :action_service_class, to: :context
+      delegate :action, to: :context
+      delegate :action_service_class, to: :context
 
       def call
         validate_action

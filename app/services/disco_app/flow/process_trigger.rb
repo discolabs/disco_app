@@ -6,7 +6,8 @@ module DiscoApp
 
       include Interactor
 
-      delegate :trigger, :api_success, :api_errors, to: :context
+      delegate :trigger, to: :context
+      delegate :api_success, :api_errors, to: :context
 
       def call
         validate_trigger
