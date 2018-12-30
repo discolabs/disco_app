@@ -430,6 +430,170 @@ listen for the `app/uninstalled` and `shop/update` webhook topics.
 
 To check which webhooks are registered by your app run `shop.with_api_context{ShopifyAPI::Webhook.find(:all)}` from your console, where `shop = DiscoApp::Shop.find(your_shop_id)`. 
 
+### Shopify Flow
+The gem provides support for [Shopify Flow Connectors][], allowing applications
+built with this framework to define and send triggers and receive and process
+actions. Each trigger that's created or action that's received is stored in the
+database as `DiscoApp::Flow::Trigger` and `DiscoApp::Flow::Action` models
+respectively.
+
+Triggers and actions are processed asynchronously as background jobs. The
+success or failure of a trigger or action is stored in a `status` attribute in
+the models. If a trigger or action fails for any reason, the reported reasons
+for failure are stored in a `processing_errors` attribute.
+
+Applications that are sending a lot of triggers, or receiving a lot of actions,
+may want to clear out the trigger and action database tables periodically.
+
+[Shopify Flow Connectors]: https://help.shopify.com/en/api/embedded-apps/app-extensions/flow
+
+#### Triggers
+Shopify Flow Triggers are events that happen inside a Shopify app that can be
+used inside Shopify Flow to start workflows. There's no special configuration
+that you need to undertake to start using Flow triggers with a Disco App -
+assuming that you've [defined a trigger][] in your application's configuration
+from the Shopify Partner dashboard, you can fire that trigger with the
+following code:
+
+```ruby
+DiscoApp::Flow::CreateTrigger.call(
+  shop: @shop,
+  title: 'Customer became a VIP',
+  resource_name: 'Customer Jane Doe',
+  resource_url: 'https://store.myshopify.com/admin/customers/734299256292',
+  properties: {
+    'Customer email' => 'jane.doe@example.com'
+  }
+)
+```
+
+Upon execution, a new `DiscoApp::Flow::Trigger` model will be persisted and a
+background job enqueued to send the trigger information to the relevant Shopify
+store's GraphQL API endpoint.
+
+The arguments passed to the `CreateTrigger` method are:
+
+- `shop`: The relevant `DiscoApp::Shop` instance the trigger relates to;
+- `title`: The title of the trigger. This must exactly match the title of the
+   trigger as defined from the Shopify Partner dashboard;
+- `resource_name`: A short description of the object the trigger relates to.
+   This is used by the Shopify Flow app to display workflow event history to
+   store owners;
+- `resource_url`: A URL that can be followed by a store owner to view more
+  information about the object the trigger relates to;
+- `properties`: A payload hash containing data about the trigger event that can
+  be used by merchants within their workflows. The presence and data types of
+  the values in this hash must exactly match those configured for the relevant
+  trigger in the Shopify Partner dashboard.
+
+[defined a trigger]: https://help.shopify.com/en/api/embedded-apps/app-extensions/flow/create-triggers
+
+#### Actions
+Shopify Flow Actions are the operations a Shopify application can perform as
+part of a workflow. Like Triggers, [Actions must be defined][] within the
+Shopify Partner Dashboard configuration page for the application. The Disco App
+gem provides an `DiscoApp::Flow::ActionsController`, which serves a similar
+function to the `DiscoApp::WebhooksController` - it receives and verifies
+incoming requests from Shopify before handing them off for processing.
+
+Unlike webhook processing, incoming actions are persisted to the database in
+the form of a `DiscoApp::Flow::Action` model before being processed. When
+attempting to process an action, Disco App will attempt to find, instantiate
+and call a service object with the same name as the `action_id` of the
+relevant action. The `action_id` is determined by the URL used by Shopify to
+send the action payload.
+
+To take an example, an action may be configured in the Shopify Dashboard with
+the following attributes:
+
+- Action title: `Email customer`;
+- Action description: `Send an email to a customer`;
+- HTTPS request URL: `https://example.discolabs.com/flow/action/email_customer`.
+
+When Shopify sends a request for this action, the `action_id` of the persisted
+action model will be `email_customer` (derived from the request URL). When
+trying to process this action, Disco App will attempt to look for either an
+`EmailCustomer` or `Flow::Actions::EmailCustomer` service object class within
+the current application. If found, the `call` method will be called on that
+object with the relevant `DiscoApp::Shop` instance and the provided action
+properties hash being passed as keyword arguments - essentially, something like
+this:
+
+```ruby
+Flow::Actions::EmailCustomer.call(shop: action.shop, properties: action.properties)
+```
+
+In this way Disco App expects applications using Shopify Flow actions to define
+service objects to process those actions using a typical Disco interactor
+pattern.
+
+[Actions must be defined]: https://help.shopify.com/en/api/embedded-apps/app-extensions/flow/create-actions
+
+#### Configuration
+Strictly speaking, the only two things that need to be done inside application
+code to support Shopify Flow Actions and Triggers are:
+
+1. Call `DiscoApp::Flow::CreateTrigger` anywhere in your code where a trigger
+   should be fired;
+2. Create a `Flow::Actions::ActionName` service object class for each action
+   you'd like your application to be able to process.
+   
+Assuming you've configured your application's Flow integration correctly from
+the Shopify Partner dashboard, the sending of triggers and receiving of actions
+should then "just work".
+
+However, to help maintain an overview of the actions and triggers supported by
+your application with its codebase, it's recommended to maintain two additional
+initializers in your application's configuration that describe them. These
+files should then be treated as the source of truth for your application's 
+actions and triggers, and should be referenced when setting up or updating your
+application's Flow configuration from the Partner Dashboard.
+
+Examples of each initializer follow.
+
+```ruby
+# config/initializers/disco_app_flow_actions.rb
+DiscoApp.configure do |config|
+  config.flow_actions = {
+    email_customer: {
+      title: 'Email customer',
+      description: 'Send an email to a customer',
+      properties: [
+        {
+          name: 'customer_email',
+          label: 'Customer email',
+          help_text: 'The email address of the customer.',
+          type: :email,
+          required: true
+        }
+      ]
+    }
+  }
+end
+```
+
+```ruby
+# config/initializers/disco_app_flow_triggers.rb
+DiscoApp.configure do |config|
+  config.flow_triggers = {
+    customer_became_a_vip: {
+      title: 'Customer became a VIP',
+      description: 'A customer successfully qualified for VIP status.',
+      properties: [
+        {
+          name: 'Customer email',
+          description: 'The email address of the customer.',
+          type: :email
+        }
+      ]
+    }
+  }
+end
+```
+
+In future versions of Disco App, the creation of triggers and the processing of
+actions may be validated against the schema defined in these initializers.
+
 ### Asset Rendering
 It's a pretty common pattern for apps to want to render and update Shopify
 assets (Javascript, stylesheets, Liquid snippets etc) whenever a store owner
