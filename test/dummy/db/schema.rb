@@ -180,8 +180,8 @@ ActiveRecord::Schema.define(version: 2018_12_29_100327) do
   add_foreign_key "carts", "disco_app_shops", column: "shop_id"
   add_foreign_key "disco_app_application_charges", "disco_app_shops", column: "shop_id"
   add_foreign_key "disco_app_application_charges", "disco_app_subscriptions", column: "subscription_id"
-  add_foreign_key "disco_app_flow_actions", "disco_app_shops", column: "shop_id"
-  add_foreign_key "disco_app_flow_triggers", "disco_app_shops", column: "shop_id"
+  add_foreign_key "disco_app_flow_actions", "disco_app_shops", column: "shop_id", on_delete: :cascade
+  add_foreign_key "disco_app_flow_triggers", "disco_app_shops", column: "shop_id", on_delete: :cascade
   add_foreign_key "disco_app_plan_codes", "disco_app_plans", column: "plan_id"
   add_foreign_key "disco_app_recurring_application_charges", "disco_app_shops", column: "shop_id"
   add_foreign_key "disco_app_recurring_application_charges", "disco_app_subscriptions", column: "subscription_id"

@@ -24,8 +24,8 @@ class CreateFlowActionsAndTriggers < ActiveRecord::Migration[5.2]
       t.timestamps null: false
     end
 
-    add_foreign_key :disco_app_flow_actions, :disco_app_shops, column: :shop_id
-    add_foreign_key :disco_app_flow_triggers, :disco_app_shops, column: :shop_id
+    add_foreign_key :disco_app_flow_actions, :disco_app_shops, column: :shop_id, on_delete: :cascade
+    add_foreign_key :disco_app_flow_triggers, :disco_app_shops, column: :shop_id, on_delete: :cascade
     add_index :disco_app_flow_actions, :action_run_id, unique: true
   end
 
