@@ -4,8 +4,12 @@ an application between one release version of the gem to the next. It's intended
 as more in-depth accompaniment to the notes in `CHANGELOG.md` for each version.
 
 ## Upgrading from 0.16.0 to Unreleased (inclusive)
-No changes required.
+Ensure database migrations are brought across and run:
 
+```
+bundle exec rake disco_app:install:migrations`
+bundle exec rake db:migrate
+```
 
 ## Upgrading from 0.15.2 to 0.16.0 (inclusive)
 Upgrade your app to Rails version 5.2. See the [Rails upgrade docs](https://guides.rubyonrails.org/upgrading_ruby_on_rails.html#upgrading-from-rails-5-1-to-rails-5-2).
