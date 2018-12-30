@@ -28,7 +28,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'jquery-rails', '~> 4.3'
   s.add_runtime_dependency 'turbolinks', '~> 5.0'
   s.add_runtime_dependency 'shopify_app', '~> 7.2', '>= 7.2.3'
-  s.add_runtime_dependency 'shopify_api', '~> 5.2'
   s.add_runtime_dependency 'puma', '~> 3.9'
   s.add_runtime_dependency 'sidekiq', '~> 5.0'
   s.add_runtime_dependency 'pg', '~> 0.21.0'
