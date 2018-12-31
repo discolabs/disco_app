@@ -48,6 +48,8 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'newrelic_rpm', '~> 3.15'
   s.add_runtime_dependency 'mailgun_rails', '~> 0.8'
   s.add_runtime_dependency 'activemodel-serializers-xml', '~> 1.0'
+  s.add_runtime_dependency 'interactor'
+  s.add_runtime_dependency 'interactor-rails'
 
   s.add_development_dependency 'dotenv-rails', '~> 2.0'
   s.add_development_dependency 'minitest-reporters', '1.1.9'
