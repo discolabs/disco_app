@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## 0.16.1 - 2019-01-01
 ### Added
 - Support for Shopify Flow triggers and actions
 
