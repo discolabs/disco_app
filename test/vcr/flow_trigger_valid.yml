@@ -1,0 +1,38 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://widgets.myshopify.com/admin/api/graphql.json
+    body:
+      encoding: UTF-8
+      string: '{"query":"\n        mutation {\n          flowTriggerReceive(body: \"{\\\"trigger_title\\\":\\\"Test trigger\\\",\\\"resources\\\":[{\\\"name\\\":\\\"test_resource_name\\\",\\\"url\\\":\\\"https://example.com/test-resource-url\\\"}],\\\"properties\\\":{\\\"Customer email\\\":\\\"name@example.com\\\"}}\") {\n            userErrors {\n              field,\n              message\n            }\n          }\n        }\n      "}'
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Type:
+      - application/json
+      X-Shopify-Access-Token:
+      - 00000000000000000000000000000000
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sat, 29 Dec 2018 11:46:27 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"flowTriggerReceive":{"userErrors":[]}},"extensions":{"cost":{"requestedQueryCost":1,"actualQueryCost":1,"throttleStatus":{"maximumAvailable":2000.0,"currentlyAvailable":1999,"restoreRate":100.0}}}}'
+    http_version:
+  recorded_at: Sat, 29 Dec 2018 11:46:27 GMT
+recorded_with: VCR 3.0.3
