@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170606160751) do
+ActiveRecord::Schema.define(version: 2018_12_29_100327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,12 +24,12 @@ ActiveRecord::Schema.define(version: 20170606160751) do
     t.index ["token"], name: "index_carts_on_token", unique: true
   end
 
-  create_table "disco_app_app_settings", force: :cascade do |t|
+  create_table "disco_app_app_settings", id: :serial, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "disco_app_application_charges", force: :cascade do |t|
+  create_table "disco_app_application_charges", id: :serial, force: :cascade do |t|
     t.bigint "shop_id"
     t.bigint "subscription_id"
     t.integer "status", default: 0
@@ -39,7 +39,33 @@ ActiveRecord::Schema.define(version: 20170606160751) do
     t.string "confirmation_url"
   end
 
-  create_table "disco_app_plan_codes", force: :cascade do |t|
+  create_table "disco_app_flow_actions", force: :cascade do |t|
+    t.bigint "shop_id"
+    t.string "action_id"
+    t.string "action_run_id"
+    t.jsonb "properties", default: {}
+    t.integer "status", default: 0
+    t.datetime "processed_at"
+    t.jsonb "processing_errors", default: []
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["action_run_id"], name: "index_disco_app_flow_actions_on_action_run_id", unique: true
+  end
+
+  create_table "disco_app_flow_triggers", force: :cascade do |t|
+    t.bigint "shop_id"
+    t.string "title"
+    t.string "resource_name"
+    t.string "resource_url"
+    t.jsonb "properties", default: {}
+    t.integer "status", default: 0
+    t.datetime "processed_at"
+    t.jsonb "processing_errors", default: []
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "disco_app_plan_codes", id: :serial, force: :cascade do |t|
     t.bigint "plan_id"
     t.string "code"
     t.integer "trial_period_days"
@@ -49,7 +75,7 @@ ActiveRecord::Schema.define(version: 20170606160751) do
     t.integer "status", default: 0
   end
 
-  create_table "disco_app_plans", force: :cascade do |t|
+  create_table "disco_app_plans", id: :serial, force: :cascade do |t|
     t.integer "status", default: 0
     t.string "name"
     t.integer "plan_type", default: 0
@@ -62,7 +88,7 @@ ActiveRecord::Schema.define(version: 20170606160751) do
     t.integer "interval_count", default: 1
   end
 
-  create_table "disco_app_recurring_application_charges", force: :cascade do |t|
+  create_table "disco_app_recurring_application_charges", id: :serial, force: :cascade do |t|
     t.bigint "shop_id"
     t.bigint "subscription_id"
     t.integer "status", default: 0
@@ -72,7 +98,7 @@ ActiveRecord::Schema.define(version: 20170606160751) do
     t.string "confirmation_url"
   end
 
-  create_table "disco_app_sessions", force: :cascade do |t|
+  create_table "disco_app_sessions", id: :serial, force: :cascade do |t|
     t.string "session_id", null: false
     t.text "data"
     t.datetime "created_at", null: false
@@ -82,7 +108,7 @@ ActiveRecord::Schema.define(version: 20170606160751) do
     t.index ["updated_at"], name: "index_disco_app_sessions_on_updated_at"
   end
 
-  create_table "disco_app_shops", force: :cascade do |t|
+  create_table "disco_app_shops", id: :serial, force: :cascade do |t|
     t.string "shopify_domain", null: false
     t.string "shopify_token", null: false
     t.datetime "created_at", null: false
@@ -95,7 +121,7 @@ ActiveRecord::Schema.define(version: 20170606160751) do
     t.index ["shopify_domain"], name: "index_disco_app_shops_on_shopify_domain", unique: true
   end
 
-  create_table "disco_app_sources", force: :cascade do |t|
+  create_table "disco_app_sources", id: :serial, force: :cascade do |t|
     t.string "source"
     t.string "name"
     t.datetime "created_at", null: false
@@ -103,7 +129,7 @@ ActiveRecord::Schema.define(version: 20170606160751) do
     t.index ["source"], name: "index_disco_app_sources_on_source"
   end
 
-  create_table "disco_app_subscriptions", force: :cascade do |t|
+  create_table "disco_app_subscriptions", id: :serial, force: :cascade do |t|
     t.integer "shop_id"
     t.integer "plan_id"
     t.integer "status"
@@ -121,7 +147,7 @@ ActiveRecord::Schema.define(version: 20170606160751) do
     t.index ["shop_id"], name: "index_disco_app_subscriptions_on_shop_id"
   end
 
-  create_table "disco_app_users", force: :cascade do |t|
+  create_table "disco_app_users", id: :serial, force: :cascade do |t|
     t.bigint "shop_id"
     t.string "first_name"
     t.string "last_name"
@@ -154,6 +180,8 @@ ActiveRecord::Schema.define(version: 20170606160751) do
   add_foreign_key "carts", "disco_app_shops", column: "shop_id"
   add_foreign_key "disco_app_application_charges", "disco_app_shops", column: "shop_id"
   add_foreign_key "disco_app_application_charges", "disco_app_subscriptions", column: "subscription_id"
+  add_foreign_key "disco_app_flow_actions", "disco_app_shops", column: "shop_id", on_delete: :cascade
+  add_foreign_key "disco_app_flow_triggers", "disco_app_shops", column: "shop_id", on_delete: :cascade
   add_foreign_key "disco_app_plan_codes", "disco_app_plans", column: "plan_id"
   add_foreign_key "disco_app_recurring_application_charges", "disco_app_shops", column: "shop_id"
   add_foreign_key "disco_app_recurring_application_charges", "disco_app_subscriptions", column: "subscription_id"
