@@ -15,6 +15,10 @@ module DiscoApp::Concerns::Shop
     # Define relationship to sessions.
     has_many :sessions, class_name: 'DiscoApp::Session', dependent: :destroy
 
+    # Define relationship to Flow actions and triggers.
+    has_many :flow_actions, class_name: 'DiscoApp::Flow::Action', dependent: :destroy
+    has_many :flow_triggers, class_name: 'DiscoApp::Flow::Trigger', dependent: :destroy
+
     # Define possible installation statuses as an enum.
     enum status: {
       never_installed: 0,
