@@ -55,4 +55,13 @@ class DiscoApp::WebhooksControllerTest < ActionController::TestCase
     end
   end
 
+  test 'webhook request for unknown topic returns success' do
+    body = '{}'
+    @request.headers['HTTP_X_SHOPIFY_TOPIC'] = :'app/unknown'
+    @request.headers['HTTP_X_SHOPIFY_SHOP_DOMAIN'] = @shop.shopify_domain
+    @request.headers['HTTP_X_SHOPIFY_HMAC_SHA256'] = DiscoApp::WebhookService.calculated_hmac(body, ShopifyApp.configuration.secret)
+    post :process_webhook, body: body
+    assert_response :ok
+  end
+
 end

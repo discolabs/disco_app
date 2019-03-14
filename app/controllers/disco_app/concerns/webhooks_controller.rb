@@ -13,15 +13,17 @@ module DiscoApp::Concerns::WebhooksController
 
     # Ensure a domain was provided in the headers.
     unless shopify_domain
-      head :bad_request
+      return head :bad_request
     end
 
     # Try to find a matching background job task for the given topic using class name.
     job_class = DiscoApp::WebhookService.find_job_class(topic)
 
-    # Return bad request if we couldn't match a job class.
+    # Return when we don't have the matching job class (a topic that
+    # can't be currently dealt with).  It's important to not return an
+    # error otherwise the webhook may be removed by Shopify.
     unless job_class.present?
-      head :bad_request
+      return render body: nil
     end
 
     # Decode the body data and enqueue the appropriate job.
