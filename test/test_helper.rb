@@ -61,11 +61,13 @@ class ActiveSupport::TestCase
   def log_in_as(shop)
     session[:shopify] = shop.id
     session[:shopify_domain] = shop.shopify_domain
+    session[:api_version] = shop.api_version
   end
 
   def log_out
     session[:shopify] = nil
     session[:shopify_domain] = nil
+    session[:api_version] = nil
   end
 
 end

@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://widgets.myshopify.com/admin/webhooks.json
+    uri: https://widgets.myshopify.com/admin/api/2019-04/webhooks.json
     body:
       encoding: US-ASCII
       string: ''
@@ -95,7 +95,7 @@ http_interactions:
   recorded_at: Sun, 07 Jan 2018 22:02:25 GMT
 - request:
     method: post
-    uri: https://widgets.myshopify.com/admin/webhooks.json
+    uri: https://widgets.myshopify.com/admin/api/2019-04/webhooks.json
     body:
       encoding: UTF-8
       string: '{"webhook":{"topic":"app/uninstalled","address":"https://test.example.com/webhooks","format":"json"}}'
@@ -185,7 +185,7 @@ http_interactions:
   recorded_at: Sun, 07 Jan 2018 22:02:26 GMT
 - request:
     method: post
-    uri: https://widgets.myshopify.com/admin/webhooks.json
+    uri: https://widgets.myshopify.com/admin/api/2019-04/webhooks.json
     body:
       encoding: UTF-8
       string: '{"webhook":{"topic":"shop/update","address":"https://test.example.com/webhooks","format":"json"}}'
@@ -275,7 +275,7 @@ http_interactions:
   recorded_at: Sun, 07 Jan 2018 22:02:28 GMT
 - request:
     method: post
-    uri: https://widgets.myshopify.com/admin/webhooks.json
+    uri: https://widgets.myshopify.com/admin/api/2019-04/webhooks.json
     body:
       encoding: UTF-8
       string: '{"webhook":{"topic":"orders/create","address":"https://test.example.com/webhooks","format":"json"}}'
@@ -366,7 +366,7 @@ http_interactions:
   recorded_at: Sun, 07 Jan 2018 22:02:29 GMT
 - request:
     method: post
-    uri: https://widgets.myshopify.com/admin/webhooks.json
+    uri: https://widgets.myshopify.com/admin/api/2019-04/webhooks.json
     body:
       encoding: UTF-8
       string: '{"webhook":{"topic":"orders/paid","address":"https://test.example.com/webhooks","format":"json"}}'
@@ -457,7 +457,7 @@ http_interactions:
   recorded_at: Sun, 07 Jan 2018 22:02:30 GMT
 - request:
     method: post
-    uri: https://widgets.myshopify.com/admin/webhooks.json
+    uri: https://widgets.myshopify.com/admin/api/2019-04/webhooks.json
     body:
       encoding: UTF-8
       string: '{"webhook":{"topic":"carts/create","address":"https://test.example.com/webhooks","format":"json"}}'
@@ -548,7 +548,7 @@ http_interactions:
   recorded_at: Sun, 07 Jan 2018 22:02:31 GMT
 - request:
     method: post
-    uri: https://widgets.myshopify.com/admin/webhooks.json
+    uri: https://widgets.myshopify.com/admin/api/2019-04/webhooks.json
     body:
       encoding: UTF-8
       string: '{"webhook":{"topic":"carts/update","address":"https://test.example.com/webhooks","format":"json"}}'

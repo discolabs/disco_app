@@ -12,7 +12,7 @@ module DiscoApp
       return unless id
 
       shop = Shop.find(id)
-      ShopifyAPI::Session.new(shop.shopify_domain, shop.shopify_token)
+      ShopifyAPI::Session.new(domain: shop.shopify_domain, token: shop.shopify_token, api_version: shop.api_version)
     rescue ActiveRecord::RecordNotFound
       nil
     end
