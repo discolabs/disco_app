@@ -787,7 +787,7 @@ At the view level, you should override `app/views/disco_app/admin/app_settings/e
 in order to add fields for the new settings you've created.
 
 
-### Helpers
+### View Helpers
 A number of view helpers designed to encapsulate common Shopify app
 functionality are included with the gem and are automatically imported and made
 available from within the main application helper.
@@ -819,6 +819,22 @@ passing the information into React components.
     errors: errors_to_react(@example_resource)
   })) %>
 ```
+
+
+### Console Helpers
+To make console-based application management easier, the gem also adds helper
+methods in the global namespace to help efficiency.
+
+#### find_shop
+Lets you look up a `DiscoApp::Shop` model quickly by Shopify or primary domain.
+
+```ruby
+# All the variations below will find the same shop
+find_shop 'lovisa-com'
+find_shop 'lovisa-com.myshopify.com'
+find_shop 'lovisa.com'
+```
+
 
 ### Extending Models
 The models that come with the `DiscoApp` engine (such as `DiscoApp::Shop`) can

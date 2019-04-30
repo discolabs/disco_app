@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## Unreleased
+### Added
+- New `find_shop` helper function
+
 ## 0.16.1 - 2019-01-01
 ### Added
 - Support for Shopify Flow triggers and actions
