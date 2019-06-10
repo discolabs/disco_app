@@ -48,7 +48,7 @@ end
 # Minitest helpers to give a better formatted and more helpful output in Rubymine
 require 'minitest/reporters'
 require 'minitest/autorun'
-MiniTest::Reporters.use!
+MiniTest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
 # Set up the base test class.
 class ActiveSupport::TestCase
@@ -67,5 +67,4 @@ class ActiveSupport::TestCase
     session[:shopify] = nil
     session[:shopify_domain] = nil
   end
-
 end
