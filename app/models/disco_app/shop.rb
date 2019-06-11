@@ -1,3 +1,3 @@
-class DiscoApp::Shop < ActiveRecord::Base
+class DiscoApp::Shop < ApplicationRecord
   include DiscoApp::Concerns::Shop
 end

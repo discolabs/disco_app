@@ -51,7 +51,7 @@ class DiscoApp::UserSessionsController < ApplicationController
     end
 
     def sanitized_shop_name
-      @shop.shopify_domain
+      @shop.present? ? @shop.shopify_domain : super
     end
 
 end

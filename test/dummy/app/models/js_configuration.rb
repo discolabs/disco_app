@@ -1,4 +1,4 @@
-class JsConfiguration < ActiveRecord::Base
+class JsConfiguration < ApplicationRecord
   include DiscoApp::Concerns::RendersAssets
 
   belongs_to :shop, class_name: 'DiscoApp::Shop'

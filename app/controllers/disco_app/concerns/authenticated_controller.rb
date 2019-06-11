@@ -4,12 +4,13 @@ module DiscoApp::Concerns::AuthenticatedController
 
   included do
     before_action :auto_login
+    before_action :check_shop_whitelist
     before_action :login_again_if_different_shop
     before_action :shopify_shop
     before_action :check_installed
     before_action :check_current_subscription
     before_action :check_active_charge
-    around_filter :shopify_session
+    around_action :shopify_session
     layout 'embedded_app'
   end
 
@@ -66,6 +67,14 @@ module DiscoApp::Concerns::AuthenticatedController
 
     def request_hmac_valid?
       DiscoApp::RequestValidationService.hmac_valid?(request.query_string, ShopifyApp.configuration.secret)
+    end
+
+    def check_shop_whitelist
+      if shop_session
+        if ENV['WHITELISTED_DOMAINS'].present? && !ENV['WHITELISTED_DOMAINS'].include?(shop_session.url)
+          redirect_to_login
+        end
+      end
     end
 
 end

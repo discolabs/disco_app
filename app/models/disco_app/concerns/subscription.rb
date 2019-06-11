@@ -5,13 +5,20 @@ module DiscoApp::Concerns::Subscription
 
     belongs_to :shop
     belongs_to :plan
-    belongs_to :plan_code
-    belongs_to :source
+    belongs_to :plan_code, optional: true
+    belongs_to :source, optional: true
     has_many :one_time_charges, class_name: 'DiscoApp::ApplicationCharge', dependent: :destroy
     has_many :recurring_charges, class_name: 'DiscoApp::RecurringApplicationCharge', dependent: :destroy
 
-    enum status: [:trial, :active, :cancelled]
-    enum subscription_type: [:recurring, :one_time]
+    enum status: {
+      trial: 0,
+      active: 1,
+      cancelled: 2
+    }
+    enum subscription_type: {
+      recurring: 0,
+      one_time: 1
+    }
 
     scope :current, -> { where status: [statuses[:trial], statuses[:active]] }
 

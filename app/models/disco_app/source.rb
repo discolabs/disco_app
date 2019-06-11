@@ -1,3 +1,3 @@
-class DiscoApp::Source < ActiveRecord::Base
+class DiscoApp::Source < ApplicationRecord
   include DiscoApp::Concerns::Source
 end

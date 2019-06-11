@@ -1,9 +1,82 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## 0.16.1 - 2019-01-01
+### Added
+- Support for Shopify Flow triggers and actions
+
+## 0.16.0 - 2018-10-01
+### Changed
+- Update to Rails 5.2
+- Add support for staging environment
+- Update Rubocop config and make sure generated files comply
+
+## 0.15.2 - 2018-08-05
+### Changed
+- Final (hopefully) bugfix for dotfolder problem
+
+## 0.15.1 - 2018-08-05
+### Changed
+- Actual fix for Github dotfolder problem
+- Updated release instructions for Gemfury
+
+## 0.15.0 - 2018-08-05
+### Changed
+- Webhook controller now a concern for extensibility
+
+## 0.14.5 - 2018-08-04
+### Added
+- VS code support
+
+### Changed
+- Init script fix
+- Github dotfile fix
+
+## 0.14.4 - 2018-05-18
+### Changed
+- Bugfix for case-insensitive comparison in `has_tag?` taggable method
+
+## 0.14.3 - 2018-05-02
+### Changed
+- Loosely set the Rails version to '~> 5.1.0' to allow minor patches
+
+## 0.14.2 - 2018-04-16
+### Added
+- New initialise.sh script to make starting applications a single command.
+
+### Changed
+- Fix for dotfiles not being included on Gemfury
+- Explicitly specify Rails '5.1', not '~> 5.1'
+
+## 0.14.1 - 2018-04-14
+### Changed
+- Bugfix for webhook controller authenticity token issue
+- Bugfix for proxy and webhook signature verification issue
+
+## 0.14.0 - 2018-02-28
+### Added
+- Add README template
+- Add Rollbar Rake task
+
+### Changed
+- Update to Ruby 2.5.0
+- Update to Rails 5.1
+- Improve webhooks sync output
+- Rubocop updates
+- Change source of `disco_app` gem to Gemfury
+
+## 0.13.8 - 2017-08-16
+### Added
+- Add ability to enforce a whitelist of stores that are allowed to install the app
+
+### Changed
+- Update to Ruby 2.4.1
+
+## 0.13.7 - 2017-07-22
 ### Added
 - Add a default `.editorconfig` to help enforce coding conventions
+- Added Partner app generator via a new PartnerAppService and rake task
+- Tweaked behaviour of `as_liquid` to allow overrides
 
 ## 0.13.6 - 2017-06-21
 ### Added
@@ -168,7 +241,7 @@ as the login redirection is handled from shopify omniauth
 ### Added
 - `Taggable` concern for models representing synchronised Shopify resources that
   can have tags applied.
-- `synchronise_all` class method for models with the `Synchronises` concern.  
+- `synchronise_all` class method for models with the `Synchronises` concern.
 
 ## 0.9.6 - 2016-06-08
 ### Added
@@ -276,7 +349,7 @@ as the login redirection is handled from shopify omniauth
 - Move `Rails.configuration.x.shopify_app_name` to `DiscoApp.configuration`
 - Move `Rails.configuration.x.shopify_app_proxy_prefix` to
   `DiscoApp.configuration.app_proxy_prefix`
-- Update to latest versions of monitoring gems   
+- Update to latest versions of monitoring gems
 
 ## 0.8.3 - 2016-02-04
 ### Changed

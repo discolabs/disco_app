@@ -3,7 +3,7 @@ class DiscoApp::RequestValidationService
   def self.hmac_valid?(query_string, secret)
     query_hash = Rack::Utils.parse_query(query_string)
     hmac = query_hash.delete('hmac').to_s
-    ActiveSupport::SecurityUtils.variable_size_secure_compare(self.calculated_hmac(query_hash, secret), hmac)
+    ActiveSupport::SecurityUtils.secure_compare(self.calculated_hmac(query_hash, secret), hmac)
   end
 
   # Return the calculated hmac for the given query hash and secret.

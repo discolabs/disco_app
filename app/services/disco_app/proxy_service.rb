@@ -5,7 +5,7 @@ class DiscoApp::ProxyService
   def self.proxy_signature_is_valid?(query_string, secret)
     query_hash = Rack::Utils.parse_query(query_string)
     signature = query_hash.delete('signature').to_s
-    ActiveSupport::SecurityUtils.variable_size_secure_compare(self.calculated_signature(query_hash, secret), signature)
+    ActiveSupport::SecurityUtils.secure_compare(self.calculated_signature(query_hash, secret), signature)
   end
 
   # Return the calculated signature for the given query hash and secret.

@@ -18,18 +18,18 @@ class ProxyControllerTest < ActionController::TestCase
   end
 
   test 'app proxy request with incorrect authentication information returns unauthorized' do
-    get(:index, proxy_params(shop: @shop.shopify_domain).merge(signature: 'invalid_signature'))
+    get :index, params: proxy_params(shop: @shop.shopify_domain).merge(signature: 'invalid_signature')
     assert_response :unauthorized
   end
 
   test 'app proxy request with correct authentication information returns ok and has shop context' do
-    get(:index, proxy_params(shop: @shop.shopify_domain))
+    get :index, params: proxy_params(shop: @shop.shopify_domain)
     assert_response :ok
     assert_equal @shop, assigns(:shop)
   end
 
   test 'app proxy request with correct authentication information but unknown shop returns 404' do
-    get(:index, proxy_params(shop: 'unknown.myshopify.com'))
+    get :index, params: proxy_params(shop: 'unknown.myshopify.com')
     assert_response :not_found
   end
 

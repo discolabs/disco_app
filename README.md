@@ -18,47 +18,52 @@ detailed below.
 
 ### 1. Setting up
 First make sure you've got all of the tools you need for Shopify and Rails
-development. You should read through the [General Development][] and
-[Rails Development][] sections on the Disco documentation site. The key things
-to note are:
+development. You should read through the [Getting Started] board in Guru and
+make sure you've followed all setup instructions there, specifically the cards
+on [Development Setup] and [Development Configuration]. The key things to note
+are:
 
 - You should have set up a Shopify Partner account to allow you to create
   development stores and applications;
 - [rbenv][] is recommended for Ruby version management;
-- You should have the latest version of Ruby 2.3.3 installed locally, along with
-  the `rails` and `bundler` gems;
-- You should have some form of HTTP tunnelling software like [ngrok][] or
-  [localtunnel][] installed.
-
-[General Development]: https://github.com/discolabs/docs/blob/master/sections/development.md#general-development
-[Rails Development]: https://github.com/discolabs/docs/blob/master/sections/development.md#rails-development
+- You should have the latest version of Ruby 2.5 installed locally, along with
+  the `rails` and `bundler` gems (make sure you have the version of Rails you'd
+  like to use installed - use `gem install rails -v VERSION` for this);
+- You should have [ngrok] installed for HTTP tunnelling;  
+- You should have followed the instructions in the Development Configuration Guru
+  card for configuring Bundler with credentials to access Disco's private Gemfury server.
+- You should have followed the instructions in the Development Configuration
+  Guru card to have generated a personal access token on Github and added it to
+  your development configuration.
+ 
+[Getting Started]: https://app.getguru.com/#/boards/30ff224a-3c2c-4d46-a6f0-f4dc3ced8fe1
+[Development Setup]: https://app.getguru.com/#/facts/b3677c35-6e1f-4b7b-954b-4f9f990adeff
+[Development Configuration]: https://app.getguru.com/#/facts/63da8b91-ec7f-4b75-ba19-8aa3e30ce777
 [rbenv]: https://github.com/sstephenson/rbenv
 [ngrok]: https://ngrok.com
-[localtunnel]: http://localtunnel.me
 
 ### 2. Creating the Rails app
-Running the following commands from your terminal to create a new Rails app,
+Running the following command from your terminal to create a new Rails app,
 add the DiscoApp Rails Engine to your Gemfile, and set up the Engine:
 
 ```
-$ export DISCO_GEM_CREDENTIALS=disco-gems:0dfbd458c126baa2744cef477b24c7cf7227fae5
-$ mkdir example_app
-$ cd example_app
-$ echo "source 'https://rubygems.org'" > Gemfile
-$ echo "gem 'rails', '~> 4.2'" >> Gemfile
-$ echo "2.3.3" > .ruby-version
-$ bundle install
-$ bundle exec rails new . --force --skip-bundle
-$ echo "gem 'disco_app', git: 'https://$DISCO_GEM_CREDENTIALS@github.com/discolabs/disco_app.git', tag: '0.13.6'" >> Gemfile
-$ bundle update
-$ bundle exec rails generate disco_app --force
-$ bundle install
+curl -H "Authorization: token $GITHUB_PERSONAL_ACCESS_TOKEN" \
+     -H "Accept: application/vnd.github.v4.raw" \
+     -L "https://raw.githubusercontent.com/discolabs/disco_app/master/initialise.sh" \
+     | bash -s example_app
 ```
 
-Note the `tag` option being added to the Gemfile - this pins the version of
-DiscoApp you'll be using and avoid accidentally pulling incompatible changes
-into your project when you run a `bundle update`. Double check that the tag
-number you're using is the latest version available.
+Be sure to change `example_app` to the desired name of your actual application.
+
+By default, the `initialise.sh` script uses the latest version of Ruby, Rails
+and the DiscoApp framework. If for any reason you need to specify which version
+of each of these to use, you can provide them as arguments on the last line. For
+example, to use Rails 4.2 with Ruby 2.4.1 and DiscoApp version 0.13.8, the last
+line of the command above should read:
+
+```
+    | bash -s example_app 4.2.0 2.4.1 0.13.8  
+```
 
 If you're app should be free of charge, you can append an option `-d` to
 the `disco_app` generator line which will automatically subscribe to the
@@ -76,22 +81,50 @@ In order to work on our app, we need to create a development application from
 the Shopify Partners dashboard. Once that's done, we can copy across the
 generated API credentials to our development app and perform a test install.
 
-To do this, open your Shopify Partner dashboard and create a new application
-from the "Apps" tab. Make sure the "Embedded App" option is selected. When
-prompted for the **Application URL**, enter the endpoint provided by your
-tunneling software - for example, `https://example.ngrok.io`. You can ignore the
-fields for **Preferences URL** and **Support URL** for now. The
-**Redirection URL** should be set to something like
-`https://example.ngrok.io/auth/shopify/callback`.
+DiscoApp provides a command line utility to quickly generate a new Shopify
+app via the partner dashboard. Before you can do this, you need to configure
+a couple of things.
 
-Once the application has been created on Shopify, copy over the API credentials
-to the `SHOPIFY_APP_API_KEY` and `SHOPIFY_APP_SECRET` values in the `.env.local` file
-located in the root directory of the Rails app (this file was created by the
-DiscoApp generator during step 2).
+#### Create a DiscoApp configuration file in your home directory
+First, you'll need to add your partner dashboard and Rollbar credentials to a DiscoApp
+configuration file in your home directory, `~/.disco_app.yml`:
 
-While the `.env.local` file is open, add in values for `DEFAULT_HOST` (this should be
-the tunnel endpoint), `SHOPIFY_APP_NAME`, `SHOPIFY_APP_REDIRECT_URI`,
-`SHOPIFY_APP_PROXY_PREFIX`, and `SHOPIFY_APP_SCOPE` (view a [list of scopes][]).
+```
+params:
+  PARTNER_EMAIL: "hello@discolabs.com"
+  PARTNER_PASSWORD: "***********"
+  PARTNER_ORGANIZATION: "Disco"
+  ROLLBAR_ACCOUNT_ACCESS_TOKEN_WRITE: "******************************"
+  ROLLBAR_ACCOUNT_ACCESS_TOKEN_READ: "******************************"
+```
+
+You can find your tokens in the Rollbar settings under 'Project Access Tokens'.
+If you don't yet have a Rollbar account you can leave out the bottom two lines for now.
+You'll only need to set this up the one time on your local machine.
+
+#### Configure initial values in local ENV file
+Next, you'll need to set a few of the basic configuration parameters for your
+app in `.env.local` in the application directory. The command line utility
+will use these to configure your app.
+
+You'll need to set values for `DEFAULT_HOST` (the base URL for your application,
+for example `https://example-app.ngrok.io`) and for `SHOPIFY_APP_NAME` (the name
+of the application).
+
+#### Creating and configuring your app
+With the above set up, you can now run the following from the command line to
+create a new app:
+
+```
+bundle exec rake generate:partner_app
+```
+
+The `.env.local` will be automatically populated with values for
+`SHOPIFY_APP_API_KEY` and `SHOPIFY_APP_SECRET`.
+
+While the `.env.local` file is open, add in values for`SHOPIFY_APP_PROXY_PREFIX`
+and `SHOPIFY_APP_SCOPE` (view a [list of scopes][]).
+
 The `SHOPIFY_CHARGES_REAL`, `SECRET_KEY_BASE` and `REDIS_PROVIDER` values can be
 left blank in development.
 
@@ -119,6 +152,19 @@ added to `.gitignore`. On the other side, `.env` is added to Git and should keep
 all the environment variables that are kept equal across the different environments.
 
 [list of scopes]: https://docs.shopify.com/api/authentication/oauth#scopes
+
+Finally, you'll want to add a subscription. Subscriptions are covered in more detail in the [Plans, Subscriptions, and Charges](#plans-subscriptions-and-charges) section. For now, we just want our stores to subscribe to a free plan. To do this, we need to add something like the following snippet to the `db/seeds.rb` file.
+
+```
+DiscoApp::Plan.find_or_create_by(
+  name: 'My Free App',
+  amount: 0,
+  trial_period_days: 0
+)
+```
+
+Run `bundle exec rake db:seed` and you're done!
+
 
 ### 4. Putting it all together
 Finally, we're ready to test the installation of the development app. First,
@@ -163,12 +209,12 @@ The following gems are added during setup:
 - [pg][] for Postgres use in all environments: development, test and production;
 - [dotenv-rails][] for reading environment variables from `.env` files in
   development;
-- [rails_12factor][] for use with Heroku/Dokku in production.
-- [activeresource][] , the threadsafe branch, which is used by the Shopify API gem.
-- [mailgun_rails][] for sending email programatically via the Mailgun service.
-- [premailer_rails][] support for styling HTML emails with CSS
-- [rollbar][] Exception tracking and logging
-- [newrelic_rpm][] New Relic RPM Ruby Agent
+- [rails_12factor][] for use with Heroku/Dokku in production;
+- [activeresource][] for Shopify to communicate with REST web service;
+- [mailgun_rails][] for sending email programatically via the Mailgun service;
+- [premailer_rails][] support for styling HTML emails with CSS;
+- [rollbar][] Exception tracking and logging;
+- [newrelic_rpm][] New Relic RPM Ruby Agent.
 
 The following configuration changes are made:
 
@@ -193,7 +239,7 @@ Finally, the following environment changes are made:
 [pg]: https://bitbucket.org/ged/ruby-pg
 [dotenv-rails]: https://github.com/bkeepers/dotenv
 [rails_12factor]: https://github.com/heroku/rails_12factor
-[activeresource]: https://github.com/Shopify/activeresource/tree/4.2-threadsafe
+[activeresource]: https://github.com/rails/activeresource
 [mailgun_rails]: https://github.com/jorgemanrubia/mailgun_rails
 [premailer_rails]: https://github.com/fphilipe/premailer-rails
 [rollbar]: https://github.com/rollbar/rollbar-gem
@@ -310,6 +356,8 @@ There's a number of useful Rake tasks that are baked into the app. They are:
   the database has been imported or migrated.
 - `rake shops:sync`: Synchronises shop data across all installed shops.
 - `rake users:sync`: Synchronises user data across all installed shops.
+- `rake generate:partner_app`: Generates an app on the Disco Partner Dashboard
+- `rake generate:rollbar_project`: Generates a Rollbar Project
 
 ### Background Tasks
 The `DiscoApp::ShopJob` class inherits from `ActiveJob::Base`, and can be used
@@ -387,6 +435,172 @@ relevant `*Job` class.
 Webhooks should generally be created inside the `perform` method of the
 `DiscoApp::AppInstalledJob` background task. By default, webhooks are set up to
 listen for the `app/uninstalled` and `shop/update` webhook topics.
+
+To check which webhooks are registered by your app run `shop.with_api_context{ShopifyAPI::Webhook.find(:all)}` from your console, where `shop = DiscoApp::Shop.find(your_shop_id)`. 
+
+### Shopify Flow
+The gem provides support for [Shopify Flow Connectors][], allowing applications
+built with this framework to define and send triggers and receive and process
+actions. Each trigger that's created or action that's received is stored in the
+database as `DiscoApp::Flow::Trigger` and `DiscoApp::Flow::Action` models
+respectively.
+
+Triggers and actions are processed asynchronously as background jobs. The
+success or failure of a trigger or action is stored in a `status` attribute in
+the models. If a trigger or action fails for any reason, the reported reasons
+for failure are stored in a `processing_errors` attribute.
+
+Applications that are sending a lot of triggers, or receiving a lot of actions,
+may want to clear out the trigger and action database tables periodically.
+
+[Shopify Flow Connectors]: https://help.shopify.com/en/api/embedded-apps/app-extensions/flow
+
+#### Triggers
+Shopify Flow Triggers are events that happen inside a Shopify app that can be
+used inside Shopify Flow to start workflows. There's no special configuration
+that you need to undertake to start using Flow triggers with a Disco App -
+assuming that you've [defined a trigger][] in your application's configuration
+from the Shopify Partner dashboard, you can fire that trigger with the
+following code:
+
+```ruby
+DiscoApp::Flow::CreateTrigger.call(
+  shop: @shop,
+  title: 'Customer became a VIP',
+  resource_name: 'Customer Jane Doe',
+  resource_url: 'https://store.myshopify.com/admin/customers/734299256292',
+  properties: {
+    'Customer email' => 'jane.doe@example.com'
+  }
+)
+```
+
+Upon execution, a new `DiscoApp::Flow::Trigger` model will be persisted and a
+background job enqueued to send the trigger information to the relevant Shopify
+store's GraphQL API endpoint.
+
+The arguments passed to the `CreateTrigger` method are:
+
+- `shop`: The relevant `DiscoApp::Shop` instance the trigger relates to;
+- `title`: The title of the trigger. This must exactly match the title of the
+   trigger as defined from the Shopify Partner dashboard;
+- `resource_name`: A short description of the object the trigger relates to.
+   This is used by the Shopify Flow app to display workflow event history to
+   store owners;
+- `resource_url`: A URL that can be followed by a store owner to view more
+  information about the object the trigger relates to;
+- `properties`: A payload hash containing data about the trigger event that can
+  be used by merchants within their workflows. The presence and data types of
+  the values in this hash must exactly match those configured for the relevant
+  trigger in the Shopify Partner dashboard.
+
+[defined a trigger]: https://help.shopify.com/en/api/embedded-apps/app-extensions/flow/create-triggers
+
+#### Actions
+Shopify Flow Actions are the operations a Shopify application can perform as
+part of a workflow. Like Triggers, [Actions must be defined][] within the
+Shopify Partner Dashboard configuration page for the application. The Disco App
+gem provides an `DiscoApp::Flow::ActionsController`, which serves a similar
+function to the `DiscoApp::WebhooksController` - it receives and verifies
+incoming requests from Shopify before handing them off for processing.
+
+Unlike webhook processing, incoming actions are persisted to the database in
+the form of a `DiscoApp::Flow::Action` model before being processed. When
+attempting to process an action, Disco App will attempt to find, instantiate
+and call a service object with the same name as the `action_id` of the
+relevant action. The `action_id` is determined by the URL used by Shopify to
+send the action payload.
+
+To take an example, an action may be configured in the Shopify Dashboard with
+the following attributes:
+
+- Action title: `Email customer`;
+- Action description: `Send an email to a customer`;
+- HTTPS request URL: `https://example.discolabs.com/flow/action/email_customer`.
+
+When Shopify sends a request for this action, the `action_id` of the persisted
+action model will be `email_customer` (derived from the request URL). When
+trying to process this action, Disco App will attempt to look for either an
+`EmailCustomer` or `Flow::Actions::EmailCustomer` service object class within
+the current application. If found, the `call` method will be called on that
+object with the relevant `DiscoApp::Shop` instance and the provided action
+properties hash being passed as keyword arguments - essentially, something like
+this:
+
+```ruby
+Flow::Actions::EmailCustomer.call(shop: action.shop, properties: action.properties)
+```
+
+In this way Disco App expects applications using Shopify Flow actions to define
+service objects to process those actions using a typical Disco interactor
+pattern.
+
+[Actions must be defined]: https://help.shopify.com/en/api/embedded-apps/app-extensions/flow/create-actions
+
+#### Configuration
+Strictly speaking, the only two things that need to be done inside application
+code to support Shopify Flow Actions and Triggers are:
+
+1. Call `DiscoApp::Flow::CreateTrigger` anywhere in your code where a trigger
+   should be fired;
+2. Create a `Flow::Actions::ActionName` service object class for each action
+   you'd like your application to be able to process.
+   
+Assuming you've configured your application's Flow integration correctly from
+the Shopify Partner dashboard, the sending of triggers and receiving of actions
+should then "just work".
+
+However, to help maintain an overview of the actions and triggers supported by
+your application with its codebase, it's recommended to maintain two additional
+initializers in your application's configuration that describe them. These
+files should then be treated as the source of truth for your application's 
+actions and triggers, and should be referenced when setting up or updating your
+application's Flow configuration from the Partner Dashboard.
+
+Examples of each initializer follow.
+
+```ruby
+# config/initializers/disco_app_flow_actions.rb
+DiscoApp.configure do |config|
+  config.flow_actions = {
+    email_customer: {
+      title: 'Email customer',
+      description: 'Send an email to a customer',
+      properties: [
+        {
+          name: 'customer_email',
+          label: 'Customer email',
+          help_text: 'The email address of the customer.',
+          type: :email,
+          required: true
+        }
+      ]
+    }
+  }
+end
+```
+
+```ruby
+# config/initializers/disco_app_flow_triggers.rb
+DiscoApp.configure do |config|
+  config.flow_triggers = {
+    customer_became_a_vip: {
+      title: 'Customer became a VIP',
+      description: 'A customer successfully qualified for VIP status.',
+      properties: [
+        {
+          name: 'Customer email',
+          description: 'The email address of the customer.',
+          type: :email
+        }
+      ]
+    }
+  }
+end
+```
+
+In future versions of Disco App, the creation of triggers and the processing of
+actions may be validated against the schema defined in these initializers.
 
 ### Asset Rendering
 It's a pretty common pattern for apps to want to render and update Shopify
@@ -513,8 +727,8 @@ works out of the box.
 To make the process of providing model data to Liquid templates, the DiscoApp
 Engine provides the `DiscoApp::Concerns::CanBeLiquified` concern. It will use
 the model's `as_json` method to get a list of serialised attributes for your
-model and returns the necessary Liquid `{% assigns %}` tags to provide that data
-inside a template.
+model and returns the necessary Liquid `{%- assign -%}` tags to provide that
+data inside a template.
 
 As an example, if you had a model `MyModel` that you wanted to render via an
 application proxy, you would have the following in your application's
@@ -709,20 +923,6 @@ class Product < ActiveRecord::Base
 end
 ```
 
-### Model Primary Keys
-We use the `rails-bigint-pk` gem in order to default to 64-bit integer IDs in
-our models (the Rails default is 32-bit). This allows us to have a 1:1 mapping
-on the `id` column between our application and Shopify, which uses 64-bit
-integers for their IDs.
-
-On installation, the `rails-bigint-pk` gem migrates all existing models to use
-the `bigint` type for the `id` field, and adds a `bigint_pk.rb` initializer
-which ensures `bigint` is used in all future migrations automatically. To make
-sure that this all works okay, make sure you use the `references` keyword in
-your migrations, rather than `integer`. If you do for some reason need to
-manually create columns storing references to other models, make sure you use
-`limit: 8` in the column definition.
-
 ### Model Metafields
 If you're writing resource metafields for your models via the Shopify API, you
 can include `DiscoApp::Concerns::HasMetafields` to gain access to a convenient
@@ -765,8 +965,12 @@ monitoring to the application.
 
 [Rollbar][] is used for exception tracking, and will be activated when a
 `ROLLBAR_ACCESS_TOKEN` environment variable is present. Rollbar access tokens
-are unique to each app - if you're deploying a new app and don't have a token,
-ask Gavin for one.
+are unique to each app. In order to generate a new token run
+`rake generate:rollbar_project`.
+Make sure you have configured your `~/.disco_app.yml` as per
+[the setup guide](#create-a-discoapp-configuration-file-in-your-home-directory)
+and that you have the necessary Rollbar permissions to create a project. You can
+specify an app name by adding APP_NAME='App Name'.
 
 [New Relic][] is used for application performance monitoring, and will be
 activated when a `NEW_RELIC_LICENSE_KEY` environment variable is present. There
@@ -822,6 +1026,34 @@ Check that:
 - You've correctly set `DEFAULT_HOST` in your local `ENV`;
 - You've correctly listed the redirect URI in the app on the partner dashboard.
 
+### Scheduled tasks aren't running
+Check that you've added the tasks to the server. This will look something like: 
+
+```  
+  dokku_apps:
+     - name: app-name
+       plugins: ['redis']
+       tasks:
+         - name: run scheduled imports (every 30 minutes)
+           job: rake run_scheduled_imports
+           minute: "0,30"
+         - name: run scheduled fetches (every 5 minutes)
+           job: rake run_scheduled_fetches
+           minute: "*/5"
+```
+
+Don't forget to provision the server after making changes: `./provision.sh server-name`. 
+
+### Webhooks aren't firing
+This is a pretty common problem and can be cause by a number of things. You can check if your webhook has registered by running `shop.with_api_context{ShopifyAPI::Webhook.find(:all)}` in a Rails console, where `shop = DiscoApp::Shop.find(your_shop_id)`. If it isn't registered, check the following things:
+
+1. Check you've run the `rake webhooks:sync` task 
+2. Check you've added the webhook topic to `config/initializers/disco_app.rb` and it's spelled correctly 
+3. Ensure you have a background job set up and named correctly with a `perform` method 
+4. Run `DiscoApp::Shop.installed.has_active_shopify_plan` from a console. If this doesn't return an active plan make sure `shop.status` is set to `'installed'`. 
+
+If you encounter other speedbumps with webhooks please add then to this list. 
+
 ## Contributing
 While developing Shopify applications using the DiscoApp Engine, you may see
 something that could be improved, or perhaps notice a pattern that's becoming
@@ -835,19 +1067,10 @@ to update the relevant section of this README as well.
 ## Releasing
 To create a new release of the application:
 
-1. Ensure the CHANGELOG is up to date by reviewing all commits since the last
-   release;
-2. Ensure the UPGRADING file contains all necessary instructions for upgrading
-   an application to the latest version of the gem.
-3. Ensure the README is accurate and up to date by reviewing all commits since
-   the last release;
-4. Update `lib/disco_app/version.rb` with the new version number;
-5. Update references to the latest version number in the README;
-6. Create a new commit with a commit message `vX.Y.Z`, where `X.Y.Z` is the
-   version number;
-7. Tag the new commit with a tag `X.Y.Z` (`git tag -a "X.Y.Z"`);
-8. `git push && git push --tags` to push the new release.
-
-See [an example release commit][].
-
-[an example release commit]: https://github.com/discolabs/disco_app/commit/0cb60a1c212f480af85ebb7c42188befb932a818
+1. In general, follow the instructions for [releasing an app to production with git flow](https://app.getguru.com/card/7idyndGi/Releasing-an-app-to-production-with-git-flow).
+2. During **Step 3** of the release process, in addition to bumping the version number in the `VERSION` file, you should:
+    1. Also update the version number in `version.rb` to match `VERSION`;
+    2. Ensure the `CHANGELOG` is up to date by reviewing all commits since the last release;
+    3. Ensure the `UPGRADING` file contains all necessary instructions for upgrading an application to the latest version of the gem;
+    4. Update `initialise.sh` to point to the latest version number of the gem.
+3. Once the git flow release steps have been completed, ensure you have the latest version of the `master` branch and push to Gemfury. See [uploading packages to Gemfury](https://gemfury.com/help/upload-packages) for instructions on this step if you haven't done it before.

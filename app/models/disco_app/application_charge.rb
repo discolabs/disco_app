@@ -1,9 +1,15 @@
-class DiscoApp::ApplicationCharge < ActiveRecord::Base
+class DiscoApp::ApplicationCharge < ApplicationRecord
 
   belongs_to :shop
   belongs_to :subscription
 
-  enum status: [:pending, :accepted, :declined, :expired, :active]
+  enum status: {
+    pending: 0,
+    accepted: 1,
+    declined: 2,
+    expired: 3,
+    active: 4,
+  }
 
   scope :active, -> { where status: statuses[:active] }
 

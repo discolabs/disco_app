@@ -3,12 +3,59 @@ This file contains more detailed instructions on what's required when updating
 an application between one release version of the gem to the next. It's intended
 as more in-depth accompaniment to the notes in `CHANGELOG.md` for each version.
 
-## Upgrading from 0.13.6 to Unreleased
+## Upgrading from 0.16.0 to 0.16.1
+Ensure new Shopify Flow database migrations are brought across and run:
+
+```
+bundle exec rake disco_app:install:migrations`
+bundle exec rake db:migrate
+```
+
+## Upgrading from 0.15.2 to 0.16.0 (inclusive)
+Upgrade your app to Rails version 5.2. See the [Rails upgrade docs](https://guides.rubyonrails.org/upgrading_ruby_on_rails.html#upgrading-from-rails-5-1-to-rails-5-2).
+
+One big change is the introduction of the [Credentials API](https://github.com/rails/rails/pull/30067), which is intended to replace `config/secrets.yml` and `config/secrets.yml.enc`, and works much like [Ansible Vault](https://docs.ansible.com/ansible/2.6/user_guide/vault.html). There's no need to migrate old secrets usage, since the two behaviours can sit side by side. However, if you do want to try it out, make sure to add the following to your `config/environments/*.rb` file:
+```
+config.require_master_key = true
+```
+
+## Upgrading from 0.14.0 to 0.15.2 (inclusive)
+No changes required.
+
+## Upgrading from 0.13.8 to 0.14.0
+Update your app's `.ruby-version` to 2.5.0.
+
+Upgrade your app to Rails version 5.1. See [the wiki](https://github.com/discolabs/disco_app/wiki/Upgrade-to-Rails-5.1)
+for detailed instructions on this upgrade.
+
+## Upgrading from 0.13.7 to 0.13.8
+Update your app's `.ruby-version` to 2.4.1.
+
+Upgrade your app to Rails version 4.2.8.
+
+```
+# when using homebrew and rbenv:
+brew update
+brew upgrade rbenv
+rbenv install 2.4.1
+```
+
+## Upgrading from 0.13.6 to 0.13.7
 ### New editor config file
 A new default `.editorconfig` configuration file has been added to the list of
 default files copied over in an initial `disco_app` install. For any existing
 apps, you should copy this file from `disco_app` into the root of your
 application directory.
+
+### New partner app generator
+A Shopify Partner app generator has been added, which allows you to create a new app
+for a given project via a task (refer to the [README](./README.md) for setup).
+For running this task on a pre-existing project, you will need to add the `mechanize`
+gem into `:development` group in the project's `Gemfile` and `bundle install`
+
+### Change to implementation of `as_liquid` in `CanBeLiquified` concern
+The implementation of `as_liquid` has changed (`to_liquid` remainins unchanged).
+Please check to see if your app calls `as_liquid` directly and update as required.
 
 ## Upgrading from 0.13.5 to 0.13.6
 No changes required.

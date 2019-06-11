@@ -15,8 +15,20 @@ module DiscoApp::Concerns::Shop
     # Define relationship to sessions.
     has_many :sessions, class_name: 'DiscoApp::Session', dependent: :destroy
 
+    # Define relationship to Flow actions and triggers.
+    has_many :flow_actions, class_name: 'DiscoApp::Flow::Action', dependent: :destroy
+    has_many :flow_triggers, class_name: 'DiscoApp::Flow::Trigger', dependent: :destroy
+
     # Define possible installation statuses as an enum.
-    enum status: [:never_installed, :awaiting_install, :installing, :installed, :awaiting_uninstall, :uninstalling, :uninstalled]
+    enum status: {
+      never_installed: 0,
+      awaiting_install: 1,
+      installing: 2,
+      installed: 3,
+      awaiting_uninstall: 4,
+      uninstalling: 5,
+      uninstalled: 6
+    }
 
     # Define some useful scopes.
     scope :status, -> (status) { where status: status }
@@ -63,11 +75,6 @@ module DiscoApp::Concerns::Shop
     # Return the absolute URL to the shop's admin.
     def admin_url
       "https://#{shopify_domain}/admin"
-    end
-
-    # Convenience method to get the email of the shop's admin, to display in Rollbar.
-    def email
-      data[:email]
     end
 
     def installed_duration

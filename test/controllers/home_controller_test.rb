@@ -93,7 +93,7 @@ class HomeControllerTest < ActionController::TestCase
     log_out
     Timecop.freeze('2017-03-08 12:44:58 +1100') do
       hmac = 'eb49ba93a8daf8a11a04c66129faf98de1cd40f082b0ae78e79a2dfbbefb438d'
-      get(:index, { hmac: hmac, shop: 'widgets-dev.myshopify.com', timestamp: Time.now.to_i })
+      get :index, params: { hmac: hmac, shop: 'widgets-dev.myshopify.com', timestamp: Time.now.to_i }
       assert_response  :success
     end
   end

@@ -9,11 +9,13 @@ class DiscoAppGenerator < Rails::Generators::Base
   #  - Slightly customised version of the default Rails .gitignore;
   #  - Default simple Procfile for Heroku;
   #  - .editorconfig to help enforce 2-space tabs, newlines and truncated whitespace for editors that support it.
+  #  - README/PULL REQUEST template
   #
   def copy_root_files
-    %w(.editorconfig .env .env.local .gitignore .rubocop.yml .codeclimate.yml Procfile CHECKS).each do |file|
+    %w(.editorconfig .env .env.local .gitignore .rubocop.yml .codeclimate.yml Procfile CHECKS README.md).each do |file|
       copy_file "root/#{file}", file
     end
+    directory 'root/.github'
   end
 
   # Remove a number of root files.
@@ -30,6 +32,7 @@ class DiscoAppGenerator < Rails::Generators::Base
 
     # Add gem requirements.
     gem 'active_link_to'
+    gem 'activeresource'
     gem 'acts_as_singleton'
     gem 'classnames-rails'
     gem 'newrelic_rpm'
@@ -37,18 +40,14 @@ class DiscoAppGenerator < Rails::Generators::Base
     gem 'oj'
     gem 'pg'
     gem 'premailer-rails'
-    gem 'rails-bigint-pk'
     gem 'react-rails'
     gem 'render_anywhere'
-    gem 'rollbar'
+    gem 'appsignal'
     gem 'shopify_app'
     gem 'sidekiq'
 
-    # Specify the threadsafe version of ActiveResource.
-    gem 'activeresource', git: 'https://github.com/shopify/activeresource.git', tag: '4.2-threadsafe'
-
-    # Indicate which gems should only be used in production.
-    gem_group :production do
+    # Indicate which gems should only be used in staging and production.
+    gem_group :staging, :production do
       gem 'mailgun_rails'
       gem 'rails_12factor'
     end
@@ -56,6 +55,7 @@ class DiscoAppGenerator < Rails::Generators::Base
     # Indicate which gems should only be used in development and test.
     gem_group :development, :test do
       gem 'dotenv-rails'
+      gem 'mechanize'
       gem 'minitest-reporters'
       gem 'webmock'
     end
@@ -66,11 +66,19 @@ class DiscoAppGenerator < Rails::Generators::Base
     template 'config/database.yml.tt'
   end
 
+  def update_cable_config
+    template 'config/cable.yml.tt'
+  end
+
   # Run bundle install to add our new gems before running tasks.
   def bundle_install
     Bundler.with_clean_env do
       run 'bundle install'
     end
+  end
+
+  def support_staging_environment
+    copy_file 'config/environments/staging.rb', 'config/environments/staging.rb'
   end
 
   # Make any required adjustments to the application configuration.
@@ -110,15 +118,23 @@ class DiscoAppGenerator < Rails::Generators::Base
     application "config.active_job.queue_adapter = :sidekiq\n", env: :production
     application "# Use Sidekiq as the active job backend", env: :production
 
+    # Set Sidekiq as the queue adapter in staging.
+    application "config.active_job.queue_adapter = :sidekiq\n", env: :staging
+    application "# Use Sidekiq as the active job backend", env: :staging
+
     # Ensure the application configuration uses the DEFAULT_HOST environment
     # variable to set up support for reverse routing absolute URLS (needed when
     # generating Webhook URLs for example).
     application "routes.default_url_options[:host] = ENV['DEFAULT_HOST']\n"
     application "# Set the default host for absolute URL routing purposes"
 
-    # Configure React in development and production.
+    # Configure React in development, staging, and production.
     application "config.react.variant = :development", env: :development
     application "# Use development variant of React in development.", env: :development
+
+    application "config.react.variant = :production", env: :staging
+    application "# Use production variant of React in staging.", env: :staging
+
     application "config.react.variant = :production", env: :production
     application "# Use production variant of React in production.", env: :production
 
@@ -138,12 +154,12 @@ class DiscoAppGenerator < Rails::Generators::Base
         end
     CONFIG
     application configuration, env: :production
+    application configuration, env: :staging
 
     # Monitoring configuration
-    copy_file 'initializers/rollbar.rb', 'config/initializers/rollbar.rb'
+    copy_file 'config/appsignal.yml', 'config/appsignal.yml'
     copy_file 'config/newrelic.yml', 'config/newrelic.yml'
   end
-
 
   # Add entries to .env and .env.local
   def add_env_variables
@@ -165,7 +181,6 @@ class DiscoAppGenerator < Rails::Generators::Base
   def run_generators
     generate 'shopify_app:install'
     generate 'shopify_app:home_controller'
-    generate 'bigint_pk:install'
     generate 'react:install'
   end
 
@@ -232,7 +247,7 @@ class DiscoAppGenerator < Rails::Generators::Base
   # This should be the last operation, to allow all other operations to run in the initial Ruby version.
   def set_ruby_version
     copy_file 'root/.ruby-version', '.ruby-version'
-    prepend_to_file 'Gemfile', "ruby '2.3.3'\n"
+    prepend_to_file 'Gemfile', "ruby '2.5.0'\n"
   end
 
   private

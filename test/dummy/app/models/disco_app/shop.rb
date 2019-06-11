@@ -1,6 +1,6 @@
 require 'active_utils'
 
-class DiscoApp::Shop < ActiveRecord::Base
+class DiscoApp::Shop < ApplicationRecord
   include DiscoApp::Concerns::Shop
 
   has_one :js_configuration

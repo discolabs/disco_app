@@ -45,7 +45,7 @@ module DiscoApp::Concerns::Synchronises
 
       return unless should_synchronise_deletion?(shop, data)
 
-      self.destroy_all(shop: shop, id: data[:id])
+      self.where(shop: shop, id: data[:id]).destroy_all
     end
 
     def synchronise_all(shop, params = {})
