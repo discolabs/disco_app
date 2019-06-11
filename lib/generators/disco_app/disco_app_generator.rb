@@ -1,7 +1,6 @@
 class DiscoAppGenerator < Rails::Generators::Base
 
   source_root File.expand_path('../templates', __FILE__)
-  class_option :default_plan, aliases: '--d', type: :boolean, default: false, description: 'Automatically subscribe app to free default plan'
 
   # Copy a number of template files to the top-level directory of our application:
   #
@@ -230,13 +229,11 @@ class DiscoAppGenerator < Rails::Generators::Base
     rake 'db:migrate'
   end
 
-  # Generate free default plan if options has been added to generator
+  # Generate free default plan
   def default_plan
-    if options[:default_plan]
-      copy_file 'jobs/app_installed_job.rb', 'app/jobs/disco_app/app_installed_job.rb'
-      copy_file 'db/seeds.rb', 'db/seeds.rb'
-      rake 'db:seed'
-    end
+    copy_file 'jobs/app_installed_job.rb', 'app/jobs/disco_app/app_installed_job.rb'
+    copy_file 'db/seeds.rb', 'db/seeds.rb'
+    rake 'db:seed'
   end
 
   # Lock down the application to a specific Ruby version:

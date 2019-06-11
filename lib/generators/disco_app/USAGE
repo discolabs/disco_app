@@ -1,6 +1,5 @@
 Description:
     Generate a new Shopify application.
-    Append `--d` to generator to automatically subscribe to Free Default plan
 
 Example:
     rails generate disco_app

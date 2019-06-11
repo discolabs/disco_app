@@ -65,14 +65,6 @@ line of the command above should read:
     | bash -s example_app 4.2.0 2.4.1 0.13.8  
 ```
 
-If you're app should be free of charge, you can append an option `-d` to
-the `disco_app` generator line which will automatically subscribe to the
-free default plan upon installation :
-
-```
-bundle exec rails generate disco_app --force --d
-```
-
 Once this is complete, you'll have a new Rails app created in `/example_app`,
 with the DiscoApp Engine configured and mounted.
 
