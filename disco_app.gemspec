@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
 
   s.test_files = Dir["test/**/*"]
 
-  s.add_runtime_dependency 'rails', '~> 5.2.0'
+  s.add_runtime_dependency 'rails', '~> 5.2.2'
   s.add_runtime_dependency 'sass-rails', '~> 5.0'
   s.add_runtime_dependency 'uglifier', '~> 3.2'
   s.add_runtime_dependency 'coffee-rails', '~> 4.2'
