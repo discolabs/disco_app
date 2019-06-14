@@ -100,7 +100,7 @@ module DiscoApp::Concerns::Shop
 
     # Return an instance of the Disco API client.
     def disco_api_client
-      @api_client ||= DiscoApp::ApiClient.new(self, ENV['DISCO_API_URL'])
+      @disco_api_client ||= DiscoApp::ApiClient.new(self, ENV['DISCO_API_URL'])
     end
 
     # Override the "read" data attribute to allow indifferent access.

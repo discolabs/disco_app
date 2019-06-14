@@ -18,7 +18,9 @@ class DiscoApp::ShopJob < ApplicationJob
   private
 
     def find_shop(job)
-      @shop ||= job.arguments.first.is_a?(DiscoApp::Shop) ? job.arguments.first : DiscoApp::Shop.find_by!(shopify_domain: job.arguments.first)
+      return @shop if @shop
+
+      @shop = job.arguments.first.is_a?(DiscoApp::Shop) ? job.arguments.first : DiscoApp::Shop.find_by!(shopify_domain: job.arguments.first)
     end
 
     def shop_context(job, block)

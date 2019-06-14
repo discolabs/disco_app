@@ -50,7 +50,7 @@ module DiscoApp::Concerns::SynchroniseCarrierServiceJob
 
     # Return a list of currently registered carrier services.
     def current_carrier_services
-      @current_carrier_service ||= ShopifyAPI::CarrierService.find(:all)
+      @current_carrier_services ||= ShopifyAPI::CarrierService.find(:all)
     end
 
 end
