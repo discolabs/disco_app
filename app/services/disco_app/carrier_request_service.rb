@@ -2,7 +2,7 @@ class DiscoApp::CarrierRequestService
 
   # Return true iff the provided hmac_to_verify matches that calculated from the
   # given data and secret.
-  def self.is_valid_hmac?(body, secret, hmac_to_verify)
+  def self.valid_hmac?(body, secret, hmac_to_verify)
     ActiveSupport::SecurityUtils.secure_compare(calculated_hmac(body, secret), hmac_to_verify.to_s)
   end
 
