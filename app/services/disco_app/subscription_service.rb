@@ -76,4 +76,5 @@ class DiscoApp::SubscriptionService
         source: source_instance
       )
     end
+
 end
