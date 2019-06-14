@@ -26,7 +26,7 @@ module DiscoApp
             action.action_id.classify.safe_constantize ||
             %(Flow::Actions::#{action.action_id.to_s.classify}).safe_constantize
 
-          return if action_service_class.nil?
+          return unless action_service_class.nil?
 
           update_action(false, ["Could not find service class for #{action.action_id}"])
           context.fail!
