@@ -28,7 +28,7 @@ module DiscoApp::Concerns::Plan
   end
 
   def has_trial?
-    trial_period_days.present? && (trial_period_days > 0)
+    trial_period_days.present? && trial_period_days.positive?
   end
 
 end
