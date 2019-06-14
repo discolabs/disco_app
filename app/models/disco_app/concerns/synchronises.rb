@@ -21,9 +21,9 @@ module DiscoApp::Concerns::Synchronises
       return unless should_synchronise?(shop, data)
 
       begin
-        instance = find_or_create_by!(synchronise_by(shop, data)) do |instance|
-          instance.shop = shop
-          instance.data = data
+        instance = find_or_create_by!(synchronise_by(shop, data)) do |new_instance|
+          new_instance.shop = shop
+          new_instance.data = data
         end
       rescue ActiveRecord::RecordNotUnique, PG::UniqueViolation
         retry

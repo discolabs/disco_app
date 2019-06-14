@@ -150,9 +150,12 @@ module DiscoApp::Concerns::RendersAssets
       # Iterate each script tag for which we have a known public URL and create
       # or update the corresponding script tag resource.
       public_urls.slice(*options[:script_tags]).each do |asset, public_url|
-        script_tag = current_script_tags.find(-> { ShopifyAPI::ScriptTag.new(event: 'onload') }) { |script_tag| script_tag.src.include?("#{asset}?") }
-        script_tag.src = public_url
-        shop.with_api_context { script_tag.save }
+        generate_new_script_tag = -> { ShopifyAPI::ScriptTag.new(event: 'onload') }
+
+        current_script_tags
+          .find(generate_new_script_tag) { |script_tag| script_tag.src.include?("#{asset}?") }
+          .tap { |script_tag| script_tag.src = public_url }
+          .yield_self { |script_tag| shop.with_api_context { script_tag.save } }
       end
     end
 
