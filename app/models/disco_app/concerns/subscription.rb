@@ -1,8 +1,8 @@
 module DiscoApp::Concerns::Subscription
+
   extend ActiveSupport::Concern
 
   included do
-
     belongs_to :shop
     belongs_to :plan
     belongs_to :plan_code, optional: true
@@ -23,7 +23,6 @@ module DiscoApp::Concerns::Subscription
     scope :current, -> { where status: [statuses[:trial], statuses[:active]] }
 
     after_commit :cancel_charge
-
   end
 
   # Only require an active charge if the amount to be charged is > 0.
@@ -67,6 +66,7 @@ module DiscoApp::Concerns::Subscription
     def cancel_charge
       return if (previous_changes.keys & ['amount', 'trial_period_days']).empty?
       return unless active_charge?
+
       active_charge.cancelled!
     end
 

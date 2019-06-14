@@ -1,10 +1,10 @@
 module DiscoApp::Concerns::CanBeLiquified
+
   extend ActiveSupport::Concern
 
-  SPLIT_ARRAY_SEPARATOR = '@!@'
+  SPLIT_ARRAY_SEPARATOR = '@!@'.freeze
 
   included do
-
     # Return this model as a hash for use with `to_liquid`. Returns `as_json` by default but is provided here as a hook
     # for potential overrides.
     def as_liquid
@@ -26,21 +26,15 @@ module DiscoApp::Concerns::CanBeLiquified
 
       # Return given value as a string expression that will be evaluated in Liquid to result in the correct value type.
       def as_liquid_value(key, value)
-        if value.is_a? Numeric or (!!value == value)
-          return value.to_s
-        end
-        if value.nil?
-          return 'nil'
-        end
+        return value.to_s if value.is_a?(Numeric) || (!!value == value)
+        return 'nil' if value.nil?
         if value.is_a? Array
-          return "'#{value.map { |e| (e.is_a? String) ? CGI::escapeHTML(e) : e }.join(SPLIT_ARRAY_SEPARATOR)}' | split: '#{SPLIT_ARRAY_SEPARATOR}'"
+          return "'#{value.map { |e| (e.is_a? String) ? CGI.escapeHTML(e) : e }.join(SPLIT_ARRAY_SEPARATOR)}' | split: '#{SPLIT_ARRAY_SEPARATOR}'"
         end
-        if value.is_a? String and key.end_with? '_html'
-          return "'#{value.to_s.gsub("'", "&#39;")}'"
-        end
-        "'#{CGI::escapeHTML(value.to_s)}'"
-      end
+        return "'#{value.to_s.gsub("'", '&#39;')}'" if value.is_a?(String) && key.end_with?('_html')
 
+        "'#{CGI.escapeHTML(value.to_s)}'"
+      end
   end
 
 end

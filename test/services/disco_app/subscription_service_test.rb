@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class DiscoApp::SubscriptionServiceTest < ActiveSupport::TestCase
+
   include ActiveJob::TestHelper
 
   def setup

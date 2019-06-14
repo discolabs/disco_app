@@ -46,7 +46,6 @@ Layout/ClassStructure:
   ExpectedOrder:
     - module_inclusion
     - constants
-    - attributes
     - associations
     - validations
     - callbacks
@@ -79,7 +78,7 @@ Layout/InitialIndentation:
     Checks the indentation of the first non-blank non-comment line in a file.
   Enabled: false
 
-Layout/IndentHash:
+Layout/IndentFirstHashElement:
   Enabled: true
   EnforcedStyle: consistent
 
@@ -239,7 +238,7 @@ Style/FrozenStringLiteralComment:
     to help transition from Ruby 2.3.0 to Ruby 3.0.
   Enabled: false
 
-Style/FlipFlop:
+Lint/FlipFlop:
   Description: 'Checks for flip flops'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-flip-flops'
   Enabled: true
@@ -433,7 +432,7 @@ Style/TrailingCommaInHashLiteral:
   Description: 'Checks for trailing comma in hash literals.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-trailing-array-commas'
   EnforcedStyleForMultiline: no_comma
-  Enabled: false
+  Enabled: true
 
 Style/TrivialAccessors:
   Description: 'Prefer attr_* methods to trivial readers/writers.'
@@ -480,6 +479,16 @@ Metrics/BlockLength:
   Enabled: true
   Exclude:
     - config/environments/*
+  ExcludedMethods:
+    - context
+    - define
+    - describe
+    - draw
+    - factory
+    - guard
+    - included
+    - namespace
+    - trait
 
 Metrics/BlockNesting:
   Description: 'Avoid excessive block nesting'
@@ -645,7 +654,7 @@ Performance/ReverseEach:
   Reference: 'https://github.com/JuanitoFatas/fast-ruby#enumerablereverseeach-vs-enumerablereverse_each-code'
   Enabled: true
 
-Performance/Sample:
+Style/Sample:
   Description: >-
                   Use `sample` instead of `shuffle.first`,
                   `shuffle.last`, and `shuffle[Fixnum]`.

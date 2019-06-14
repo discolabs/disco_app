@@ -1,4 +1,5 @@
 module DiscoApp::Concerns::AuthenticatedController
+
   extend ActiveSupport::Concern
   include ShopifyApp::LoginProtection
 
@@ -17,8 +18,8 @@ module DiscoApp::Concerns::AuthenticatedController
   private
 
     def auto_login
-      if shop_session.nil? and request_hmac_valid?
-        if(shop =  DiscoApp::Shop.find_by_shopify_domain(sanitized_shop_name)).present?
+      if shop_session.nil? && request_hmac_valid?
+        if (shop = DiscoApp::Shop.find_by_shopify_domain(sanitized_shop_name)).present?
           session[:shopify] = shop.id
           session[:shopify_domain] = sanitized_shop_name
         end
@@ -34,35 +35,27 @@ module DiscoApp::Concerns::AuthenticatedController
     end
 
     def check_installed
-      if @shop.awaiting_install? or @shop.installing?
+      if @shop.awaiting_install? || @shop.installing?
         redirect_if_not_current_path disco_app.installing_path
         return
       end
-      if @shop.awaiting_uninstall? or @shop.uninstalling?
+      if @shop.awaiting_uninstall? || @shop.uninstalling?
         redirect_if_not_current_path disco_app.uninstalling_path
         return
       end
-      unless @shop.installed?
-        redirect_if_not_current_path disco_app.install_path
-      end
+      redirect_if_not_current_path disco_app.install_path unless @shop.installed?
     end
 
     def check_current_subscription
-      unless @shop.current_subscription?
-        redirect_if_not_current_path disco_app.new_subscription_path
-      end
+      redirect_if_not_current_path disco_app.new_subscription_path unless @shop.current_subscription?
     end
 
     def check_active_charge
-      if @shop.current_subscription? and @shop.current_subscription.requires_active_charge? and not @shop.development? and not @shop.current_subscription.active_charge?
-        redirect_if_not_current_path disco_app.new_subscription_charge_path(@shop.current_subscription)
-      end
+      redirect_if_not_current_path disco_app.new_subscription_charge_path(@shop.current_subscription) if @shop.current_subscription? && @shop.current_subscription.requires_active_charge? && !@shop.development? && !@shop.current_subscription.active_charge?
     end
 
     def redirect_if_not_current_path(target)
-      if request.path != target
-        redirect_to target
-      end
+      redirect_to target if request.path != target
     end
 
     def request_hmac_valid?
@@ -71,9 +64,7 @@ module DiscoApp::Concerns::AuthenticatedController
 
     def check_shop_whitelist
       if shop_session
-        if ENV['WHITELISTED_DOMAINS'].present? && !ENV['WHITELISTED_DOMAINS'].include?(shop_session.url)
-          redirect_to_login
-        end
+        redirect_to_login if ENV['WHITELISTED_DOMAINS'].present? && !ENV['WHITELISTED_DOMAINS'].include?(shop_session.url)
       end
     end
 

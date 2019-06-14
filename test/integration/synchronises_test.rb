@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class SynchronisesTest < ActionDispatch::IntegrationTest
+
   include ActiveJob::TestHelper
   fixtures :all
 

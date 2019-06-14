@@ -1,4 +1,5 @@
 class DiscoApp::UserSessionsController < ApplicationController
+
   include DiscoApp::Concerns::AuthenticatedController
 
   def new

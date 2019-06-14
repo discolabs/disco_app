@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class DiscoApp::SynchroniseWebhooksJobTest < ActionController::TestCase
+
   include ActiveJob::TestHelper
 
   def setup
@@ -40,11 +41,12 @@ class DiscoApp::SynchroniseWebhooksJobTest < ActionController::TestCase
         assert output.first.include?('Invalid topic specified.')
         assert output.first.include?('orders/create - not registered')
       end
-    end 
+    end
   end
-  
+
   private
-    # Prevents the output from the webhook synchronisation from 
+
+    # Prevents the output from the webhook synchronisation from
     # printing to STDOUT and messing up the test output
     def with_suppressed_output
       original_stdout = $stdout.clone
@@ -55,4 +57,3 @@ class DiscoApp::SynchroniseWebhooksJobTest < ActionController::TestCase
     end
 
 end
-

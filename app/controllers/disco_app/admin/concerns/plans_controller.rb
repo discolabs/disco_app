@@ -1,4 +1,5 @@
 module DiscoApp::Admin::Concerns::PlansController
+
   extend ActiveSupport::Concern
 
   included do
@@ -47,7 +48,7 @@ module DiscoApp::Admin::Concerns::PlansController
     def plan_params
       params.require(:plan).permit(
         :name, :status, :plan_type, :trial_period_days, :amount,
-        :plan_codes_attributes => [:id, :_destroy, :code, :trial_period_days, :amount]
+        plan_codes_attributes: %i[id _destroy code trial_period_days amount]
       )
     end
 

@@ -1,4 +1,5 @@
 module DiscoApp::Concerns::Shop
+
   extend ActiveSupport::Concern
 
   included do
@@ -31,7 +32,7 @@ module DiscoApp::Concerns::Shop
     }
 
     # Define some useful scopes.
-    scope :status, -> (status) { where status: status }
+    scope :status, ->(status) { where status: status }
     scope :installed, -> { where status: statuses[:installed] }
     scope :has_active_shopify_plan, -> { where.not(plan_name: [:cancelled, :frozen, :fraudulent]) }
     scope :shopify_plus, -> { where(plan_name: :shopify_plus) }
@@ -86,8 +87,8 @@ module DiscoApp::Concerns::Shop
     def time_zone
       @time_zone ||= begin
         Time.find_zone!(data[:timezone].to_s.gsub(/^\(.+\)\s/, ''))
-      rescue ArgumentError
-        Time.zone
+                     rescue ArgumentError
+                       Time.zone
       end
     end
 
@@ -106,7 +107,6 @@ module DiscoApp::Concerns::Shop
     def data
       read_attribute(:data).with_indifferent_access
     end
-
   end
 
 end

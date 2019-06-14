@@ -2,6 +2,7 @@ require 'render_anywhere'
 require 'uglifier'
 
 module DiscoApp::Concerns::RendersAssets
+
   extend ActiveSupport::Concern
 
   included do
@@ -10,7 +11,6 @@ module DiscoApp::Concerns::RendersAssets
   end
 
   class_methods do
-
     # Ruby "macro" that allows the definition of a number of Shopify assets that
     # should be rendered and uploaded when certain attributes on the including
     # class change. This assumes that the including class (1) is an ActiveRecord
@@ -70,7 +70,6 @@ module DiscoApp::Concerns::RendersAssets
         minify: Rails.env.production? || Rails.env.staging?
       }
     end
-
   end
 
   # Callback, triggered after a model save. Iterates through each asset group
@@ -78,9 +77,7 @@ module DiscoApp::Concerns::RendersAssets
   # attributes are found in the asset group's triggered_by list.
   def queue_render_asset_group_job
     renderable_asset_groups.each do |asset_group, options|
-      unless (previous_changes.keys & options[:triggered_by]).empty?
-        DiscoApp::RenderAssetGroupJob.perform_later(shop, self, asset_group.to_s)
-      end
+      DiscoApp::RenderAssetGroupJob.perform_later(shop, self, asset_group.to_s) unless (previous_changes.keys & options[:triggered_by]).empty?
     end
   end
 
@@ -97,26 +94,22 @@ module DiscoApp::Concerns::RendersAssets
 
     options[:assets].each do |asset|
       # Create/replace the asset via the Shopify API.
-      shopify_asset = shop.with_api_context {
+      shopify_asset = shop.with_api_context do
         ShopifyAPI::Asset.create(
           key: asset,
           value: render_asset_group_asset(asset, public_urls, options)
         )
-      }
+      end
 
       # Store the public URL to this asset, so that we're able to use it in
       # subsequent template renders. Adds a .css suffix to .scss assets, so that
       # we use the Shopify-compiled version of any SCSS stylesheets.
-      if shopify_asset.public_url.present?
-        public_urls[asset] = shopify_asset.public_url.gsub(/\.scss\?/, '.scss.css?')
-      end
+      public_urls[asset] = shopify_asset.public_url.gsub(/\.scss\?/, '.scss.css?') if shopify_asset.public_url.present?
     end
 
     # If we specified the creation of any script tags based on newly rendered
     # assets, do that now.
-    unless options[:script_tags].empty?
-      render_asset_script_tags(options, public_urls)
-    end
+    render_asset_script_tags(options, public_urls) unless options[:script_tags].empty?
   end
 
   private
@@ -141,7 +134,7 @@ module DiscoApp::Concerns::RendersAssets
 
     # Return true if the given asset should be minified with Uglifier.
     def should_be_minified?(asset, options)
-      asset.to_s.end_with?('.js') and options[:minify]
+      asset.to_s.end_with?('.js') && options[:minify]
     end
 
     def render_asset_renderer
@@ -157,7 +150,7 @@ module DiscoApp::Concerns::RendersAssets
       # Iterate each script tag for which we have a known public URL and create
       # or update the corresponding script tag resource.
       public_urls.slice(*options[:script_tags]).each do |asset, public_url|
-        script_tag = current_script_tags.find(lambda { ShopifyAPI::ScriptTag.new(event: 'onload') }) { |script_tag| script_tag.src.include?("#{asset}?") }
+        script_tag = current_script_tags.find(-> { ShopifyAPI::ScriptTag.new(event: 'onload') }) { |script_tag| script_tag.src.include?("#{asset}?") }
         script_tag.src = public_url
         shop.with_api_context { script_tag.save }
       end

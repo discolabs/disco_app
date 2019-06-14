@@ -1,4 +1,5 @@
 class DiscoApp::InstallController < ApplicationController
+
   include DiscoApp::Concerns::AuthenticatedController
 
   skip_before_action :check_current_subscription
@@ -12,16 +13,12 @@ class DiscoApp::InstallController < ApplicationController
 
   # Display an "installing" page.
   def installing
-    if @shop.installed?
-      redirect_to main_app.root_path
-    end
+    redirect_to main_app.root_path if @shop.installed?
   end
 
   # Display an "uninstalling" page. Should be almost never used.
   def uninstalling
-    if @shop.uninstalled?
-      redirect_to main_app.root_path
-    end
+    redirect_to main_app.root_path if @shop.uninstalled?
   end
 
 end
