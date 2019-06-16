@@ -491,6 +491,7 @@ Metrics/BlockLength:
     - included
     - namespace
     - trait
+    - class_methods
 
 Metrics/BlockNesting:
   Description: 'Avoid excessive block nesting'
