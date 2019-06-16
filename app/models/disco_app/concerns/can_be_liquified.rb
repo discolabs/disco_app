@@ -27,12 +27,20 @@ module DiscoApp::Concerns::CanBeLiquified
 
       # Return given value as a string expression that will be evaluated in Liquid to result in the correct value type.
       def as_liquid_value(key, value)
-        return value.to_s if value.is_a?(Numeric) || (!!value == value)
-        return NIL_VALUE if value.nil?
-        return converted_array_value(value) if value.is_a? Array
-        return converted_html(value) if value.is_a?(String) && key.end_with?('_html')
+        html_string = ->(val) { val.is_a?(String) && key.end_with?('_html') }
 
-        "'#{CGI.escapeHTML(value.to_s)}'"
+        case value
+        when Numeric, TrueClass, FalseClass
+          value.to_s
+        when NilClass
+          NIL_VALUE
+        when Array
+          converted_array_value(value)
+        when html_string 
+          converted_html(value)
+        else
+          "'#{CGI.escapeHTML(value.to_s)}'"
+        end
       end
 
       def converted_array_value(value)
