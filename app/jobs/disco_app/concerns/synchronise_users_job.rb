@@ -8,8 +8,10 @@ module DiscoApp::Concerns::SynchroniseUsersJob
         ShopifyAPI::User.all
       end
     rescue ActiveResource::UnauthorizedAccess => e
-      Rollbar.error(e) && (return)
+      Rollbar.error(e)
+      return
     end
+
     users.each { |user| DiscoApp::User.create_user(user, @shop) }
   end
 
