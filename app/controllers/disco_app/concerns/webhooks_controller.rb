@@ -13,13 +13,13 @@ module DiscoApp::Concerns::WebhooksController
     shopify_domain = request.headers['HTTP_X_SHOPIFY_SHOP_DOMAIN']
 
     # Ensure a domain was provided in the headers.
-    head :bad_request unless shopify_domain
+    return head :bad_request unless shopify_domain
 
     # Try to find a matching background job task for the given topic using class name.
     job_class = DiscoApp::WebhookService.find_job_class(topic)
 
     # Return bad request if we couldn't match a job class.
-    head :bad_request unless job_class.present?
+    return head :bad_request unless job_class.present?
 
     # Decode the body data and enqueue the appropriate job.
     data = JSON.parse(request.body.read).with_indifferent_access
@@ -31,7 +31,8 @@ module DiscoApp::Concerns::WebhooksController
   private
 
     def verify_webhook
-      head :unauthorized unless webhook_is_valid?
+      return head :unauthorized unless webhook_is_valid?
+
       request.body.rewind
     end
 

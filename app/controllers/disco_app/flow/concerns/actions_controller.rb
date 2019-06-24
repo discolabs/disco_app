@@ -25,7 +25,8 @@ module DiscoApp
         private
 
           def verify_flow_action
-            head :unauthorized unless flow_action_is_valid?
+            return head :unauthorized unless flow_action_is_valid?
+
             request.body.rewind
           end
 
