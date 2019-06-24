@@ -35,15 +35,15 @@ module DiscoApp::Concerns::CanBeLiquified
         when NilClass
           NIL_VALUE
         when Array
-          converted_array_value(value)
-        when html_string 
-          converted_html(value)
+          as_liquid_array_value(value)
+        when html_string
+          as_liquid_html_value(value)
         else
           "'#{CGI.escapeHTML(value.to_s)}'"
         end
       end
 
-      def converted_array_value(value)
+      def as_liquid_array_value(value)
         split_array = value.map do |element|
           CGI.escapeHTML(element) if element.is_a? String
 
@@ -53,7 +53,7 @@ module DiscoApp::Concerns::CanBeLiquified
         "'#{split_array}' | split: '#{SPLIT_ARRAY_SEPARATOR}'"
       end
 
-      def converted_html(value)
+      def as_liquid_html_value(value)
         "'#{value.to_s.gsub("'", '&#39;')}'"
       end
   end
