@@ -8,7 +8,13 @@ module DiscoApp::Concerns::ShopUpdateJob
     shop_data ||= JSON.parse(ShopifyAPI::Shop.current.to_json)
 
     # Update attributes stored directly on the Shop model, along with the data hash itself.
-    @shop.update(shop_data.with_indifferent_access.slice(*DiscoApp::Shop.column_names).except(:id, :created_at).merge(data: shop_data))
+    @shop.update(
+      shop_data
+        .with_indifferent_access
+        .slice(*DiscoApp::Shop.column_names)
+        .except(:id, :created_at)
+        .merge(data: shop_data)
+    )
   end
 
 end

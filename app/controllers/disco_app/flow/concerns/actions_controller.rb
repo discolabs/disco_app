@@ -32,7 +32,11 @@ module DiscoApp
           # Shopify Flow action endpoints use the same verification method as webhooks, which is why we reuse this
           # service method here.
           def flow_action_is_valid?
-            DiscoApp::WebhookService.valid_hmac?(request.body.read.to_s, ShopifyApp.configuration.secret, request.headers['HTTP_X_SHOPIFY_HMAC_SHA256'])
+            DiscoApp::WebhookService.valid_hmac?(
+              request.body.read.to_s, 
+              ShopifyApp.configuration.secret, 
+              request.headers['HTTP_X_SHOPIFY_HMAC_SHA256']
+            )
           end
 
           def find_shop

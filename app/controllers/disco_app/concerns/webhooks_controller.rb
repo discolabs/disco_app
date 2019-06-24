@@ -38,7 +38,11 @@ module DiscoApp::Concerns::WebhooksController
     def webhook_is_valid?
       return true if Rails.env.development? && DiscoApp.configuration.skip_webhook_verification?
 
-      DiscoApp::WebhookService.valid_hmac?(request.body.read.to_s, ShopifyApp.configuration.secret, request.headers['HTTP_X_SHOPIFY_HMAC_SHA256'])
+      DiscoApp::WebhookService.valid_hmac?(
+        request.body.read.to_s,
+        ShopifyApp.configuration.secret,
+        request.headers['HTTP_X_SHOPIFY_HMAC_SHA256']
+      )
     end
 
 end
