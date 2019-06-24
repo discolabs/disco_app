@@ -22,7 +22,7 @@ module DiscoApp::Concerns::WebhooksController
     head :bad_request unless job_class.present?
 
     # Decode the body data and enqueue the appropriate job.
-    data = ActiveSupport::JSON.decode(request.body.read).with_indifferent_access
+    data = JSON.parse(request.body.read).with_indifferent_access
     job_class.perform_later(shopify_domain, data)
 
     render body: nil

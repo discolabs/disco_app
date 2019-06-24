@@ -15,7 +15,7 @@ module DiscoApp::Concerns::Synchronises
     end
 
     def synchronise(shop, data)
-      data = ActiveSupport::JSON.decode(data.to_json) if data.is_a?(ShopifyAPI::Base)
+      data = JSON.parse(data.to_json) if data.is_a?(ShopifyAPI::Base)
       data = data.with_indifferent_access
 
       return unless should_synchronise?(shop, data)
