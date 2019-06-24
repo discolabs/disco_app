@@ -52,7 +52,12 @@ module DiscoApp::Concerns::AuthenticatedController
     end
 
     def check_active_charge
-      redirect_if_not_current_path disco_app.new_subscription_charge_path(@shop.current_subscription) if @shop.current_subscription? && @shop.current_subscription.requires_active_charge? && !@shop.development? && !@shop.current_subscription.active_charge?
+      return unless @shop.current_subscription?
+      return unless @shop.current_subscription.requires_active_charge?
+      return if @shop.development?
+      return if @shop.current_subscription.active_charge?
+
+      redirect_if_not_current_path disco_app.new_subscription_charge_path(@shop.current_subscription)
     end
 
     def redirect_if_not_current_path(target)
