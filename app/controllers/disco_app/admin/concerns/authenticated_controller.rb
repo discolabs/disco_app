@@ -11,9 +11,12 @@ module DiscoApp::Admin::Concerns::AuthenticatedController
   private
 
     def authenticate_administrator
-      authenticate_or_request_with_http_basic do |username, password|
-        !username.blank? && !password.blank? && username == ENV['ADMIN_APP_USERNAME'] && password == ENV['ADMIN_APP_PASSWORD']
-      end
+      authenticate_or_request_with_http_basic do |username, password| 
+        username.present? && 
+        password.present? && 
+        username == ENV['ADMIN_APP_USERNAME'] && 
+        password == ENV['ADMIN_APP_PASSWORD'] 
+      end 
     end
 
 end
