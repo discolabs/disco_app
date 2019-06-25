@@ -1,4 +1,5 @@
 module DiscoApp::Concerns::Taggable
+
   extend ActiveSupport::Concern
 
   def tags

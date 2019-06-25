@@ -7,8 +7,8 @@ class DiscoApp::SessionTest < ActiveSupport::TestCase
     @session = DiscoApp::Session.create(
       session_id: 'a91bfc51fa79c9d09d43e2615d9345d4',
       data: {
-        :shopify => @shop.id,
-        :shopify_domain => @shop.shopify_domain
+        shopify: @shop.id,
+        shopify_domain: @shop.shopify_domain
       }
     )
   end

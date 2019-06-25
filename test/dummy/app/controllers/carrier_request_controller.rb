@@ -1,4 +1,5 @@
 class CarrierRequestController < ActionController::Base
+
   include DiscoApp::Concerns::CarrierRequestController
 
   def rates

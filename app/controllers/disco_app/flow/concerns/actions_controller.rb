@@ -25,16 +25,19 @@ module DiscoApp
         private
 
           def verify_flow_action
-            unless flow_action_is_valid?
-              head :unauthorized
-            end
+            return head :unauthorized unless flow_action_is_valid?
+
             request.body.rewind
           end
 
           # Shopify Flow action endpoints use the same verification method as webhooks, which is why we reuse this
           # service method here.
           def flow_action_is_valid?
-            DiscoApp::WebhookService.is_valid_hmac?(request.body.read.to_s, ShopifyApp.configuration.secret, request.headers['HTTP_X_SHOPIFY_HMAC_SHA256'])
+            DiscoApp::WebhookService.valid_hmac?(
+              request.body.read.to_s, 
+              ShopifyApp.configuration.secret, 
+              request.headers['HTTP_X_SHOPIFY_HMAC_SHA256']
+            )
           end
 
           def find_shop

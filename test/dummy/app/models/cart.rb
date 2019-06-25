@@ -1,13 +1,14 @@
 class Cart < ApplicationRecord
-  include DiscoApp::Concerns::Synchronises
 
-  belongs_to :shop, class_name: 'DiscoApp::Shop'
+  include DiscoApp::Concerns::Synchronises
 
   SHOPIFY_API_CLASS = ShopifyAPI::Cart
 
+  belongs_to :shop, class_name: 'DiscoApp::Shop'
+
   before_save :set_token
 
-  def self.synchronise_by(shop, data)
+  def self.synchronise_by(_shop, data)
     { token: data[:token] }
   end
 

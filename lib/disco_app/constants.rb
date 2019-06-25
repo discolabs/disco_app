@@ -1,4 +1,6 @@
 module DiscoApp
-  SOURCE_COOKIE_KEY = '_disco_app_source'
-  CODE_COOKIE_KEY = '_disco_app_code'
+
+  SOURCE_COOKIE_KEY = '_disco_app_source'.freeze
+  CODE_COOKIE_KEY = '_disco_app_code'.freeze
+
 end

@@ -1,4 +1,5 @@
 module DiscoApp::Admin::Concerns::AppSettingsController
+
   extend ActiveSupport::Concern
 
   def edit

@@ -1,4 +1,5 @@
 class WidgetConfiguration < ApplicationRecord
+
   include DiscoApp::Concerns::RendersAssets
 
   belongs_to :shop, class_name: 'DiscoApp::Shop'

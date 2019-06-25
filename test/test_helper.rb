@@ -1,5 +1,5 @@
 # Prevent warnings from showing up during testing.
-$VERBOSE=nil
+$VERBOSE = nil
 
 # Configure Rails Environment
 ENV['RAILS_ENV'] = 'test'
@@ -12,10 +12,10 @@ ENV['SHOPIFY_APP_SCOPE'] = 'read_products'
 ENV['SHOPIFY_CHARGES_REAL'] = 'false'
 ENV['DISCO_API_URL'] = 'https://api.discolabs.com/v1/'
 
-require File.expand_path("../../test/dummy/config/environment.rb",  __FILE__)
-ActiveRecord::Migrator.migrations_paths = [File.expand_path("../../test/dummy/db/migrate", __FILE__)]
-ActiveRecord::Migrator.migrations_paths << File.expand_path('../../db/migrate', __FILE__)
-require "rails/test_help"
+require File.expand_path('../test/dummy/config/environment.rb', __dir__)
+ActiveRecord::Migrator.migrations_paths = [File.expand_path('../test/dummy/db/migrate', __dir__)]
+ActiveRecord::Migrator.migrations_paths << File.expand_path('../db/migrate', __dir__)
+require 'rails/test_help'
 
 # Require our additional test support helpers.
 require 'support/test_file_fixtures'
@@ -33,7 +33,7 @@ Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
 # Load fixtures from the engine
 if ActiveSupport::TestCase.respond_to?(:fixture_path=)
-  ActiveSupport::TestCase.fixture_path = File.expand_path("../fixtures", __FILE__)
+  ActiveSupport::TestCase.fixture_path = File.expand_path('fixtures', __dir__)
   ActiveSupport::TestCase.fixtures :all
 end
 
@@ -67,4 +67,5 @@ class ActiveSupport::TestCase
     session[:shopify] = nil
     session[:shopify_domain] = nil
   end
+
 end

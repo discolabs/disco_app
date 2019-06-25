@@ -1,5 +1,6 @@
 class CreateAssetModels < ActiveRecord::Migration[4.2]
-def change
+
+  def change
     create_table :js_configurations do |t|
       t.integer :shop_id, limit: 8
       t.string :label, default: 'Default'
@@ -16,4 +17,5 @@ def change
     add_foreign_key :js_configurations, :disco_app_shops, column: :shop_id
     add_foreign_key :widget_configurations, :disco_app_shops, column: :shop_id
   end
+
 end

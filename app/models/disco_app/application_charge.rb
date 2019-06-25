@@ -8,7 +8,7 @@ class DiscoApp::ApplicationCharge < ApplicationRecord
     accepted: 1,
     declined: 2,
     expired: 3,
-    active: 4,
+    active: 4
   }
 
   scope :active, -> { where status: statuses[:active] }
