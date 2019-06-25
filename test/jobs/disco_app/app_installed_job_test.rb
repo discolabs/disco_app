@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class DiscoApp::AppInstalledJobTest < ActionController::TestCase
+
   include ActiveJob::TestHelper
 
   def setup
@@ -11,7 +12,7 @@ class DiscoApp::AppInstalledJobTest < ActionController::TestCase
     stub_request(:get, "#{@shop.admin_url}/shop.json").to_return(status: 200, body: api_fixture('widget_store/shop').to_json)
     stub_request(:get, "#{@shop.admin_url}/carrier_services.json").to_return(status: 200, body: api_fixture('widget_store/carrier_services').to_json)
     stub_request(:post, "#{@shop.admin_url}/carrier_services.json").to_return(status: 200)
-    stub_request(:post, "https://api.discolabs.com/v1/app_subscriptions.json").to_return(status: 200)
+    stub_request(:post, 'https://api.discolabs.com/v1/app_subscriptions.json').to_return(status: 200)
   end
 
   def teardown
@@ -61,7 +62,8 @@ class DiscoApp::AppInstalledJobTest < ActionController::TestCase
   end
 
   private
-    # Prevents the output from the webhook synchronisation from 
+
+    # Prevents the output from the webhook synchronisation from
     # printing to STDOUT and messing up the test output
     def with_suppressed_output
       original_stdout = $stdout.clone
@@ -70,4 +72,5 @@ class DiscoApp::AppInstalledJobTest < ActionController::TestCase
     ensure
       $stdout.reopen(original_stdout)
     end
+
 end

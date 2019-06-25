@@ -1,4 +1,5 @@
 module DiscoApp::Admin::Concerns::SourcesController
+
   extend ActiveSupport::Concern
 
   included do

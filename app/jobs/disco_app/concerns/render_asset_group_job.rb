@@ -1,4 +1,5 @@
 module DiscoApp::Concerns::RenderAssetGroupJob
+
   extend ActiveSupport::Concern
 
   def perform(_shop, instance, asset_group)

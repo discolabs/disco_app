@@ -1,8 +1,8 @@
 module DiscoApp::Concerns::HasMetafields
+
   extend ActiveSupport::Concern
 
   included do
-
     # Write multiple metafields for this object in a single call.
     #
     # Expects an argument in a nested hash structure with :namespace => :key =>
@@ -42,7 +42,6 @@ module DiscoApp::Concerns::HasMetafields
         end
       end.flatten
     end
-
   end
 
 end

@@ -1,4 +1,5 @@
 module DiscoApp::Concerns::UserAuthenticatedController
+
   extend ActiveSupport::Concern
   include ShopifyApp::LoginProtection
 

@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class DiscoApp::WebhooksControllerTest < ActionController::TestCase
+
   include ActiveJob::TestHelper
 
   def setup

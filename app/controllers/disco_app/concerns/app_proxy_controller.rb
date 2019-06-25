@@ -1,4 +1,5 @@
 module DiscoApp::Concerns::AppProxyController
+
   extend ActiveSupport::Concern
 
   included do
@@ -6,7 +7,7 @@ module DiscoApp::Concerns::AppProxyController
     before_action :shopify_shop
     after_action :add_liquid_header
 
-    rescue_from ActiveRecord::RecordNotFound do |exception|
+    rescue_from ActiveRecord::RecordNotFound do |_exception|
       render_error 404
     end
   end
@@ -14,13 +15,12 @@ module DiscoApp::Concerns::AppProxyController
   private
 
     def verify_proxy_signature
-      unless proxy_signature_is_valid?
-        head :unauthorized
-      end
+      head :unauthorized unless proxy_signature_is_valid?
     end
 
     def proxy_signature_is_valid?
-      return true if (Rails.env.development? || Rails.env.test?) and DiscoApp.configuration.skip_proxy_verification?
+      return true if (Rails.env.development? || Rails.env.test?) && DiscoApp.configuration.skip_proxy_verification?
+
       DiscoApp::ProxyService.proxy_signature_is_valid?(request.query_string, ShopifyApp.configuration.secret)
     end
 

@@ -1,4 +1,5 @@
 class DiscoApp::AppInstalledJob < DiscoApp::ShopJob
+
   include DiscoApp::Concerns::AppInstalledJob
 
   DEVELOPMENT_PLAN_ID = 1
@@ -7,9 +8,7 @@ class DiscoApp::AppInstalledJob < DiscoApp::ShopJob
   # on their status.
   def default_plan
     @default_plan ||= begin
-      if @shop.plan_name === 'affiliate'
-        DiscoApp::Plan.find(DEVELOPMENT_PLAN_ID)
-      end
+      DiscoApp::Plan.find(DEVELOPMENT_PLAN_ID) if @shop.plan_name === 'affiliate'
     end
   end
 

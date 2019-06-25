@@ -1,4 +1,5 @@
 module DiscoApp::Admin::Concerns::SubscriptionsController
+
   extend ActiveSupport::Concern
 
   included do

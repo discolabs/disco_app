@@ -43,7 +43,7 @@ module DiscoApp
 
       # The double .to_json.to_json below looks odd but is required to properly escape the JSON hash
       # when inserting it into the GraphQL mutation call.
-      response = execute(%Q(
+      response = execute(%(
         mutation {
           flowTriggerReceive(body: #{body.to_json.to_json}) {
             userErrors {
