@@ -1,13 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-<<<<<<< HEAD
-=======
 ## 0.16.1 - 2019-01-01
 ### Added
 - Support for Shopify Flow triggers and actions
 
->>>>>>> develop
 ## 0.16.0 - 2018-10-01
 ### Changed
 - Update to Rails 5.2
