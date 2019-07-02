@@ -5,7 +5,7 @@
   data-debug="<%= Rails.env.development? ? 'true' : 'false' %>"
   data-environment="<%= Rails.env %>"
   data-force-redirect="<%= Rails.env.development? ? 'false' : 'true' %>"
-  data-shop-origin="https://<%= @shop_session&.url %>"
+  data-shop-origin="<%= @shop_session&.url %>"
   data-version="<%= Rails.application.class::VERSION %>"
 ></div>
 <%= javascript_pack_tag 'embedded' %>

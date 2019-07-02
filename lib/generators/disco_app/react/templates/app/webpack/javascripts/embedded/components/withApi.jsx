@@ -110,8 +110,8 @@ function withApi(WrappedComponent) {
         <WrappedComponent
           api={this.api}
           getErrorsFor={this.getErrorsFor}
-          parseApiResponse={this.parseApiResponse}
           parseApiError={this.parseApiError}
+          parseApiResponse={this.parseApiResponse}
           resourceListParams={this.resourceListParams}
           {...this.props}
         />

@@ -5,6 +5,8 @@ import { Route, Switch } from 'react-router-dom';
 import HomePage from './HomePage';
 import withApi from './withApi';
 
+const HomePageWithApi = withApi(HomePage);
+
 class App extends React.Component {
   static propTypes = {
     api: PropTypes.func.isRequired,
@@ -15,15 +17,15 @@ class App extends React.Component {
     shop: PropTypes.shape({
       id: PropTypes.string,
       name: PropTypes.string,
-      plan: PropTypes.string,
-      shopifyDomain: PropTypes.string
+      shopifyDomain: PropTypes.string,
+      timeZone: PropTypes.string
     }),
     user: PropTypes.shape({
       id: PropTypes.string,
       email: PropTypes.string,
       firstName: PropTypes.string,
-      lastName: PropTypes.string,
-      initials: PropTypes.string
+      initials: PropTypes.string,
+      lastName: PropTypes.string
     })
   };
 
@@ -40,7 +42,7 @@ class App extends React.Component {
   }
 
   componentWillMount() {
-    const { api } = this.props;
+    const { api, parseApiResponse } = this.props;
 
     axios
       .all([
@@ -51,8 +53,8 @@ class App extends React.Component {
         axios.spread(
           async (shopResponse, usersResponse) => {
             this.setState({
-              shop: await this.props.parseApiResponse(shopResponse),
-              user: await this.props.parseApiResponse(usersResponse)
+              shop: await parseApiResponse(shopResponse),
+              user: await parseApiResponse(usersResponse)
             });
           }
         )
@@ -60,9 +62,9 @@ class App extends React.Component {
   }
 
   render() {
-    if (!this.state.user) return <div />;
+    const { user } = this.state;
 
-    const HomePageWithApi = withApi(HomePage);
+    if (!user) return <div />;
 
     return (
       <Switch>

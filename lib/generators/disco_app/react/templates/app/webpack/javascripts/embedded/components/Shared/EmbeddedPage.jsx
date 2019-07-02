@@ -2,28 +2,42 @@ import _ from 'lodash';
 import * as PropTypes from 'prop-types';
 import React from 'react';
 import ReactRouterPropTypes from 'react-router-prop-types';
+import { History } from '@shopify/app-bridge/actions';
 import { Page } from '@shopify/polaris';
 
 class EmbeddedPage extends React.Component {
+  static contextTypes = {
+    polaris: PropTypes.object
+  };
+
   static propTypes = {
     children: PropTypes.node.isRequired,
     history: ReactRouterPropTypes.history.isRequired,
+    location: ReactRouterPropTypes.location.isRequired,
     title: PropTypes.string.isRequired
-  };
-
-  static contextTypes = {
-    easdk: PropTypes.object
   };
 
   componentDidMount() {
     window.addEventListener('message', this.handleMessage);
 
-    this.context.easdk.pushState(this.props.history.location.pathname);
+    this.pushHistory();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.location.pathname !== this.props.location.pathname) {
+      this.pushHistory();
+    }
   }
 
   componentWillUnmount() {
     window.removeEventListener('message', this.handleMessage);
   }
+
+  pushHistory = () => {
+    const history = History.create(this.context.polaris.appBridge);
+
+    history.dispatch(History.Action.PUSH, this.props.history.location.pathname);
+  };
 
   handleMessage = e => {
     if (e.isTrusted) {
@@ -36,6 +50,12 @@ class EmbeddedPage extends React.Component {
         }
       }
     }
+  };
+
+  pushHistory = () => {
+    const history = History.create(this.context.polaris.appBridge);
+
+    history.dispatch(History.Action.PUSH, this.props.history.location.pathname);
   };
 
   render() {

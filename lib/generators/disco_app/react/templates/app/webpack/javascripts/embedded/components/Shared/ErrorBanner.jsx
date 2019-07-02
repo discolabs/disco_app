@@ -30,7 +30,7 @@ const ErrorBanner = ({ errors, prologue }) => {
   return (
     <Banner status="critical">
       <p>
-        {prologue}, {errorMessage()}:
+        {prologue},{errorMessage()}:
         {errorKeys().map((key, index) => (
           <span>
             {separator(index)}
@@ -38,7 +38,8 @@ const ErrorBanner = ({ errors, prologue }) => {
               {key}
             </TextStyle>
           </span>
-        ))}.
+        ))}
+        .
       </p>
     </Banner>
   );

@@ -62,7 +62,7 @@ module DiscoApp
       end
 
       def configure_webpack
-        %w[.babelrc .eslintrc .postcssrc.yml .prettierrc].each do |file|
+        %w[.eslintignore .eslintrc .prettierrc babel.config.js postcss.config.js].each do |file|
           copy_file "root/#{file}", file
         end
 
@@ -70,6 +70,7 @@ module DiscoApp
 
         copy_file 'config/webpacker.yml'
         copy_file 'config/webpack/staging.js'
+        copy_file 'config/webpack/test.js'
 
         run "if [ -d 'app/javascript' ]; then mv -f app/javascript app/webpack; fi"
       end
@@ -85,6 +86,14 @@ module DiscoApp
       def configure_views
         directory 'app/views/embedded'
         copy_file 'app/views/layouts/embedded.html.erb'
+      end
+
+      def configure_serializers
+        directory 'app/serializers'
+      end
+
+      def configure_api_response
+        copy_file 'app/models/api_response.rb'
       end
 
       def configure_react

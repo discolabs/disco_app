@@ -10,7 +10,7 @@ module Embedded
       private
 
         def unprocessable_entity(exception)
-          render json: ApiResponse.serialize(exception.record.errors), status: 422
+          render json: ApiResponse.serialize(exception.record.errors), status: :unprocessable_entity
         end
 
     end

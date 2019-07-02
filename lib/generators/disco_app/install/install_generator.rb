@@ -139,10 +139,6 @@ module DiscoApp
             end
         CONFIG
         application configuration, env: :production
-
-        # Monitoring configuration
-        copy_file 'initializers/rollbar.rb', 'config/initializers/rollbar.rb'
-        copy_file 'config/newrelic.yml', 'config/newrelic.yml'
       end
 
 

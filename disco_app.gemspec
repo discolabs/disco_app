@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency 'rails', '~> 5.2.0'
   s.add_runtime_dependency 'sass-rails', '~> 5.0'
-  s.add_runtime_dependency 'uglifier', '~> 3.2'
+  s.add_runtime_dependency 'uglifier', '>= 3.2'
   s.add_runtime_dependency 'coffee-rails', '~> 4.2'
   s.add_runtime_dependency 'jquery-rails', '~> 4.3'
   s.add_runtime_dependency 'turbolinks', '~> 5.0'
