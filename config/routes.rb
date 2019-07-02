@@ -1,12 +1,17 @@
 require 'sidekiq/web'
 
 DiscoApp::Engine.routes.draw do
-
   get 'ref', to: '/sessions#referral'
   get '/auth/failure', to: '/sessions#failure'
 
   controller :webhooks do
     post 'webhooks' => :process_webhook, as: :webhooks
+  end
+
+  namespace :flow do
+    controller :actions do
+      post 'actions/:id' => :create_flow_action, as: :flow_actions
+    end
   end
 
   resources :user_sessions, only: [:new, :create, :destroy]
@@ -46,7 +51,7 @@ DiscoApp::Engine.routes.draw do
   end
 
   # Make the Sidekiq Web UI accessible using the same credentials as the admin.
-  if Rails.env.production? || Rails.env.staging? 
+  if Rails.env.production? || Rails.env.staging?
     Sidekiq::Web.use Rack::Auth::Basic do |username, password|
       [
         ENV['ADMIN_APP_USERNAME'].present?,
@@ -64,5 +69,4 @@ DiscoApp::Engine.routes.draw do
       get 'frame' => :frame, as: :frame
     end
   end
-
 end

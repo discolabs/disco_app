@@ -1,4 +1,5 @@
 module DiscoApp::Concerns::SynchroniseResourcesJob
+
   extend ActiveSupport::Concern
 
   def perform(_shop, class_name, params)

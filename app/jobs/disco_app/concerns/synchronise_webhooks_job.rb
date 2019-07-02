@@ -1,7 +1,8 @@
 module DiscoApp::Concerns::SynchroniseWebhooksJob
+
   extend ActiveSupport::Concern
 
-  COMMON_WEBHOOKS = [:'app/uninstalled', :'shop/update']
+  COMMON_WEBHOOKS = [:'app/uninstalled', :'shop/update'].freeze
 
   # Ensure the webhooks registered with our shop are the same as those listed
   # in our application configuration.
@@ -12,16 +13,14 @@ module DiscoApp::Concerns::SynchroniseWebhooksJob
         ShopifyAPI::Webhook.create(
           topic: topic,
           address: webhooks_url,
-          format: 'json',
+          format: 'json'
         )
       end
     end
 
     # Remove any extraneous topics.
     current_webhooks.each do |webhook|
-      unless expected_topics.include?(webhook.topic.to_sym)
-        ShopifyAPI::Webhook.delete(webhook.id)
-      end
+      ShopifyAPI::Webhook.delete(webhook.id) unless expected_topics.include?(webhook.topic.to_sym)
     end
 
     # Ensure webhook addresses are current.

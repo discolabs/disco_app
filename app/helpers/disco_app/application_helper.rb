@@ -18,7 +18,7 @@ module DiscoApp::ApplicationHelper
       title: options.delete(:modal_title),
       width: options.delete(:modal_width),
       height: options.delete(:modal_height),
-      buttons: options.delete(:modal_buttons),
+      buttons: options.delete(:modal_buttons)
     }
     options[:onclick] = "ShopifyApp.Modal.open(#{modal_options.to_json}); return false;"
     options[:onclick].gsub!(/"function(.*?)"/, 'function\1')
@@ -32,14 +32,14 @@ module DiscoApp::ApplicationHelper
     react_component(name, args, options)
   end
 
-  # Provide link to dynamically add a new nested fields association 
-  def link_to_add_fields(name, f, association)
-    new_object = f.object.send(association).klass.new
+  # Provide link to dynamically add a new nested fields association
+  def link_to_add_fields(name, form, association)
+    new_object = form.object.send(association).klass.new
     id = new_object.object_id
-    fields = f.fields_for(association, new_object, child_index: id) do |builder|
-      render(association.to_s.singularize + "_fields", f: builder)
+    fields = form.fields_for(association, new_object, child_index: id) do |builder|
+      render(association.to_s.singularize + '_fields', f: builder)
     end
-    link_to(name, '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", "")})
+    link_to(name, '#', class: 'add_fields', data: { id: id, fields: fields.gsub("\n", '') })
   end
 
   # Return the props required to instantiate a React ModelForm component for the

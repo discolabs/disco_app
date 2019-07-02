@@ -1,12 +1,13 @@
-require File.expand_path('../boot', __FILE__)
+require File.expand_path('boot', __dir__)
 
 require 'rails/all'
 
 Bundler.require(*Rails.groups)
-require "disco_app"
+require 'disco_app'
 
 module Dummy
   class Application < Rails::Application
+
     config.action_dispatch.default_headers['P3P'] = 'CP="Not used"'
     config.action_dispatch.default_headers.delete('X-Frame-Options')
     # Settings in config/environments/* take precedence over those specified here.
@@ -30,6 +31,6 @@ module Dummy
 
     # Explicitly prevent real charges being created by default
     config.x.shopify_charges_real = false
+
   end
 end
-

@@ -1,4 +1,5 @@
 module DiscoApp::Concerns::Shop
+
   extend ActiveSupport::Concern
 
   included do
@@ -15,6 +16,10 @@ module DiscoApp::Concerns::Shop
     # Define relationship to sessions.
     has_many :sessions, class_name: 'DiscoApp::Session', dependent: :destroy
 
+    # Define relationship to Flow actions and triggers.
+    has_many :flow_actions, class_name: 'DiscoApp::Flow::Action', dependent: :destroy
+    has_many :flow_triggers, class_name: 'DiscoApp::Flow::Trigger', dependent: :destroy
+
     # Define possible installation statuses as an enum.
     enum status: {
       never_installed: 0,
@@ -27,7 +32,7 @@ module DiscoApp::Concerns::Shop
     }
 
     # Define some useful scopes.
-    scope :status, -> (status) { where status: status }
+    scope :status, ->(status) { where status: status }
     scope :installed, -> { where status: statuses[:installed] }
     scope :has_active_shopify_plan, -> { where.not(plan_name: [:cancelled, :frozen, :fraudulent]) }
     scope :shopify_plus, -> { where(plan_name: :shopify_plus) }
@@ -72,7 +77,7 @@ module DiscoApp::Concerns::Shop
     def admin_url
       "https://#{shopify_domain}/admin"
     end
-    
+
     def installed_duration
       distance_of_time_in_words_to_now(created_at.time)
     end
@@ -82,8 +87,8 @@ module DiscoApp::Concerns::Shop
     def time_zone
       @time_zone ||= begin
         Time.find_zone!(data[:timezone].to_s.gsub(/^\(.+\)\s/, ''))
-      rescue ArgumentError
-        Time.zone
+                     rescue ArgumentError
+                       Time.zone
       end
     end
 
@@ -95,14 +100,13 @@ module DiscoApp::Concerns::Shop
 
     # Return an instance of the Disco API client.
     def disco_api_client
-      @api_client ||= DiscoApp::ApiClient.new(self, ENV['DISCO_API_URL'])
+      @disco_api_client ||= DiscoApp::ApiClient.new(self, ENV['DISCO_API_URL'])
     end
 
     # Override the "read" data attribute to allow indifferent access.
     def data
       read_attribute(:data).with_indifferent_access
     end
-
   end
 
 end

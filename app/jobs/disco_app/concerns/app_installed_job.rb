@@ -1,4 +1,5 @@
 module DiscoApp::Concerns::AppInstalledJob
+
   extend ActiveSupport::Concern
 
   included do
@@ -21,9 +22,7 @@ module DiscoApp::Concerns::AppInstalledJob
 
     @shop.reload
 
-    if default_plan.present?
-      DiscoApp::SubscriptionService.subscribe(@shop, default_plan, plan_code, source)
-    end
+    DiscoApp::SubscriptionService.subscribe(@shop, default_plan, plan_code, source) if default_plan.present?
   end
 
   # Provide an overridable hook for applications to examine the @shop object

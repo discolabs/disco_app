@@ -3,6 +3,7 @@ require 'test_helper'
 class DiscoApp::CanBeLiquifiedTest < ActiveSupport::TestCase
 
   class Model
+
     include ActiveModel::Model
     include DiscoApp::Concerns::CanBeLiquified
 
@@ -17,6 +18,7 @@ class DiscoApp::CanBeLiquifiedTest < ActiveSupport::TestCase
     def liquid_model_name
       'model'
     end
+
   end
 
   def setup
@@ -48,7 +50,7 @@ class DiscoApp::CanBeLiquifiedTest < ActiveSupport::TestCase
 
     # Return an asset fixture as a string.
     def liquid_fixture(path)
-      filename = File.join(File.dirname(File.dirname(File.dirname(__FILE__))), 'fixtures', 'liquid', "#{path}")
+      filename = File.join(File.dirname(File.dirname(File.dirname(__FILE__))), 'fixtures', 'liquid', path.to_s)
       File.read(filename).strip
     end
 

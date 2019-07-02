@@ -1,8 +1,8 @@
 module DiscoApp::Concerns::Plan
+
   extend ActiveSupport::Concern
 
   included do
-
     has_many :subscriptions
     has_many :shops, through: :subscriptions
     has_many :plan_codes, dependent: :destroy
@@ -25,11 +25,10 @@ module DiscoApp::Concerns::Plan
     scope :available, -> { where status: statuses[:available] }
 
     validates_presence_of :name
-
   end
 
   def has_trial?
-    trial_period_days.present? and trial_period_days > 0
+    trial_period_days.present? && trial_period_days.positive?
   end
 
 end

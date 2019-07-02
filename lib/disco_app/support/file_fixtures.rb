@@ -11,7 +11,8 @@ module DiscoApp::Test
     def json_fixture(path, dir: 'json', parse: true)
       filename = Rails.root.join('test', 'fixtures', dir, "#{path}.json")
       return File.read(filename) unless parse
-      HashWithIndifferentAccess.new(ActiveSupport::JSON.decode(File.read(filename)))
+
+      HashWithIndifferentAccess.new(JSON.parse(File.read(filename)))
     end
 
     # Webhook fixtures are special-case JSON fixtures.
