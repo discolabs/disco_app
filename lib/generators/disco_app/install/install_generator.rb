@@ -35,15 +35,14 @@ module DiscoApp
         gem 'active_link_to'
         gem 'activeresource'
         gem 'acts_as_singleton'
+        gem 'appsignal'
         gem 'classnames-rails'
-        gem 'newrelic_rpm'
         gem 'nokogiri'
         gem 'oj'
         gem 'pg'
         gem 'premailer-rails'
         gem 'react-rails'
         gem 'render_anywhere'
-        gem 'rollbar'
         gem 'shopify_app'
         gem 'sidekiq'
 
@@ -155,6 +154,9 @@ module DiscoApp
         CONFIG
         application configuration, env: :production
         application configuration, env: :staging
+
+        # Monitoring configuration
+        copy_file 'config/appsignal.yml', 'config/appsignal.yml'
       end
 
 
