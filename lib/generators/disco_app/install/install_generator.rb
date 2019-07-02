@@ -13,7 +13,7 @@ module DiscoApp
       #  - README/PULL REQUEST template
       #
       def copy_root_files
-        %w(.editorconfig .env .env.local .gitignore .rubocop.yml .codeclimate.yml Procfile CHECKS README.md).each do |file|
+        %w(.editorconfig .env .env.local .gitignore .rubocop.yml Procfile CHECKS README.md).each do |file|
           copy_file "root/#{file}", file
         end
         directory 'root/.github'
@@ -33,6 +33,7 @@ module DiscoApp
 
         # Add gem requirements.
         gem 'active_link_to'
+        gem 'activeresource'
         gem 'acts_as_singleton'
         gem 'classnames-rails'
         gem 'newrelic_rpm'
@@ -45,7 +46,6 @@ module DiscoApp
         gem 'rollbar'
         gem 'shopify_app'
         gem 'sidekiq'
-        gem 'activeresource'
 
         # Indicate which gems should only be used in production.
         gem_group :production do
@@ -53,12 +53,17 @@ module DiscoApp
           gem 'rails_12factor'
         end
 
+        # Indicate which gems should only be used in development.
+        gem_group :production do
+          gem 'rb-readline'
+        end
+
         # Indicate which gems should only be used in development and test.
         gem_group :development, :test do
           gem 'dotenv-rails'
+          gem 'mechanize'
           gem 'minitest-reporters'
           gem 'webmock'
-          gem 'mechanize'
         end
       end
 
@@ -72,6 +77,10 @@ module DiscoApp
         Bundler.with_clean_env do
           run 'bundle install'
         end
+      end
+
+      def support_staging_environment
+        copy_file 'config/environments/staging.rb', 'config/environments/staging.rb'
       end
 
       # Make any required adjustments to the application configuration.
@@ -111,15 +120,21 @@ module DiscoApp
         application "config.active_job.queue_adapter = :sidekiq\n", env: :production
         application "# Use Sidekiq as the active job backend", env: :production
 
+        # Set Sidekiq as the queue adapter in staging.
+        application "config.active_job.queue_adapter = :sidekiq\n", env: :staging
+        application '# Use Sidekiq as the active job backend', env: :staging
+
         # Ensure the application configuration uses the DEFAULT_HOST environment
         # variable to set up support for reverse routing absolute URLS (needed when
         # generating Webhook URLs for example).
         application "routes.default_url_options[:host] = ENV['DEFAULT_HOST']\n"
         application "# Set the default host for absolute URL routing purposes"
 
-        # Configure React in development and production.
+        # Configure React in development, staging and production.
         application "config.react.variant = :development", env: :development
         application "# Use development variant of React in development.", env: :development
+        application 'config.react.variant = :production', env: :staging
+        application '# Use production variant of React in staging.', env: :staging
         application "config.react.variant = :production", env: :production
         application "# Use production variant of React in production.", env: :production
 
@@ -139,6 +154,7 @@ module DiscoApp
             end
         CONFIG
         application configuration, env: :production
+        application configuration, env: :staging
       end
 
 
