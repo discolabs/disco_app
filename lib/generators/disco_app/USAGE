@@ -1,5 +1,0 @@
-Description:
-    Generate a new Shopify application.
-
-Example:
-    rails generate disco_app

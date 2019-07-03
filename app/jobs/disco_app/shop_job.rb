@@ -28,7 +28,6 @@ class DiscoApp::ShopJob < ApplicationJob
         shop_id: @shop.id,
         shopify_domain: @shop.shopify_domain
       )
-
       @shop.with_api_context { block.call(job.arguments) }
     end
 

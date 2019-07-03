@@ -46,6 +46,7 @@ Layout/ClassStructure:
   ExpectedOrder:
     - module_inclusion
     - constants
+    - attributes
     - associations
     - validations
     - callbacks

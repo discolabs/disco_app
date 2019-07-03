@@ -1,0 +1,7 @@
+module <%= Rails.application.class.parent_name %>
+  class Application
+
+    VERSION = File.read(Rails.root.join('VERSION')).chomp.freeze
+
+  end
+end

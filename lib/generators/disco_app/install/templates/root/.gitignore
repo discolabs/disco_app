@@ -15,6 +15,11 @@ pickle-email-*.html
 .byebug_history
 .DS_Store
 .disco_app
+/public/packs
+/public/packs-test
+/node_modules
+yarn-debug.log*
+.yarn-integrity
 
 ## Environment normalisation:
 /.bundle
@@ -22,6 +27,7 @@ pickle-email-*.html
 /vendor/ruby
 /.env.local
 .envrc
+.pryrc
 
 # these should all be checked in to normalise the environment:
 # Gemfile.lock, .ruby-version, .ruby-gemset
