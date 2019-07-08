@@ -40,7 +40,6 @@ class DiscoAppGenerator < Rails::Generators::Base
     gem 'pg'
     gem 'premailer-rails'
     gem 'react-rails'
-    gem 'render_anywhere'
     gem 'appsignal'
     gem 'shopify_app'
     gem 'sidekiq'
