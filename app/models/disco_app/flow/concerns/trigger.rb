@@ -15,6 +15,10 @@ module DiscoApp
             succeeded: 1,
             failed: 2
           }
+
+          def properties
+            read_attribute(:properties).with_indifferent_access
+          end
         end
 
       end
