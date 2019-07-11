@@ -34,8 +34,8 @@ module DiscoApp
           # service method here.
           def flow_action_is_valid?
             DiscoApp::WebhookService.valid_hmac?(
-              request.body.read.to_s, 
-              ShopifyApp.configuration.secret, 
+              request.body.read.to_s,
+              ShopifyApp.configuration.secret,
               request.headers['HTTP_X_SHOPIFY_HMAC_SHA256']
             )
           end
