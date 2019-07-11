@@ -13,7 +13,7 @@ module DiscoApp
       #  - README/PULL REQUEST template
       #
       def copy_root_files
-        %w(.editorconfig .env .env.local .gitignore .rubocop.yml Procfile CHECKS README.md).each do |file|
+        %w[.editorconfig .env .env.local .gitignore .rubocop.yml Procfile CHECKS README.md].each do |file|
           copy_file "root/#{file}", file
         end
         directory 'root/.github'
@@ -21,7 +21,7 @@ module DiscoApp
 
       # Remove a number of root files.
       def remove_root_files
-        %w(README.rdoc).each do |file|
+        %w[README.rdoc].each do |file|
           remove_file file
         end
       end
@@ -45,6 +45,8 @@ module DiscoApp
         gem 'render_anywhere'
         gem 'shopify_app'
         gem 'sidekiq'
+        gem 'timber', '~> 3.0'
+        gem 'timber-rails', '~> 1.0'
 
         # Indicate which gems should only be used in production.
         gem_group :production do
@@ -59,10 +61,19 @@ module DiscoApp
 
         # Indicate which gems should only be used in development and test.
         gem_group :development, :test do
+          gem 'coveralls'
           gem 'dotenv-rails'
+          gem 'factory_bot_rails'
+          gem 'faker'
           gem 'mechanize'
-          gem 'minitest-reporters'
+          gem 'rspec-rails'
+          gem 'vcr'
           gem 'webmock'
+        end
+
+        gem_group :test do
+          gem 'database_cleaner'
+          gem 'shoulda-matchers'
         end
       end
 
@@ -90,34 +101,34 @@ module DiscoApp
 
         # Set time zone to UTC
         application "config.time_zone = 'UTC'"
-        application "# Ensure UTC is the default timezone"
+        application '# Ensure UTC is the default timezone'
 
         # Set server side rendereing for components.js
         application "config.react.server_renderer_options = {\nfiles: ['components.js'], # files to load for prerendering\n}"
-        application "# Enable server side react rendering"
+        application '# Enable server side react rendering'
 
         # Set defaults for various charge attributes.
         application "config.x.shopify_charges_default_trial_days = 14\n"
-        application "config.x.shopify_charges_default_price = 10.00"
-        application "config.x.shopify_charges_default_type = :recurring"
-        application "# Set defaults for charges created by the application"
+        application 'config.x.shopify_charges_default_price = 10.00'
+        application 'config.x.shopify_charges_default_type = :recurring'
+        application '# Set defaults for charges created by the application'
 
         # Set the "real charges" config variable to false explicitly by default.
         # Only in production do we read from the environment variable and
         # potentially have it become true.
         application "config.x.shopify_charges_real = false\n"
-        application "# Explicitly prevent real charges being created by default"
+        application '# Explicitly prevent real charges being created by default'
         application "config.x.shopify_charges_real = ENV['SHOPIFY_CHARGES_REAL'] == 'true'\n", env: :production
-        application "# Allow real charges in production with an ENV variable", env: :production
+        application '# Allow real charges in production with an ENV variable', env: :production
 
         # Configure session storage.
         application "ActiveRecord::SessionStore::Session.table_name = 'disco_app_sessions'"
-        application "ActionDispatch::Session::ActiveRecordStore.session_class = DiscoApp::Session"
-        application "# Configure custom session storage"
+        application 'ActionDispatch::Session::ActiveRecordStore.session_class = DiscoApp::Session'
+        application '# Configure custom session storage'
 
         # Set Sidekiq as the queue adapter in production.
         application "config.active_job.queue_adapter = :sidekiq\n", env: :production
-        application "# Use Sidekiq as the active job backend", env: :production
+        application '# Use Sidekiq as the active job backend', env: :production
 
         # Set Sidekiq as the queue adapter in staging.
         application "config.active_job.queue_adapter = :sidekiq\n", env: :staging
@@ -127,15 +138,23 @@ module DiscoApp
         # variable to set up support for reverse routing absolute URLS (needed when
         # generating Webhook URLs for example).
         application "routes.default_url_options[:host] = ENV['DEFAULT_HOST']\n"
-        application "# Set the default host for absolute URL routing purposes"
+        application '# Set the default host for absolute URL routing purposes'
 
         # Configure React in development, staging and production.
-        application "config.react.variant = :development", env: :development
-        application "# Use development variant of React in development.", env: :development
+        application 'config.react.variant = :development', env: :development
+        application '# Use development variant of React in development.', env: :development
         application 'config.react.variant = :production', env: :staging
         application '# Use production variant of React in staging.', env: :staging
-        application "config.react.variant = :production", env: :production
-        application "# Use production variant of React in production.", env: :production
+        application 'config.react.variant = :production', env: :production
+        application '# Use production variant of React in production.', env: :production
+
+        # Configure Factory Bot as the Rails testing fixture replacement
+        application <<~CONFIG
+          config.generators do |g|
+            g.test_framework :rspec, fixtures: true, view_specs: false, helper_specs: false, routing_specs: false
+            g.fixture_replacement :factory_bot, dir: 'spec/factories'
+          end
+        CONFIG
 
         # Copy over the default puma configuration.
         copy_file 'config/puma.rb', 'config/puma.rb'
@@ -158,7 +177,6 @@ module DiscoApp
         # Monitoring configuration
         copy_file 'config/appsignal.yml', 'config/appsignal.yml'
       end
-
 
       # Add entries to .env and .env.local
       def add_env_variables
@@ -183,6 +201,11 @@ module DiscoApp
         generate 'react:install'
       end
 
+      def configure_rspec
+        directory 'spec'
+        copy_file 'root/.rspec', '.rspec'
+      end
+
       # Copy template files to the appropriate location. In some cases, we'll be
       # overwriting or removing existing files or those created by ShopifyApp.
       def copy_and_remove_files
@@ -191,6 +214,7 @@ module DiscoApp
         copy_file 'initializers/disco_app.rb', 'config/initializers/disco_app.rb'
         copy_file 'initializers/shopify_session_repository.rb', 'config/initializers/shopify_session_repository.rb'
         copy_file 'initializers/session_store.rb', 'config/initializers/session_store.rb'
+        copy_file 'initializers/timber.rb', 'config/initializers/timber.rb'
 
         # Copy default home controller and view
         copy_file 'controllers/home_controller.rb', 'app/controllers/home_controller.rb'
@@ -207,11 +231,14 @@ module DiscoApp
         # Remove the layout files created by ShopifyApp
         remove_file 'app/views/layouts/application.html.erb'
         remove_file 'app/views/layouts/embedded_app.html.erb'
+
+        # Remove the test directory generated by rails new
+        remove_dir 'test'
       end
 
       # Add the Disco App test helper to test/test_helper.rb
       def add_test_helper
-        inject_into_file 'test/test_helper.rb', "require 'disco_app/test_help'\n", { after: "require 'rails/test_help'\n" }
+        inject_into_file 'test/test_helper.rb', "require 'disco_app/test_help'\n", after: "require 'rails/test_help'\n"
       end
 
       # Copy engine migrations over.

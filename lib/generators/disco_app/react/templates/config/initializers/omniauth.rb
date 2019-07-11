@@ -16,12 +16,12 @@ end
 
 Rails.application.config.middleware.use OmniAuth::Builder do
   provider :shopify,
-    ShopifyApp.configuration.api_key,
-    ShopifyApp.configuration.secret,
-    scope: ShopifyApp.configuration.scope
+           ShopifyApp.configuration.api_key,
+           ShopifyApp.configuration.secret,
+           scope: ShopifyApp.configuration.scope
   provider :shopify_user,
-    ShopifyApp.configuration.api_key,
-    ShopifyApp.configuration.secret,
-    scope: ShopifyApp.configuration.scope,
-    setup: SETUP_PROC
+           ShopifyApp.configuration.api_key,
+           ShopifyApp.configuration.secret,
+           scope: ShopifyApp.configuration.scope,
+           setup: SETUP_PROC
 end

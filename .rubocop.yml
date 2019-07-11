@@ -480,7 +480,7 @@ Metrics/BlockLength:
   Exclude:
     - config/environments/*
     - ./*.gemspec
-    - lib/generators/disco_app/templates/config/environments/*
+    - lib/generators/disco_app/install/templates/config/environments/*
   ExcludedMethods:
     - context
     - define

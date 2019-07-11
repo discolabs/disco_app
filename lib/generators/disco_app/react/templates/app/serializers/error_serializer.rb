@@ -69,7 +69,6 @@ class ErrorSerializer
       errors.is_a?(StandardError)
     end
 
-
     def string_error?
       errors.is_a?(String)
     end
