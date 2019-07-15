@@ -19,7 +19,7 @@ module DiscoApp::Concerns::WebhooksController
     job_class = DiscoApp::WebhookService.find_job_class(topic)
 
     # Return bad request if we couldn't match a job class.
-    return head :bad_request unless job_class.present?
+    return head :bad_request if job_class.blank?
 
     # Decode the body data and enqueue the appropriate job.
     data = JSON.parse(request.body.read).with_indifferent_access

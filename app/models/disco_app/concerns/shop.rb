@@ -7,11 +7,11 @@ module DiscoApp::Concerns::Shop
     include ActionView::Helpers::DateHelper
 
     # Define relationships to plans and subscriptions.
-    has_many :subscriptions
+    has_many :subscriptions, dependent: :restrict_with_exception
     has_many :plans, through: :subscriptions
 
     # Define relationship to users.
-    has_many :users
+    has_many :users, dependent: :restrict_with_exception
 
     # Define relationship to sessions.
     has_many :sessions, class_name: 'DiscoApp::Session', dependent: :destroy

@@ -27,7 +27,7 @@ module DiscoApp::Admin::Concerns::PlansController
   end
 
   def update
-    if @plan.update_attributes(plan_params)
+    if @plan.update(plan_params)
       redirect_to edit_admin_plan_path(@plan)
     else
       render 'edit'

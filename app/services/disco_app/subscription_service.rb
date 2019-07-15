@@ -32,23 +32,23 @@ class DiscoApp::SubscriptionService
 
     # If a plan code was provided, fetch it for the given plan.
     def plan_code_instance
-      return unless plan_code.present?
+      return if plan_code.blank?
 
       @plan_code_instance ||= DiscoApp::PlanCode.available.find_by(plan: plan, code: plan_code)
     end
 
     # If a source name has been provided, fetch or create it
     def source_instance
-      return unless source_name.present?
+      return if source_name.blank?
 
       @source_instance ||= DiscoApp::Source.find_or_create_by(source: source_name)
     end
 
     # Cancel any existing current subscriptions.
     def cancel_existing_subscriptions
-      shop.subscriptions.current.update_all(
+      shop.subscriptions.current.update_all( # rubocop:disable Rails/SkipsModelValidations
         status: DiscoApp::Subscription.statuses[:cancelled],
-        cancelled_at: Time.now
+        cancelled_at: Time.zone.now
       )
     end
 
@@ -71,7 +71,7 @@ class DiscoApp::SubscriptionService
         subscription_type: plan.plan_type,
         amount: subscription_amount,
         trial_period_days: plan.has_trial? ? subscription_trial_period_days : nil,
-        trial_start_at: plan.has_trial? ? Time.now : nil,
+        trial_start_at: plan.has_trial? ? Time.zone.now : nil,
         trial_end_at: plan.has_trial? ? subscription_trial_period_days.days.from_now : nil,
         source: source_instance
       )

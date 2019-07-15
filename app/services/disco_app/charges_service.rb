@@ -67,7 +67,7 @@ class DiscoApp::ChargesService
   def self.cancel_recurring_charges(shop, charge = nil)
     charges = DiscoApp::RecurringApplicationCharge.where(shop: shop)
     charges = charges.where.not(id: charge) if charge.present?
-    charges.update_all(status: DiscoApp::RecurringApplicationCharge.statuses[:cancelled])
+    charges.update_all(status: DiscoApp::RecurringApplicationCharge.statuses[:cancelled]) # rubocop:disable Rails/SkipsModelValidations
   end
 
 end

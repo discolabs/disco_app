@@ -39,7 +39,7 @@ class DiscoApp::ChargesController < ApplicationController
   private
 
     def find_subscription
-      @subscription = @shop.subscriptions.find_by_id!(params[:subscription_id])
+      @subscription = @shop.subscriptions.find_by!(id: params[:subscription_id])
       redirect_to main_app.root_url unless @subscription.requires_active_charge? && !@subscription.active_charge?
     end
 

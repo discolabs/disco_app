@@ -1,8 +1,13 @@
+require: 
+  - rubocop-rails
+  - rubocop-performance
+
 AllCops:
   Exclude:
     - bin/*
     - db/schema.rb
     - vendor/ruby/**/*
+    - node_modules/**/*
   TargetRubyVersion: 2.5
 
 # Layout
@@ -46,6 +51,7 @@ Layout/ClassStructure:
   ExpectedOrder:
     - module_inclusion
     - constants
+    - public_attributes
     - associations
     - validations
     - callbacks
@@ -53,6 +59,7 @@ Layout/ClassStructure:
     - initializer
     - public_methods
     - protected_methods
+    - private_attributes
     - private_methods
   Enabled: true
 
@@ -83,7 +90,7 @@ Layout/IndentFirstHashElement:
   EnforcedStyle: consistent
 
 Layout/IndentationConsistency:
-  EnforcedStyle: rails
+  EnforcedStyle: indented_internal_methods
   Enabled: true
 
 Layout/MultilineBlockLayout:
@@ -238,11 +245,6 @@ Style/FrozenStringLiteralComment:
     to help transition from Ruby 2.3.0 to Ruby 3.0.
   Enabled: false
 
-Lint/FlipFlop:
-  Description: 'Checks for flip flops'
-  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-flip-flops'
-  Enabled: true
-
 Style/FormatString:
   Description: 'Enforce the use of Kernel#sprintf, Kernel#format or String#%.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#sprintf'
@@ -381,6 +383,13 @@ Style/RaiseArgs:
 Style/RegexpLiteral:
   Description: 'Use / or %r around regular expressions.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#percent-r'
+  Enabled: true
+
+Style/Sample:
+  Description: >-
+                  Use `sample` instead of `shuffle.first`,
+                  `shuffle.last`, and `shuffle[Fixnum]`.
+  Reference: 'https://github.com/JuanitoFatas/fast-ruby#arrayshufflefirst-vs-arraysample-code'
   Enabled: true
 
 Style/SelfAssignment:
@@ -568,6 +577,11 @@ Lint/ElseLayout:
   Description: 'Check for odd code arrangement in an else block.'
   Enabled: true
 
+Lint/FlipFlop:
+  Description: 'Checks for flip flops'
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-flip-flops'
+  Enabled: true
+
 Lint/FormatParameterMismatch:
   Description: 'The number of parameters to format/sprint must match the fields.'
   Enabled: true
@@ -657,13 +671,6 @@ Performance/ReverseEach:
   Reference: 'https://github.com/JuanitoFatas/fast-ruby#enumerablereverseeach-vs-enumerablereverse_each-code'
   Enabled: true
 
-Style/Sample:
-  Description: >-
-                  Use `sample` instead of `shuffle.first`,
-                  `shuffle.last`, and `shuffle[Fixnum]`.
-  Reference: 'https://github.com/JuanitoFatas/fast-ruby#arrayshufflefirst-vs-arraysample-code'
-  Enabled: true
-
 Performance/Size:
   Description: >-
                   Use `size` instead of `count` for counting
@@ -695,6 +702,10 @@ Rails/Delegate:
   Description: 'Prefer delegate method for delegations.'
   Enabled: false
 
+Rails/Exit:
+  Exclude:
+    - lib/generators/disco_app/install/templates/spec/rails_helper.rb
+
 Rails/FindBy:
   Description: 'Prefer find_by over where.first.'
   Enabled: true
@@ -709,7 +720,11 @@ Rails/HasAndBelongsToMany:
 
 Rails/Output:
   Description: 'Checks for calls to puts, print, etc.'
-  Enabled: true
+  Enabled: false
+
+Rails/HttpPositionalArguments:
+  Description: 'Use keyword arguments instead of positional arguments for http calls'
+  Enabled: false
 
 Rails/ReadWriteAttribute:
   Description: >-
@@ -726,6 +741,13 @@ Rails/TimeZone:
   StyleGuide: 'https://github.com/bbatsov/rails-style-guide#time'
   Reference: 'http://danilenko.org/2012/7/6/rails_timezones'
   Enabled: true
+
+Rails/UnknownEnv:
+  Environments:
+    - development
+    - production
+    - staging
+    - test
 
 Rails/Validation:
   Description: 'Use validates :attribute, hash of validations.'

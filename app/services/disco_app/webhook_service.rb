@@ -15,11 +15,11 @@ class DiscoApp::WebhookService
   # Try to find a job class for the given webhook topic.
   def self.find_job_class(topic)
     # First try to find a top-level matching job class.
-    "#{topic}_job".gsub('/', '_').classify.constantize
+    "#{topic}_job".tr('/', '_').classify.constantize
   rescue NameError
     # If that fails, try to find a DiscoApp:: prefixed job class.
     begin
-      %(DiscoApp::#{"#{topic}_job".gsub('/', '_').classify}).constantize
+      %(DiscoApp::#{"#{topic}_job".tr('/', '_').classify}).constantize
     rescue NameError
       nil
     end

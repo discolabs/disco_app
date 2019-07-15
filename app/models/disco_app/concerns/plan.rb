@@ -3,7 +3,7 @@ module DiscoApp::Concerns::Plan
   extend ActiveSupport::Concern
 
   included do
-    has_many :subscriptions
+    has_many :subscriptions, dependent: :restrict_with_exception
     has_many :shops, through: :subscriptions
     has_many :plan_codes, dependent: :destroy
 

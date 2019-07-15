@@ -14,7 +14,7 @@ module DiscoApp
           resource_url: 'https://example.com/test-resource-url',
           properties: { 'Customer email' => 'name@example.com' }
         )
-        @now = Time.parse('2018-12-29T00:00:00Z')
+        @now = Time.zone.parse('2018-12-29T00:00:00Z')
         Timecop.freeze(@now)
       end
 

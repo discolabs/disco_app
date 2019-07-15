@@ -25,7 +25,7 @@ module DiscoApp::Concerns::AppProxyController
     end
 
     def shopify_shop
-      @shop = DiscoApp::Shop.find_by_shopify_domain!(params[:shop])
+      @shop = DiscoApp::Shop.find_by!(shopify_domain: params[:shop])
     end
 
     def add_liquid_header

@@ -59,6 +59,12 @@ module DiscoApp
           gem 'rb-readline'
         end
 
+        gem_group :development do
+          gem 'rubocop'
+          gem 'rubocop-performance'
+          gem 'rubocop-rails'
+        end
+
         # Indicate which gems should only be used in development and test.
         gem_group :development, :test do
           gem 'coveralls'
@@ -104,8 +110,13 @@ module DiscoApp
         application '# Ensure UTC is the default timezone'
 
         # Set server side rendereing for components.js
-        application "config.react.server_renderer_options = {\nfiles: ['components.js'], # files to load for prerendering\n}"
-        application '# Enable server side react rendering'
+        application <<~CONFIG
+          # Enable server side react rendering
+          config.react.server_renderer_options = {
+            # files to load for prerendering
+            files: ['components.js']
+          }
+        CONFIG
 
         # Set defaults for various charge attributes.
         application "config.x.shopify_charges_default_trial_days = 14\n"

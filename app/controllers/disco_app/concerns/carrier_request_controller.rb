@@ -25,7 +25,7 @@ module DiscoApp::Concerns::CarrierRequestController
     end
 
     def find_shop
-      @shop = DiscoApp::Shop.find_by_shopify_domain(request.headers['HTTP_X_SHOPIFY_SHOP_DOMAIN'])
+      @shop = DiscoApp::Shop.find_by(shopify_domain: request.headers['HTTP_X_SHOPIFY_SHOP_DOMAIN'])
 
       head :unauthorized unless @shop
     end
@@ -35,10 +35,10 @@ module DiscoApp::Concerns::CarrierRequestController
     end
 
     def request_is_valid?
-      return false unless params[:rate].present?
-      return false unless params[:rate][:origin].present?
-      return false unless params[:rate][:destination].present?
-      return false unless params[:rate][:items].present?
+      return false if params[:rate].blank?
+      return false if params[:rate][:origin].blank?
+      return false if params[:rate][:destination].blank?
+      return false if params[:rate][:items].blank?
     end
 
 end
