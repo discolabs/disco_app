@@ -1,0 +1,5 @@
+Description:
+  Generate boilerplate for a React-flavoured embedded app.
+
+Example:
+  rails generate disco_app:react

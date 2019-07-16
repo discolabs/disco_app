@@ -10,7 +10,7 @@ class AddSourcesToShopSubscriptions < ActiveRecord::Migration[5.1]
       end
     end
 
-    remove_column :disco_app_subscriptions, :source
+    remove_column :disco_app_subscriptions, :source, :string
   end
 
 end

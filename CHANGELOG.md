@@ -1,6 +1,22 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 0.17.0 - 2019-07-16
+### Added
+- Timber logging for generated apps
+- rubocop-performance and rubocop-rails plugins
+- Support for AppSignal
+- Generator for React applications
+
+### Changed
+- Switch from Minitest to RSpec as the testing library for generated apps
+- Update rubocop.yml file
+- Lock shopify_api version to avoid breaking changes
+- Upgrade Rails to 5.2.2 to avoid gem vulnerabilities
+- Run rubocop auto-corrections
+- Use with_indifferent_access when reading Flow properties
+- Renaming of methods and general refactoring
+
 ## 0.16.1 - 2019-01-01
 ### Added
 - Support for Shopify Flow triggers and actions

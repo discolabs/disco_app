@@ -3,6 +3,15 @@ This file contains more detailed instructions on what's required when updating
 an application between one release version of the gem to the next. It's intended
 as more in-depth accompaniment to the notes in `CHANGELOG.md` for each version.
 
+## Upgrading from 0.16.1 to 0.17.1
+Upgrade your app to Rails version 5.2.2.
+
+Set your `shopify_api` version to 6.0:
+
+```ruby
+gem 'shopify_api', '~> 6.0'
+```
+
 ## Upgrading from 0.16.0 to 0.16.1
 Ensure new Shopify Flow database migrations are brought across and run:
 

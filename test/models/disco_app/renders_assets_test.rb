@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class DiscoApp::RendersAssetsTest < ActiveSupport::TestCase
+
   include ActiveJob::TestHelper
   include DiscoApp::Test::ShopifyAPI
 
@@ -102,7 +103,7 @@ class DiscoApp::RendersAssetsTest < ActiveSupport::TestCase
 
     # Return an asset fixture as a string.
     def asset_fixture(path)
-      filename = File.join(File.dirname(File.dirname(File.dirname(__FILE__))), 'fixtures', 'assets', "#{path}")
+      filename = File.join(File.dirname(File.dirname(File.dirname(__FILE__))), 'fixtures', 'assets', path.to_s)
       File.read(filename)
     end
 

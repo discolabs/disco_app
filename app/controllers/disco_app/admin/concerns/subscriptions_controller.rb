@@ -1,4 +1,5 @@
 module DiscoApp::Admin::Concerns::SubscriptionsController
+
   extend ActiveSupport::Concern
 
   included do
@@ -9,7 +10,7 @@ module DiscoApp::Admin::Concerns::SubscriptionsController
   end
 
   def update
-    if @subscription.update_attributes(subscription_params)
+    if @subscription.update(subscription_params)
       redirect_to edit_admin_shop_subscription_path(@subscription.shop, @subscription)
     else
       render 'edit'
@@ -19,7 +20,7 @@ module DiscoApp::Admin::Concerns::SubscriptionsController
   private
 
     def find_subscription
-      @subscription = DiscoApp::Subscription.find_by_id(params[:id])
+      @subscription = DiscoApp::Subscription.find_by(id: params[:id])
     end
 
     def subscription_params

@@ -79,7 +79,7 @@ module DiscoApp
           form['create_form[application_url]'] = @app_url
 
           # Accept TOS
-          unless form['create_form[accepted]'].blank?
+          if form['create_form[accepted]'].present?
             form['create_form[accepted]'] = '1'
             form.hiddens.last.value = 1
           end

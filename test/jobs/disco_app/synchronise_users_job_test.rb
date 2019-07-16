@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class DiscoApp::SynchroniseUsersJobTest < ActionController::TestCase
+
   include ActiveJob::TestHelper
 
   def setup
