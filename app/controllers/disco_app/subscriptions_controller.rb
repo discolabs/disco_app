@@ -11,7 +11,7 @@ class DiscoApp::SubscriptionsController < ApplicationController
   def create
     # Get the selected plan. If it's not available or couldn't be found,
     # redirect back to the plan selection page.
-    plan = DiscoApp::Plan.available.find_by_id(subscription_params[:plan])
+    plan = DiscoApp::Plan.available.find_by(id: subscription_params[:plan])
 
     redirect_to(action: :new) && return unless plan
 

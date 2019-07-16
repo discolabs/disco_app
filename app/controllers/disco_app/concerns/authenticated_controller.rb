@@ -20,8 +20,8 @@ module DiscoApp::Concerns::AuthenticatedController
     def auto_login
       return unless shop_session.nil? && request_hmac_valid?
 
-      shop = DiscoApp::Shop.find_by_shopify_domain(sanitized_shop_name)
-      return unless shop.present?
+      shop = DiscoApp::Shop.find_by(shopify_domain: sanitized_shop_name)
+      return if shop.blank?
 
       session[:shopify] = shop.id
       session[:shopify_domain] = sanitized_shop_name
@@ -70,7 +70,7 @@ module DiscoApp::Concerns::AuthenticatedController
 
     def check_shop_whitelist
       return unless shop_session
-      return unless ENV['WHITELISTED_DOMAINS'].present?
+      return if ENV['WHITELISTED_DOMAINS'].blank?
       return if ENV['WHITELISTED_DOMAINS'].include?(shop_session.url)
 
       redirect_to_login

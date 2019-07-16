@@ -8,7 +8,7 @@ module DiscoApp::Admin::Concerns::AppSettingsController
 
   def update
     @app_settings = DiscoApp::AppSettings.instance
-    if @app_settings.update_attributes(app_settings_params)
+    if @app_settings.update(app_settings_params)
       flash[:success] = 'Settings updated.'
       redirect_to edit_admin_app_settings_path
     else

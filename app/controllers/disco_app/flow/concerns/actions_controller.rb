@@ -41,7 +41,7 @@ module DiscoApp
           end
 
           def find_shop
-            @shop = DiscoApp::Shop.find_by_shopify_domain!(params[:shopify_domain])
+            @shop = DiscoApp::Shop.find_by!(shopify_domain: params[:shopify_domain])
           end
 
       end

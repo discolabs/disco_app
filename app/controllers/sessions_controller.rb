@@ -20,7 +20,7 @@ class SessionsController < ActionController::Base
     # by the `shop` parameter to be present in the local database.
     def authenticate
       if Rails.env.development? && DiscoApp.configuration.skip_oauth?
-        shop = DiscoApp::Shop.find_by_shopify_domain!(sanitized_shop_name)
+        shop = DiscoApp::Shop.find_by!(shopify_domain: sanitized_shop_name)
 
         sess = ShopifyAPI::Session.new(shop.shopify_domain, shop.shopify_token)
         session[:shopify] = ShopifyApp::SessionRepository.store(sess)

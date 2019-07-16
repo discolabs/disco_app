@@ -27,7 +27,7 @@ module DiscoApp::Admin::Concerns::SourcesController
   end
 
   def update
-    if @source.update_attributes(source_params)
+    if @source.update(source_params)
       redirect_to edit_admin_plan_path(@source)
     else
       render 'edit'

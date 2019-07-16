@@ -45,14 +45,14 @@ class DiscoApp::SubscriptionServiceTest < ActiveSupport::TestCase
   test 'new subscription for a plan with a trial period created correctly' do
     new_subscription = DiscoApp::SubscriptionService.subscribe(@shop, disco_app_plans(:premium))
     assert new_subscription.trial?
-    assert_equal Time.now, new_subscription.trial_start_at
+    assert_equal Time.zone.now, new_subscription.trial_start_at
     assert_equal 28.days.from_now, new_subscription.trial_end_at
   end
 
   test 'new subscription for a plan with a plan code created correctly' do
     new_subscription = DiscoApp::SubscriptionService.subscribe(@shop, disco_app_plans(:premium), 'PODCAST')
     assert new_subscription.trial?
-    assert_equal Time.now, new_subscription.trial_start_at
+    assert_equal Time.zone.now, new_subscription.trial_start_at
     assert_equal 60.days.from_now, new_subscription.trial_end_at
     assert_equal 60, new_subscription.trial_period_days
     assert_equal 8999, new_subscription.amount

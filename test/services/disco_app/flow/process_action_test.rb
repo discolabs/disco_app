@@ -24,7 +24,7 @@ module DiscoApp
           action_run_id: 'bdb15e45-4f9d-4c80-88c8-7b43a24edaac-30892-cc8eb62a-14db-43fc-bc33-d6dea41ae623',
           properties: { 'customer_email' => 'name@example.com' }
         )
-        @now = Time.parse('2018-12-29T00:00:00Z')
+        @now = Time.zone.parse('2018-12-29T00:00:00Z')
         Timecop.freeze(@now)
       end
 
