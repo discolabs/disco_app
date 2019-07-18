@@ -8,7 +8,7 @@ module DiscoApp::Concerns::SynchroniseUsersJob
         ShopifyAPI::User.all
       end
     rescue ActiveResource::UnauthorizedAccess => e
-      Rollbar.error(e)
+      Appsignal.set_error(e)
       return
     end
 
