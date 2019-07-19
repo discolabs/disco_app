@@ -39,6 +39,8 @@ module DiscoApp::Concerns::CarrierRequestController
       return false if params[:rate][:origin].blank?
       return false if params[:rate][:destination].blank?
       return false if params[:rate][:items].blank?
+
+      true
     end
 
 end
