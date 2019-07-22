@@ -1,4 +1,5 @@
 class DiscoApp::ChargesController < ApplicationController
+
   include DiscoApp::Concerns::AuthenticatedController
 
   skip_before_action :check_active_charge
@@ -13,7 +14,7 @@ class DiscoApp::ChargesController < ApplicationController
   # subscription. If successful, redirect to the (external) charge confirmation
   # URL. If it fails, redirect back to the new charge page.
   def create
-    if(charge = DiscoApp::ChargesService.create(@shop, @subscription)).nil?
+    if (charge = DiscoApp::ChargesService.create(@shop, @subscription)).nil?
       redirect_to action: :new
     else
       redirect_to charge.confirmation_url
@@ -25,8 +26,8 @@ class DiscoApp::ChargesController < ApplicationController
   # charge wasn't accepted, the flow will start again.
   def activate
     # First attempt to find a matching charge.
-    if(charge = @subscription.charges.find_by(id: params[:id], shopify_id: params[:charge_id])).nil?
-      redirect_to action: :new and return
+    if (charge = @subscription.charges.find_by(id: params[:id], shopify_id: params[:charge_id])).nil?
+      redirect_to(action: :new) && return
     end
     if DiscoApp::ChargesService.activate(@shop, charge)
       redirect_to main_app.root_url
@@ -38,10 +39,8 @@ class DiscoApp::ChargesController < ApplicationController
   private
 
     def find_subscription
-      @subscription = @shop.subscriptions.find_by_id!(params[:subscription_id])
-      unless @subscription.requires_active_charge? and not @subscription.active_charge?
-        redirect_to main_app.root_url
-      end
+      @subscription = @shop.subscriptions.find_by!(id: params[:subscription_id])
+      redirect_to main_app.root_url unless @subscription.requires_active_charge? && !@subscription.active_charge?
     end
 
 end

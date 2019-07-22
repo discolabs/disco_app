@@ -1,0 +1,84 @@
+{
+  "name": "<%= Rails.application.class.parent_name.underscore.dasherize %>",
+  "private": true,
+  "scripts": {
+    "lint": "eslint app/webpack -c .eslintrc --ext js,jsx",
+    "test": "jest",
+    "test-watch": "jest --watch"
+  },
+  "jest": {
+    "moduleDirectories": [
+      "app/webpack/javascripts",
+      "node_modules"
+    ],
+    "roots": [
+      "app/webpack/javascripts"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>spec/javascripts/setupTests.js"
+    ],
+    "testPathIgnorePatterns": [
+      "/config/",
+      "/node_modules/",
+      "/vendor/"
+    ],
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    }
+  },
+  "dependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/plugin-proposal-class-properties": "^7.3.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.3.4",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/plugin-transform-destructuring": "^7.3.2",
+    "@babel/plugin-transform-regenerator": "^7.3.4",
+    "@babel/plugin-transform-runtime": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/preset-react": "^7.0.0",
+    "@rails/webpacker": "^4.0.2",
+    "@shopify/app-bridge": "^1.2.0-0",
+    "@shopify/polaris": "^3.10.0",
+    "axios": "^0.18.0",
+    "babel-plugin-dynamic-import-node": "^2.2.0",
+    "babel-plugin-macros": "^2.5.0",
+    "bugsnag-js": "^4.7.3",
+    "bugsnag-react": "^1.1.1",
+    "kitsu-core": "^7.0.0",
+    "lodash": "^4.17.11",
+    "luxon": "^1.11.4",
+    "numeral": "^2.0.6",
+    "pluralize": "^7.0.0",
+    "postcss-flexbugs-fixes": "^4.1.0",
+    "postcss-import": "^12.0.1",
+    "postcss-preset-env": "^6.6.0",
+    "prop-types": "^15.7.2",
+    "qs": "^6.6.0",
+    "query-string": "^6.4.0",
+    "react": "^16.8.4",
+    "react-dom": "^16.6.3",
+    "react-router-dom": "^4.3.1",
+    "react-router-prop-types": "^1.0.4",
+    "regenerator": "^0.13.3",
+    "url-parse": "^1.4.4"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^24.8.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "eslint": "^5.15.3",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jest": "^22.6.4",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react": "^7.12.4",
+    "jest": "^24.8.0",
+    "jest-enzyme": "^7.0.2",
+    "prettier": "^1.16.4",
+    "react-test-renderer": "^16.8.6",
+    "webpack-dev-server": "^3.2.1"
+  }
+}

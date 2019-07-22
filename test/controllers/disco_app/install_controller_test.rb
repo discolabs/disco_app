@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class DiscoApp::InstallControllerTest < ActionController::TestCase
+
   include ActiveJob::TestHelper
 
   def setup
@@ -23,7 +24,7 @@ class DiscoApp::InstallControllerTest < ActionController::TestCase
 
   test 'logged-in and installed user is redirected to installing url for install/uninstalling actions' do
     @shop.installed!
-    [:install, :uninstalling].each do |action|
+    [:install, :uninstalling].each do |_action|
       get(:install)
       assert_redirected_to :installing
     end

@@ -1,7 +1,6 @@
 require 'sidekiq/web'
 
 DiscoApp::Engine.routes.draw do
-
   get 'ref', to: '/sessions#referral'
   get '/auth/failure', to: '/sessions#failure'
 
@@ -70,5 +69,4 @@ DiscoApp::Engine.routes.draw do
       get 'frame' => :frame, as: :frame
     end
   end
-
 end

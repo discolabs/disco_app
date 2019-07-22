@@ -1,4 +1,5 @@
 class DiscoApp::AppUninstalledJob < DiscoApp::ShopJob
+
   include DiscoApp::Concerns::AppUninstalledJob
 
   # Extend the perform method to change the country name of the shop to

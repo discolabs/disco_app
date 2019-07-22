@@ -1,4 +1,5 @@
 module DiscoApp::Concerns::Shop
+
   extend ActiveSupport::Concern
 
   included do
@@ -6,11 +7,11 @@ module DiscoApp::Concerns::Shop
     include ActionView::Helpers::DateHelper
 
     # Define relationships to plans and subscriptions.
-    has_many :subscriptions
+    has_many :subscriptions, dependent: :restrict_with_exception
     has_many :plans, through: :subscriptions
 
     # Define relationship to users.
-    has_many :users
+    has_many :users, dependent: :restrict_with_exception
 
     # Define relationship to sessions.
     has_many :sessions, class_name: 'DiscoApp::Session', dependent: :destroy
@@ -31,7 +32,7 @@ module DiscoApp::Concerns::Shop
     }
 
     # Define some useful scopes.
-    scope :status, -> (status) { where status: status }
+    scope :status, ->(status) { where status: status }
     scope :installed, -> { where status: statuses[:installed] }
     scope :has_active_shopify_plan, -> { where.not(plan_name: [:cancelled, :frozen, :fraudulent]) }
     scope :shopify_plus, -> { where(plan_name: :shopify_plus) }
@@ -86,8 +87,8 @@ module DiscoApp::Concerns::Shop
     def time_zone
       @time_zone ||= begin
         Time.find_zone!(data[:timezone].to_s.gsub(/^\(.+\)\s/, ''))
-      rescue ArgumentError
-        Time.zone
+                     rescue ArgumentError
+                       Time.zone
       end
     end
 
@@ -99,14 +100,13 @@ module DiscoApp::Concerns::Shop
 
     # Return an instance of the Disco API client.
     def disco_api_client
-      @api_client ||= DiscoApp::ApiClient.new(self, ENV['DISCO_API_URL'])
+      @disco_api_client ||= DiscoApp::ApiClient.new(self, ENV['DISCO_API_URL'])
     end
 
     # Override the "read" data attribute to allow indifferent access.
     def data
       read_attribute(:data).with_indifferent_access
     end
-
   end
 
 end
