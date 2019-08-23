@@ -39,7 +39,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'pg', '~> 0.21.0'
   s.add_runtime_dependency 'premailer-rails', '~> 1.8'
   s.add_runtime_dependency 'puma', '~> 3.9'
-  s.add_runtime_dependency 'rails', '~> 6.0.0.rc1'
+  s.add_runtime_dependency 'rails', '~> 6.0.0'
   s.add_runtime_dependency 'rails_12factor', '~> 0.0.3'
   s.add_runtime_dependency 'react-rails', '~> 2.5'
   s.add_runtime_dependency 'sass-rails', '~> 5.0'
