@@ -55,11 +55,8 @@ module DiscoApp
         end
 
         # Indicate which gems should only be used in development.
-        gem_group :production do
-          gem 'rb-readline'
-        end
-
         gem_group :development do
+          gem 'rb-readline'
           gem 'rubocop'
           gem 'rubocop-performance'
           gem 'rubocop-rails'
