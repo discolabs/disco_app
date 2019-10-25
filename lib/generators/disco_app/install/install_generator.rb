@@ -29,7 +29,7 @@ module DiscoApp
       # Configure the application's Gemfile.
       def configure_gemfile
         # Remove sqlite.
-        gsub_file 'Gemfile', /^# Use sqlite3 as the database for Active Record\ngem 'sqlite3'/m, ''
+        gsub_file 'Gemfile', /^# Use sqlite3 as the database for Active Record\ngem 'sqlite3', '~> 1.4'/m, ''
 
         # Add gem requirements.
         gem 'active_link_to'
@@ -46,7 +46,6 @@ module DiscoApp
         gem 'shopify_app'
         gem 'sidekiq'
         gem 'timber', '~> 3.0'
-        gem 'timber-rails', '~> 1.0'
 
         # Indicate which gems should only be used in production.
         gem_group :production do
@@ -141,6 +140,10 @@ module DiscoApp
         application "config.active_job.queue_adapter = :sidekiq\n", env: :production
         application '# Use Sidekiq as the active job backend', env: :production
 
+        # Configure to delete X-Frame-Options so that embedded app works in iframe.
+        application "config.action_dispatch.default_headers.delete('X-Frame-Options')"
+        application '# Allow iframe requests'
+
         # Set Sidekiq as the queue adapter in staging.
         application "config.active_job.queue_adapter = :sidekiq\n", env: :staging
         application '# Use Sidekiq as the active job backend', env: :staging
@@ -158,6 +161,10 @@ module DiscoApp
         application '# Use production variant of React in staging.', env: :staging
         application 'config.react.variant = :production', env: :production
         application '# Use production variant of React in production.', env: :production
+
+        # Configure ActionDispatch::HostAuthorization to be disabled
+        application 'config.hosts.clear', env: :development
+        application '# Disable Host Authorization middleware', env: :development
 
         # Configure Factory Bot as the Rails testing fixture replacement
         application <<~CONFIG
@@ -209,6 +216,7 @@ module DiscoApp
       def run_generators
         generate 'shopify_app:install'
         generate 'shopify_app:home_controller'
+        rails_command 'webpacker:install'
         generate 'react:install'
       end
 
@@ -232,8 +240,6 @@ module DiscoApp
         copy_file 'views/home/index.html.erb', 'app/views/home/index.html.erb'
 
         # Copy assets
-        copy_file 'assets/javascripts/application.js', 'app/assets/javascripts/application.js'
-        copy_file 'assets/javascripts/components.js', 'app/assets/javascripts/components.js'
         copy_file 'assets/stylesheets/application.scss', 'app/assets/stylesheets/application.scss'
 
         # Remove application.css
@@ -262,6 +268,15 @@ module DiscoApp
         rake 'db:migrate'
       end
 
+      # Copy package.json.
+      def configure_package
+        template 'root/package.json.tt', 'package.json'
+      end
+
+      def yarn_install
+        run 'yarn install'
+      end
+
       # Lock down the application to a specific Ruby version:
       #
       #  - Via .ruby-version file for rbenv in development;
@@ -270,7 +285,6 @@ module DiscoApp
       # This should be the last operation, to allow all other operations to run in the initial Ruby version.
       def set_ruby_version
         copy_file 'root/.ruby-version', '.ruby-version'
-        prepend_to_file 'Gemfile', "ruby '2.5.0'\n"
       end
 
       private
