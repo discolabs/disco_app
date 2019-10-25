@@ -14,7 +14,7 @@
   </script>
 
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
-
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', 'data-turbolinks-eval': false %>
   <%= csrf_meta_tags %>
 
   <%= yield :extra_head %>
@@ -42,8 +42,6 @@
     ShopifyApp.flash<%= (key == 'error') ? 'Error' : 'Notice' %>('<%= message %>');
   </script>
   <% end %>
-
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true, 'data-turbolinks-eval' => false %>
 
   <%= render 'disco_app/shared/icons' %>
 </body>
