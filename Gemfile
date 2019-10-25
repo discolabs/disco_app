@@ -20,3 +20,5 @@ gem 'timecop', '~> 0.8.0', group: [:development, :test]
 gem 'rails-controller-testing', group: [:development, :test]
 
 gem 'rb-readline', group: :development
+
+gem 'webpacker'
