@@ -25,7 +25,7 @@ are:
 
 - You should have set up a Shopify Partner account to allow you to create
   development stores and applications;
-- [rbenv][] is recommended for Ruby version management;
+- [asdf][] is recommended for Ruby version management;
 - You should have the latest version of Ruby 2.5 installed locally, along with
   the `rails` and `bundler` gems (make sure you have the version of Rails you'd
   like to use installed - use `gem install rails -v VERSION` for this);
@@ -38,7 +38,7 @@ are:
  
 [Development Setup]: https://www.notion.so/discolabs/Development-Setup-97199ecca84343c18f29efec6fd841ab
 [Development Configuration]: https://www.notion.so/discolabs/Development-Configuration-9ac4e3d77da7454480d750bde3323a0a
-[rbenv]: https://github.com/sstephenson/rbenv
+[asdf]: https://github.com/asdf-vm/asdf
 [ngrok]: https://ngrok.com
 
 ### 2. Creating the Rails app
