@@ -100,7 +100,7 @@ With the above set up, you can now run the following from the command line to
 create a new app:
 
 ```
-bundle exec rake generate:partner_app
+rails generate:partner_app
 ```
 
 The `.env.local` will be automatically populated with values for
@@ -147,7 +147,7 @@ DiscoApp::Plan.find_or_create_by(
 )
 ```
 
-Run `bundle exec rake db:seed` and you're done!
+Run `rails db:seed` and you're done!
 
 
 ### 4. Putting it all together
@@ -323,7 +323,7 @@ owners, you should ensure it creates a Plan with an `amount` value of zero, and
 that all stores are subscribed to that plan during `DiscoApp::AppInstalledJob`.
 
 The default set of plans for your app should be placed into the `db/seeds.rb`
-file. Make sure you run `bundle exec rake db:seed` after resetting your database
+file. Make sure you run `rails db:seed` after resetting your database
 to ensure the plans are correctly set up.
 
 Whenever a store's subscription level is changed,
@@ -966,9 +966,9 @@ steps you should take:
   release of the gem (check the [release list][] to find the latest available
   version).
 - Run `bundle update`. You may have to resolve some gem dependencies.
-- Run `bundle exec rake disco_app:install:migrations` to copy over any new
+- Run `rails disco_app:install:migrations` to copy over any new
   migrations from the gem into your application, ready to be run with a
-  `bundle exec rake db:migrate`.
+  `rails db:migrate`.
 - Carefully read through `CHANGELOG.md`, `UPGRADING.md`, and the commit history
   for `disco_app` between the previous version of the gem you were using and the
   new one. You may have to make some changes to your application code to adapt
