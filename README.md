@@ -18,28 +18,27 @@ detailed below.
 
 ### 1. Setting up
 First make sure you've got all of the tools you need for Shopify and Rails
-development. You should read through the [Getting Started] board in Guru and
+development. You should read through the [Getting Started] board in Notion and
 make sure you've followed all setup instructions there, specifically the cards
 on [Development Setup] and [Development Configuration]. The key things to note
 are:
 
 - You should have set up a Shopify Partner account to allow you to create
   development stores and applications;
-- [rbenv][] is recommended for Ruby version management;
+- [asdf][] is recommended for Ruby version management;
 - You should have the latest version of Ruby 2.5 installed locally, along with
   the `rails` and `bundler` gems (make sure you have the version of Rails you'd
   like to use installed - use `gem install rails -v VERSION` for this);
 - You should have [ngrok] installed for HTTP tunnelling;  
-- You should have followed the instructions in the Development Configuration Guru
+- You should have followed the instructions in the Development Configuration Notion
   card for configuring Bundler with credentials to access Disco's private Gemfury server.
 - You should have followed the instructions in the Development Configuration
-  Guru card to have generated a personal access token on Github and added it to
+  Notion page to have generated a personal access token on Github and added it to
   your development configuration.
  
-[Getting Started]: https://app.getguru.com/#/boards/30ff224a-3c2c-4d46-a6f0-f4dc3ced8fe1
-[Development Setup]: https://app.getguru.com/#/facts/b3677c35-6e1f-4b7b-954b-4f9f990adeff
-[Development Configuration]: https://app.getguru.com/#/facts/63da8b91-ec7f-4b75-ba19-8aa3e30ce777
-[rbenv]: https://github.com/sstephenson/rbenv
+[Development Setup]: https://www.notion.so/discolabs/Development-Setup-97199ecca84343c18f29efec6fd841ab
+[Development Configuration]: https://www.notion.so/discolabs/Development-Configuration-9ac4e3d77da7454480d750bde3323a0a
+[asdf]: https://github.com/asdf-vm/asdf
 [ngrok]: https://ngrok.com
 
 ### 2. Creating the Rails app
@@ -101,7 +100,7 @@ With the above set up, you can now run the following from the command line to
 create a new app:
 
 ```
-bundle exec rake generate:partner_app
+rails generate:partner_app
 ```
 
 The `.env.local` will be automatically populated with values for
@@ -148,7 +147,7 @@ DiscoApp::Plan.find_or_create_by(
 )
 ```
 
-Run `bundle exec rake db:seed` and you're done!
+Run `rails db:seed` and you're done!
 
 
 ### 4. Putting it all together
@@ -324,7 +323,7 @@ owners, you should ensure it creates a Plan with an `amount` value of zero, and
 that all stores are subscribed to that plan during `DiscoApp::AppInstalledJob`.
 
 The default set of plans for your app should be placed into the `db/seeds.rb`
-file. Make sure you run `bundle exec rake db:seed` after resetting your database
+file. Make sure you run `rails db:seed` after resetting your database
 to ensure the plans are correctly set up.
 
 Whenever a store's subscription level is changed,
@@ -967,9 +966,9 @@ steps you should take:
   release of the gem (check the [release list][] to find the latest available
   version).
 - Run `bundle update`. You may have to resolve some gem dependencies.
-- Run `bundle exec rake disco_app:install:migrations` to copy over any new
+- Run `rails disco_app:install:migrations` to copy over any new
   migrations from the gem into your application, ready to be run with a
-  `bundle exec rake db:migrate`.
+  `rails db:migrate`.
 - Carefully read through `CHANGELOG.md`, `UPGRADING.md`, and the commit history
   for `disco_app` between the previous version of the gem you were using and the
   new one. You may have to make some changes to your application code to adapt
@@ -1045,7 +1044,7 @@ to update the relevant section of this README as well.
 ## Releasing
 To create a new release of the application:
 
-1. In general, follow the instructions for [releasing an app to production with git flow](https://app.getguru.com/card/7idyndGi/Releasing-an-app-to-production-with-git-flow).
+1. In general, follow the instructions for [releasing an app to production with git flow](https://www.notion.so/discolabs/Releasing-an-app-to-production-with-git-flow-293c447447f74842968b8fa3b284e9a0).
 2. During **Step 3** of the release process, in addition to bumping the version number in the `VERSION` file, you should:
     1. Also update the version number in `version.rb` to match `VERSION`;
     2. Ensure the `CHANGELOG` is up to date by reviewing all commits since the last release;
