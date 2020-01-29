@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", "~> 4.2.3"
   s.add_dependency "shopify_app", "~> 6.1.2"
-  s.add_dependency "puma", "~> 2.11.3"
+  s.add_dependency "puma", "~> 3.12"
   s.add_dependency "sidekiq", "~> 3.4.1"
   s.add_dependency "bootstrap-sass", "~> 3.3.5.1"
   s.add_dependency "pg", "~> 0.18.2"
