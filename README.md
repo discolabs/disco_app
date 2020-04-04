@@ -54,14 +54,14 @@ curl -H "Authorization: token $GITHUB_PERSONAL_ACCESS_TOKEN" \
 
 Be sure to change `example_app` to the desired name of your actual application.
 
-By default, the `initialise.sh` script uses the latest version of Ruby, Rails
-and the DiscoApp framework. If for any reason you need to specify which version
-of each of these to use, you can provide them as arguments on the last line. For
-example, to use Rails 4.2 with Ruby 2.4.1 and DiscoApp version 0.13.8, the last
-line of the command above should read:
+By default, the `initialise.sh` script uses the latest version of Ruby, Rails,
+Node and the DiscoApp framework. If for any reason you need to specify which
+version of each of these to use, you can provide them as arguments on the last
+line. For example, to use Rails 4.2 with Ruby 2.4.1, Node 10.19 and DiscoApp
+version 0.13.8, the last line of the command above should read:
 
 ```
-    | bash -s example_app 4.2.0 2.4.1 0.13.8
+    | bash -s example_app 4.2.0 2.4.1 10.19 0.13.8
 ```
 
 Once this is complete, you'll have a new Rails app created in `/example_app`,
