@@ -32,16 +32,16 @@ module DiscoApp
         older_timestamp = timestamp - 7.days
 
         trigger_usage = @shop.flow_trigger_usages.create!(
-            flow_trigger_definition_id: flow_trigger_definition_id,
-            has_enabled_flow: true,
-            timestamp: older_timestamp
+          flow_trigger_definition_id: flow_trigger_definition_id,
+          has_enabled_flow: true,
+          timestamp: older_timestamp
         )
 
         result = UpdateTriggerUsage.call(
-            shop: @shop,
-            flow_trigger_definition_id: flow_trigger_definition_id,
-            has_enabled_flow: false,
-            timestamp: timestamp
+          shop: @shop,
+          flow_trigger_definition_id: flow_trigger_definition_id,
+          has_enabled_flow: false,
+          timestamp: timestamp
         )
 
         assert result.success?
