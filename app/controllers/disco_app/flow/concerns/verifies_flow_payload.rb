@@ -11,17 +11,6 @@ module DiscoApp
           protect_from_forgery with: :null_session
         end
 
-        def create_flow_action
-          DiscoApp::Flow::CreateAction.call(
-            shop: @shop,
-            action_id: params[:id],
-            action_run_id: params[:action_run_id],
-            properties: params[:properties]
-          )
-
-          head :ok
-        end
-
         private
 
           def verify_flow_payload
@@ -30,8 +19,8 @@ module DiscoApp
             request.body.rewind
           end
 
-          # Shopify Flow action endpoints use the same verification method as webhooks, which is why we reuse this
-          # service method here.
+          # Shopify Flow action and trigger usage update endpoints use the same
+          # verification as webhooks, which is why we reuse this service method here.
           def flow_payload_is_valid?
             DiscoApp::WebhookService.valid_hmac?(
               request.body.read.to_s,
