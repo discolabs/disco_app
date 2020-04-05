@@ -480,6 +480,27 @@ The arguments passed to the `CreateTrigger` method are:
 
 [defined a trigger]: https://help.shopify.com/en/api/embedded-apps/app-extensions/flow/create-triggers
 
+#### Trigger Usage Monitoring
+After the initial introduction of Shopify Flow, Shopify added support for
+sending a special [Shopify Flow webhook] to applications to let them know when
+their Flow triggers were or weren't being actively used by merchants. Having
+this information means apps can avoid making redundant Flow trigger API calls.
+
+Disco App provides built-in support for processing the information provided in
+these webhooks, keeping track of current trigger usage for each installed shop,
+and skipping the trigger API call in situations where we know it isn't being
+used by a merchant. It does this by providing a
+`DiscoApp::Flow::TriggerUsageController` endpoint, alongside a
+`DiscoApp::Flow::TriggerUsage` model to track usage in the database.
+
+The only thing you'll have to do if you'd like your app to take advantage of
+this functionality is update the "Extensions... Shopify Flow... Webhook
+configuration" setting for your application in the Shopify Partner dashboard.
+You should set the webhook URL to point to the `/flow/trigger_usage` path for
+your app, eg `https://example.discolabs.com/flow/trigger_usage`.
+
+[Shopify Flow webhook]: https://shopify.dev/tutorials/create-a-shopify-flow-webhook
+
 #### Actions
 Shopify Flow Actions are the operations a Shopify application can perform as
 part of a workflow. Like Triggers, [Actions must be defined][] within the

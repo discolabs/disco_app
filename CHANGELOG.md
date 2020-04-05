@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file.
 - rubocop-performance and rubocop-rails plugins
 - Support for AppSignal
 - Generator for React applications
+- Support for monitoring Shopify Flow trigger usage to minimise redundant requests
 
 ### Changed
 - Switch from Minitest to RSpec as the testing library for generated apps

@@ -28,11 +28,18 @@ Set your `shopify_api` version to 6.0:
 gem 'shopify_api', '~> 6.0'
 ```
 
+Ensure new Shopify Flow Trigger Usage database migrations are brought across and run:
+
+```
+bundle exec rake disco_app:install:migrations
+bundle exec rake db:migrate
+```
+
 ## Upgrading from 0.16.0 to 0.16.1
 Ensure new Shopify Flow database migrations are brought across and run:
 
 ```
-bundle exec rake disco_app:install:migrations`
+bundle exec rake disco_app:install:migrations
 bundle exec rake db:migrate
 ```
 
