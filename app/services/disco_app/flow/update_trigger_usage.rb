@@ -29,16 +29,12 @@ module DiscoApp
 
           trigger_usage.update(
             has_enabled_flow: has_enabled_flow,
-            timestamp: parsed_timestamp
+            timestamp: timestamp
           )
         end
 
         def existing_timestamp_is_newer?
-          trigger_usage.timestamp.present? && parsed_timestamp < trigger_usage.timestamp
-        end
-
-        def parsed_timestamp
-          @parsed_timestamp ||= Time.parse(timestamp)
+          trigger_usage.timestamp.present? && timestamp < trigger_usage.timestamp
         end
 
     end

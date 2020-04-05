@@ -11,11 +11,17 @@ module DiscoApp
             shop: @shop,
             flow_trigger_definition_id: params[:flow_trigger_definition_id],
             has_enabled_flow: params[:has_enabled_flow],
-            timestamp: params[:timestamp]
+            timestamp: parsed_timestamp
           )
 
           head :ok
         end
+
+        private
+
+          def parsed_timestamp
+            Time.parse(params[:timestamp])
+          end
 
       end
     end
