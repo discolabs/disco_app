@@ -87,9 +87,9 @@ module DiscoApp::Concerns::Shop
     # shop's "data" hash, return the default Rails zone (which should be UTC).
     def time_zone
       @time_zone ||= begin
-        Time.find_zone!(data[:timezone].to_s.gsub(/^\(.+\)\s/, ''))
-                     rescue ArgumentError
-                       Time.zone
+        Time.find_zone!(data[:iana_timezone])
+      rescue ArgumentError
+        Time.zone
       end
     end
 

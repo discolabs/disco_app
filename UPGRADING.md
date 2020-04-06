@@ -35,6 +35,11 @@ bundle exec rake disco_app:install:migrations
 bundle exec rake db:migrate
 ```
 
+Shop timezones are now calculated based on the `iana_timezone` attribute in the shop's
+`data` attribute, rather than the old text-based `timezone` attribute. If you have an
+app with many old installs, you may need to ensure the `iana_timezone` attribute is
+set.
+
 ## Upgrading from 0.16.0 to 0.16.1
 Ensure new Shopify Flow database migrations are brought across and run:
 
