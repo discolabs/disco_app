@@ -1,7 +1,7 @@
 module DiscoApp
   class SessionStorage
 
-    def self.store(session)
+    def self.store(session, *args)
       shop = Shop.find_or_initialize_by(shopify_domain: session.url)
       shop.shopify_token = session.token
       shop.save!
