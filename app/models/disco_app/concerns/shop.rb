@@ -3,7 +3,7 @@ module DiscoApp::Concerns::Shop
   extend ActiveSupport::Concern
 
   included do
-    include ShopifyApp::Shop
+    include ShopifyApp::SessionStorage
     include ActionView::Helpers::DateHelper
 
     # Define relationships to plans and subscriptions.
@@ -75,7 +75,7 @@ module DiscoApp::Concerns::Shop
 
     # Return the absolute URL to the shop's admin.
     def admin_url
-      "https://#{shopify_domain}/admin"
+      "https://#{shopify_domain}/admin/api/#{api_version}"
     end
 
     def installed_duration
@@ -107,6 +107,11 @@ module DiscoApp::Concerns::Shop
     def data
       read_attribute(:data).with_indifferent_access
     end
+
+    def api_version
+      ShopifyApp.configuration.api_version
+    end
+
   end
 
 end

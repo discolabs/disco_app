@@ -1,6 +1,4 @@
-class SessionsController < ActionController::Base
-
-  include ShopifyApp::SessionsConcern
+class SessionsController < ShopifyApp::SessionsController
 
   def referral
     cookies[DiscoApp::SOURCE_COOKIE_KEY] = params[:source] if params[:source].present?
@@ -22,7 +20,7 @@ class SessionsController < ActionController::Base
       if Rails.env.development? && DiscoApp.configuration.skip_oauth?
         shop = DiscoApp::Shop.find_by!(shopify_domain: sanitized_shop_name)
 
-        sess = ShopifyAPI::Session.new(shop.shopify_domain, shop.shopify_token)
+        sess = ShopifyAPI::Session.new(domain: shop.shopify_domain, token: shop.shopify_token, api_version: shop.api_version)
         session[:shopify] = ShopifyApp::SessionRepository.store(sess)
         session[:shopify_domain] = sanitized_shop_name
 

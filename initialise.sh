@@ -2,8 +2,8 @@
 # Usage: initialise.sh example_app
 
 APP_NAME="$1"
-RAILS_VERSION="${RAILS_VERSION:-5.2.0}"
-RUBY_VERSION="${RUBY_VERSION:-2.5.0}"
+RAILS_VERSION="${RAILS_VERSION:-6.0.1}"
+RUBY_VERSION="${RUBY_VERSION:-2.6.5}"
 DISCO_APP_VERSION="${DISCO_APP_VERSION:-0.17.0}"
 
 if [ -z $APP_NAME ]; then
@@ -16,7 +16,7 @@ mkdir $APP_NAME
 cd $APP_NAME
 echo "source 'https://rubygems.org'" > Gemfile
 echo "gem 'rails', '~> $RAILS_VERSION'" >> Gemfile
-echo "$RUBY_VERSION" > .ruby-version
+echo "ruby $RUBY_VERSION" > .tool-versions
 bundle install
 bundle exec rails _"$RAILS_VERSION"_ new . --force --skip-bundle
 echo "gem 'disco_app', '$DISCO_APP_VERSION', source: \"https://gem.fury.io/discolabs/\"" >> Gemfile
