@@ -48,17 +48,14 @@ module DiscoApp
         gem 'timber', '~> 3.0'
 
         # Indicate which gems should only be used in production.
-        gem_group :production do
+        gem_group :staging, :production do
           gem 'mailgun_rails'
           gem 'rails_12factor'
         end
 
         # Indicate which gems should only be used in development.
-        gem_group :production do
-          gem 'rb-readline'
-        end
-
         gem_group :development do
+          gem 'rb-readline'
           gem 'rubocop'
           gem 'rubocop-performance'
           gem 'rubocop-rails'
