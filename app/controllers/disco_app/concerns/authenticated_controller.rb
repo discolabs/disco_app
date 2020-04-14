@@ -6,7 +6,7 @@ module DiscoApp::Concerns::AuthenticatedController
   included do
     before_action :auto_login
     before_action :check_shop_whitelist
-    before_action :login_again_if_different_shop
+    before_action :login_again_if_different_user_or_shop
     before_action :shopify_shop
     before_action :check_installed
     before_action :check_current_subscription
