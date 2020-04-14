@@ -279,12 +279,11 @@ module DiscoApp
 
       # Lock down the application to a specific Ruby version:
       #
-      #  - Via .ruby-version file for rbenv in development;
-      #  - Via a Gemfile line in production.
+      #  - Via .tool-versions file for asdf in development;
       #
       # This should be the last operation, to allow all other operations to run in the initial Ruby version.
       def set_ruby_version
-        copy_file 'root/.ruby-version', '.ruby-version'
+        copy_file 'root/.tool-versions', '.tool-versions'
       end
 
       private

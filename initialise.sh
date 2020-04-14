@@ -16,7 +16,7 @@ mkdir $APP_NAME
 cd $APP_NAME
 echo "source 'https://rubygems.org'" > Gemfile
 echo "gem 'rails', '~> $RAILS_VERSION'" >> Gemfile
-echo "$RUBY_VERSION" > .ruby-version
+echo "ruby $RUBY_VERSION" > .tool-versions
 bundle install
 bundle exec rails _"$RAILS_VERSION"_ new . --force --skip-bundle
 echo "gem 'disco_app', '$DISCO_APP_VERSION', source: \"https://gem.fury.io/discolabs/\"" >> Gemfile
