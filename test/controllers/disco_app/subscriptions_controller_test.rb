@@ -19,7 +19,7 @@ class DiscoApp::SubscriptionsControllerTest < ActionController::TestCase
   test 'non-logged in user is redirected to the login page' do
     log_out
     get(:new)
-    assert_redirected_to ShopifyApp::Engine.routes.url_helpers.login_path
+    assert_redirected_to ShopifyApp::Engine.routes.url_helpers.login_path + "?" + { return_to: session[:return_to] }.to_query
   end
 
   test 'logged-in, never installed user is redirected to the install page' do

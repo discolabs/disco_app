@@ -11,6 +11,7 @@ ENV['SHOPIFY_APP_REDIRECT_URI'] = 'https://test.example.com/shopify/auth/callbac
 ENV['SHOPIFY_APP_SCOPE'] = 'read_products'
 ENV['SHOPIFY_CHARGES_REAL'] = 'false'
 ENV['DISCO_API_URL'] = 'https://api.discolabs.com/v1/'
+ENV['SHOPIFY_APP_API_VERSION'] = '2019-10'
 
 require File.expand_path('../test/dummy/config/environment.rb', __dir__)
 ActiveRecord::Migrator.migrations_paths = [File.expand_path('../test/dummy/db/migrate', __dir__)]
@@ -61,11 +62,13 @@ class ActiveSupport::TestCase
   def log_in_as(shop)
     session[:shopify] = shop.id
     session[:shopify_domain] = shop.shopify_domain
+    session[:api_version] = shop.api_version
   end
 
   def log_out
     session[:shopify] = nil
     session[:shopify_domain] = nil
+    session[:api_version] = nil
   end
 
 end
