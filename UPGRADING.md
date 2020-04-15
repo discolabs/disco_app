@@ -3,6 +3,22 @@ This file contains more detailed instructions on what's required when updating
 an application between one release version of the gem to the next. It's intended
 as more in-depth accompaniment to the notes in `CHANGELOG.md` for each version.
 
+## Upgrading from 0.17.0 to 0.18.0
+Upgrade to Rails 6 ([guide](https://edgeguides.rubyonrails.org/upgrading_ruby_on_rails.html#upgrading-from-rails-5-2-to-rails-6-0)).
+
+Upgrade to Ruby 2.6.5.
+
+Upgrade the following gems:
+```
+gem 'shopify_api', '~> 9.0'
+gem 'shopify_app', '~> 12.0.7'
+gem 'sidekiq', '~> 6.0'
+```
+
+Additionally, you might have to upgrade `react-rails`, `uglifier`, `vcr` and `webmock` gems.
+
+Add `SHOPIFY_APP_API_VERSION` env variable.
+
 ## Upgrading from 0.16.1 to 0.17.1
 Upgrade your app to Rails version 5.2.2.
 

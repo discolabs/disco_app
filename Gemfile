@@ -18,3 +18,7 @@ gem 'timecop', '~> 0.8.0', group: [:development, :test]
 
 # To continue using assigns and assert_template in Rails 5
 gem 'rails-controller-testing', group: [:development, :test]
+
+gem 'rb-readline', group: :development
+
+gem 'webpacker'

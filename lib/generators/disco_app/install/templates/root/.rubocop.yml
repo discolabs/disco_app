@@ -1,4 +1,4 @@
-require: 
+require:
   - rubocop-rails
   - rubocop-performance
 
@@ -7,7 +7,7 @@ AllCops:
     - bin/*
     - db/schema.rb
     - vendor/ruby/**/*
-    - node_modules/**/*  
+    - node_modules/**/*
   TargetRubyVersion: 2.5
 
 # Layout
@@ -18,7 +18,7 @@ Layout/AccessModifierIndentation:
 Layout/AlignParameters:
   Description: 'Here we check if the parameters on a multi-line method call or definition are aligned.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-double-indent'
-  Enabled: true,
+  Enabled: true
   EnforcedStyle: with_fixed_indentation
 
 Layout/ClassStructure:
@@ -98,22 +98,22 @@ Layout/MultilineBlockLayout:
 
 Layout/MultilineOperationIndentation:
   Description: >-
-                 Checks indentation of binary operations that span more than
-                 one line.
+    Checks indentation of binary operations that span more than
+    one line.
   Enabled: true
   EnforcedStyle: indented
 
 Layout/MultilineMethodCallIndentation:
   Description: >-
-                 Checks indentation of method calls with the dot operator
-                 that span more than one line.
+    Checks indentation of method calls with the dot operator
+    that span more than one line.
   Enabled: true
   EnforcedStyle: indented
 
 Layout/SpaceBeforeBlockBraces:
   Description: >-
-                 Checks that block braces have or don't have a space before
-                 the opening brace depending on configuration.
+    Checks that block braces have or don't have a space before
+    the opening brace depending on configuration.
   Enabled: false
 
 # Naming
@@ -202,8 +202,8 @@ Style/ColonMethodCall:
 
 Style/CommentAnnotation:
   Description: >-
-                 Checks formatting of special comments
-                 (TODO, FIXME, OPTIMIZE, HACK, REVIEW).
+    Checks formatting of special comments
+    (TODO, FIXME, OPTIMIZE, HACK, REVIEW).
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#annotate-keywords'
   Enabled: false
 
@@ -263,8 +263,8 @@ Style/GuardClause:
 
 Style/IfUnlessModifier:
   Description: >-
-                 Favor modifier if/unless usage when you have a
-                 single-line body.
+    Favor modifier if/unless usage when you have a
+    single-line body.
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#if-as-a-modifier'
   Enabled: true
 
@@ -289,8 +289,8 @@ Style/LambdaCall:
 
 Style/LineEndConcatenation:
   Description: >-
-                 Use \ instead of + or << to concatenate two string literals at
-                 line end.
+    Use \ instead of + or << to concatenate two string literals at
+    line end.
   Enabled: true
 
 Style/MixinUsage:
@@ -316,8 +316,8 @@ Style/MutableConstant:
 
 Style/NegatedIf:
   Description: >-
-                 Favor unless over if for negative conditions
-                 (or control flow or).
+    Favor unless over if for negative conditions
+    (or control flow or).
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#unless-for-negatives'
   Enabled: true
 
@@ -343,15 +343,15 @@ Style/Not:
 
 Style/NumericLiterals:
   Description: >-
-                 Add underscores to large numeric literals to improve their
-                 readability.
+    Add underscores to large numeric literals to improve their
+    readability.
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#underscores-in-numerics'
   Enabled: false
 
 Style/OneLineConditional:
   Description: >-
-                 Favor the ternary operator(?:) over
-                 if/then/else/end constructs.
+    Favor the ternary operator(?:) over
+    if/then/else/end constructs.
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#ternary-operator'
   Enabled: true
 
@@ -387,15 +387,15 @@ Style/RegexpLiteral:
 
 Style/Sample:
   Description: >-
-                  Use `sample` instead of `shuffle.first`,
-                  `shuffle.last`, and `shuffle[Fixnum]`.
+    Use `sample` instead of `shuffle.first`,
+    `shuffle.last`, and `shuffle[Fixnum]`.
   Reference: 'https://github.com/JuanitoFatas/fast-ruby#arrayshufflefirst-vs-arraysample-code'
   Enabled: true
 
 Style/SelfAssignment:
   Description: >-
-                 Checks for places where self-assignment shorthand should have
-                 been used.
+    Checks for places where self-assignment shorthand should have
+    been used.
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#self-assignment'
   Enabled: true
 
@@ -450,8 +450,8 @@ Style/TrivialAccessors:
 
 Style/VariableInterpolation:
   Description: >-
-                 Don't interpolate global, instance and class variables
-                 directly in strings.
+    Don't interpolate global, instance and class variables
+    directly in strings.
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#curlies-interpolate'
   Enabled: true
 
@@ -462,8 +462,8 @@ Style/WhenThen:
 
 Style/WhileUntilModifier:
   Description: >-
-                 Favor modifier while/until usage when you have a
-                 single-line body.
+    Favor modifier while/until usage when you have a
+    single-line body.
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#while-as-a-modifier'
   Enabled: true
 
@@ -480,8 +480,8 @@ Style/WordArray:
 
 Metrics/AbcSize:
   Description: >-
-                 A calculated magnitude based on number of assignments,
-                 branches, and conditions.
+    A calculated magnitude based on number of assignments,
+    branches, and conditions.
   Enabled: false
 
 Metrics/BlockLength:
@@ -511,8 +511,8 @@ Metrics/ClassLength:
 
 Metrics/CyclomaticComplexity:
   Description: >-
-                 A complexity metric that is strongly correlated to the number
-                 of test cases needed to validate a method.
+    A complexity metric that is strongly correlated to the number
+    of test cases needed to validate a method.
   Enabled: false
 
 Metrics/LineLength:
@@ -537,17 +537,22 @@ Metrics/ParameterLists:
 
 # Lint
 
+Lint/AmbiguousBlockAssociation:
+  Enabled: true
+  Exclude:
+    - spec/**/*
+
 Lint/AmbiguousOperator:
   Description: >-
-                 Checks for ambiguous operators in the first argument of a
-                 method invocation without parentheses.
+    Checks for ambiguous operators in the first argument of a
+    method invocation without parentheses.
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#parens-as-args'
   Enabled: true
 
 Lint/AmbiguousRegexpLiteral:
   Description: >-
-                 Checks for ambiguous regexp literals in the first argument of
-                 a method invocation without parenthesis.
+    Checks for ambiguous regexp literals in the first argument of
+    a method invocation without parenthesis.
   Enabled: false
 
 Lint/AssignmentInCondition:
@@ -599,8 +604,8 @@ Lint/LiteralInInterpolation:
 
 Lint/Loop:
   Description: >-
-                 Use Kernel#loop with break rather than begin/end/until or
-                 begin/end/while for post-loop tests.
+    Use Kernel#loop with break rather than begin/end/until or
+    begin/end/while for post-loop tests.
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#loop-with-break'
   Enabled: false
 
@@ -615,15 +620,15 @@ Lint/NonLocalExitFromIterator:
 
 Lint/ParenthesesAsGroupedExpression:
   Description: >-
-                 Checks for method calls with a space before the opening
-                 parenthesis.
+    Checks for method calls with a space before the opening
+    parenthesis.
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#parens-no-spaces'
   Enabled: true
 
 Lint/RequireParentheses:
   Description: >-
-                 Use parentheses in the method call to avoid confusion
-                 about precedence.
+    Use parentheses in the method call to avoid confusion
+    about precedence.
   Enabled: true
 
 Lint/UnderscorePrefixedVariableName:
@@ -638,29 +643,29 @@ Lint/Void:
 
 Performance/CaseWhenSplat:
   Description: >-
-                  Place `when` conditions that use splat at the end
-                  of the list of `when` branches.
+    Place `when` conditions that use splat at the end
+    of the list of `when` branches.
   Enabled: false
 
 Performance/Count:
   Description: >-
-                  Use `count` instead of `select...size`, `reject...size`,
-                  `select...count`, `reject...count`, `select...length`,
-                  and `reject...length`.
+    Use `count` instead of `select...size`, `reject...size`,
+    `select...count`, `reject...count`, `select...length`,
+    and `reject...length`.
   Enabled: true
 
 Performance/Detect:
   Description: >-
-                  Use `detect` instead of `select.first`, `find_all.first`,
-                  `select.last`, and `find_all.last`.
+    Use `detect` instead of `select.first`, `find_all.first`,
+    `select.last`, and `find_all.last`.
   Reference: 'https://github.com/JuanitoFatas/fast-ruby#enumerabledetect-vs-enumerableselectfirst-code'
   Enabled: true
 
 Performance/FlatMap:
   Description: >-
-                  Use `Enumerable#flat_map`
-                  instead of `Enumerable#map...Array#flatten(1)`
-                  or `Enumberable#collect..Array#flatten(1)`
+    Use `Enumerable#flat_map`
+    instead of `Enumerable#map...Array#flatten(1)`
+    or `Enumberable#collect..Array#flatten(1)`
   Reference: 'https://github.com/JuanitoFatas/fast-ruby#enumerablemaparrayflatten-vs-enumerableflat_map-code'
   Enabled: true
 
@@ -671,16 +676,16 @@ Performance/ReverseEach:
 
 Performance/Size:
   Description: >-
-                  Use `size` instead of `count` for counting
-                  the number of elements in `Array` and `Hash`.
+    Use `size` instead of `count` for counting
+    the number of elements in `Array` and `Hash`.
   Reference: 'https://github.com/JuanitoFatas/fast-ruby#arraycount-vs-arraysize-code'
   Enabled: true
 
 Performance/StringReplacement:
   Description: >-
-                  Use `tr` instead of `gsub` when you are replacing the same
-                  number of characters. Use `delete` instead of `gsub` when
-                  you are deleting characters.
+    Use `tr` instead of `gsub` when you are replacing the same
+    number of characters. Use `delete` instead of `gsub` when
+    you are deleting characters.
   Reference: 'https://github.com/JuanitoFatas/fast-ruby#stringgsub-vs-stringtr-code'
   Enabled: true
 
@@ -692,8 +697,8 @@ Rails/ActionFilter:
 
 Rails/Date:
   Description: >-
-                  Checks the correct usage of date aware methods,
-                  such as Date.today, Date.current etc.
+    Checks the correct usage of date aware methods,
+    such as Date.today, Date.current etc.
   Enabled: true
 
 Rails/Delegate:
@@ -722,8 +727,8 @@ Rails/Output:
 
 Rails/ReadWriteAttribute:
   Description: >-
-                 Checks for read_attribute(:attr) and
-                 write_attribute(:attr, val).
+    Checks for read_attribute(:attr) and
+    write_attribute(:attr, val).
   Enabled: false
 
 Rails/ScopeArgs:

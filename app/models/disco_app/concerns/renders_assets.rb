@@ -1,4 +1,3 @@
-require 'render_anywhere'
 require 'uglifier'
 
 module DiscoApp::Concerns::RendersAssets
@@ -6,7 +5,6 @@ module DiscoApp::Concerns::RendersAssets
   extend ActiveSupport::Concern
 
   included do
-    include RenderAnywhere
     after_commit :queue_render_asset_group_job
   end
 
@@ -138,7 +136,7 @@ module DiscoApp::Concerns::RendersAssets
     end
 
     def render_asset_renderer
-      @render_asset_renderer ||= self.class.const_get('RenderingController').new
+      @render_asset_renderer ||= self.class.const_get('ApplicationController').new
     end
 
     # Render any script tags defined by the :script_tags options that we have
