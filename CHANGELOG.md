@@ -1,6 +1,17 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 0.18.0 - 2020-04-15
+### Changed
+- Upgraded to Rails 6
+- Upgraded to Ruby 2.6.5
+- Upgraded to shopify_api 9
+- Upgraded to shopify_app 12
+- Upgraded to sidekiq 6
+- Replaced .ruby-version with .tool-versions
+- Updated Timber initialiser
+- Updated README
+
 ## 0.17.0 - 2019-07-16
 ### Added
 - Timber logging for generated apps
