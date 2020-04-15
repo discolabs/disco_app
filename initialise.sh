@@ -4,7 +4,7 @@
 APP_NAME="$1"
 RAILS_VERSION="${RAILS_VERSION:-6.0.1}"
 RUBY_VERSION="${RUBY_VERSION:-2.6.5}"
-DISCO_APP_VERSION="${DISCO_APP_VERSION:-0.17.0}"
+DISCO_APP_VERSION="${DISCO_APP_VERSION:-0.18.0}"
 
 if [ -z $APP_NAME ]; then
   echo "Usage: ./initialise.sh app_name (rails_version) (ruby_version) (disco_app_version)"
