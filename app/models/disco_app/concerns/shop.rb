@@ -91,11 +91,7 @@ module DiscoApp::Concerns::Shop
     # Return the shop's configured timezone. If none can be parsed from the
     # shop's "data" hash, return the default Rails zone (which should be UTC).
     def time_zone
-      @time_zone ||= begin
-        Time.find_zone!(data[:iana_timezone])
-      rescue ArgumentError
-        Time.zone
-      end
+      @time_zone ||= Time.find_zone!(data[:iana_timezone]) || Time.zone
     end
 
     # Return the shop's configured locale as a symbol. If none exists for some

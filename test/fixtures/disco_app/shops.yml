@@ -6,6 +6,7 @@ widget_store:
   data:
     country_name: 'Australia'
     timezone: '(GMT+10:00) Melbourne'
+    iana_timezone: 'Australia/Melbourne'
 
 widget_store_dev:
   shopify_domain: widgets-dev.myshopify.com
