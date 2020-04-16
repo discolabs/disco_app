@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## Unreleased
+### Added
+- Support for Shopify Flow trigger usage monitoring
+
 ## 0.18.0 - 2020-04-15
 ### Changed
 - Upgraded to Rails 6
