@@ -14,7 +14,6 @@ Highlight any interesting design decisions that you may have taken.
 - [ ] Updated README and any other relevant documentation.
 - [ ] Tested changes locally.
 - [ ] Updated test suite and made sure that it all passes.
-- [ ] Updated test matrix.
 - [ ] Ensured that Rubocop and friends are happy.
 - [ ] Checked that this PR is referencing the correct base.
 - [ ] Logged all time in Clockify.
