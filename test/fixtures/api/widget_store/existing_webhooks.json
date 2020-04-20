@@ -1,0 +1,43 @@
+{
+  "webhooks": [
+    {
+      "id": 748073353265,
+      "address": "https://test.example.com/webhooks",
+      "topic": "shop/update",
+      "created_at": "2020-04-01T00:00:00Z",
+      "updated_at": "2020-04-01T00:00:00Z",
+      "format": "json",
+      "fields": [],
+      "metafield_namespaces": [],
+      "api_version": "2020-04",
+      "private_metafield_namespaces": []
+    },
+    {
+      "id": 748073353266,
+      "address": "https://old.example.com/webhooks",
+      "topic": "orders/create",
+      "created_at": "2020-04-01T00:00:00Z",
+      "updated_at": "2020-04-01T00:00:00Z",
+      "format": "json",
+      "fields": [],
+      "metafield_namespaces": [],
+      "api_version": "2020-04",
+      "private_metafield_namespaces": []
+    },
+    {
+      "id": 748073353267,
+      "address": "https://test.example.com/webhooks",
+      "topic": "orders/paid",
+      "created_at": "2020-04-01T00:00:00Z",
+      "updated_at": "2020-04-01T00:00:00Z",
+      "format": "json",
+      "fields": [
+        "id",
+        "financial_status"
+      ],
+      "metafield_namespaces": [],
+      "api_version": "2020-04",
+      "private_metafield_namespaces": []
+    }
+  ]
+}

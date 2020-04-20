@@ -26,16 +26,16 @@ are:
 - You should have set up a Shopify Partner account to allow you to create
   development stores and applications;
 - [asdf][] is recommended for Ruby version management;
-- You should have the latest version of Ruby 2.5 installed locally, along with
+- You should have the latest version of Ruby 2.6 installed locally, along with
   the `rails` and `bundler` gems (make sure you have the version of Rails you'd
   like to use installed - use `gem install rails -v VERSION` for this);
-- You should have [ngrok] installed for HTTP tunnelling;  
+- You should have [ngrok] installed for HTTP tunnelling;
 - You should have followed the instructions in the Development Configuration Notion
   card for configuring Bundler with credentials to access Disco's private Gemfury server.
 - You should have followed the instructions in the Development Configuration
   Notion page to have generated a personal access token on Github and added it to
   your development configuration.
- 
+
 [Development Setup]: https://www.notion.so/discolabs/Development-Setup-97199ecca84343c18f29efec6fd841ab
 [Development Configuration]: https://www.notion.so/discolabs/Development-Configuration-9ac4e3d77da7454480d750bde3323a0a
 [asdf]: https://github.com/asdf-vm/asdf
@@ -54,14 +54,14 @@ curl -H "Authorization: token $GITHUB_PERSONAL_ACCESS_TOKEN" \
 
 Be sure to change `example_app` to the desired name of your actual application.
 
-By default, the `initialise.sh` script uses the latest version of Ruby, Rails
-and the DiscoApp framework. If for any reason you need to specify which version
-of each of these to use, you can provide them as arguments on the last line. For
-example, to use Rails 4.2 with Ruby 2.4.1 and DiscoApp version 0.13.8, the last
-line of the command above should read:
+By default, the `initialise.sh` script uses the latest version of Ruby, Rails,
+Node and the DiscoApp framework. If for any reason you need to specify which
+version of each of these to use, you can provide them as arguments on the last
+line. For example, to use Rails 4.2 with Ruby 2.4.1, Node 10.19 and DiscoApp
+version 0.13.8, the last line of the command above should read:
 
 ```
-    | bash -s example_app 4.2.0 2.4.1 0.13.8  
+    | bash -s example_app 4.2.0 2.4.1 10.19 0.13.8
 ```
 
 Once this is complete, you'll have a new Rails app created in `/example_app`,
@@ -376,14 +376,20 @@ specific webhooks are received. They are:
 - `DiscoApp::ShopUpdateJob`, triggered when the `shop/update` webhook is
   received. By default, this task keeps the metadata attributes on the relevant
   `DiscoApp::Shop` model up to date.
+- `DiscoApp::CustomersDataRequestJob`, triggered when the
+  `customers/data_request` webhook is received. By default, this does nothing.
+- `DiscoApp::CustomersRedactJob`, triggered when the `customers/redact` webhook
+  is received. By default, this does nothing.
+- `DiscoApp::ShopRedactJob`, triggered when the `shop/redact` webhook is
+  received. By default, this does nothing.
 - `DiscoApp::SubscriptionChangedJob`, called whenever a shop changes the plan
-  that they are subscribed to.  
+  that they are subscribed to.
 - `DiscoApp::SynchroniseWebhooksJob`, called by the installation job but also
   enqueued by the `webhooks:sync` rake task to allow for re-synchronisation of
   webhooks after installation.
 - `DiscoApp::SynchroniseCarrierServiceJob`, called by the installation job but
   also enqueued by the `carrier_service:sync` rake task to allow for
-  re-synchronisation of the carrier service after installation.  
+  re-synchronisation of the carrier service after installation.
 
 The default jobs that come with the engine can be extended through the use of
 Concerns in a similar way to the models that come with the engine. See
@@ -416,11 +422,45 @@ There shouldn't be any need to extend or override `DiscoApp::WebhooksController`
 inside an application - all application logic should simply be placed inside the
 relevant `*Job` class.
 
-Webhooks should generally be created inside the `perform` method of the
-`DiscoApp::AppInstalledJob` background task. By default, webhooks are set up to
-listen for the `app/uninstalled` and `shop/update` webhook topics.
+The registration of webhooks for a shop is typically handled automatically by
+the `DiscoApp::SynchroniseWebhooksJob` background job, which is either queued
+automatically on installation (the default `DiscoApp::AppInstalledJob`) does
+this) or by the `webhooks:sync` rake task.
 
-To check which webhooks are registered by your app run `shop.with_api_context{ShopifyAPI::Webhook.find(:all)}` from your console, where `shop = DiscoApp::Shop.find(your_shop_id)`. 
+To check which webhooks are currently registered by your app for any given
+shop, you can run the following from the Rails console:
+
+```ruby
+shop = DiscoApp::Shop.find(your_shop_id)
+shop.with_api_context { ShopifyAPI::Webhook.find(:all) }
+```
+
+All application are configured to register webhooks for the `app/uninstalled`
+and `shop/update` webhook topics, as these are almost always required.
+Additional webhook topics can be defined in `config/initializers/disco_app.rb`,
+with:
+
+```ruby
+DiscoApp.configure do |config|
+
+  config.webhook_topics = [:'orders/create', :'orders/paid']
+
+end
+```
+
+By default, webhooks will be registered with an empty `fields` attribute
+(meaning all object fields will be sent in the payload). This can be overridden
+on a per-topic basis with the optional `webhook_fields` configuration option:
+
+```ruby
+DiscoApp.configure do |config|
+
+  config.webhook_fields = {
+    'orders/paid': [:id, :financial_status]
+  }
+
+end
+```
 
 ### Shopify Flow
 The gem provides support for [Shopify Flow Connectors][], allowing applications
@@ -480,6 +520,27 @@ The arguments passed to the `CreateTrigger` method are:
 
 [defined a trigger]: https://help.shopify.com/en/api/embedded-apps/app-extensions/flow/create-triggers
 
+#### Trigger Usage Monitoring
+After the initial introduction of Shopify Flow, Shopify added support for
+sending a special [Shopify Flow webhook] to applications to let them know when
+their Flow triggers were or weren't being actively used by merchants. Having
+this information means apps can avoid making redundant Flow trigger API calls.
+
+Disco App provides built-in support for processing the information provided in
+these webhooks, keeping track of current trigger usage for each installed shop,
+and skipping the trigger API call in situations where we know it isn't being
+used by a merchant. It does this by providing a
+`DiscoApp::Flow::TriggerUsageController` endpoint, alongside a
+`DiscoApp::Flow::TriggerUsage` model to track usage in the database.
+
+The only thing you'll have to do if you'd like your app to take advantage of
+this functionality is update the "Extensions... Shopify Flow... Webhook
+configuration" setting for your application in the Shopify Partner dashboard.
+You should set the webhook URL to point to the `/flow/trigger_usage` path for
+your app, eg `https://example.discolabs.com/flow/trigger_usage`.
+
+[Shopify Flow webhook]: https://shopify.dev/tutorials/create-a-shopify-flow-webhook
+
 #### Actions
 Shopify Flow Actions are the operations a Shopify application can perform as
 part of a workflow. Like Triggers, [Actions must be defined][] within the
@@ -529,7 +590,7 @@ code to support Shopify Flow Actions and Triggers are:
    should be fired;
 2. Create a `Flow::Actions::ActionName` service object class for each action
    you'd like your application to be able to process.
-   
+
 Assuming you've configured your application's Flow integration correctly from
 the Shopify Partner dashboard, the sending of triggers and receiving of actions
 should then "just work".
@@ -537,7 +598,7 @@ should then "just work".
 However, to help maintain an overview of the actions and triggers supported by
 your application with its codebase, it's recommended to maintain two additional
 initializers in your application's configuration that describe them. These
-files should then be treated as the source of truth for your application's 
+files should then be treated as the source of truth for your application's
 actions and triggers, and should be referenced when setting up or updating your
 application's Flow configuration from the Partner Dashboard.
 
@@ -597,9 +658,9 @@ model change. Here's an example:
 ```
 # app/models/widget_configuration.rb
 class WidgetConfiguration < ActiveRecord::Base
-  include DiscoApp::Concerns::RendersAssets  
-  renders_assets :js_asset, assets: 'assets/widgets.js', triggered_by: 'locale'  
-end   
+  include DiscoApp::Concerns::RendersAssets
+  renders_assets :js_asset, assets: 'assets/widgets.js', triggered_by: 'locale'
+end
 ```
 
 With this simple declaration, any time the `locale` attribute on a particular
@@ -624,8 +685,8 @@ like this:
 ```
 # app/models/widget_configuration.rb
 class WidgetConfiguration < ActiveRecord::Base
-  include DiscoApp::Concerns::RendersAssets  
-  renders_assets :widget_assets, assets: ['assets/widgets.scss', 'assets/widgets.js'], triggered_by: ['locale', 'background_color']  
+  include DiscoApp::Concerns::RendersAssets
+  renders_assets :widget_assets, assets: ['assets/widgets.scss', 'assets/widgets.js'], triggered_by: ['locale', 'background_color']
 end
 ```
 
@@ -650,8 +711,8 @@ rendered asset:
 ```
 # app/models/widget_configuration.rb
 class WidgetConfiguration < ActiveRecord::Base
-  include DiscoApp::Concerns::RendersAssets  
-  renders_assets :widget_assets, assets: ['assets/widgets.scss', 'assets/widgets.js'], script_tags: 'widgets.js', triggered_by: ['locale', 'background_color']  
+  include DiscoApp::Concerns::RendersAssets
+  renders_assets :widget_assets, assets: ['assets/widgets.scss', 'assets/widgets.js'], script_tags: 'widgets.js', triggered_by: ['locale', 'background_color']
 end
 ```
 
@@ -722,7 +783,7 @@ application proxy, you would have the following in your application's
 class MyModel < ActiveRecord::Base
   include DiscoApp::Concerns::CanBeLiquified
 
-  ... rest of model definition ...  
+  ... rest of model definition ...
 end
 ```
 
@@ -858,8 +919,8 @@ implementation of this inside the dummy app used for testing Disco App in
 
    ```ruby
    class Product < ActiveRecord::Base
-     include DiscoApp::Concerns::Synchronises  
-     belongs_to :shop, class_name: 'DiscoApp::Shop'  
+     include DiscoApp::Concerns::Synchronises
+     belongs_to :shop, class_name: 'DiscoApp::Shop'
    end
    ```
 3. Add background jobs to handle possible webhook calls we could receive to keep
@@ -869,7 +930,7 @@ implementation of this inside the dummy app used for testing Disco App in
    `synchronise_deletion` method as appropriate, eg:
 
    ```ruby
-   class ProductsCreateJob < DiscoApp::ShopJob   
+   class ProductsCreateJob < DiscoApp::ShopJob
      def perform(_shop, product_data)
        Product.synchronise(@shop, product_data)
      end
@@ -882,7 +943,7 @@ implementation of this inside the dummy app used for testing Disco App in
 
    ```
    class Product < ActiveRecord::Base
-      include DiscoApp::Concerns::Synchronises  
+      include DiscoApp::Concerns::Synchronises
       belongs_to :shop, class_name: 'DiscoApp::Shop'
       SHOPIFY_API_CLASS = ShopifyAPI::Product
    end
@@ -898,7 +959,7 @@ wanted to synchronise products of a particular type, you could implement:
 
 ```ruby
 class Product < ActiveRecord::Base
-  include DiscoApp::Concerns::Synchronises  
+  include DiscoApp::Concerns::Synchronises
   belongs_to :shop, class_name: 'DiscoApp::Shop'
 
   def should_synchronise?(shop, data)
@@ -914,7 +975,7 @@ can include `DiscoApp::Concerns::HasMetafields` to gain access to a convenient
 on your class and away you go:
 
 ```
-class Product < ActiveRecord::Base  
+class Product < ActiveRecord::Base
   include DiscoApp::Concerns::HasMetafields
 
   SHOPIFY_API_CLASS = ShopifyAPI::Product
@@ -1005,9 +1066,9 @@ Check that:
 - You've correctly listed the redirect URI in the app on the partner dashboard.
 
 ### Scheduled tasks aren't running
-Check that you've added the tasks to the server. This will look something like: 
+Check that you've added the tasks to the server. This will look something like:
 
-```  
+```
   dokku_apps:
      - name: app-name
        plugins: ['redis']
@@ -1020,17 +1081,17 @@ Check that you've added the tasks to the server. This will look something like:
            minute: "*/5"
 ```
 
-Don't forget to provision the server after making changes: `./provision.sh server-name`. 
+Don't forget to provision the server after making changes: `./provision.sh server-name`.
 
 ### Webhooks aren't firing
 This is a pretty common problem and can be cause by a number of things. You can check if your webhook has registered by running `shop.with_api_context{ShopifyAPI::Webhook.find(:all)}` in a Rails console, where `shop = DiscoApp::Shop.find(your_shop_id)`. If it isn't registered, check the following things:
 
-1. Check you've run the `rake webhooks:sync` task 
-2. Check you've added the webhook topic to `config/initializers/disco_app.rb` and it's spelled correctly 
-3. Ensure you have a background job set up and named correctly with a `perform` method 
-4. Run `DiscoApp::Shop.installed.has_active_shopify_plan` from a console. If this doesn't return an active plan make sure `shop.status` is set to `'installed'`. 
+1. Check you've run the `rake webhooks:sync` task
+2. Check you've added the webhook topic to `config/initializers/disco_app.rb` and it's spelled correctly
+3. Ensure you have a background job set up and named correctly with a `perform` method
+4. Run `DiscoApp::Shop.installed.has_active_shopify_plan` from a console. If this doesn't return an active plan make sure `shop.status` is set to `'installed'`.
 
-If you encounter other speedbumps with webhooks please add then to this list. 
+If you encounter other speedbumps with webhooks please add then to this list.
 
 ## Contributing
 While developing Shopify applications using the DiscoApp Engine, you may see

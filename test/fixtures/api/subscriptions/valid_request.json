@@ -9,7 +9,7 @@
     "domain": null,
     "plan_name": null,
     "name": null,
-    "data": {"timezone": "(GMT+10:00) Melbourne", "country_name": "Australia"}
+    "data": {"timezone": "(GMT+10:00) Melbourne", "country_name": "Australia", "iana_timezone":  "Australia/Melbourne"}
   },
   "subscription": {
     "id": 304261385,

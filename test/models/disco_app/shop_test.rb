@@ -25,7 +25,7 @@ class DiscoApp::ShopTest < ActiveSupport::TestCase
   end
 
   test 'time_zone helper returns correct time zone instance when known timezone defined' do
-    assert_equal 'Melbourne', @shop.time_zone.name
+    assert_equal 'Australia/Melbourne', @shop.time_zone.name
   end
 
   test 'time_zone helper returns default Rails timezone when no known timezone defined' do

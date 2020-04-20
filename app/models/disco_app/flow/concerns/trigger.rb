@@ -13,7 +13,8 @@ module DiscoApp
           enum status: {
             pending: 0,
             succeeded: 1,
-            failed: 2
+            failed: 2,
+            skipped: 3
           }
 
           def properties

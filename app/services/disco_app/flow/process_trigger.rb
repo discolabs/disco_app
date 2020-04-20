@@ -11,7 +11,7 @@ module DiscoApp
 
       def call
         validate_trigger
-        make_api_request
+        make_api_request unless trigger_not_in_use?
         update_trigger
         fail_if_errors_present
       end
@@ -33,18 +33,38 @@ module DiscoApp
 
         def update_trigger
           trigger.update!(
-            status: api_success ? Trigger.statuses[:succeeded] : Trigger.statuses[:failed],
-            processing_errors: api_success ? [] : api_errors,
+            status: trigger_status,
+            processing_errors: processing_errors,
             processed_at: Time.current
           )
         end
 
+        def trigger_status
+          return Trigger.statuses[:skipped] if trigger_not_in_use?
+
+          api_success ? Trigger.statuses[:succeeded] : Trigger.statuses[:failed]
+        end
+
+        def processing_errors
+          return [] if trigger_not_in_use?
+          return [] if api_success
+          api_errors
+        end
+
         def fail_if_errors_present
-          context.fail! unless api_success
+          context.fail! unless trigger_not_in_use? || api_success
         end
 
         def api_client
           @api_client ||= DiscoApp::GraphqlClient.new(trigger.shop)
+        end
+
+        def trigger_not_in_use?
+          trigger_usage.present? && !trigger_usage.has_enabled_flow?
+        end
+
+        def trigger_usage
+          @trigger_usage ||= TriggerUsage.find_by(shop: trigger.shop, flow_trigger_definition_id: trigger.title)
         end
 
     end

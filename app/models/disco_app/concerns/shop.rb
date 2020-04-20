@@ -19,6 +19,7 @@ module DiscoApp::Concerns::Shop
     # Define relationship to Flow actions and triggers.
     has_many :flow_actions, class_name: 'DiscoApp::Flow::Action', dependent: :destroy
     has_many :flow_triggers, class_name: 'DiscoApp::Flow::Trigger', dependent: :destroy
+    has_many :flow_trigger_usages, class_name: 'DiscoApp::Flow::TriggerUsage', dependent: :destroy
 
     # Define possible installation statuses as an enum.
     enum status: {
@@ -78,6 +79,11 @@ module DiscoApp::Concerns::Shop
       "https://#{shopify_domain}/admin/api/#{api_version}"
     end
 
+    # Return the absolutely URL to the shop's admin.
+    def shopify_url
+      "https://#{shopify_domain}"
+    end
+
     def installed_duration
       distance_of_time_in_words_to_now(created_at.time)
     end
@@ -85,11 +91,7 @@ module DiscoApp::Concerns::Shop
     # Return the shop's configured timezone. If none can be parsed from the
     # shop's "data" hash, return the default Rails zone (which should be UTC).
     def time_zone
-      @time_zone ||= begin
-        Time.find_zone!(data[:timezone].to_s.gsub(/^\(.+\)\s/, ''))
-                     rescue ArgumentError
-                       Time.zone
-      end
+      @time_zone ||= Time.find_zone!(data[:iana_timezone]) || Time.zone
     end
 
     # Return the shop's configured locale as a symbol. If none exists for some
