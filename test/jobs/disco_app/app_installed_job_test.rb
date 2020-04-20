@@ -7,7 +7,7 @@ class DiscoApp::AppInstalledJobTest < ActionController::TestCase
   def setup
     @shop = disco_app_shops(:widget_store)
 
-    stub_request(:get, "#{@shop.admin_url}/webhooks.json").to_return(status: 200, body: api_fixture('widget_store/webhooks').to_json)
+    stub_request(:get, "#{@shop.admin_url}/webhooks.json").to_return(status: 200, body: api_fixture('widget_store/empty_webhooks').to_json)
     stub_request(:post, "#{@shop.admin_url}/webhooks.json").to_return(status: 200)
     stub_request(:get, "#{@shop.admin_url}/shop.json").to_return(status: 200, body: api_fixture('widget_store/shop').to_json)
     stub_request(:get, "#{@shop.admin_url}/carrier_services.json").to_return(status: 200, body: api_fixture('widget_store/carrier_services').to_json)
