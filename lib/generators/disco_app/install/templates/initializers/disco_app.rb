@@ -8,6 +8,11 @@ DiscoApp.configure do |config|
   # See https://help.shopify.com/api/reference/webhook.
   config.webhook_topics = []
 
+  # By default, webhooks request all fields to be provided in the payload.
+  # You can override this behaviour by providing an entry in this hash with the
+  # key set to a webhook topic and the value set to an array of fields.
+  # config.webhook_fields = {}
+
   # Set the below if using an application proxy.
   config.app_proxy_prefix = ENV['SHOPIFY_APP_PROXY_PREFIX']
 

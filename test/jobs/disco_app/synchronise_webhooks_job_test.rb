@@ -22,9 +22,16 @@ class DiscoApp::SynchroniseWebhooksJobTest < ActionController::TestCase
         DiscoApp::SynchroniseWebhooksJob.perform_later(@shop)
       end
 
-      # Assert that all 4 expected webhook topics were POSTed to.
-      ['app/uninstalled', 'shop/update', 'orders/create', 'orders/paid'].each do |expected_webhook_topic|
-        assert_requested(:post, "#{@shop.admin_url}/webhooks.json", times: 1) { |request| request.body.include?(expected_webhook_topic) }
+      # Assert that all 3 webhook topics without field lists were POSTed to.
+      ['app/uninstalled', 'shop/update', 'orders/create'].each do |expected_webhook_topic|
+        assert_requested(:post, "#{@shop.admin_url}/webhooks.json", times: 1) do |request|
+          request.body.include?(%Q("topic":"#{expected_webhook_topic}")) && request.body.include?('"fields":[]')
+        end
+      end
+
+      # Assert that the orders/paid webhook topic was posted to with a field restriction.
+      assert_requested(:post, "#{@shop.admin_url}/webhooks.json", times: 1) do |request|
+        request.body.include?('"topic":"orders/paid"') && request.body.include?('"fields":["id"]')
       end
     end
   end

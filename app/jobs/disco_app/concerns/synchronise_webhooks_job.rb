@@ -2,7 +2,7 @@ module DiscoApp::Concerns::SynchroniseWebhooksJob
 
   extend ActiveSupport::Concern
 
-  COMMON_WEBHOOKS = [:'app/uninstalled', :'shop/update'].freeze
+  COMMON_WEBHOOKS = %i[app/uninstalled shop/update]
 
   # Ensure the webhooks registered with our shop are the same as those listed
   # in our application configuration.
@@ -12,6 +12,7 @@ module DiscoApp::Concerns::SynchroniseWebhooksJob
       with_verbose_output(topic) do
         ShopifyAPI::Webhook.create(
           topic: topic,
+          fields: topic_fields(topic),
           address: webhooks_url,
           format: 'json'
         )
@@ -25,10 +26,13 @@ module DiscoApp::Concerns::SynchroniseWebhooksJob
 
     # Ensure webhook addresses are current.
     current_webhooks.each do |webhook|
-      unless webhook.address == webhooks_url
-        webhook.address = webhooks_url
-        webhook.save
-      end
+      expected_fields = topic_fields(webhook.topic.to_sym).map(&:to_s)
+
+      next if webhook.address == webhooks_url && webhook.fields == expected_fields
+
+      webhook.address = webhooks_url
+      webhook.fields = expected_fields
+      webhook.save
     end
   end
 
@@ -36,17 +40,27 @@ module DiscoApp::Concerns::SynchroniseWebhooksJob
 
     # Get the full list of expected webhook topics.
     def expected_topics
-      COMMON_WEBHOOKS + (DiscoApp.configuration.webhook_topics || [])
+      @expected_topics ||= (COMMON_WEBHOOKS + (DiscoApp.configuration.webhook_topics || [])).map(&:to_sym)
     end
 
     # Return a list of currently registered topics.
     def current_topics
-      current_webhooks.map(&:topic).map(&:to_sym)
+      @current_topics ||= current_webhooks.map(&:topic).map(&:to_sym)
     end
 
     # Return a list of current registered webhooks.
     def current_webhooks
       @current_webhooks ||= ShopifyAPI::Webhook.find(:all)
+    end
+
+    # Return a list of requested fields for the given topic.
+    def topic_fields(topic)
+      webhook_fields[topic] || []
+    end
+
+    # Return a list of topic-to-field mappings.
+    def webhook_fields
+      @webhook_fields ||= (DiscoApp.configuration.webhook_fields || {}).symbolize_keys
     end
 
     # Return the absolute URL to the webhooks endpoint.
