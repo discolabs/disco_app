@@ -422,11 +422,45 @@ There shouldn't be any need to extend or override `DiscoApp::WebhooksController`
 inside an application - all application logic should simply be placed inside the
 relevant `*Job` class.
 
-Webhooks should generally be created inside the `perform` method of the
-`DiscoApp::AppInstalledJob` background task. By default, webhooks are set up to
-listen for the `app/uninstalled` and `shop/update` webhook topics.
+The registration of webhooks for a shop is typically handled automatically by
+the `DiscoApp::SynchroniseWebhooksJob` background job, which is either queued
+automatically on installation (the default `DiscoApp::AppInstalledJob`) does
+this) or by the `webhooks:sync` rake task.
 
-To check which webhooks are registered by your app run `shop.with_api_context{ShopifyAPI::Webhook.find(:all)}` from your console, where `shop = DiscoApp::Shop.find(your_shop_id)`.
+To check which webhooks are currently registered by your app for any given
+shop, you can run the following from the Rails console:
+
+```ruby
+shop = DiscoApp::Shop.find(your_shop_id)
+shop.with_api_context { ShopifyAPI::Webhook.find(:all) }
+```
+
+All application are configured to register webhooks for the `app/uninstalled`
+and `shop/update` webhook topics, as these are almost always required.
+Additional webhook topics can be defined in `config/initializers/disco_app.rb`,
+with:
+
+```ruby
+DiscoApp.configure do |config|
+
+  config.webhook_topics = [:'orders/create', :'orders/paid']
+
+end
+```
+
+By default, webhooks will be registered with an empty `fields` attribute
+(meaning all object fields will be sent in the payload). This can be overridden
+on a per-topic basis with the optional `webhook_fields` configuration option:
+
+```ruby
+DiscoApp.configure do |config|
+
+  config.webhook_fields = {
+    'orders/paid': [:id, :financial_status]
+  }
+
+end
+```
 
 ### Shopify Flow
 The gem provides support for [Shopify Flow Connectors][], allowing applications
