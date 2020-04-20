@@ -15,7 +15,7 @@ class DiscoApp::SynchroniseWebhooksJobTest < ActionController::TestCase
 
   test 'webhook synchronisation job creates webhooks for all expected topics' do
     with_suppressed_output do
-      stub_request(:get, "#{@shop.admin_url}/webhooks.json").to_return(status: 200, body: api_fixture('widget_store/webhooks').to_json)
+      stub_request(:get, "#{@shop.admin_url}/webhooks.json").to_return(status: 200, body: api_fixture('widget_store/empty_webhooks').to_json)
       stub_request(:post, "#{@shop.admin_url}/webhooks.json").to_return(status: 200)
 
       perform_enqueued_jobs do
@@ -31,6 +31,39 @@ class DiscoApp::SynchroniseWebhooksJobTest < ActionController::TestCase
 
       # Assert that the orders/paid webhook topic was posted to with a field restriction.
       assert_requested(:post, "#{@shop.admin_url}/webhooks.json", times: 1) do |request|
+        request.body.include?('"topic":"orders/paid"') && request.body.include?('"fields":["id"]')
+      end
+    end
+  end
+
+  test 'webhook synchronisation job only creates and updates webhooks when required' do
+    with_suppressed_output do
+      stub_request(:get, "#{@shop.admin_url}/webhooks.json").to_return(status: 200, body: api_fixture('widget_store/existing_webhooks').to_json)
+      stub_request(:put, "#{@shop.admin_url}/webhooks/748073353266.json").to_return(status: 200)
+      stub_request(:put, "#{@shop.admin_url}/webhooks/748073353267.json").to_return(status: 200)
+      stub_request(:post, "#{@shop.admin_url}/webhooks.json").to_return(status: 200)
+
+      perform_enqueued_jobs do
+        DiscoApp::SynchroniseWebhooksJob.perform_later(@shop)
+      end
+
+      # Assert that a missing webhook was created.
+      assert_requested(:post, "#{@shop.admin_url}/webhooks.json", times: 1) do |request|
+        request.body.include?('"topic":"app/uninstalled"')
+      end
+
+      # Assert that no request was made to update an existing webhook with the expected values.
+      assert_requested(:post, "#{@shop.admin_url}/webhooks.json", times: 0) do |request|
+        request.body.include?('"topic":"shop/update"')
+      end
+
+      # Assert that a request was made to update the URL of a webhook with an out of date URL.
+      assert_requested(:put, "#{@shop.admin_url}/webhooks/748073353266.json", times: 1) do |request|
+        request.body.include?('"topic":"orders/create"') && request.body.include?('"address":"https://test.example.com/webhooks"')
+      end
+
+      # Assert that a request was made to update the fields of a webhook with out of date fields.
+      assert_requested(:put, "#{@shop.admin_url}/webhooks/748073353267.json", times: 1) do |request|
         request.body.include?('"topic":"orders/paid"') && request.body.include?('"fields":["id"]')
       end
     end
