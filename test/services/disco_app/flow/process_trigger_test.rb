@@ -37,7 +37,40 @@ module DiscoApp
         assert_not result.success?
       end
 
+      test 'call to process trigger that has already been skipped fails' do
+        @trigger.skipped!
+        result = ProcessTrigger.call(trigger: @trigger)
+        assert_not result.success?
+      end
+
+      test 'call to process trigger that we know is not being used succeeds with skipped status logged' do
+        @shop.flow_trigger_usages.create(
+          flow_trigger_definition_id: @trigger.title,
+          has_enabled_flow: false,
+          timestamp: @now
+        )
+        result = ProcessTrigger.call(trigger: @trigger)
+        assert result.success?
+        assert @trigger.skipped?
+        assert_equal @now, @trigger.processed_at
+      end
+
       test 'processing valid pending trigger succeeds and makes the expected api call' do
+        VCR.use_cassette('flow_trigger_valid') do
+          result = ProcessTrigger.call(trigger: @trigger)
+          assert result.success?
+          assert @trigger.succeeded?
+          assert_equal @now, @trigger.processed_at
+        end
+      end
+
+      test 'processing valid pending trigger that we know is being used succeeds and makes the expected api call' do
+        @shop.flow_trigger_usages.create(
+          flow_trigger_definition_id: @trigger.title,
+          has_enabled_flow: true,
+          timestamp: @now
+        )
+
         VCR.use_cassette('flow_trigger_valid') do
           result = ProcessTrigger.call(trigger: @trigger)
           assert result.success?

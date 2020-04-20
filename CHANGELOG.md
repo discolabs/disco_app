@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## Unreleased
+### Added
+- Support for Shopify Flow trigger usage monitoring
+
 ## 0.18.0 - 2020-04-15
 ### Changed
 - Upgraded to Rails 6
@@ -18,6 +22,7 @@ All notable changes to this project will be documented in this file.
 - rubocop-performance and rubocop-rails plugins
 - Support for AppSignal
 - Generator for React applications
+- Support for monitoring Shopify Flow trigger usage to minimise redundant requests
 
 ### Changed
 - Switch from Minitest to RSpec as the testing library for generated apps

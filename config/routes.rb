@@ -12,6 +12,10 @@ DiscoApp::Engine.routes.draw do
     controller :actions do
       post 'actions/:id' => :create_flow_action, as: :flow_actions
     end
+
+    controller :trigger_usage do
+      post 'trigger_usage' => :update_trigger_usage, as: :flow_trigger_usage
+    end
   end
 
   resources :user_sessions, only: [:new, :create, :destroy]

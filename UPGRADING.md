@@ -3,6 +3,19 @@ This file contains more detailed instructions on what's required when updating
 an application between one release version of the gem to the next. It's intended
 as more in-depth accompaniment to the notes in `CHANGELOG.md` for each version.
 
+## Upgrading from 0.18.0 to Unreleased
+Ensure new Shopify Flow Trigger Usage database migrations are brought across and run:
+
+```
+bundle exec rake disco_app:install:migrations
+bundle exec rake db:migrate
+```
+
+Shop timezones are now calculated based on the `iana_timezone` attribute in the shop's
+`data` attribute, rather than the old text-based `timezone` attribute. If you have an
+app with many old installs, you may need to ensure the `iana_timezone` attribute is
+set.
+
 ## Upgrading from 0.17.0 to 0.18.0
 Upgrade to Rails 6 ([guide](https://edgeguides.rubyonrails.org/upgrading_ruby_on_rails.html#upgrading-from-rails-5-2-to-rails-6-0)).
 
@@ -32,7 +45,7 @@ gem 'shopify_api', '~> 6.0'
 Ensure new Shopify Flow database migrations are brought across and run:
 
 ```
-bundle exec rake disco_app:install:migrations`
+bundle exec rake disco_app:install:migrations
 bundle exec rake db:migrate
 ```
 
