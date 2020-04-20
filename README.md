@@ -376,6 +376,12 @@ specific webhooks are received. They are:
 - `DiscoApp::ShopUpdateJob`, triggered when the `shop/update` webhook is
   received. By default, this task keeps the metadata attributes on the relevant
   `DiscoApp::Shop` model up to date.
+- `DiscoApp::CustomersDataRequestJob`, triggered when the
+  `customers/data_request` webhook is received. By default, this does nothing.
+- `DiscoApp::CustomersRedactJob`, triggered when the `customers/redact` webhook
+  is received. By default, this does nothing.
+- `DiscoApp::ShopRedactJob`, triggered when the `shop/redact` webhook is
+  received. By default, this does nothing.
 - `DiscoApp::SubscriptionChangedJob`, called whenever a shop changes the plan
   that they are subscribed to.
 - `DiscoApp::SynchroniseWebhooksJob`, called by the installation job but also
