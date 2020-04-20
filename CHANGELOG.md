@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 ### Added
 - Support for Shopify Flow trigger usage monitoring
+- Ability to minimise webhook payloads through `config.webhook_fields`
 
 ## 0.18.0 - 2020-04-15
 ### Changed

@@ -16,6 +16,17 @@ Shop timezones are now calculated based on the `iana_timezone` attribute in the 
 app with many old installs, you may need to ensure the `iana_timezone` attribute is
 set.
 
+You can now easily restrict the fields that are sent in webhook payloads with the new
+`webhook_fields` configuration option:
+
+```
+DiscoApp.configure do |config|
+  config.webhook_fields = {
+    'orders/paid': [:id, :financial_status]
+  }
+end
+```
+
 ## Upgrading from 0.17.0 to 0.18.0
 Upgrade to Rails 6 ([guide](https://edgeguides.rubyonrails.org/upgrading_ruby_on_rails.html#upgrading-from-rails-5-2-to-rails-6-0)).
 
