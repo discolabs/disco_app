@@ -8,6 +8,9 @@ module DiscoApp
     # Set the list of Shopify webhook topics to register.
     attr_accessor :webhook_topics
 
+    # Define the list of fields to receive for each webhook topic.
+    attr_accessor :webhook_fields
+
     # Set Flow configuration
     attr_accessor :flow_actions
     attr_accessor :flow_triggers
