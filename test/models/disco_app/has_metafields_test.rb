@@ -14,7 +14,13 @@ class DiscoApp::HasMetafieldsTest < ActiveSupport::TestCase
     @shop = nil
   end
 
-  test 'can write metafields with a single namespace' do
+  test 'can write product metafields with a single namespace with no existing metafields' do
+    stub_api_request(
+      :get,
+      "#{@shop.admin_url}/products/#{@product.id}/metafields.json",
+      'widget_store/products/get_metafields_empty'
+    )
+
     stub_api_request(
       :put,
       "#{@shop.admin_url}/products/#{@product.id}.json",
@@ -33,7 +39,13 @@ class DiscoApp::HasMetafieldsTest < ActiveSupport::TestCase
     )
   end
 
-  test 'can write metafields with multiple namespaces' do
+  test 'can write product metafields with multiple namespaces with no existing metafields' do
+    stub_api_request(
+      :get,
+      "#{@shop.admin_url}/products/#{@product.id}/metafields.json",
+      'widget_store/products/get_metafields_empty'
+    )
+
     stub_api_request(
       :put,
       "#{@shop.admin_url}/products/#{@product.id}.json",

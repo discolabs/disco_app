@@ -3,12 +3,14 @@
     "id": 632910393,
     "metafields": [
       {
+        "id": null,
         "namespace": "namespace1",
         "key": "key1",
         "value": "value1",
         "value_type": "string"
       },
       {
+        "id": null,
         "namespace": "namespace1",
         "key": "key2",
         "value": 2,
