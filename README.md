@@ -972,7 +972,8 @@ end
 If you're writing resource metafields for your models via the Shopify API, you
 can include `DiscoApp::Concerns::HasMetafields` to gain access to a convenient
 `write_metafields` method. Just make sure that `SHOPIFY_API_CLASS` is defined
-on your class and away you go:
+on your class, that you're calling the method in an API context, and away you
+go:
 
 ```
 class Product < ActiveRecord::Base
@@ -982,17 +983,49 @@ class Product < ActiveRecord::Base
 
 end
 
-@product = Product.find(12345678)
-@product.write_metafields(
-  namespace1: {
-    key1: 'value1',
-    key2: 'value2
-  },
-  namespace2: {
-    key3: 'value3'
-  }
-)
+product = Product.find(12345678)
+
+@shop.with_api_context do
+  product.write_metafields(
+    namespace1: {
+      key1: 'value1',
+      key2: 'value2
+    },
+    namespace2: {
+      key3: 'value3'
+    }
+  )
+end
 ```
+
+This also works for shop metafields, although be aware that in this case each
+metafield requires an individual API call:
+
+```
+class DiscoApp::Shop < ActiveRecord::Base
+  include DiscoApp::Concerns::HasMetafields
+
+  SHOPIFY_API_CLASS = ShopifyAPI::Shop
+
+end
+
+# this works, but results in 3 API calls
+@shop.with_api_context do
+  @shop.write_metafields(
+    namespace1: {
+      key1: 'value1',
+      key2: 'value2
+    },
+    namespace2: {
+      key3: 'value3'
+    }
+  )
+end
+```
+
+Note also that `write_metafields` includes an API call out to fetch any existing
+metafields for the object, so that it can avoid any namespace and key conflicts
+by updating existing metafields rather than trying to create new ones.
 
 ### Rubocop
 DiscoApp adds support for Rubocop and Codeclimate. the .rubocop.yml contains the
