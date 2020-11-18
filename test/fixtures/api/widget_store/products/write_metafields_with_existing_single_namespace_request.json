@@ -1,0 +1,21 @@
+{
+  "product": {
+    "id": 632910393,
+    "metafields": [
+      {
+        "id": 874857827343,
+        "namespace": "namespace1",
+        "key": "key1",
+        "value": "value1",
+        "value_type": "string"
+      },
+      {
+        "id": null,
+        "namespace": "namespace1",
+        "key": "key2",
+        "value": "{\"json_key\":\"json_value\"}",
+        "value_type": "json_string"
+      }
+    ]
+  }
+}

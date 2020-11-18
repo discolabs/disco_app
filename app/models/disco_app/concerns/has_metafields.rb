@@ -21,9 +21,7 @@ module DiscoApp
         # eg @shop.with_api_context { ... }.
         #
         # It also assumes that the including class has defined the appropriate value for
-        # SHOPIFY_API_CLASS and that calling the `shopify_api_id` method on the instance will
-        # return the relevant object's Shopify ID (by default, this will be the ID of the local
-        # model instance).
+        # SHOPIFY_API_CLASS.
         #
         # To avoid an issue with trying to set metafield values for namespace and key pairs that
         # already exist, this method also performs a lookup of existing metafields as part of the
@@ -32,8 +30,20 @@ module DiscoApp
         #
         # Returns true on success, raises an exception otherwise.
         def write_metafields(metafields)
+          return write_shop_metafields(metafields) if shopify_api_class_is_shop?
+
+          write_resource_metafields(metafields)
+        end
+
+        # Writing shop metafields is a special case - they need to be saved one by one.
+        def write_shop_metafields(metafields)
+          build_metafields(metafields).all?(&:save!)
+        end
+
+        # Writing regular resource metafields can be done in a single request.
+        def write_resource_metafields(metafields)
           self.class::SHOPIFY_API_CLASS.new(
-            id: shopify_api_id,
+            id: id,
             metafields: build_metafields(metafields)
           ).save!
         end
@@ -47,7 +57,7 @@ module DiscoApp
                 id: existing_metafield_id(namespace, key),
                 namespace: namespace,
                 key: key,
-                value: value,
+                value: build_value(value),
                 value_type: build_value_type(value)
               )
             end
@@ -80,15 +90,12 @@ module DiscoApp
         # Fetch and cache existing metafields for this object from the Shopify API.
         def existing_metafields
           @existing_metafields ||= begin
-            self.class::SHOPIFY_API_CLASS.new(id: shopify_api_id).metafields
+            self.class::SHOPIFY_API_CLASS.new(id: id).metafields
           end
         end
 
-        # Return the Shopify API id of this model. For almost all resources, this will be the
-        # inheriting model's ID (hence the default value), but for some situations (such as for the
-        # DiscoApp::Shop model), this isn't the case, so this provides a handy hook.
-        def shopify_api_id
-          id
+        def shopify_api_class_is_shop?
+          self.class::SHOPIFY_API_CLASS == ShopifyAPI::Shop
         end
       end
 
