@@ -3,24 +3,28 @@
     "id": 632910393,
     "metafields": [
       {
+        "id": null,
         "namespace": "namespace1",
         "key": "n1key1",
         "value": "value1",
         "value_type": "string"
       },
       {
+        "id": null,
         "namespace": "namespace1",
         "key": "n1key2",
         "value": 2,
         "value_type": "integer"
       },
       {
+        "id": null,
         "namespace": "namespace2",
         "key": "n2key3",
         "value": "value3",
         "value_type": "string"
       },
       {
+        "id": null,
         "namespace": "namespace2",
         "key": "n2key4",
         "value": 2,

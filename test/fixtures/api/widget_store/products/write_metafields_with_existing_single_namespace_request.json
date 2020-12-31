@@ -3,7 +3,7 @@
     "id": 632910393,
     "metafields": [
       {
-        "id": null,
+        "id": 874857827343,
         "namespace": "namespace1",
         "key": "key1",
         "value": "value1",
@@ -13,8 +13,8 @@
         "id": null,
         "namespace": "namespace1",
         "key": "key2",
-        "value": 2,
-        "value_type": "integer"
+        "value": "{\"json_key\":\"json_value\"}",
+        "value_type": "json_string"
       }
     ]
   }
