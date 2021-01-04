@@ -1,0 +1,11 @@
+{
+  "metafields": [
+    {
+      "id": 874857827343,
+      "namespace": "namespace1",
+      "key": "key1",
+      "value": "value9",
+      "value_type": "string"
+    }
+  ]
+}

@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 0.18.2 - 2021-01-04
+### Changed
+- Improved flexibility of the `HasMetafields` concern
+
 ## 0.18.1 - 2020-04-21
 ### Added
 - Support for Shopify Flow trigger usage monitoring
