@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## 0.18.2 - 2021-01-04
 ### Changed
 - Improved flexibility of the `HasMetafields` concern
 
