@@ -3,7 +3,7 @@ This file contains more detailed instructions on what's required when updating
 an application between one release version of the gem to the next. It's intended
 as more in-depth accompaniment to the notes in `CHANGELOG.md` for each version.
 
-## Upgrading from 0.18.1 to Unreleased
+## Upgrading from 0.18.1 to 0.18.2
 The `HasMetafields` concern has been upgraded - it now handles updating existing
 metafields, and can also properly support writing shop metafields. In order to
 do this, the `write_metafields` method now involves fetching existing metafields
