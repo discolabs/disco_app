@@ -15,7 +15,7 @@ if [ ! $? -eq 0 ]; then
   echo "You can install it using: asdf install ruby $RUBY_VERSION"
   exit
 fi
-# Bunlder is also a minimum requirement (within our given ruby environment)
+# Bundler is also a minimum requirement (within our given ruby environment)
 if [ -z $(command -v bundle) ]; then
   echo "Bundler is not installed. You can install it using: gem install bundler"
   exit
