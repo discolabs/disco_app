@@ -8,7 +8,7 @@ if [ -z "$RUBY_VERSION" ]; then
   RUBY_VERSION=${RUBY_VERSION:-2.6.5}
 fi
 # Now we're settled on a ruby version, check it is installed by switching to it.
-. $HOME/.asdf/asdf.sh
+. $ASDF_DIR/asdf.sh
 asdf shell ruby $RUBY_VERSION
 if [ ! $? -eq 0 ]; then
   echo "Attempting to use ruby $RUBY_VERSION but it doesn't appear to be installed."
