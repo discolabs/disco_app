@@ -47,11 +47,7 @@ module DiscoApp::Concerns::Synchronises
     end
 
     def synchronise_all(shop, params = {})
-      resource_count = shop.with_api_context { self::SHOPIFY_API_CLASS.count(params) }
-
-      (1..(resource_count / SYNCHRONISES_PAGE_LIMIT.to_f).ceil).each do |page|
-        DiscoApp::SynchroniseResourcesJob.perform_later(shop, name, params.merge(page: page, limit: SYNCHRONISES_PAGE_LIMIT))
-      end
+      DiscoApp::SynchroniseResourcesJob.perform_later(shop, name)
     end
   end
 
