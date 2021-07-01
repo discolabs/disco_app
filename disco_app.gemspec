@@ -34,7 +34,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'jsonapi-resources', '~> 0.9'
   s.add_runtime_dependency 'mailgun_rails', '~> 0.8'
   s.add_runtime_dependency 'nokogiri', '~> 1.7'
-  s.add_runtime_dependency 'pg', '~> 0.21.0'
+  s.add_runtime_dependency 'pg', '~> 1.1'
   s.add_runtime_dependency 'premailer-rails', '~> 1.8'
   s.add_runtime_dependency 'puma', '>= 3.9'
   s.add_runtime_dependency 'rails', '~> 6.0'
