@@ -51,6 +51,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'dotenv-rails', '~> 2.0'
   s.add_development_dependency 'minitest', '5.11.3'
   s.add_development_dependency 'minitest-reporters', '1.3'
+  s.add_development_dependency 'minitest-stub-const'
   s.add_development_dependency 'rubocop', '~> 0.77'
   s.add_development_dependency 'rubocop-performance', '~> 1.5.1'
   s.add_development_dependency 'rubocop-rails', '~> 2.4.0'
