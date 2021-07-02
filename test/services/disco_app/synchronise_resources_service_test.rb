@@ -7,11 +7,6 @@ module DiscoApp
 
     def setup
       @shop = disco_app_shops(:widget_store)
-
-      # @shop = DiscoApp::Shop.create(
-      #   shopify_domain: "simon-sandbox.myshopify.com",
-      #   shopify_token: "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",
-      # )
     end
 
     def teardown
@@ -35,9 +30,6 @@ module DiscoApp
     end
       
     test 'synchronising all Products with pagination enques job with since id' do
-      # before { DiscoApp::SynchroniseResourcesService::PAGE_LIMIT = 2 }
-      # after { DiscoApp::SynchroniseResourcesService::PAGE_LIMIT = 250 }
-
       assert_difference 'Product.count', 2 do
         VCR.use_cassette('synchronise_products_paginated') do
           DiscoApp::SynchroniseResourcesService.stub_const(:PAGE_LIMIT, 2) do
