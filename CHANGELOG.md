@@ -1,6 +1,14 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## Unreleased
+### Changed
+- Address the [Shopify API deprecation of page-based pagination](https://shopify.dev/changelog/page-based-pagination-replaced-by-cursor-based-pagination-across-multiple-rest-endpoints) in favour of cursor-based in the `Synchronises` concern.
+
+## 0.18.2 - 2021-01-04
+### Changed
+- Improved flexibility of the `HasMetafields` concern
+
 ## 0.18.1 - 2020-04-21
 ### Added
 - Support for Shopify Flow trigger usage monitoring

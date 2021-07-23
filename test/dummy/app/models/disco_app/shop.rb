@@ -4,6 +4,9 @@ class DiscoApp::Shop < ApplicationRecord
 
   include DiscoApp::Concerns::Shop
 
+  include DiscoApp::Concerns::HasMetafields
+  SHOPIFY_API_CLASS = ShopifyAPI::Shop
+
   has_one :js_configuration
   has_one :widget_configuration
   has_many :carts

@@ -39,7 +39,7 @@ module DiscoApp
         gem 'classnames-rails'
         gem 'nokogiri'
         gem 'oj'
-        gem 'pg'
+        gem 'pg', '~> 1.1'
         gem 'premailer-rails'
         gem 'react-rails'
         gem 'render_anywhere'

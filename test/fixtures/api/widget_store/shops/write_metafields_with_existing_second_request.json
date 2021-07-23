@@ -1,0 +1,9 @@
+{
+  "metafield": {
+    "id": null,
+    "namespace": "namespace1",
+    "key": "key2",
+    "value": 2,
+    "value_type": "integer"
+  }
+}

@@ -3,6 +3,18 @@ This file contains more detailed instructions on what's required when updating
 an application between one release version of the gem to the next. It's intended
 as more in-depth accompaniment to the notes in `CHANGELOG.md` for each version.
 
+## Upgrading from 0.18.2 to unreleased
+The `synchronise_all` method for models with the `Synchronises` concern has been updated to use cursor-based pagination per the [Shopify API deprecation](https://shopify.dev/changelog/page-based-pagination-replaced-by-cursor-based-pagination-across-multiple-rest-endpoints). Ad hoc app code updates to address this may now be removed.
+
+## Upgrading from 0.18.1 to 0.18.2
+The `HasMetafields` concern has been upgraded - it now handles updating existing
+metafields, and can also properly support writing shop metafields. In order to
+do this, the `write_metafields` method now involves fetching existing metafields
+from the relevant resource - you may need to account for this in tests. A large
+number of Disco projects had their own implementation of the `HasMetafields`
+concern to handle the update existing case - you may want to check and see if
+you can now remove that from your application code.
+
 ## Upgrading from 0.18.0 to 0.18.1
 Ensure new Shopify Flow Trigger Usage database migrations are brought across and run:
 
