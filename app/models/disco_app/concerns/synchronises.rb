@@ -47,7 +47,7 @@ module DiscoApp::Concerns::Synchronises
     end
 
     def synchronise_all(shop, params = {})
-      DiscoApp::SynchroniseResourcesJob.perform_later(shop, name)
+      DiscoApp::SynchroniseResourcesJob.perform_later(shop, name, params)
     end
   end
 
