@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## 0.18.3 - 2021-07-23
 ### Changed
 - Address the [Shopify API deprecation of page-based pagination](https://shopify.dev/changelog/page-based-pagination-replaced-by-cursor-based-pagination-across-multiple-rest-endpoints) in favour of cursor-based in the `Synchronises` concern.
 
