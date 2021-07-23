@@ -25,6 +25,8 @@ require 'support/test_shopify_api'
 # Require WebMock
 require 'webmock/minitest'
 
+require "minitest/stub_const"
+
 # Filter out Minitest backtrace while allowing backtrace from other libraries
 # to be shown.
 Minitest.backtrace_filter = Minitest::BacktraceFilter.new
