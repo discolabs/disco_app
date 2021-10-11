@@ -86,8 +86,7 @@ class DiscoApp::ChargesControllerTest < ActionController::TestCase
   end
 
   test 'user trying to activate accepted charge succeeds and is redirected to the root page' do
-    stub_api_request(:get, "#{@shop.admin_url}/recurring_application_charges/654381179.json", 'widget_store/charges/get_accepted_recurring_application_charge')
-    stub_api_request(:post, "#{@shop.admin_url}/recurring_application_charges/654381179/activate.json", 'widget_store/charges/activate_recurring_application_charge')
+    stub_api_request(:get, "#{@shop.admin_url}/recurring_application_charges/654381179.json", 'widget_store/charges/get_active_recurring_application_charge')
 
     @current_subscription.active_charge.destroy
     get :activate, params: { subscription_id: @current_subscription, id: @new_charge.id, charge_id: @new_charge.shopify_id }

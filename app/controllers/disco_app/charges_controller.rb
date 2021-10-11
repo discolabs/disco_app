@@ -21,9 +21,14 @@ class DiscoApp::ChargesController < ApplicationController
     end
   end
 
-  # Attempt to activate a charge after a user has accepted or declined it.
+  # Attempt to activate a charge (locally) after a user has accepted or declined it.
   # Redirect to the main application's root URL immediately afterwards - if the
   # charge wasn't accepted, the flow will start again.
+  #
+  # Previously, the activation of a charge also required updating Shopify via the
+  # API, but that requirement has been removed.
+  #
+  # See https://shopify.dev/changelog/auto-activation-of-charges-and-subscriptions
   def activate
     # First attempt to find a matching charge.
     if (charge = @subscription.charges.find_by(id: params[:id], shopify_id: params[:charge_id])).nil?
