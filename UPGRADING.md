@@ -3,6 +3,9 @@ This file contains more detailed instructions on what's required when updating
 an application between one release version of the gem to the next. It's intended
 as more in-depth accompaniment to the notes in `CHANGELOG.md` for each version.
 
+## Upgrading from 0.18.3 to 0.18.4
+No changes required.
+
 ## Upgrading from 0.18.2 to 0.18.3
 The `synchronise_all` method for models with the `Synchronises` concern has been updated to use cursor-based pagination per the [Shopify API deprecation](https://shopify.dev/changelog/page-based-pagination-replaced-by-cursor-based-pagination-across-multiple-rest-endpoints). Ad hoc app code updates to address this may now be removed.
 
