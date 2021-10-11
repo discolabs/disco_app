@@ -32,8 +32,13 @@ class DiscoApp::ChargesService
     charge
   end
 
-  # Attempt to activate the given Shopify charge for the given Shop using the
-  # Shopify API. Returns true on successful activation, false otherwise.
+  # Synchronises the status of a given charge from the Shopify API and returns
+  # true if it's active (and false otherwise).
+  #
+  # Previously, the activation of a charge also required updating Shopify via the
+  # API, but that requirement has been removed.
+  #
+  # See https://shopify.dev/changelog/auto-activation-of-charges-and-subscriptions
   def self.activate(shop, charge)
     # Start by fetching the Shopify charge to check that it was accepted.
     shopify_charge = shop.with_api_context do
@@ -43,19 +48,12 @@ class DiscoApp::ChargesService
     # Update the status of the local charge based on the Shopify charge.
     charge.send("#{shopify_charge.status}!") if charge.respond_to? "#{shopify_charge.status}!"
 
-    # If the charge wasn't accepted, fail and return.
-    return false unless charge.accepted?
-
-    # If the charge was indeed accepted, activate it via Shopify.
-    charge.shop.with_api_context do
-      shopify_charge.activate
-    end
+    # If the charge isn't active, fail and return.
+    return false unless charge.active?
 
     # If the charge was recurring, make sure that all other local recurring
     # charges are marked inactive.
     cancel_recurring_charges(shop, charge) if charge.recurring?
-
-    charge.active!
 
     true
   rescue StandardError

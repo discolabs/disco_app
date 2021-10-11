@@ -57,8 +57,7 @@ class DiscoApp::ChargesServiceTest < ActiveSupport::TestCase
   end
 
   test 'activating an accepted recurring charge is successful and cancels any existing recurring charges' do
-    stub_api_request(:get, "#{@shop.admin_url}/recurring_application_charges/654381179.json", 'widget_store/charges/get_accepted_recurring_application_charge')
-    stub_api_request(:post, "#{@shop.admin_url}/recurring_application_charges/654381179/activate.json", 'widget_store/charges/activate_recurring_application_charge')
+    stub_api_request(:get, "#{@shop.admin_url}/recurring_application_charges/654381179.json", 'widget_store/charges/get_active_recurring_application_charge')
 
     old_charge = @subscription.active_charge
     assert old_charge.active?
@@ -71,8 +70,7 @@ class DiscoApp::ChargesServiceTest < ActiveSupport::TestCase
   end
 
   test 'activating an accepted recurring charge cancels other recurring charges' do
-    stub_api_request(:get, "#{@shop.admin_url}/recurring_application_charges/654381179.json", 'widget_store/charges/get_accepted_recurring_application_charge')
-    stub_api_request(:post, "#{@shop.admin_url}/recurring_application_charges/654381179/activate.json", 'widget_store/charges/activate_recurring_application_charge')
+    stub_api_request(:get, "#{@shop.admin_url}/recurring_application_charges/654381179.json", 'widget_store/charges/get_active_recurring_application_charge')
 
     assert DiscoApp::ChargesService.activate(@shop, @new_charge)
     assert @new_charge.active?
@@ -101,8 +99,7 @@ class DiscoApp::ChargesServiceTest < ActiveSupport::TestCase
   end
 
   test 'activating an accepted one-time charge is successful' do
-    stub_api_request(:get, "#{@dev_shop.admin_url}/application_charges/1012637323.json", 'widget_store/charges/get_accepted_application_charge')
-    stub_api_request(:post, "#{@dev_shop.admin_url}/application_charges/1012637323/activate.json", 'widget_store/charges/activate_application_charge')
+    stub_api_request(:get, "#{@dev_shop.admin_url}/application_charges/1012637323.json", 'widget_store/charges/get_active_application_charge')
 
     assert DiscoApp::ChargesService.activate(@dev_shop, @dev_new_charge)
     assert @dev_new_charge.active?
