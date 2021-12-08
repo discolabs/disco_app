@@ -3,13 +3,17 @@
 <head>
   <title><%= yield(:title) %></title>
 
-  <script src="//cdn.shopify.com/s/assets/external/app.js?<%= Time.now.strftime('%Y%m%d%H') %>"></script>
+  <script src="https://unpkg.com/@shopify/app-bridge@2"></script>
   <script type="text/javascript">
     // Initialise the Shopify App.
-    ShopifyApp.init({
+    var AppBridge = window['app-bridge'];
+    var createApp = AppBridge.createApp;
+    createApp({
       "apiKey": "<%= ShopifyApp.configuration.api_key %>",
       "shopOrigin": "<%= "https://#{ @shop_session.domain }" if @shop_session %>",
-      "debug": <%= Rails.env.development? ? 'true' : 'false' %>
+      "host": params.fetch(:host),
+      "debug": <%= Rails.env.development? ? 'true' : 'false' %>,
+      "forceRedirect": false
     });
   </script>
 
