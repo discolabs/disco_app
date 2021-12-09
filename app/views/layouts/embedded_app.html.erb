@@ -8,10 +8,10 @@
     // Initialise the Shopify App.
     var AppBridge = window['app-bridge'];
     var createApp = AppBridge.createApp;
-    createApp({
+    var app = createApp({
       "apiKey": "<%= ShopifyApp.configuration.api_key %>",
       "shopOrigin": "<%= "https://#{ @shop_session.domain }" if @shop_session %>",
-      "host": <%= params.fetch(:host) %>,
+      "host": <%= params.fetch(:host) { '' } %>,
       "debug": <%= Rails.env.development? ? 'true' : 'false' %>,
       "forceRedirect": false
     });
