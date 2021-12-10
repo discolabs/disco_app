@@ -10,14 +10,14 @@
 <% end %>
 
 <script>
-  ShopifyApp.ready(function(){
+  $(document).ready(function(){
     var container = document.getElementById('account-warning');
-    if (ShopifyApp.User.current.accountAccess === "Account owner") {
-      container.innerHTML = "Before we start setting things up, we need you to authorize a charge for the application."
-    } else {
-      container.innerHTML = "Since you're not the account owner, you won't be able to setup a charge. Ask the account owner to install the app."
-      var okButton = document.getElementById('install-ok');
-      okButton.parentElement.removeChild(okButton);
-    }
+    // if (ShopifyApp.User.current.accountAccess === "Account owner") {
+    //   container.innerHTML = "Before we start setting things up, we need you to authorize a charge for the application."
+    // } else {
+    //   container.innerHTML = "Since you're not the account owner, you won't be able to setup a charge. Ask the account owner to install the app."
+    //   var okButton = document.getElementById('install-ok');
+    //   okButton.parentElement.removeChild(okButton);
+    // }
   });
 </script>
