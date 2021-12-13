@@ -2,12 +2,16 @@ class EmbeddedAppBar extends React.Component {
 
   componentDidMount() {
     const { title, icon, buttons, breadcrumb } = this.props;
-    ShopifyApp.Bar.initialize({
-      title: title || DiscoApp.INITIAL_TITLE,
-      icon: icon || DiscoApp.INITIAL_ICON,
-      buttons: buttons,
-      breadcrumb: breadcrumb
-    });
+    const TitleBar = AppBridge.actions.TitleBar;
+    TitleBar.create(
+      app,
+      {
+        title: title || DiscoApp.INITIAL_TITLE,
+        icon: icon || DiscoApp.INITIAL_ICON,
+        buttons: buttons,
+        breadcrumb: breadcrumb
+      }
+    );
   }
 
   render() {
