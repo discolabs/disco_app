@@ -14,11 +14,13 @@ var ShopifyAdminLink = React.createClass({
 
     handleClick: function(e) {
         e.preventDefault();
-        ShopifyApp.redirect(this.props.href);
+        var Redirect = AppBridge.actions.Redirect;
+        var redirect = Redirect.create(app);
+        redirect.dispatch(Redirect.Action.ADMIN_PATH, this.props.href);
     },
 
     render: function() {
-        var href = ShopifyApp.shopOrigin + '/admin' + this.props.href;
+        var href = '/admin' + this.props.href;
         return (
             <a className={this.props.className} href={href} onClick={this.handleClick}>
                 {this.props.label}
