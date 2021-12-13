@@ -3,5 +3,7 @@
  * Some tweaks to help Turbolinks play nicely with the Embedded App SDK.
  */
 jQuery(document).on('turbolinks:load', function() {
-  ShopifyApp.pushState(window.location.pathname);
+  const History = AppBridge.actions.History;
+  const history = History.create(app);
+  history.dispatch(History.Action.PUSH, window.location.pathname);
 });
