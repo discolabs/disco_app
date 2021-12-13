@@ -10,7 +10,7 @@
     var app = createApp({
       "apiKey": "<%= ShopifyApp.configuration.api_key %>",
       "shopOrigin": "<%= "https://#{ @shop_session.domain }" if @shop_session %>",
-      "host": <%= params.fetch(:host) { '' } %>,
+      "host": <%= params.fetch(:host) { Base64.urlsafe_encode64(@shop_session&.url + '/admin', padding: false).strip } %>,
       "debug": <%= Rails.env.development? ? 'true' : 'false' %>,
       "forceRedirect": false
     });

@@ -11,7 +11,7 @@
     var app = createApp({
       "apiKey": "<%= ShopifyApp.configuration.api_key %>",
       "shopOrigin": "<%= "https://#{ @shop_session.domain }" if @shop_session %>",
-      "host": <%= params.fetch(:host) { '' } %>,
+      "host": <%= params.fetch(:host) { Base64.urlsafe_encode64(@shop_session&.url + '/admin', padding: false).strip } %>,
       "debug": <%= Rails.env.development? ? 'true' : 'false' %>,
       "forceRedirect": false
     });
@@ -31,19 +31,32 @@
       INITIAL_BUTTONS: <%= content_for?(:buttons) ? content_for(:buttons) : '{}' %>,
       INITIAL_BREADCRUMB: <%= content_for?(:breadcrumb) ? content_for(:breadcrumb) : 'undefined' %>
     };
-    ShopifyApp.Bar.initialize({
-      title: DiscoApp.INITIAL_TITLE,
-      icon: DiscoApp.INITIAL_ICON,
-      buttons: DiscoApp.INITIAL_BUTTONS,
-      breadcrumb: DiscoApp.INITIAL_BREADCRUMB
-    });
+    var TitleBar = AppBridge.actions.TitleBar;
+    TitleBar.create(
+      app,
+      {
+        title: DiscoApp.INITIAL_TITLE,
+        icon: DiscoApp.INITIAL_ICON,
+        buttons: DiscoApp.INITIAL_BUTTONS,
+        breadcrumb: DiscoApp.INITIAL_BREADCRUMB
+      }
+    );
   </script>
 
   <%= yield %>
 
   <% flash.each do |key, message| %>
   <script type="text/javascript">
-    ShopifyApp.flash<%= (key == 'error') ? 'Error' : 'Notice' %>('<%= message %>');
+    var Toast = AppBridge.actions.Toast;
+    var toast = Toast.create(
+      app,
+      {
+        message: "<%= message %>",
+        duration: Toast.durations.SHORT,
+        isError: <%= (key == 'error') %>,
+      }
+    );
+    toast.dispatch(Toast.Action.SHOW);
   </script>
   <% end %>
 
