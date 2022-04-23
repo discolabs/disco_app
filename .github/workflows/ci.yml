@@ -47,4 +47,7 @@ jobs:
           bundle install --jobs 4 --retry 3
           cp test/dummy/config/database.ci.yml test/dummy/config/database.yml
           bundle exec rake db:create db:schema:load
+          cd test/dummy
+          yarn install
+          cd ../..
           bundle exec rake test
