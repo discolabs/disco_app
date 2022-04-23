@@ -1,0 +1,50 @@
+name: CI/CD
+
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      db:
+        image: postgres:10.4
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Set up Ruby 2.6.5
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.6.5
+
+      - name: Cache bundled gems
+        uses: actions/cache@v1
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+      - name: Build and test
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          RAILS_ENV: test
+        run: |
+          sudo apt-get -yqq install libpq-dev
+          gem install bundler -v '1.17.3'
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+          cp test/dummy/config/database.ci.yml test/dummy/config/database.yml
+          bundle exec rake db:create db:schema:load
+          bundle exec rake test
