@@ -1,6 +1,14 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 0.18.6 - 2022-04-23
+### Changed
+- Fix version issue with release
+
+## 0.18.5 - 2022-04-23
+### Changed
+- Move to Github Actions for CI
+
 ## 0.18.4 - 2021-10-11
 ### Changed
 - Address the [Shopify API deprecation of charge activation](https://shopify.dev/changelog/auto-activation-of-charges-and-subscriptions)
