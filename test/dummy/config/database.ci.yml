@@ -2,10 +2,7 @@ test:
   adapter: postgresql
   host: localhost
   encoding: unicode
-  pool: 10
-  username: <%= ENV['PG_USER'] %>
-  template: template1
-  password: <%= ENV['PG_PASSWORD'] %>
-  database: test<%= ENV['TEST_ENV_NUMBER'] %>
-  port: 5432
-  sslmode: disable
+  database: disco-app-ci
+  pool: 20
+  username: <%= ENV['POSTGRES_USER'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
