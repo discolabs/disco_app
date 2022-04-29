@@ -1149,5 +1149,4 @@ To create a new release of the application:
 
 
 ## License
-
 DiscoApp is released under the [MIT License](./MIT-LICENSE).
