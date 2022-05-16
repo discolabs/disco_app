@@ -1146,3 +1146,7 @@ To create a new release of the application:
     3. Ensure the `UPGRADING` file contains all necessary instructions for upgrading an application to the latest version of the gem;
     4. Update `initialise.sh` to point to the latest version number of the gem.
 3. Once the git flow release steps have been completed, ensure you have the latest version of the `master` branch and push to Gemfury. See [uploading packages to Gemfury](https://gemfury.com/help/upload-packages) for instructions on this step if you haven't done it before.
+
+
+## License
+DiscoApp is released under the [MIT License](./MIT-LICENSE).

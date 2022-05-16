@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://github.com/discolabs/disco_app/'
   s.summary     = 'Rails engine for Shopify applications.'
   s.description = 'Rails engine for Shopify applications.'
-  s.license     = 'None'
+  s.license     = 'MIT'
 
   # To build up the list of files, we need to deviate from the standard .gemspec approach to ensure that
   # a number of "dotfiles"/"dotfolders" that we use as templates files are included in our gem package.
