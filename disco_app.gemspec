@@ -43,7 +43,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'active_link_to', '~> 1.0'
   s.add_runtime_dependency 'premailer-rails', '~> 1.8'
   s.add_runtime_dependency 'nokogiri', '~> 1.7'
-  s.add_runtime_dependency 'appsignal', '~> 2.7'
+  s.add_runtime_dependency 'appsignal', '~> 3.0'
   s.add_runtime_dependency 'oj', '~> 2.14'
   s.add_runtime_dependency 'newrelic_rpm', '~> 3.15'
   s.add_runtime_dependency 'mailgun_rails', '~> 0.8'
