@@ -45,7 +45,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'react-rails', '~> 1.10'
   s.add_runtime_dependency 'render_anywhere', '~> 0.0.12'
   s.add_runtime_dependency 'sass-rails', '~> 5.0'
-  s.add_runtime_dependency 'shopify_api', '~> 6.0'
   s.add_runtime_dependency 'shopify_app', '~> 7.2', '>= 7.2.3'
   s.add_runtime_dependency 'sidekiq', '~> 5.0'
   s.add_runtime_dependency 'sinatra', '~> 2.0'
