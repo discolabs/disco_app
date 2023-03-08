@@ -1,3 +1,7 @@
+> :warning: _After a long, fruitful career, Disco Labs has deprecated the use of this gem internally. Over time, much of the functionality developed in DiscoApp has been replicated or merged into the [official ShopifyApp gem](https://github.com/Shopify/shopify_app), which has also better kept up to date with substantial changes in the way Shopify Apps are built such as session token authentication._
+>
+> _Third party developers who have been relying on this gem are welcome to fork and use it as needed, and if there's a pressing need, pull requests and new releases can be actioned, but no active development will take place in this repository._
+
 # DiscoApp Rails Engine
 A Rails Engine encapsulating common functionality for Disco's Shopify
 applications.
