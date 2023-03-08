@@ -1,3 +1,7 @@
+> :warning: _After a long, fruitful career, Disco Labs has deprecated the use of this gem internally. Over time, much of the functionality developed in DiscoApp has been replicated or merged into the [official ShopifyApp gem](https://github.com/Shopify/shopify_app), which has also better kept up to date with substantial changes in the way Shopify Apps are built such as session token authentication._
+>
+> _Third party developers who have been relying on this gem are welcome to fork and use it as needed, and if there's a pressing need, pull requests and new releases can be actioned, but no active development will take place in this repository._
+
 # DiscoApp Rails Engine
 A Rails Engine encapsulating common functionality for Disco's Shopify
 applications.
@@ -52,7 +56,7 @@ curl -H "Authorization: token $GITHUB_PERSONAL_ACCESS_TOKEN" \
      | bash -s example_app
 ```
 
-Be sure to change `example_app` to the desired name of your actual application.
+Be sure to change `example_app` to the desired name of your actual application. Also, if you are stuck at any point in the initialise process, hit ctrl-c and do `spring stop` in the folder and run `bundle exec rails generate disco_app:install --force` to continue the process.
 
 By default, the `initialise.sh` script uses the latest version of Ruby, Rails,
 Node and the DiscoApp framework. If for any reason you need to specify which
@@ -96,24 +100,9 @@ for example `https://example-app.ngrok.io`) and for `SHOPIFY_APP_NAME` (the name
 of the application).
 
 #### Creating and configuring your app
-With the above set up, you can now run the following from the command line to
-create a new app:
+With the above set up, should head to [Create an app](https://partners.shopify.com/124804/apps/new) to create your app.
 
-```
-rails generate:partner_app
-```
-
-The `.env.local` will be automatically populated with values for
-`SHOPIFY_APP_API_KEY` and `SHOPIFY_APP_SECRET`.
-
-While the `.env.local` file is open, add in values for`SHOPIFY_APP_PROXY_PREFIX`
-and `SHOPIFY_APP_SCOPE` (view a [list of scopes][]).
-
-The `SHOPIFY_CHARGES_REAL`, `SECRET_KEY_BASE` and `REDIS_PROVIDER` values can be
-left blank in development.
-
-When you're done, your `.env.local` file should look something like this:
-
+As you are creating your app, please take note of the details and fill the following in the `.env.local` file:
 ```
 DEFAULT_HOST=https://example.ngrok.io
 
@@ -121,7 +110,11 @@ SHOPIFY_APP_NAME=Example App
 SHOPIFY_APP_API_KEY=ebef81bcfe2174ff2c6e65f5c0a0ba50
 SHOPIFY_APP_SECRET=d5e1347de6352cb778413654e1296dde
 SHOPIFY_APP_REDIRECT_URI=https://example.ngrok.io/auth/shopify/callback
-SHOPIFY_APP_SCOPE=read_products,write_script_tags
+```
+
+The `.env.local` file would also require the following:
+```
+SHOPIFY_APP_SCOPE=read_products,read_orders,write_orders,write_script_tags
 SHOPIFY_APP_PROXY_PREFIX=/a/example
 
 SHOPIFY_CHARGES_REAL=
@@ -130,12 +123,11 @@ SECRET_KEY_BASE=
 
 REDIS_PROVIDER=
 ```
+If you need help filling in the scope, here is a [list of scope](https://shopify.dev/api/admin/access-scopes)
 
 Notice that `.env.local` should not be added to Git, and is therefore
 added to `.gitignore`. On the other side, `.env` is added to Git and should keep
 all the environment variables that are kept equal across the different environments.
-
-[list of scopes]: https://docs.shopify.com/api/authentication/oauth#scopes
 
 Finally, you'll want to add a subscription. Subscriptions are covered in more detail in the [Plans, Subscriptions, and Charges](#plans-subscriptions-and-charges) section. For now, we just want our stores to subscribe to a free plan. To do this, we need to add something like the following snippet to the `db/seeds.rb` file.
 
@@ -341,7 +333,6 @@ There's a number of useful Rake tasks that are baked into the app. They are:
   the database has been imported or migrated.
 - `rake shops:sync`: Synchronises shop data across all installed shops.
 - `rake users:sync`: Synchronises user data across all installed shops.
-- `rake generate:partner_app`: Generates an app on the Disco Partner Dashboard
 
 ### Background Tasks
 The `DiscoApp::ShopJob` class inherits from `ActiveJob::Base`, and can be used
@@ -1146,3 +1137,7 @@ To create a new release of the application:
     3. Ensure the `UPGRADING` file contains all necessary instructions for upgrading an application to the latest version of the gem;
     4. Update `initialise.sh` to point to the latest version number of the gem.
 3. Once the git flow release steps have been completed, ensure you have the latest version of the `master` branch and push to Gemfury. See [uploading packages to Gemfury](https://gemfury.com/help/upload-packages) for instructions on this step if you haven't done it before.
+
+
+## License
+DiscoApp is released under the [MIT License](./MIT-LICENSE).

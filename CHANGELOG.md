@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 0.19.0 - 2023-03-08
+### Changed
+- Deprecate gem.
+
 ## 0.18.6 - 2022-04-23
 ### Changed
 - Fix version issue with release
